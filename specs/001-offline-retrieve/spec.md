@@ -67,10 +67,11 @@ Copied from Spec 000 (do not invent):
 - [x] PR #1 merged — retrieve on main
 - [x] `pytest` includes retrieve tests; efficacy null asserted
 - [x] Manual retrieve against Wave 0 SoT returns family hits
+- [x] T5 retrieve-time chrome strip (excerpts only; SoT unchanged)
 
 ## Risks
 
 | Risk | Mitigation |
 |------|------------|
-| Nav chrome in sacred-texts SPA pollutes excerpts | Later: better strip; settle gold |
+| Nav chrome in sacred-texts SPA pollutes excerpts | T5: `strip_chrome` at excerpt time in `retrieve.py`. Corpus re-harvest optional later. |
 | Empty corpus | Clear error / empty hits; CI uses fixtures |

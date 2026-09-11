@@ -2,6 +2,9 @@
 
 Stdlib-only BM25-ish ranking. Corpus default: ~/.athanor/corpus/atoms.jsonl
 Override path with ATHANOR_CORPUS.
+
+Excerpts run `strip_chrome` at retrieve time so sacred-texts SPA nav does not
+own the window. Stored SoT atoms are not rewritten.
 """
 
 from __future__ import annotations
@@ -15,6 +18,8 @@ from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
+
+from athanor.chrome import strip_chrome
 
 _TOKEN_RE = re.compile(r"[a-z0-9]+", re.IGNORECASE)
 _DEFAULT_CORPUS = Path.home() / ".athanor" / "corpus" / "atoms.jsonl"
@@ -134,7 +139,7 @@ def _bm25_scores(
 
 
 def _excerpt(text: str, query_tokens: Sequence[str], limit: int = _EXCERPT_MAX) -> str:
-    compact = " ".join(text.split())
+    compact = " ".join(strip_chrome(text).split())
     if not compact:
         return ""
     if len(compact) <= limit:
