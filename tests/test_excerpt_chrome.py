@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from athanor.retrieve import Atom, build_packet, strip_chrome
+from athanor.chrome import strip_chrome
+from athanor.retrieve import Atom, build_packet
 
 # Flattened crawl4ai-style atom: SPA chrome, then tradition body.
 # Mirrors live SoT excerpts that start at breadcrumb "[Categories](...) [Enochian Magic]".
@@ -101,6 +102,56 @@ def test_strip_chrome_keeps_in_body_tradition_words():
     cleaned = strip_chrome(prose)
     assert "Freemasonry" in cleaned
     assert "African" in cleaned
+
+
+def test_in_body_markdown_link_unwraps_to_label():
+    prose = (
+        "Consult [The Calls of Enoch](https://sacred-texts.com/eso/enoch/callench.htm) "
+        "for the Keys."
+    )
+    cleaned = strip_chrome(prose)
+    assert "Calls of Enoch" in cleaned
+    assert "for the Keys" in cleaned
+    assert "sacred-texts.com" not in cleaned
+    assert "callench.htm)" not in cleaned
+
+
+def test_ritual_english_is_not_eaten_by_chrome_phrases():
+    prose = (
+        "Make the Sign in the East, then the Sign in the West. "
+        "The angels assign in due order the parts of the tablet. "
+        "They sign up the names upon the Holy Table. "
+        "Each become a member of the chorus of angels."
+    )
+    cleaned = strip_chrome(prose)
+    assert "Sign in the East" in cleaned
+    assert "assign in due order" in cleaned
+    assert "sign up the names" in cleaned
+    assert "become a member of the chorus" in cleaned
+
+
+def test_adjacent_content_citations_are_kept_as_labels():
+    prose = (
+        "See [Liber Loagaeth](https://example.invalid/loagaeth) "
+        "[Liber Mysteriorum](https://example.invalid/mysteriorum) "
+        "and note [1](#fn1)."
+    )
+    cleaned = strip_chrome(prose)
+    assert "Liber Loagaeth" in cleaned
+    assert "Liber Mysteriorum" in cleaned
+    assert "1" in cleaned
+    assert "example.invalid" not in cleaned
+
+
+def test_archive_content_citation_keeps_title():
+    prose = (
+        "Consult [The Calls of Enoch]"
+        "(https://archive.sacred-texts.com/eso/enoch/callench.htm) "
+        "for the Keys."
+    )
+    cleaned = strip_chrome(prose)
+    assert "Calls of Enoch" in cleaned
+    assert "for the Keys" in cleaned
 
 
 def test_chrome_only_atom_yields_empty_excerpt():

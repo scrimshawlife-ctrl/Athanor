@@ -1,6 +1,7 @@
 """Retrieve-time nav/chrome strip for harvested markdown (sacred-texts SPA and similar).
 
-Does not rewrite stored corpus atoms. Stdlib only. Safe on clean prose.
+Does not rewrite stored corpus atoms. Stdlib only. Remaining markdown links unwrap
+to their labels so excerpts stay readable.
 """
 
 from __future__ import annotations
@@ -9,14 +10,12 @@ import re
 from itertools import pairwise
 from urllib.parse import urlparse
 
-# Nested logo: [![alt](src)](href)
 _NESTED_IMAGE_LINK = re.compile(r"\[!\[[^\]]*\]\([^)]+\)\]\([^)]+\)")
-_MD_IMAGE = re.compile(r"!\[[^\]]*\]\([^)]+\)")
+_MD_IMAGE = re.compile(r"!\[(?P<alt>[^\]]*)\]\([^)]+\)")
 _MD_LINK = re.compile(r"\[(?P<text>[^\]]*)\]\((?P<dest>[^)]+)\)")
 _LINK_GAP = re.compile(r"^[\s*+\-|•]+$")
-_ORPHAN_MARKDOWN = re.compile(r"\]\([^)]*\)|\[[^\]]*\]\(")
+_ORPHAN_CLOSE = re.compile(r"\]\([^)]*\)")
 _ORPHAN_LIST = re.compile(r"(?m)^[\s*+\-|•]+$")
-_STANDALONE_HIDE = re.compile(r"(?im)^hide\s*$")
 
 _CHROME_PATH_MARKERS = (
     "/categories",
@@ -27,10 +26,10 @@ _CHROME_PATH_MARKERS = (
     "/rankings",
     "/support",
     "/new.htm",
-    "/about",
-    "/abuse",
-    "/contact",
-    "/donate",
+    "/about.htm",
+    "/abuse.htm",
+    "/contact.htm",
+    "/donate.htm",
     "/faq.htm",
     "/privacy",
     "/terms",
@@ -60,9 +59,17 @@ _CHROME_LABELS = frozenset(
     }
 )
 
+_STANDALONE_CHROME_LINE = re.compile(
+    r"(?im)^(?:"
+    r"hide|sign in|sign up|toggle sidebar|close navigation|"
+    r"view the original site|buy usb drive|clear cache|"
+    r"back to book"
+    r")[.…]*\s*$"
+)
+
+# Distinctive SPA/shop copy only — not short English ("sign in", "become a member").
 _CHROME_PHRASES = (
     "to view the original internet sacred text archive",
-    "view the original site",
     "visit archive.sacred-texts.com",
     "sign in access your account",
     "close navigation",
@@ -71,20 +78,14 @@ _CHROME_PHRASES = (
     "own the wisdom of the ages",
     "every text in the library on a single usb drive",
     "read offline, cite freely, keep forever",
-    "no subscription required",
-    "get the drive",
-    "buy usb drive",
-    "support the archive",
-    "read ad-free",
-    "become a member",
     "comments and social are coming soon",
     "reader conversations and shared activity will appear here",
-    "sign in",
-    "sign up",
 )
 
 _PHRASE_RE = re.compile(
-    "|".join(re.escape(p) for p in sorted(_CHROME_PHRASES, key=len, reverse=True)),
+    r"(?<![A-Za-z0-9])(?:"
+    + "|".join(re.escape(p) for p in sorted(_CHROME_PHRASES, key=len, reverse=True))
+    + r")(?![A-Za-z0-9])",
     re.IGNORECASE,
 )
 
@@ -92,19 +93,20 @@ _PHRASE_RE = re.compile(
 def strip_chrome(text: str) -> str:
     """Remove site nav/chrome from harvested markdown.
 
-    Retrieve-time only: does not rewrite stored corpus atoms. Unchanged when
-    the input has no chrome patterns.
+    Retrieve-time only: does not rewrite stored corpus atoms. Clean prose and
+    in-body citations are kept (markdown links unwrap to labels).
     """
     if not text:
         return ""
 
     cleaned = _NESTED_IMAGE_LINK.sub(" ", text)
-    cleaned = _MD_IMAGE.sub(" ", cleaned)
-    cleaned = _drop_link_runs(cleaned)
+    cleaned = _MD_IMAGE.sub(_image_to_alt, cleaned)
+    cleaned = _drop_chrome_link_runs(cleaned)
     cleaned = _drop_chrome_links(cleaned)
+    cleaned = _MD_LINK.sub(_unwrap_link, cleaned)
     cleaned = _PHRASE_RE.sub(" ", cleaned)
-    cleaned = _STANDALONE_HIDE.sub("", cleaned)
-    cleaned = _ORPHAN_MARKDOWN.sub(" ", cleaned)
+    cleaned = _STANDALONE_CHROME_LINE.sub("", cleaned)
+    cleaned = _ORPHAN_CLOSE.sub(" ", cleaned)
     cleaned = _ORPHAN_LIST.sub("", cleaned)
     cleaned = re.sub(r"[ \t]+", " ", cleaned)
     cleaned = re.sub(r"\n{3,}", "\n\n", cleaned)
@@ -112,6 +114,17 @@ def strip_chrome(text: str) -> str:
     if not re.search(r"[A-Za-z0-9]", cleaned):
         return ""
     return cleaned
+
+
+def _image_to_alt(match: re.Match[str]) -> str:
+    alt = match.group("alt").strip()
+    if not alt or _label_is_chrome(alt):
+        return " "
+    return alt
+
+
+def _unwrap_link(match: re.Match[str]) -> str:
+    return match.group("text") or " "
 
 
 def _href_from_dest(dest: str) -> str:
@@ -122,20 +135,30 @@ def _href_from_dest(dest: str) -> str:
     return parts[0] if parts else token
 
 
+def _parse_href(href: str) -> tuple[str, str, str]:
+    token = href.strip()
+    lowered = token.lower()
+    if "://" in token:
+        parsed = urlparse(token)
+        host = (parsed.hostname or "").lower()
+        path = (parsed.path or "").lower()
+        return lowered, host, path
+    path = lowered.split("?")[0].split("#")[0]
+    return lowered, "", path
+
+
 def _href_is_chrome(href: str) -> bool:
     token = href.strip()
-    if not token or token.startswith(("#", "javascript:")):
+    if not token or token.startswith("javascript:"):
         return True
-    lowered = token.lower()
-    if "archive.sacred-texts.com" in lowered:
+    if token.startswith("#"):
+        return token == "#"
+    lowered, host, path = _parse_href(token)
+    if host == "archive.sacred-texts.com" and path in ("", "/"):
         return True
-    parsed = urlparse(token if "://" in token else f"https://chrome.invalid/{token}")
-    host = (parsed.hostname or "").lower()
-    path = (parsed.path or "").lower()
     if host.endswith("sacred-texts.com") and path in ("", "/"):
         return True
-    compact = path.replace(".", "").replace("/", "")
-    if compact == "":
+    if host == "" and path.replace(".", "").replace("/", "") == "":
         return True
     blob = f"{lowered} {path}"
     return any(marker in blob for marker in _CHROME_PATH_MARKERS)
@@ -147,6 +170,11 @@ def _label_is_chrome(label: str) -> bool:
     if s in _CHROME_LABELS:
         return True
     return s.startswith("view the original") or "usb drive" in s
+
+
+def _link_is_chrome(match: re.Match[str]) -> bool:
+    href = _href_from_dest(match.group("dest"))
+    return _href_is_chrome(href) or _label_is_chrome(match.group("text"))
 
 
 def _drop_spans(text: str, spans: list[tuple[int, int]]) -> str:
@@ -164,35 +192,31 @@ def _drop_spans(text: str, spans: list[tuple[int, int]]) -> str:
     return "".join(parts)
 
 
-def _drop_link_runs(text: str) -> str:
+def _drop_chrome_link_runs(text: str) -> str:
     matches = list(_MD_LINK.finditer(text))
     if not matches:
         return text
     drop: list[tuple[int, int]] = []
-    run_start = matches[0].start()
-    run_end = matches[0].end()
-    run_len = 1
+    run = [matches[0]]
     for prev, cur in pairwise(matches):
         gap = text[prev.end() : cur.start()]
         if _LINK_GAP.match(gap):
-            run_end = cur.end()
-            run_len += 1
+            run.append(cur)
             continue
-        if run_len >= 2:
-            drop.append((run_start, run_end))
-        run_start = cur.start()
-        run_end = cur.end()
-        run_len = 1
-    if run_len >= 2:
-        drop.append((run_start, run_end))
+        _flush_chrome_run(run, drop)
+        run = [cur]
+    _flush_chrome_run(run, drop)
     return _drop_spans(text, drop)
 
 
+def _flush_chrome_run(
+    run: list[re.Match[str]],
+    drop: list[tuple[int, int]],
+) -> None:
+    if len(run) >= 2 and any(_link_is_chrome(m) for m in run):
+        drop.append((run[0].start(), run[-1].end()))
+
+
 def _drop_chrome_links(text: str) -> str:
-    drop: list[tuple[int, int]] = []
-    for match in _MD_LINK.finditer(text):
-        href = _href_from_dest(match.group("dest"))
-        label = match.group("text")
-        if _href_is_chrome(href) or _label_is_chrome(label):
-            drop.append(match.span())
+    drop = [m.span() for m in _MD_LINK.finditer(text) if _link_is_chrome(m)]
     return _drop_spans(text, drop)
