@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "athanor.atom.v0",
+  "title": "Athanor corpus atom v0",
+  "type": "object",
+  "required": ["atom_id", "family_id", "type", "text", "license", "source_url", "epistemic", "content_hash"],
+  "properties": {
+    "atom_id": { "type": "string", "minLength": 1 },
+    "family_id": { "type": "string", "minLength": 1 },
+    "type": {
+      "type": "string",
+      "enum": ["text", "table", "correspondence", "diagram_desc"]
+    },
+    "text": { "type": "string" },
+    "license": { "type": "string", "minLength": 1 },
+    "source_url": { "type": "string", "minLength": 1 },
+    "epistemic": {
+      "type": "string",
+      "enum": ["OBSERVED", "INFERRED", "SPECULATIVE", "NOT_COMPUTABLE"]
+    },
+    "content_hash": { "type": "string", "minLength": 8 },
+    "lens_hints": {
+      "type": "object",
+      "properties": {
+        "historical": { "type": "boolean" },
+        "symbolic": { "type": "boolean" },
+        "operational": { "type": "boolean" }
+      }
+    },
+    "table": { "type": "object" },
+    "correspondence": { "type": "object" },
+    "diagram_desc": { "type": "string" }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,7 @@
+version: 0
+engine: crawl4ai
+hosts:
+  - sacred-texts.com
+  - www.sacred-texts.com
+  - archive.org
+notes: Derived from docs/source-manifest.md Wave 0/1 OBSERVED rows. Expand only with license settle.

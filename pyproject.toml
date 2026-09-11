@@ -1,0 +1,79 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "athanor"
+dynamic = ["version"]
+description = "Tradition-aware corpus + encoder for ancient magical and mystical systems. PD-first, three-lens, no efficacy claims."
+authors = [
+    { name = "Zero State / Applied Alchemy Labs", email = "zer0state@zer0state.com" },
+]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+keywords = [
+    "hermetics",
+    "enochian",
+    "corpus",
+    "encoder",
+    "retrieval",
+    "athanor",
+    "zero-state",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Religion",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Text Processing",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "jsonschema>=4.0",
+    "ruff>=0.6",
+]
+schema = [
+    "jsonschema>=4.0",
+]
+docs = [
+    "mkdocs>=1.5",
+    "mkdocs-material>=9.0",
+]
+harvest = [
+    "crawl4ai>=0.9.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/scrimshawlife-ctrl/Athanor"
+Repository = "https://github.com/scrimshawlife-ctrl/Athanor"
+Documentation = "https://github.com/scrimshawlife-ctrl/Athanor#readme"
+Issues = "https://github.com/scrimshawlife-ctrl/Athanor/issues"
+
+[project.scripts]
+athanor = "athanor.entrypoint:main"
+
+[tool.setuptools.dynamic]
+version = { file = "VERSION" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+athanor = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

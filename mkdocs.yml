@@ -1,0 +1,17 @@
+site_name: Athanor
+site_description: Tradition corpus + encoder (SHADOW)
+repo_url: https://github.com/scrimshawlife-ctrl/Athanor
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: black
+    accent: amber
+nav:
+  - Home: index.md
+  - Status: status.md
+  - Architecture: architecture.md
+  - Quickstart: quickstart.md
+  - Atlas: atlas/map.md
+  - Source manifest: source-manifest.md
+docs_dir: docs

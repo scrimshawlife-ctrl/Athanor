@@ -1,0 +1,29 @@
+{
+  "query": "What are the Enochian Calls?",
+  "hits": [
+    {
+      "atom_id": "enochian.call.01.example",
+      "family_id": "enochian",
+      "excerpt": "Example excerpt only — replace with license-cleared text after harvest.",
+      "license": "public-domain",
+      "epistemic": "SPECULATIVE"
+    }
+  ],
+  "synthesis": {
+    "historical": {
+      "text": "Dee/Kelley scrying sessions produced angelical Calls recorded in surviving diaries and later editions.",
+      "epistemic": "INFERRED"
+    },
+    "symbolic": {
+      "text": "Calls function as a structured liturgical-linguistic system tied to tables and names.",
+      "epistemic": "INFERRED"
+    },
+    "operational": {
+      "text": "Historical operators arranged scrying furniture, recorded dictation, and ordered Calls; Athanor describes that history only.",
+      "epistemic": "INFERRED"
+    }
+  },
+  "efficacy": null,
+  "epistemic": "INFERRED",
+  "receipts": []
+}

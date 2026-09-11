@@ -2,11 +2,11 @@
 
 **Feature**: Tradition-aware corpus + encoder for ancient magical and mystical systems  
 **Date**: 2026-09-10  
-**Status**: SPECIFY draft — operator ALIGN locked (personal repo, encoder+corpus, extensive PD corpus incl. Enochian-as-text)  
+**Status**: SPECIFY locked — clarify C1–C12 · plan sealed · tasks filed · checklist · SHADOW (no implement/train)  
 **Depends on**: constitution v1.0.0 I–XII  
 **Lane**: SHADOW / advisory  
 **Remote**: scrimshawlife-ctrl/Athanor  
-**Clarify**: pending (corpus license checklist; Spark train home; Hub name)  
+**Clarify**: `clarify.md` (C1–C12 locked)  
 
 ## Intent
 
@@ -162,9 +162,10 @@ athanor.packet.v0
 ## Success (v0.1 specify done when)
 
 - [x] Constitution ratified in repo
-- [ ] This spec reviewed; Wave 0 source manifest started (`docs/source-manifest.md`)
-- [ ] Schemas drafted
-- [ ] `plan.md` + `tasks.md` written (FORGE)
+- [x] This spec reviewed; Wave 0 source manifest started (`docs/source-manifest.md`)
+- [x] Schemas drafted (packet + atom)
+- [x] `plan.md` + `tasks.md` + `clarify.md` + `checklist.md` + dual-use + data-model
+- [ ] Wave 0 manifest ≥8 OBSERVED URLs (T7 — in progress)
 - [ ] Operator yes to open implement / first harvest
 
 ## Risks

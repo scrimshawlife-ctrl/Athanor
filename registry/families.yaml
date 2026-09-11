@@ -1,0 +1,94 @@
+# Athanor tradition families — Spec 000
+# status: shadow until harvest settles sources
+version: 0
+families:
+  - id: hermetic
+    wave: 0
+    title: Hermetic
+  - id: alchemy_lab
+    wave: 0
+    title: Laboratory alchemy
+  - id: alchemy_spirit
+    wave: 0
+    title: Spiritual alchemy
+  - id: enochian
+    wave: 0
+    title: Enochian (corpus)
+  - id: goetia_catalog
+    wave: 0
+    title: Goetia catalogs (historical)
+  - id: solomonic
+    wave: 0
+    title: Solomonic grimoire lineages
+  - id: grimoire_other
+    wave: 0
+    title: Other western grimoires (PD)
+  - id: kabbalah_pd
+    wave: 0
+    title: Kabbalah (PD editions)
+  - id: astrology_west
+    wave: 0
+    title: Western astrology
+  - id: tarot_history
+    wave: 0
+    title: Tarot history
+  - id: runes_eddic
+    wave: 0
+    title: Eddic / rune poems
+  - id: neoplatonism
+    wave: 0
+    title: Neoplatonism / theurgy history
+  - id: mystery_cults
+    wave: 0
+    title: Mystery cult fragments
+  - id: egypt_magical
+    wave: 1
+    title: Egyptian / PGM
+  - id: mesopotamia
+    wave: 1
+    title: Mesopotamian ritual series
+  - id: hebrew_bible_magical
+    wave: 1
+    title: Hebrew Bible magical reception
+  - id: islamic_occult_pd
+    wave: 1
+    title: Islamic occult-scientific PD
+  - id: coptic_gnostic
+    wave: 1
+    title: Coptic / Gnostic PD
+  - id: jyotish_anchors
+    wave: 2
+    title: Jyotish classical anchors
+  - id: veda_upanishad_pd
+    wave: 2
+    title: Veda / Upanishad PD
+  - id: tantra_hist_pd
+    wave: 2
+    title: Tantra historical PD
+  - id: iching_daoist
+    wave: 2
+    title: I Ching / Daoist alchemy
+  - id: buddhism_esoteric_pd
+    wave: 2
+    title: Esoteric Buddhism historical PD
+  - id: shinto_onmyodo
+    wave: 2
+    title: Onmyodo historical
+  - id: mesoamerica
+    wave: 2
+    title: Mesoamerican open materials
+  - id: andes_amazon
+    wave: 2
+    title: Andes/Amazon open ethnographic PD only
+  - id: golden_dawn_hist
+    wave: 3
+    title: Golden Dawn historical PD
+  - id: theosophy_pd
+    wave: 3
+    title: Theosophy PD
+  - id: chaos_spare_hist
+    wave: 3
+    title: Spare / early chaos method history
+  - id: folk_magic_pd
+    wave: 3
+    title: Folk magic PD collectors

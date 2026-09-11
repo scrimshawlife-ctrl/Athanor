@@ -12,3 +12,8 @@ data/local/
 *.bin
 *.safetensors
 .env
+src/*.egg-info/
+*.egg-info/
+dist/
+build/
+site/
