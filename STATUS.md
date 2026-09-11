@@ -41,3 +41,12 @@ Next: operator settle gold · train still gated. Offline retrieve: shipped on `f
 - Receipt: `adapt-notion-orchestra-20260911T050713Z`
 - **+68** atoms → corpus total **387** (local SoT)
 - Doc: `docs/adapt-notion-orchestra.md`
+
+## Deepen + Wave 1 harvest (OBSERVED 2026-09-10 PT)
+
+- Receipt: `deepen-20260911T051038Z-14f21ac2`
+- Net **+840** atoms → corpus total **1227** (0 failures, 162 dupe skips)
+- Casaubon IA deepen + 15 sacred-texts Enochian /book/ + Wave 1 (mesopotamia, egypt dmp, Pistis Sophia, Tetrabiblos, Plotinus, hebrew-bible-magical)
+- Scoreboard: `docs/harvest/deepen-20260911.md`
+- Script: `scripts/shadow/athanor/deepen_harvest.py`
+- SoT remains local: `~/.athanor/corpus/atoms.jsonl` (not in git)
