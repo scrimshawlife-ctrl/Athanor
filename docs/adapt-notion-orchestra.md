@@ -7,6 +7,12 @@
   - PROTO_CORPUS_001 Hermetic + Kabbalah + Enochian
   - Drift guards + design-precedent-only authority
 
+## Operator Hub (02 Operator)
+
+- [Athanor — Operator Hub | 2026-09-10](https://app.notion.com/p/3d83e8ba2f5c81d291c9f7b65f040a0e)
+- [Spec 002 — Encoder + Hub (SHADOW)](https://app.notion.com/p/3d83e8ba2f5c813dbf59dee2b0f27e7f)
+- [Harvest brief — balance scrape for train](https://app.notion.com/p/3d83e8ba2f5c81adbbc3ce7d3396c086)
+
 ## Related Notion (linked, not all ingested yet)
 
 - AAL-Viz Sigil View / Sigil Engine (Enochian mode) — projection-only
