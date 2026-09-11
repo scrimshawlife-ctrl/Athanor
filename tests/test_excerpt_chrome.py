@@ -143,6 +143,17 @@ def test_adjacent_content_citations_are_kept_as_labels():
     assert "example.invalid" not in cleaned
 
 
+def test_linked_heading_after_nav_is_kept():
+    prose = (
+        "[Home](https://sacred-texts.com/)\n\n"
+        "[THE FIRST KEY](https://sacred-texts.com/eso/enoch/callench.htm)\n\n"
+        "I reign over you."
+    )
+    cleaned = strip_chrome(prose)
+    assert "FIRST KEY" in cleaned
+    assert "reign over you" in cleaned.lower()
+
+
 def test_archive_content_citation_keeps_title():
     prose = (
         "Consult [The Calls of Enoch]"

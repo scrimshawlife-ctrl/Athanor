@@ -13,7 +13,7 @@ from urllib.parse import urlparse
 _NESTED_IMAGE_LINK = re.compile(r"\[!\[[^\]]*\]\([^)]+\)\]\([^)]+\)")
 _MD_IMAGE = re.compile(r"!\[(?P<alt>[^\]]*)\]\([^)]+\)")
 _MD_LINK = re.compile(r"\[(?P<text>[^\]]*)\]\((?P<dest>[^)]+)\)")
-_LINK_GAP = re.compile(r"^[\s*+\-|•]+$")
+_LINK_GAP = re.compile(r"^[\t *+\-|•]+$")
 _ORPHAN_CLOSE = re.compile(r"\]\([^)]*\)")
 _ORPHAN_LIST = re.compile(r"(?m)^[\s*+\-|•]+$")
 
