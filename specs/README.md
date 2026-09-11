@@ -2,5 +2,8 @@
 
 Spec Kit order: constitution → specify → plan → tasks → implement → converge.
 
-- Constitution: `../.specify/memory/constitution.md`
-- Spine specify: `000-athanor-spine/spec.md`
+| Spec | Path | Status |
+|------|------|--------|
+| Constitution | `../.specify/memory/constitution.md` | v1.0.0 |
+| 000 spine | `000-athanor-spine/` | Sealed; Wave 0 harvest GO |
+| 001 offline retrieve | `001-offline-retrieve/` | Shipped (PR #1) |

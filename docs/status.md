@@ -8,7 +8,7 @@
 |------|-------|
 | Spec Kit spine (000) | Sealed |
 | Hero + atlas art | Shipped under `assets/` |
-| Package stub | `athanor` CLI `doctor` / `--version` |
+| Package | `athanor` CLI `doctor` / `retrieve` / `--version` |
 | CI | `.github/workflows/validate.yml` |
 | Wave 0 harvest | **GO** — Crawl4AI 0.9.3 · **319** atoms · local SoT only |
 | Hub / train | Blocked |
@@ -33,4 +33,4 @@
 | iching_daoist | 13 |
 | **total** | **319** |
 
-Next: operator settle gold · train still gated. Offline retrieve: shipped.
+Next: operator settle gold · train still gated. Offline retrieve: shipped on `feat/offline-retrieve`.
