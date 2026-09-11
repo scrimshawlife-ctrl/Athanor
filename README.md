@@ -21,6 +21,10 @@ Named for the alchemical furnace: raw tradition in, structured retrieval gold ou
 
 The Validate badge may stay red when GitHub Actions billing blocks the workflow even if local `ruff` + `pytest` pass.
 
+## Social preview
+
+GitHub / link-preview card: [`assets/og-social.png`](assets/og-social.png) (1200×630). Distinct from the README hero.
+
 ## Atlas
 
 <p align="center">
