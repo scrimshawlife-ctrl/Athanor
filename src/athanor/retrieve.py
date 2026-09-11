@@ -1,0 +1,229 @@
+"""Offline lexical retrieve over local atom JSONL (Wave 0 frozen slice).
+
+Stdlib-only BM25-ish ranking. Corpus default: ~/.athanor/corpus/atoms.jsonl
+Override path with ATHANOR_CORPUS.
+"""
+
+from __future__ import annotations
+
+import json
+import math
+import os
+import re
+from collections import Counter
+from collections.abc import Iterable, Mapping, Sequence
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any
+
+_TOKEN_RE = re.compile(r"[a-z0-9]+", re.IGNORECASE)
+_DEFAULT_CORPUS = Path.home() / ".athanor" / "corpus" / "atoms.jsonl"
+_EXCERPT_MAX = 280
+
+# BM25 defaults (Robertson / Zaragoza)
+_K1 = 1.2
+_B = 0.75
+
+_SYNTHESIS_STUBS: dict[str, dict[str, str]] = {
+    "historical": {
+        "text": "Retrieved atoms reflect documented tradition witnesses; "
+        "dating and attribution follow source metadata when present.",
+        "epistemic": "INFERRED",
+    },
+    "symbolic": {
+        "text": "Hits are ranked by lexical overlap with the query; "
+        "symbolic readings remain interpretive overlays on the cited text.",
+        "epistemic": "INFERRED",
+    },
+    "operational": {
+        "text": "Athanor returns historical/textual context only — "
+        "no practice instructions, efficacy scores, or summon UX.",
+        "epistemic": "INFERRED",
+    },
+}
+
+
+@dataclass(frozen=True)
+class Atom:
+    atom_id: str
+    family_id: str
+    text: str
+    license: str
+    epistemic: str
+    tokens: tuple[str, ...]
+
+    @classmethod
+    def from_mapping(cls, raw: Mapping[str, Any]) -> Atom:
+        text = str(raw.get("text") or "")
+        return cls(
+            atom_id=str(raw["atom_id"]),
+            family_id=str(raw["family_id"]),
+            text=text,
+            license=str(raw.get("license") or "unknown"),
+            epistemic=str(raw.get("epistemic") or "INFERRED"),
+            tokens=tuple(tokenize(text)),
+        )
+
+
+def tokenize(text: str) -> list[str]:
+    return [m.group(0).lower() for m in _TOKEN_RE.finditer(text)]
+
+
+def default_corpus_path() -> Path:
+    override = os.environ.get("ATHANOR_CORPUS")
+    if override:
+        return Path(override).expanduser()
+    return _DEFAULT_CORPUS
+
+
+def load_atoms(path: Path | None = None) -> list[Atom]:
+    corpus = path if path is not None else default_corpus_path()
+    if not corpus.is_file():
+        raise FileNotFoundError(f"corpus not found: {corpus}")
+
+    atoms: list[Atom] = []
+    with corpus.open(encoding="utf-8") as fh:
+        for line_no, line in enumerate(fh, start=1):
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                raw = json.loads(line)
+            except json.JSONDecodeError as exc:
+                raise ValueError(f"invalid JSONL at {corpus}:{line_no}") from exc
+            if not isinstance(raw, dict):
+                raise TypeError(f"atom must be object at {corpus}:{line_no}")
+            atoms.append(Atom.from_mapping(raw))
+    return atoms
+
+
+def _idf(n_docs: int, df: int) -> float:
+    # BM25+ style smoothed IDF; never negative for tiny corpora.
+    return math.log(1.0 + (n_docs - df + 0.5) / (df + 0.5))
+
+
+def _bm25_scores(
+    query_tokens: Sequence[str],
+    atoms: Sequence[Atom],
+) -> list[float]:
+    if not atoms or not query_tokens:
+        return [0.0] * len(atoms)
+
+    n_docs = len(atoms)
+    df: Counter[str] = Counter()
+    for atom in atoms:
+        df.update(set(atom.tokens))
+
+    avgdl = sum(len(a.tokens) for a in atoms) / n_docs
+    q_tf = Counter(query_tokens)
+    idf_cache = {term: _idf(n_docs, df.get(term, 0)) for term in q_tf}
+
+    scores: list[float] = []
+    for atom in atoms:
+        dl = len(atom.tokens) or 1
+        tf_map = Counter(atom.tokens)
+        score = 0.0
+        for term, q_weight in q_tf.items():
+            tf = tf_map.get(term, 0)
+            if tf == 0:
+                continue
+            denom = tf + _K1 * (1.0 - _B + _B * (dl / avgdl))
+            score += idf_cache[term] * q_weight * (tf * (_K1 + 1.0)) / denom
+        scores.append(score)
+    return scores
+
+
+def _excerpt(text: str, query_tokens: Sequence[str], limit: int = _EXCERPT_MAX) -> str:
+    compact = " ".join(text.split())
+    if not compact:
+        return ""
+    if len(compact) <= limit:
+        return compact
+
+    lower = compact.lower()
+    best = 0
+    for tok in query_tokens:
+        idx = lower.find(tok)
+        if idx >= 0:
+            best = max(0, idx - limit // 4)
+            break
+    snippet = compact[best : best + limit]
+    if best > 0:
+        snippet = "…" + snippet
+    if best + limit < len(compact):
+        snippet = snippet.rstrip() + "…"
+    return snippet
+
+
+def rank_atoms(
+    query: str,
+    atoms: Sequence[Atom],
+    *,
+    k: int = 5,
+    family: str | None = None,
+) -> list[tuple[Atom, float]]:
+    if k < 1:
+        raise ValueError("k must be >= 1")
+
+    pool: list[Atom] = list(atoms)
+    if family:
+        pool = [a for a in pool if a.family_id == family]
+
+    q_tokens = tokenize(query)
+    scores = _bm25_scores(q_tokens, pool)
+    ranked = sorted(
+        zip(pool, scores, strict=True),
+        key=lambda pair: (-pair[1], pair[0].atom_id),
+    )
+    # Drop zero-score misses when the query had tokens; keep empty-query empty.
+    if q_tokens:
+        ranked = [pair for pair in ranked if pair[1] > 0.0]
+    return ranked[:k]
+
+
+def build_packet(
+    query: str,
+    ranked: Iterable[tuple[Atom, float]],
+    *,
+    query_tokens: Sequence[str] | None = None,
+) -> dict[str, Any]:
+    tokens = list(query_tokens) if query_tokens is not None else tokenize(query)
+    hits: list[dict[str, str]] = []
+    for atom, _score in ranked:
+        hits.append(
+            {
+                "atom_id": atom.atom_id,
+                "family_id": atom.family_id,
+                "excerpt": _excerpt(atom.text, tokens),
+                "license": atom.license,
+                "epistemic": atom.epistemic,
+            }
+        )
+
+    return {
+        "query": query,
+        "hits": hits,
+        "synthesis": {
+            "historical": dict(_SYNTHESIS_STUBS["historical"]),
+            "symbolic": dict(_SYNTHESIS_STUBS["symbolic"]),
+            "operational": dict(_SYNTHESIS_STUBS["operational"]),
+        },
+        "efficacy": None,
+        "epistemic": "INFERRED",
+        "receipts": [],
+    }
+
+
+def retrieve(
+    query: str,
+    *,
+    k: int = 5,
+    family: str | None = None,
+    corpus_path: Path | None = None,
+) -> dict[str, Any]:
+    """Load corpus, rank, and return an athanor.packet.v0 dict (efficacy always null)."""
+    if not query or not query.strip():
+        raise ValueError("query must be non-empty")
+    atoms = load_atoms(corpus_path)
+    ranked = rank_atoms(query, atoms, k=k, family=family)
+    return build_packet(query, ranked)

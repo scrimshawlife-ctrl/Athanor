@@ -33,4 +33,4 @@
 | iching_daoist | 13 |
 | **total** | **319** |
 
-Next: offline retrieve on frozen slice · operator settle gold · train still gated.
+Next: operator settle gold · train still gated. Offline retrieve: shipped.
