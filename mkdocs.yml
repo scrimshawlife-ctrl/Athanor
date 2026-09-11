@@ -13,5 +13,10 @@ nav:
   - Architecture: architecture.md
   - Quickstart: quickstart.md
   - Atlas: atlas/map.md
+  - Harvest:
+      - Wave 0 Enochian: harvest/wave0-enochian-20260911.md
+      - Deepen 2026-09-11: harvest/deepen-20260911.md
+  - Settle: settle/README.md
+  - Adapt: adapt-notion-orchestra.md
   - Source manifest: source-manifest.md
 docs_dir: docs
