@@ -1,0 +1,40 @@
+# PROPOSAL — not live registry
+# Merge into registry/families.yaml only after operator yes (constitution VIII).
+# Harvest HOLD until merge.
+
+version: 0
+status: proposed
+wave: 3b
+families:
+  - id: thelema_pd
+    wave: 3b
+    title: Thelema (PD / public historical)
+    harvest: hold
+  - id: wicca_hist
+    wave: 3b
+    title: Wicca reception history
+    harvest: hold
+  - id: spiritualism_pd
+    wave: 3b
+    title: Spiritualism public reports (historical)
+    harvest: hold
+  - id: new_thought_pd
+    wave: 3b
+    title: New Thought PD
+    harvest: hold
+  - id: ceremonial_revival_hist
+    wave: 3b
+    title: Ceremonial revival reception
+    harvest: hold
+  - id: neopagan_recon_hist
+    wave: 3b
+    title: Neopagan reconstruction historiography
+    harvest: hold
+  - id: atr_open_hist
+    wave: 3b
+    title: ATR open ethnographic / historical notes
+    harvest: hold
+  - id: chaos_late_hist
+    wave: 3b
+    title: Post-Spare chaos method history
+    harvest: hold
