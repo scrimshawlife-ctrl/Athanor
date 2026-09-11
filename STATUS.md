@@ -11,8 +11,8 @@
 | Hero + atlas art | Shipped under `assets/` |
 | Package | `athanor` CLI `doctor` / `retrieve` / `--version` |
 | CI | `.github/workflows/validate.yml` — local ruff+pytest is the bar; Actions may fail on account billing |
-| Harvest | Wave 0 + adapt + deepen on local SoT · Crawl4AI 0.9.3 |
-| Local SoT | `~/.athanor/corpus/atoms.jsonl` — **1178** after settle (not in git) |
+| Harvest | Wave 0–1 + A–E + F fill3000 · Crawl4AI 0.9.3 · P3a gold sealed |
+| Local SoT | `~/.athanor/corpus/atoms.jsonl` — **2997** after F+DROP (400 GOLD OBSERVED; not in git) |
 | Hub / train | Blocked |
 
 ## Wave 0 harvest (OBSERVED 2026-09-10 PT)
@@ -59,6 +59,73 @@
 - Heuristic KEEP stays **INFERRED** until an explicit gold settle. KEEP is not OBSERVED gold.
 - Modern sacred-texts `/book/` Rowe/Achadian essays: **HOLD** — not PD gold without an operator license call.
 - Policy: [`docs/settle/README.md`](docs/settle/README.md)
+
+## ATHANOR-INGEST Priorities A–E (OBSERVED 2026-09-11 PT)
+
+Local SoT after settle DROP (**1178**) then A→E harvests. Atoms stay under `~/.athanor` — **not in git**. Crawl4AI **0.9.3**. No paid Firecrawl. Heuristic KEEP remains **INFERRED** (not gold). Wave **3b** families are proposal-only (not harvested). Train / Hub still gated.
+
+| Priority | Net +atoms | Corpus after | Scripts |
+|----------|-----------:|-------------:|---------|
+| A thin families | +385 | 1563 | `scripts/shadow/athanor/ingest_priority_a.py` |
+| B tables / correspondence | +113 | 1676 | `ingest_priority_b.py` (+ `_continue`) |
+| C `islamic_occult_pd` | +88 | 1764 | `ingest_priority_c.py` |
+| D Wave 2 PD | +395 | 2159 | `ingest_priority_d.py` (+ `_continue`) |
+| E Wave 3 reception | +215 | **2374** | `ingest_priority_e.py` |
+| **A–E total** | **+1196** | **2374** | |
+
+Scoreboards (repo copies; receipts stay local under `~/.athanor/receipts/`):
+
+- [`docs/harvest/ingest-priority-a-20260911.md`](docs/harvest/ingest-priority-a-20260911.md)
+- [`docs/harvest/ingest-priority-b-20260911.md`](docs/harvest/ingest-priority-b-20260911.md)
+- [`docs/harvest/ingest-priority-c-20260911.md`](docs/harvest/ingest-priority-c-20260911.md)
+- [`docs/harvest/ingest-priority-d-20260911.md`](docs/harvest/ingest-priority-d-20260911.md)
+- [`docs/harvest/ingest-priority-e-20260911.md`](docs/harvest/ingest-priority-e-20260911.md)
+
+### Family counts (local SoT, OBSERVED 2026-09-11 PT)
+
+| family_id | n |
+|-----------|--:|
+| enochian | 513 |
+| mesopotamia | 146 |
+| iching_daoist | 104 |
+| egypt_magical | 97 |
+| kabbalah_pd | 95 |
+| astrology_west | 95 |
+| hermetic | 90 |
+| islamic_occult_pd | 88 |
+| tantra_hist_pd | 78 |
+| coptic_gnostic | 76 |
+| runes_eddic | 71 |
+| tarot_history | 70 |
+| veda_upanishad_pd | 70 |
+| alchemy_spirit | 69 |
+| mesoamerica | 67 |
+| golden_dawn_hist | 65 |
+| theosophy_pd | 65 |
+| folk_magic_pd | 65 |
+| solomonic | 60 |
+| buddhism_esoteric_pd | 59 |
+| grimoire_other | 55 |
+| mystery_cults | 55 |
+| hebrew_bible_magical | 53 |
+| jyotish_anchors | 50 |
+| alchemy_lab | 34 |
+| goetia_catalog | 29 |
+| neoplatonism | 28 |
+| chaos_spare_hist | 27 |
+| **total** | **2374** |
+
+**HOLD:** modern Picatrix English; modern sacred-texts `/book/` Rowe/Achadian essays (license call). **STOP** before Wave 3b / Enochian flood unless operator asks.
+
+## Priority F fill3000 + P3a settle (OBSERVED 2026-09-11 PT)
+
+- Local SoT after F: **3000** → after DROP×3: **2997** (atoms not in git)
+- GOLD stamped: **400 OBSERVED** (`gold-p3a-001`, 27 families, Enochian gold 4/40)
+- P3a remainder: **63** corr pairs · **80** negatives · **20** dual-use · E7 gold **PASS**
+- Scripts: `ingest_priority_f_fill3000.py` · `apply_gold_p3a.py`
+- Fixtures: `fixtures/correspondence/pairs.p3a.jsonl` · `fixtures/negatives/negatives.p3a.jsonl` · `fixtures/dual_use/wall.p3a.jsonl`
+- Operator cards: [`fill3000`](docs/harvest/ingest-priority-f-fill3000-20260911.md) · [`settle-pack-3000`](docs/settle/settle-pack-20260911-3000.md) · [`gold-p3a`](docs/settle/gold-p3a-001-20260911.md) · [`p3a-remainder`](docs/settle/p3a-remainder-20260911.md)
+- Train / Hub still gated. Wave 3b / Enochian flood still ask-first.
 
 ## Spec 001 T5 excerpt chrome (retrieve-time)
 

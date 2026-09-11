@@ -35,7 +35,10 @@ Navigate traditions: [map](atlas/map.md) · [atlas.json](../registry/atlas.json)
 | Quickstart | [quickstart.md](quickstart.md) |
 | Wave 0 harvest | [harvest/wave0-enochian-20260911.md](harvest/wave0-enochian-20260911.md) |
 | Deepen harvest | [harvest/deepen-20260911.md](harvest/deepen-20260911.md) |
+| Ingest A–E | [A](harvest/ingest-priority-a-20260911.md) · [B](harvest/ingest-priority-b-20260911.md) · [C](harvest/ingest-priority-c-20260911.md) · [D](harvest/ingest-priority-d-20260911.md) · [E](harvest/ingest-priority-e-20260911.md) |
 | Settle KEEP / DROP / HOLD | [settle/README.md](settle/README.md) |
+| P3a settle cards | [settle-pack-3000](settle/settle-pack-20260911-3000.md) · [gold](settle/gold-p3a-001-20260911.md) · [remainder](settle/p3a-remainder-20260911.md) |
+| Fill3000 scoreboard | [harvest/ingest-priority-f-fill3000-20260911.md](harvest/ingest-priority-f-fill3000-20260911.md) |
 | Adapt (Notion + Orchestra) | [adapt-notion-orchestra.md](adapt-notion-orchestra.md) |
 | Source manifest | [source-manifest.md](source-manifest.md) |
 | Architecture | [architecture.md](architecture.md) |

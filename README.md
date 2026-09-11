@@ -42,7 +42,7 @@ Navigate traditions: [`docs/atlas/map.md`](docs/atlas/map.md) · [`registry/atla
 | Spec 000 | [`specs/000-athanor-spine/spec.md`](specs/000-athanor-spine/spec.md) |
 | Spec 001 retrieve | [`specs/001-offline-retrieve/spec.md`](specs/001-offline-retrieve/spec.md) |
 | Operator quickstart | [`docs/quickstart.md`](docs/quickstart.md) |
-| Harvest scoreboards | [`wave0`](docs/harvest/wave0-enochian-20260911.md) · [`deepen`](docs/harvest/deepen-20260911.md) |
+| Harvest scoreboards | [`wave0`](docs/harvest/wave0-enochian-20260911.md) · [`deepen`](docs/harvest/deepen-20260911.md) · [`A`](docs/harvest/ingest-priority-a-20260911.md)–[`E`](docs/harvest/ingest-priority-e-20260911.md) |
 | Settle policy | [`docs/settle/README.md`](docs/settle/README.md) |
 | Adapt (Notion + Orchestra) | [`docs/adapt-notion-orchestra.md`](docs/adapt-notion-orchestra.md) |
 | Source manifest | [`docs/source-manifest.md`](docs/source-manifest.md) |
