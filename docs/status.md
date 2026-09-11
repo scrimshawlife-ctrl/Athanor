@@ -1,25 +1,27 @@
 # Athanor STATUS
 
-**Lane:** SHADOW  
+**Lane:** SHADOW — retrieve live · train/Hub gated  
 **Version:** see `VERSION`  
 **Remote:** https://github.com/scrimshawlife-ctrl/Athanor  
 
 | Area | State |
 |------|-------|
 | Spec Kit spine (000) | Sealed |
+| Spec 001 retrieve | Live on main (PR #1) · T5 chrome strip (PR #2 / `83c3ef2`) |
 | Hero + atlas art | Shipped under `assets/` |
 | Package | `athanor` CLI `doctor` / `retrieve` / `--version` |
-| CI | `.github/workflows/validate.yml` |
-| Wave 0 harvest | **GO** — Crawl4AI 0.9.3 · **319** atoms · local SoT only |
+| CI | `.github/workflows/validate.yml` — local ruff+pytest is the bar; Actions may fail on account billing |
+| Harvest | Wave 0 + adapt + deepen on local SoT · Crawl4AI 0.9.3 |
+| Local SoT | `~/.athanor/corpus/atoms.jsonl` — **1178** after settle (not in git) |
 | Hub / train | Blocked |
 
 ## Wave 0 harvest (OBSERVED 2026-09-10 PT)
 
 - SoT: `~/.athanor/corpus/atoms.jsonl` (not in git)
 - Receipt: `~/.athanor/receipts/wave0-enochian-20260911T044756Z-95149c51.json`
-- Scoreboard copy: `/workspace/athanor-harvest/wave0-enochian-20260911-045309.md`
+- Scoreboard copy: [`docs/harvest/wave0-enochian-20260911.md`](docs/harvest/wave0-enochian-20260911.md)
 - Engine: crawl4ai 0.9.3 · pages_ok 37 · failures 2 (I Ching classic paths 404; recovered via `/book/the-i-ching`)
-- Epistemic: all atoms **INFERRED** until operator settle
+- Epistemic: harvest atoms **INFERRED** until operator gold settle
 
 | family_id | n |
 |-----------|---|
@@ -33,26 +35,34 @@
 | iching_daoist | 13 |
 | **total** | **319** |
 
-Next: operator settle gold · train still gated. Offline retrieve: shipped on `feat/offline-retrieve`.
-
 ## Notion + Orchestra adapt (OBSERVED 2026-09-10 PT)
 
 - Source: Historical Proto-Systems Integration Layer + Hermes Orchestra references
 - Receipt: `adapt-notion-orchestra-20260911T050713Z`
 - **+68** atoms → corpus total **387** (local SoT)
-- Doc: `docs/adapt-notion-orchestra.md`
+- Doc: [`docs/adapt-notion-orchestra.md`](docs/adapt-notion-orchestra.md)
 
 ## Deepen + Wave 1 harvest (OBSERVED 2026-09-10 PT)
 
 - Receipt: `deepen-20260911T051038Z-14f21ac2`
 - Net **+840** atoms → corpus total **1227** (0 failures, 162 dupe skips)
-- Casaubon IA deepen + 15 sacred-texts Enochian /book/ + Wave 1 (mesopotamia, egypt dmp, Pistis Sophia, Tetrabiblos, Plotinus, hebrew-bible-magical)
-- Scoreboard: `docs/harvest/deepen-20260911.md`
+- Casaubon IA deepen + 15 sacred-texts Enochian `/book/` + Wave 1 (mesopotamia, egypt dmp, Pistis Sophia, Tetrabiblos, Plotinus, hebrew-bible-magical)
+- Scoreboard: [`docs/harvest/deepen-20260911.md`](docs/harvest/deepen-20260911.md)
 - Script: `scripts/shadow/athanor/deepen_harvest.py`
 - SoT remains local: `~/.athanor/corpus/atoms.jsonl` (not in git)
+- No Firecrawl
+
+## Settle DROP (OBSERVED operator machine)
+
+- After deepen, local SoT was **1227**. After settle DROP, **1178** remain (**49** quarantined locally).
+- JSONL and quarantine files are **not in git**. Family-level post-settle counts are not published here.
+- Heuristic KEEP stays **INFERRED** until an explicit gold settle. KEEP is not OBSERVED gold.
+- Modern sacred-texts `/book/` Rowe/Achadian essays: **HOLD** — not PD gold without an operator license call.
+- Policy: [`docs/settle/README.md`](docs/settle/README.md)
 
 ## Spec 001 T5 excerpt chrome (retrieve-time)
 
 - Sacred-texts SPA nav (`[Categories]`, Toggle Sidebar, USB shop, breadcrumbs) is stripped **when building retrieve excerpts**, not by rewriting `~/.athanor` SoT.
 - Helper: `athanor.chrome.strip_chrome` (stdlib; reusable by a later harvest pass).
-- Corpus re-harvest remains optional if operators want clean stored `text`.
+- Landed as PR #2 / `83c3ef2`. Corpus re-harvest remains optional if operators want clean stored `text`.
+- Packet `efficacy` stays JSON `null`. Train / Hub still gated.

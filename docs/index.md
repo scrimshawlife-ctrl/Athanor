@@ -1,14 +1,12 @@
 # Athanor
 
 <p align="center">
-  <img src="assets/hero.png" alt="Athanor hero — emerald furnace under golden celestial atlas" width="100%" />
+  <img src="../assets/hero.png" alt="Athanor hero — emerald furnace under golden celestial atlas" width="100%" />
 </p>
 
 **Tradition-aware corpus + encoder** for ancient magical and mystical systems.
 
 Named for the alchemical furnace: raw tradition in, structured retrieval gold out.
-
-[![Validate](https://github.com/scrimshawlife-ctrl/Athanor/actions/workflows/validate.yml/badge.svg)](https://github.com/scrimshawlife-ctrl/Athanor/actions/workflows/validate.yml)
 
 | | |
 |---|---|
@@ -17,46 +15,41 @@ Named for the alchemical furnace: raw tradition in, structured retrieval gold ou
 | **Shape** | Encoder + retrieval (Hyperlex-shaped). Not a chatbot that claims power. |
 | **Corpus** | PD-first, **extensive** catalog — **includes Enochian as text/history** |
 | **Anti** | Efficacy claims · copyright dumps · living-tradition harm · authority-seal *mint* · summon UX · sentience claims |
-| **Lane** | SHADOW — Spec Kit sealed; harvest/train gated |
+| **Lane** | SHADOW — retrieve live · train/Hub gated |
+
+GitHub Actions Validate may stay red on account billing even when local `ruff` + `pytest` pass.
 
 ## Atlas
 
 <p align="center">
-  <img src="assets/atlas.png" alt="Athanor tradition atlas" width="100%" />
+  <img src="../assets/atlas.png" alt="Athanor tradition atlas" width="100%" />
 </p>
 
-Navigate traditions: [`docs/atlas/map.md`](docs/atlas/map.md) · [`registry/atlas.json`](registry/atlas.json) · [`registry/families.yaml`](registry/families.yaml)
+Navigate traditions: [map](atlas/map.md) · [atlas.json](../registry/atlas.json) · [families.yaml](../registry/families.yaml)
 
-## Quick links
+## Operator docs
 
 | Doc | Path |
 |-----|------|
-| Status | [`STATUS.md`](STATUS.md) |
-| Constitution | [`.specify/memory/constitution.md`](.specify/memory/constitution.md) |
-| Spec 000 | [`specs/000-athanor-spine/spec.md`](specs/000-athanor-spine/spec.md) |
-| Plan / Tasks | [`plan.md`](specs/000-athanor-spine/plan.md) · [`tasks.md`](specs/000-athanor-spine/tasks.md) |
-| Source manifest | [`docs/source-manifest.md`](docs/source-manifest.md) |
-| Dual-use | [`specs/000-athanor-spine/dual-use-gate.md`](specs/000-athanor-spine/dual-use-gate.md) |
-| Architecture | [`ARCHITECTURE.md`](ARCHITECTURE.md) |
+| Status | [status.md](status.md) (twin of repo-root `STATUS.md`) |
+| Quickstart | [quickstart.md](quickstart.md) |
+| Wave 0 harvest | [harvest/wave0-enochian-20260911.md](harvest/wave0-enochian-20260911.md) |
+| Deepen harvest | [harvest/deepen-20260911.md](harvest/deepen-20260911.md) |
+| Settle KEEP / DROP / HOLD | [settle/README.md](settle/README.md) |
+| Adapt (Notion + Orchestra) | [adapt-notion-orchestra.md](adapt-notion-orchestra.md) |
+| Source manifest | [source-manifest.md](source-manifest.md) |
+| Architecture | [architecture.md](architecture.md) |
+| Spec 000 | [../specs/000-athanor-spine/spec.md](../specs/000-athanor-spine/spec.md) |
+| Spec 001 retrieve | [../specs/001-offline-retrieve/spec.md](../specs/001-offline-retrieve/spec.md) |
 
 ## Enochian (quick)
 
 **In** the corpus (Dee/Kelley, Calls, PD witnesses). **Out** of the product surface: authority-seal mint, “summon/compel” UX, efficacy scores.
 
-## Install (stub)
+## Retrieve
 
-```bash
-pip install -e ".[dev,schema]"
-athanor --version
-athanor doctor
-```
-
-Local corpus SoT (later): `~/.athanor/corpus/` — not in git.
+See [quickstart.md](quickstart.md). Default SoT is `~/.athanor/corpus/atoms.jsonl` (not in git). Packet `efficacy` is always JSON `null`. Spec 001 T5 strips sacred-texts SPA chrome at retrieve time; stored atoms are not rewritten.
 
 ## Peers
 
-Abraxas (rune identity) · Sigil-Forge (construct) · HERMENEUT (read) · Hyperlex (slang encoder sibling) · **Athanor (train/retrieve traditions)**
-
-## License
-
-Code: MIT. Corpus atoms carry their own licenses — see `LICENSE_POLICY.md`.
+Abraxas (rune identity) · Sigil-Forge (construct) · HERMENEUT (read) · Hyperlex (slang encoder sibling) · **Athanor (retrieve live · train gated)**
