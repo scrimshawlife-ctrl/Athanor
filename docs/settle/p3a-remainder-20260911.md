@@ -10,7 +10,7 @@ Danny: Continue. Benji/images: skipped (parent).
 | pairs OBSERVED | prefer ≥15 | **60** |
 | pairs INFERRED | bootstrap OK | **3** |
 | negatives | ≥80 | **80** |
-| dual-use wall | ≥20 | **20** |
+| dual-use wall | ≥20 (expanded ≥50 for T1 prep) | **55** |
 
 ## E7 (family token share ≤ 0.25)
 

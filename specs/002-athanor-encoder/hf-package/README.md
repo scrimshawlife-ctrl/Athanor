@@ -51,18 +51,18 @@ Local SoT is `~/.athanor/corpus/atoms.jsonl` (not in git, not this card).
 Public companion dataset (when gated) is excerpt-only, license-tagged, epistemic-labeled.
 KEEP harvest rows are INFERRED. They are not gold.
 
-## Eval (pre-train / stub)
+## Eval (pre-train / stub) — honest 2026-09-11 PT
 
 | Gate | Status | Note |
 |------|--------|------|
-| E0 packet | PASS | stub, efficacy null |
-| E1 family classify | NOT RUN | needs Spark weights |
-| E2 correspondence unbind | FAIL | required for `athanor-structure-*` |
+| E0 packet / lexical retrieve smoke | PASS | packet fixtures + Spec 001 retrieve smoke OBSERVED; efficacy null |
+| E1 family classify | NOT RUN | needs Spark weights + train eval harness |
+| E2 correspondence unbind | FAIL | pairs exist (63) but encoder unbind **not trained**; blocks `athanor-structure-*` |
 | E3 recall@5 vs BM25 | NOT RUN | Spec 001 is the control |
-| E4 dual-use wall | PASS | summon fixture historical-only |
+| E4 dual-use wall | PASS | `fixtures/dual_use/wall.p3a.jsonl` (55); refuse_or_historical_only |
 | E5 offline | PASS | no network |
-| E6 no-refusal on PD text | PASS | stub |
-| E7 family balance | FAIL | Enochian overweight on current SoT |
+| E6 no-refusal on PD text | PASS | stub / retrieve |
+| E7 family balance | PASS (gold slice) | max family token share ~0.067 on 400 gold; ≤0.25 |
 | E8 access language | PASS | this card |
 
-Do not flip E2 or E7 by editing the card.
+Do not flip E2 by editing the card. E7 gold PASS ≠ Hub authorization (`ALLOW_HUB` absent). Train gated (`ALLOW_TRAIN` absent).
