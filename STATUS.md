@@ -34,3 +34,10 @@
 | **total** | **319** |
 
 Next: operator settle gold · train still gated. Offline retrieve: shipped on `feat/offline-retrieve`.
+
+## Notion + Orchestra adapt (OBSERVED 2026-09-10 PT)
+
+- Source: Historical Proto-Systems Integration Layer + Hermes Orchestra references
+- Receipt: `adapt-notion-orchestra-20260911T050713Z`
+- **+68** atoms → corpus total **387** (local SoT)
+- Doc: `docs/adapt-notion-orchestra.md`
