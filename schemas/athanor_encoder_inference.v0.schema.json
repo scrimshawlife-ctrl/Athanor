@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "athanor.encoder.inference.v0",
+  "title": "Athanor encoder inference v0",
+  "type": "object",
+  "required": ["schema", "model_id", "family_id", "efficacy", "class"],
+  "properties": {
+    "schema": { "type": "string", "const": "athanor.encoder.inference.v0" },
+    "model_id": { "type": "string", "minLength": 1 },
+    "param_count": { "type": ["integer", "null"] },
+    "family_id": { "type": "string", "minLength": 1 },
+    "family_confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "wave": { "type": ["string", "integer", "null"] },
+    "atom_type": { "type": ["string", "null"], "enum": ["text", "table", "correspondence", "diagram_desc", null] },
+    "lens_route": { "type": "array", "items": { "type": "string", "enum": ["historical", "symbolic", "operational"] } },
+    "reception_layer": { "type": ["string", "null"], "enum": ["primary_witness", "pd_translation", "historical_commentary", "modern_reception", null] },
+    "unbind_ok": { "type": "boolean" },
+    "unbind": { "type": ["object", "null"] },
+    "disposition": { "type": "string", "enum": ["ok", "historical_only", "refuse_or_historical_only"] },
+    "efficacy": { "description": "Hard null — never a score", "type": "null" },
+    "forecast_eligible": { "type": "boolean", "const": false },
+    "class": { "type": "string", "enum": ["OBSERVED", "INFERRED", "SPECULATIVE", "NOT_COMPUTABLE"] }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,17 @@
+{
+  "schema": "athanor.encoder.inference.v0",
+  "model_id": "stub",
+  "param_count": null,
+  "family_id": "hermetic",
+  "family_confidence": 0.0,
+  "wave": "0",
+  "atom_type": "text",
+  "lens_route": ["historical", "symbolic"],
+  "reception_layer": "pd_translation",
+  "unbind_ok": false,
+  "unbind": null,
+  "disposition": "ok",
+  "efficacy": null,
+  "forecast_eligible": false,
+  "class": "INFERRED"
+}

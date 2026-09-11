@@ -1,0 +1,4 @@
+{"pair_id":"corr.alchemy.saturn.lead","family_id":"alchemy_lab","role":"planet","filler":"Saturn","span":"lead","atom_id":"alchemy_lab:seed.saturn.lead","epistemic":"INFERRED"}
+{"pair_id":"corr.hermetic.sun.gold","family_id":"hermetic","role":"planet","filler":"Sun","span":"gold","atom_id":"hermetic:seed.sun.gold","epistemic":"INFERRED"}
+{"pair_id":"corr.kabbalah.kether.1","family_id":"kabbalah_pd","role":"sephirah","filler":"Kether","span":"crown","atom_id":"kabbalah_pd:seed.kether","epistemic":"INFERRED"}
+{"pair_id":"corr.enochian.air.east","family_id":"enochian","role":"watchtower","filler":"East","span":"air","atom_id":"enochian:seed.watchtower.east","epistemic":"INFERRED"}

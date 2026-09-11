@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "athanor.receipt.v0",
+  "title": "Athanor job receipt v0",
+  "type": "object",
+  "required": ["run_id", "job_type", "started_at", "engine", "content_hash"],
+  "properties": {
+    "run_id": { "type": "string", "minLength": 1 },
+    "job_type": { "type": "string", "enum": ["harvest", "normalize", "export", "gold_settle", "sanitize_export", "train", "eval"] },
+    "started_at": { "type": "string", "minLength": 1 },
+    "finished_at": { "type": "string" },
+    "source_urls": { "type": "array", "items": { "type": "string" } },
+    "atom_count": { "type": "integer", "minimum": 0 },
+    "counts_by_family": { "type": "object" },
+    "engine": { "type": "string", "minLength": 1 },
+    "content_hash": { "type": "string", "minLength": 8 },
+    "epistemic": { "type": "string", "enum": ["OBSERVED", "INFERRED", "SPECULATIVE", "NOT_COMPUTABLE"] },
+    "notes": { "type": "string" }
+  },
+  "additionalProperties": true
+}
