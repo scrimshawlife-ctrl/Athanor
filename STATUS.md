@@ -13,7 +13,7 @@
 | CI | `.github/workflows/validate.yml` — local ruff+pytest is the bar; Actions may fail on account billing |
 | Harvest | Wave 0–1 + A–E + F fill3000 · Crawl4AI 0.9.3 · P3a gold sealed |
 | Local SoT | `~/.athanor/corpus/atoms.jsonl` — **2997** after F+DROP (400 GOLD OBSERVED; not in git) |
-| Hub / train | Blocked |
+| Hub / train | Blocked · Spec 002 P3a specify exit sealed; Aaron pack local-only |
 
 ## Wave 0 harvest (OBSERVED 2026-09-10 PT)
 
@@ -121,10 +121,20 @@ Scoreboards (repo copies; receipts stay local under `~/.athanor/receipts/`):
 
 - Local SoT after F: **3000** → after DROP×3: **2997** (atoms not in git)
 - GOLD stamped: **400 OBSERVED** (`gold-p3a-001`, 27 families, Enochian gold 4/40)
-- P3a remainder: **63** corr pairs · **80** negatives · **20** dual-use · E7 gold **PASS**
+- P3a remainder: **63** corr pairs · **80** negatives · **55** dual-use · E7 gold **PASS**
 - Scripts: `ingest_priority_f_fill3000.py` · `apply_gold_p3a.py`
 - Fixtures: `fixtures/correspondence/pairs.p3a.jsonl` · `fixtures/negatives/negatives.p3a.jsonl` · `fixtures/dual_use/wall.p3a.jsonl`
 - Operator cards: [`fill3000`](docs/harvest/ingest-priority-f-fill3000-20260911.md) · [`settle-pack-3000`](docs/settle/settle-pack-20260911-3000.md) · [`gold-p3a`](docs/settle/gold-p3a-001-20260911.md) · [`p3a-remainder`](docs/settle/p3a-remainder-20260911.md)
+- Train / Hub still gated. Wave 3b / Enochian flood still ask-first.
+
+## Spec 002 P3a specify exit (OBSERVED 2026-09-11 PT)
+
+- Spec tasks U1–U2, U6–U10 marked DONE with local evidence; U11–U14 / U18–U19 still unchecked (no `ALLOW_TRAIN` / no `ALLOW_HUB`).
+- E7 gold slice **PASS** (max share ~0.067). E2 still **FAIL** (unbind not trained). E0 lexical retrieve smoke **PASS**.
+- Dual-use wall expanded to **55** prompts (`fixtures/dual_use/wall.p3a.jsonl`).
+- Sanitize exporter: `scripts/shadow/athanor/sanitize_export.py`.
+- Exit seal: [`specs/002-athanor-encoder/p3a-exit.md`](specs/002-athanor-encoder/p3a-exit.md)
+- **Aaron train pack** (local only, Hub NOT published): `/workspace/athanor-harvest/aaron-train-pack-20260911/` · zip `athanor-train-pack-aaron-20260911.zip`
 - Train / Hub still gated. Wave 3b / Enochian flood still ask-first.
 
 ## Spec 001 T5 excerpt chrome (retrieve-time)
