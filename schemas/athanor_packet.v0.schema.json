@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "athanor.packet.v0",
+  "title": "Athanor retrieval packet v0",
+  "type": "object",
+  "required": ["query", "hits", "synthesis", "efficacy", "epistemic"],
+  "properties": {
+    "query": { "type": "string", "minLength": 1 },
+    "hits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["atom_id", "family_id", "excerpt", "license", "epistemic"],
+        "properties": {
+          "atom_id": { "type": "string" },
+          "family_id": { "type": "string" },
+          "excerpt": { "type": "string" },
+          "license": { "type": "string" },
+          "epistemic": {
+            "type": "string",
+            "enum": ["OBSERVED", "INFERRED", "SPECULATIVE", "NOT_COMPUTABLE"]
+          }
+        }
+      }
+    },
+    "synthesis": {
+      "type": "object",
+      "required": ["historical", "symbolic", "operational"],
+      "properties": {
+        "historical": { "type": "object" },
+        "symbolic": { "type": "object" },
+        "operational": { "type": "object" }
+      }
+    },
+    "efficacy": {
+      "description": "Hard null — never a score",
+      "type": "null"
+    },
+    "epistemic": {
+      "type": "string",
+      "enum": ["OBSERVED", "INFERRED", "SPECULATIVE", "NOT_COMPUTABLE"]
+    },
+    "receipts": { "type": "array" }
+  },
+  "additionalProperties": true
+}
