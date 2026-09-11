@@ -11,8 +11,8 @@
 | Hero + atlas art | Shipped under `assets/` |
 | Package | `athanor` CLI `doctor` / `retrieve` / `--version` |
 | CI | `.github/workflows/validate.yml` — local ruff+pytest is the bar; Actions may fail on account billing |
-| Harvest | Wave 0–1 + ATHANOR-INGEST A–E on local SoT · Crawl4AI 0.9.3 |
-| Local SoT | `~/.athanor/corpus/atoms.jsonl` — **2374** after A–E (not in git) |
+| Harvest | Wave 0–1 + A–E + F fill3000 · Crawl4AI 0.9.3 · P3a gold sealed |
+| Local SoT | `~/.athanor/corpus/atoms.jsonl` — **2997** after F+DROP (400 GOLD OBSERVED; not in git) |
 | Hub / train | Blocked |
 
 ## Wave 0 harvest (OBSERVED 2026-09-10 PT)
@@ -116,6 +116,16 @@ Scoreboards (repo copies; receipts stay local under `~/.athanor/receipts/`):
 | **total** | **2374** |
 
 **HOLD:** modern Picatrix English; modern sacred-texts `/book/` Rowe/Achadian essays (license call). **STOP** before Wave 3b / Enochian flood unless operator asks.
+
+## Priority F fill3000 + P3a settle (OBSERVED 2026-09-11 PT)
+
+- Local SoT after F: **3000** → after DROP×3: **2997** (atoms not in git)
+- GOLD stamped: **400 OBSERVED** (`gold-p3a-001`, 27 families, Enochian gold 4/40)
+- P3a remainder: **63** corr pairs · **80** negatives · **20** dual-use · E7 gold **PASS**
+- Scripts: `ingest_priority_f_fill3000.py` · `apply_gold_p3a.py`
+- Fixtures: `fixtures/correspondence/pairs.p3a.jsonl` · `fixtures/negatives/negatives.p3a.jsonl` · `fixtures/dual_use/wall.p3a.jsonl`
+- Operator cards: [`fill3000`](docs/harvest/ingest-priority-f-fill3000-20260911.md) · [`settle-pack-3000`](docs/settle/settle-pack-20260911-3000.md) · [`gold-p3a`](docs/settle/gold-p3a-001-20260911.md) · [`p3a-remainder`](docs/settle/p3a-remainder-20260911.md)
+- Train / Hub still gated. Wave 3b / Enochian flood still ask-first.
 
 ## Spec 001 T5 excerpt chrome (retrieve-time)
 
