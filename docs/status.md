@@ -50,3 +50,9 @@ Next: operator settle gold · train still gated. Offline retrieve: shipped on `f
 - Scoreboard: `docs/harvest/deepen-20260911.md`
 - Script: `scripts/shadow/athanor/deepen_harvest.py`
 - SoT remains local: `~/.athanor/corpus/atoms.jsonl` (not in git)
+
+## Spec 001 T5 excerpt chrome (retrieve-time)
+
+- Sacred-texts SPA nav (`[Categories]`, Toggle Sidebar, USB shop, breadcrumbs) is stripped **when building retrieve excerpts**, not by rewriting `~/.athanor` SoT.
+- Helper: `athanor.chrome.strip_chrome` (stdlib; reusable by a later harvest pass).
+- Corpus re-harvest remains optional if operators want clean stored `text`.

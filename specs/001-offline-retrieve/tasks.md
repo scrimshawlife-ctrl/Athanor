@@ -6,5 +6,5 @@ Workflows: anti-slop-code · production-systems · google-developer-style · spe
 - [x] T2 packet efficacy null + schema tests
 - [x] T3 seed fixtures for CI
 - [x] T4 quickstart
-- [ ] T5 excerpt chrome cleanup (sacred-texts SPA) — follow-up
+- [x] T5 excerpt chrome cleanup (sacred-texts SPA) — retrieve-time `strip_chrome`; corpus re-harvest optional later
 - [ ] T6 optional embedding backend behind flag — later
