@@ -2,10 +2,14 @@
 
 **Feature**: Tradition-aware encoder over the Athanor corpus, plus the first legal Hugging Face surface  
 **Date**: 2026-09-10  
-**Status**: SHADOW specify on main — not implement, not train, not Hub  
+**Status**: Historical P3a local specify seal reported; canonical-method packages 1-3 are advisory. Encoder implementation, train and Hub remain gated.
 **Depends on**: constitution v1.0.0 I–XII; Spec 000 C1–C12; Spec 001 retrieve; Hyperlex Spec 007 as sibling pattern only  
 
-Longform notes in this directory are normative with this index. Constitution I–XII wins on conflict.
+Longform notes in this directory share the precedence and evidence qualifications in [specs/README.md](../README.md). Constitution I–XII wins on conflict. Proposed v1 contracts are targets, not changes to shipped schemas.
+
+## Workflows
+
+[WF-004 through WF-010 and WF-012](workflows.md) define dataset, encoder, release and handoff behavior. Read [requirements](requirements.md) and [journeys](../journeys.md) first, then [state machines](../state-machines.md), [contracts](../contracts/README.md) and data-model.md before architecture.
 
 ## Intent
 
@@ -54,9 +58,13 @@ Do not use `Athanor-DPO` or `Atanor-4B`. Those Hub slugs are unrelated projects.
 | `hf-package/PROFILE.md` | Hub profile copy |
 | `checklist.md` | specify completeness |
 
-## Next operator moves
+## Historical next operator moves (original specify snapshot)
 
 1. Flip or confirm C13–C22 INFERRED rows.
 2. Gold-settle a capped Enochian slice plus thin families.
 3. Wave 3 deepen before Wave 3b harvest.
 4. Do not upload.
+
+Current completion work follows the [specification map](../README.md). The historical 400 GOLD and E7 claims require the qualifications in p3a-exit.md; their independent validity is NOT_COMPUTABLE here. This does not govern or activate.
+
+Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 805 Slice N/A + Hash: fd84c7085579f3e7a560b38fc554a4f832fa9c10 (review base)

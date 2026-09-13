@@ -6,6 +6,8 @@
 
 **Tradition-aware corpus + encoder** for ancient magical and mystical systems.
 
+Specification completion: start at [docs/START_HERE.md](docs/START_HERE.md). Packages 1-3 are an advisory target, not runtime changes. Corpus/GOLD/E7 values below are historical operator-machine reports; independent validity is NOT_COMPUTABLE without their underlying evidence. Committed P3a fixtures are 63 pairs, 80 negatives and 55 wall prompts; fixture availability does not prove wall behavior. See [current eval evidence scope](specs/002-athanor-encoder/eval-gates.md).
+
 Named for the alchemical furnace: raw tradition in, structured retrieval gold out.
 Hyperlex-shaped sibling — **encoder + retrieval**, not a chatbot that claims power.
 
@@ -189,3 +191,7 @@ Do not spawn a fifth growth bot or a new mystical specialist — route to existi
 ## License
 
 Code: MIT. Corpus atoms carry their own licenses — see [`LICENSE_POLICY.md`](LICENSE_POLICY.md).
+
+This does not govern or activate.
+
+Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 805 Slice N/A + Hash: fd84c7085579f3e7a560b38fc554a4f832fa9c10 (review base)

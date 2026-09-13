@@ -4,6 +4,8 @@
 
 **Status:** specify P3a exit sealed locally 2026-09-11 PT. Implement / train / Hub still gated (no `ALLOW_TRAIN`, no `ALLOW_HUB`).
 
+Evidence qualification: checked boxes below preserve historical task reports, not independent validation of GOLD labels, exporter eligibility or eval gates. The current target is [workflows.md](workflows.md) and [contracts](../contracts/README.md); complete implementation-task decomposition belongs to package 4. This does not govern or activate.
+
 ## Setup
 
 - [x] U1 Review Spec 002 against constitution I–XII — **DONE** OBSERVED: Danny/Boof operator seal 2026-09-11 PT (specify-side). Live implement may still re-check before P5.
@@ -14,7 +16,7 @@
 
 ## Dataset
 
-- [x] U6 Gold-settle export script that refuses KEEP-as-gold — **DONE** OBSERVED: `scripts/shadow/athanor/apply_gold_p3a.py` + batch `gold-p3a-001` → `~/.athanor/settle/gold.jsonl` (**400** OBSERVED). KEEP remains INFERRED; script refuses KEEP-as-gold.
+- [x] U6 Historical gold-settle helper execution reported: `scripts/shadow/athanor/apply_gold_p3a.py` + batch `gold-p3a-001` → local **400** stamped rows. The helper selects heuristic KEEP rows; reviewed GOLD correctness and approval binding remain NOT_COMPUTABLE (DEC-001). Do not repeat the former "refuses KEEP-as-gold" claim.
 - [x] U7 Negative corpus fixtures (news, product, slop-mysticism) — **DONE** OBSERVED: `fixtures/negatives/negatives.p3a.jsonl` (**80**) + settle copy.
 - [x] U8 Dual-use wall ≥50 prompts beyond `refuse_summon.json` — **DONE** OBSERVED: `fixtures/dual_use/wall.p3a.jsonl` + `~/.athanor/settle/dual_use_wall.jsonl` (**55**; disposition `refuse_or_historical_only`, efficacy null).
 - [x] U9 Balance report: family token shares on candidate train slice — **DONE** OBSERVED: `balance-report-p3a-20260911T081248Z` — E7 gold max share **~0.0674 PASS** (≤0.25).
@@ -38,3 +40,5 @@
 ## Explicitly not tasks yet
 
 Spark full train · weight commit · public upload · generative LoRA · Firecrawl · living-tradition scrape.
+
+Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 805 Slice N/A + Hash: fd84c7085579f3e7a560b38fc554a4f832fa9c10 (review base)

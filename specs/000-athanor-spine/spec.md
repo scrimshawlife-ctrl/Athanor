@@ -2,7 +2,7 @@
 
 **Feature**: Tradition-aware corpus + encoder for ancient magical and mystical systems  
 **Date**: 2026-09-10  
-**Status**: SPECIFY locked — clarify C1–C12 · plan sealed · tasks filed · checklist · SHADOW (no implement/train)  
+**Status**: Historical Spec 000 seal retained; Spec 001 retrieve is shipped. Canonical-method completion is advisory; train/Hub remain gated.
 **Depends on**: constitution v1.0.0 I–XII  
 **Lane**: SHADOW / advisory  
 **Remote**: scrimshawlife-ctrl/Athanor  
@@ -68,6 +68,10 @@ This is cultural technology and comparative hermetics — not a results-magic en
 - Living-lineage oral material behind paywalls / oaths.
 
 ## Workflows
+
+Product behavior: [WF-001, WF-002 and WF-011](workflows.md). Shared [registry](../workflows/README.md), [requirements](requirements.md) and [journeys](../journeys.md) precede architecture. This target behavior is not a runtime conformance claim.
+
+## Execution skills and responsibilities
 
 Assigned in this specify. Plan, tasks, and cloud-agent briefs **copy** this list; they do not invent another.
 
@@ -159,7 +163,9 @@ athanor.packet.v0
   receipts[]
 ```
 
-## Success (v0.1 specify done when)
+## Historical success checklist (original v0.1 scope)
+
+The unchecked items below are preserved as historical text, not current operator instructions. Current evidence scope is in [specification index](../README.md) and the reconciliation receipt.
 
 - [x] Constitution ratified in repo
 - [x] This spec reviewed; Wave 0 source manifest started (`docs/source-manifest.md`)
@@ -178,9 +184,13 @@ athanor.packet.v0
 | Enochian moral panic / dual-use | Corpus yes / product anti-surface; no summon UX |
 | Spark/train blocked | Same honesty as Hyperlex E2 — label blocked, don’t fake gates |
 
-## Open questions (clarify)
+## Historical questions (see clarify.md and current decision register)
 
 1. Spark vs other box as train home (INFERRED: reuse Hyperlex Spark path).
 2. Hub name reservation (`athanor-encoder-*`?).
 3. Whether Goetic *images* of seals are ingested as described diagrams only vs image blobs (license).
 4. Notion Operator Hub page under Abraxas/AAL 02 Operator — yes/no.
+
+Current unresolved decisions: [DEC-001 through DEC-008](../decisions.md). The linked Athanor Notion Hub exists; no new hub is requested here. This does not govern or activate.
+
+Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 805 Slice N/A + Hash: fd84c7085579f3e7a560b38fc554a4f832fa9c10 (review base)

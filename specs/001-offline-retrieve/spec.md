@@ -31,6 +31,10 @@ Wave 0 harvest produced 319+ atoms with no checkable retrieve surface. Chat LLMs
 
 ## Workflows
 
+Product workflow: [WF-003](workflows.md), derived from [requirements](requirements.md) and [journeys](../journeys.md). Target error/provenance behavior extends shipped v0 and is not yet implemented.
+
+## Execution skills
+
 Copied from Spec 000 (do not invent):
 
 | Workflow | Owner |
@@ -75,3 +79,7 @@ Copied from Spec 000 (do not invent):
 |------|------------|
 | Nav chrome in sacred-texts SPA pollutes excerpts | T5: `strip_chrome` at excerpt time in `retrieve.py`. Corpus re-harvest optional later. |
 | Empty corpus | Clear error / empty hits; CI uses fixtures |
+
+Read [contracts C-006/C-007](../contracts/README.md) for proposed distinctions among malformed corpus, no-match, unsupported query and encoder fallback. This does not govern or activate.
+
+Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 805 Slice N/A + Hash: fd84c7085579f3e7a560b38fc554a4f832fa9c10 (review base)

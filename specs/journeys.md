@@ -1,0 +1,14 @@
+# Journeys — outcomes before architecture
+
+Status: advisory. This does not govern or activate. The [workflow registry](workflows/README.md) supplies executable behavior; this file describes the user's experience.
+
+| ID | Actor / initial need | Journey and successful outcome | Failure experience / handoff |
+|---|---|---|---|
+| JRN-001 | Researcher wants historical context with checkable citations | Select local slice, query it, inspect historical hits and lens labels, follow source/hash references; receives evidence or an honest no-match. WF-003. | Unsupported query explains limits; unavailable corpus offers the documented path choices; absent evidence yields NOT_COMPUTABLE rather than invented text. |
+| JRN-002 | Curator wants a questionable source handled responsibly | Review source/edition and rights; harvest approved material; inspect proposed labels; record exact settlement decisions; see preserved provenance. WF-001, WF-002, WF-004. | Unclear rights or disputed labels stay HOLD; interrupted runs show what changed and how recovery proceeds; operator decides the next eligible action. |
+| JRN-003 | Dataset reviewer needs a reproducible eligible slice | Inspect decisions, form deduplicated splits, review balance/depth and excluded rows; freeze a manifest suitable for a separate training decision. WF-005. | Insufficient support, unresolved duplicate groups or ineligible rows prevent release of that snapshot; report identifies deficits without silently changing thresholds. |
+| JRN-004 | Training operator wants a bounded experimental run | Validate tooling on synthetic data, inspect exact config and authorized snapshot, execute approved training, obtain artifact and failure/evaluation receipts. WF-007, WF-008, WF-009. | Missing approval/resources stays HOLD; interruption yields recoverable or failed state; missing weights cannot produce a quality PASS. |
+| JRN-005 | Reviewer/operator prepares a public artifact | Review sanitized content and real model behavior; confirm card matches evidence; approve exact destination and bytes; verify published identity. WF-006, WF-009, WF-010. | Restricted material, missing E6, stale approval or partial upload stops release and records remediation; historical source access remains distinct from dangerous packaging. |
+| JRN-006 | Maintainer/recipient needs a controlled extension or handoff | Review family proposal under existing authority, or receive a scoped offline pack and verify its hashes and instructions. WF-011, WF-012. | Unapproved registry changes stay proposals; incomplete packs are rejected; recipients return verification evidence and do not infer new runtime authority. |
+
+Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 805 Slice N/A + Hash: fd84c7085579f3e7a560b38fc554a4f832fa9c10 (review base)

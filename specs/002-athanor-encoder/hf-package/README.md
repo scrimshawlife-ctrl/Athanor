@@ -12,9 +12,11 @@ tags:
   - no-efficacy
 ---
 
-# athanor-encoder-modernbert-base-seed
+# athanor-structure-modernbert-base-seed (provisional T1 draft)
 
 **Furnace, not oracle.** This card is the publish *shape*. Name-gate is false until Spec 002 E2 and E7 pass. Weights are produced on Spark and are not in git.
+
+Completion qualification: this is a provisional T1 structure-tier draft, not an existing model. Base checkpoint/tokenizer and artifact identity remain DEC-002. All T1 prerequisites include T0 gates plus E1/E2/E7; Hub additionally requires E6, rights/export review and verified operator approval. The historical table below is not a current release certification; use [eval-gates.md](../eval-gates.md) for evidence scope. Model training results, E4/E6 execution and independent E7 reproduction are NOT_COMPUTABLE here. The frontmatter is draft metadata, not an approved license declaration for future weights or corpus.
 
 Do not treat this file as a live Hub upload.
 
@@ -51,7 +53,7 @@ Local SoT is `~/.athanor/corpus/atoms.jsonl` (not in git, not this card).
 Public companion dataset (when gated) is excerpt-only, license-tagged, epistemic-labeled.
 KEEP harvest rows are INFERRED. They are not gold.
 
-## Eval (pre-train / stub) — honest 2026-09-11 PT
+## Historical eval table (2026-09-11 report; qualified above)
 
 | Gate | Status | Note |
 |------|--------|------|
@@ -66,3 +68,7 @@ KEEP harvest rows are INFERRED. They are not gold.
 | E8 access language | PASS | this card |
 
 Do not flip E2 by editing the card. E7 gold PASS ≠ Hub authorization (`ALLOW_HUB` absent). Train gated (`ALLOW_TRAIN` absent).
+
+This does not govern or activate.
+
+Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 805 Slice N/A + Hash: fd84c7085579f3e7a560b38fc554a4f832fa9c10 (review base)

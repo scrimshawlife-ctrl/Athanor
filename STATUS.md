@@ -1,5 +1,11 @@
 # Athanor STATUS
 
+## Current evidence qualification — specification completion
+
+Packages 1-3 define an advisory target; runtime code and schemas remain unchanged. Historical counts/PASS labels below are reports from the operator machine, not independently reproduced corpus/model evidence. At review base fd84c708, 63 pairs, 80 negatives and 55 wall prompts are committed; 22 local tests and lint passed. Independent GOLD validity, current eligible train rows and E7 reproduction are NOT_COMPUTABLE. INFERRED=2597 is not KEEP=2597; the P3a report gives 2424 non-gold KEEP rows. Read [START_HERE](docs/START_HERE.md), [eval evidence](specs/002-athanor-encoder/eval-gates.md), and [reconciliation receipt](out/audit/spec-completion.latest.json).
+
+This does not govern or activate. Earlier dated entries remain historical; the canonical fourteen-stage method is not declared complete.
+
 **Lane:** SHADOW — retrieve live · train/Hub gated  
 **Version:** see `VERSION`  
 **Remote:** https://github.com/scrimshawlife-ctrl/Athanor  
@@ -143,3 +149,5 @@ Scoreboards (repo copies; receipts stay local under `~/.athanor/receipts/`):
 - Helper: `athanor.chrome.strip_chrome` (stdlib; reusable by a later harvest pass).
 - Landed as PR #2 / `83c3ef2`. Corpus re-harvest remains optional if operators want clean stored `text`.
 - Packet `efficacy` stays JSON `null`. Train / Hub still gated.
+
+Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 805 Slice N/A + Hash: fd84c7085579f3e7a560b38fc554a4f832fa9c10 (review base)

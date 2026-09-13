@@ -4,6 +4,8 @@
 **SoT:** `~/.athanor/corpus/atoms.jsonl` (not git, not Hub)  
 **Public cousin:** `athanor-atoms-sanitize-*` excerpts only
 
+Completion target: [WF-004/005/006](workflows.md), [C-004/C-005/C-008](../contracts/README.md), and [data model](data-model.md) define eligibility, rights, split and reconstruction semantics. Current exporter behavior is not contract conformance. This does not govern or activate.
+
 ## Classes
 
 | Class | Who labels | May train T0 | May name-gate T1 | May publish Hub |
@@ -21,6 +23,8 @@
 Split by `source_url` host-path prefix and `content_hash`.  
 All atoms from the same sacred-texts `/book/` leaf stay in one split.  
 No lemma-level leak required; page-level leak is the defect to prevent.
+
+Target refinement: group connected work/edition/canonical-source/content-hash identities before split assignment; mirrored pages must not cross splits. Record canonicalizer/grouping revisions, ratios and seed. Unknown identities that prevent leakage checks remain unresolved. Weak rows are train-only; validation/test truth requires reviewed GOLD labels.
 
 ## Minimum counts
 
@@ -51,6 +55,8 @@ No lemma-level leak required; page-level leak is the defect to prevent.
 - Enochian Calls: excerpt + pointer, never a concatenated Keys file
 - `efficacy` column absent
 
+Eligibility requires both settlement and use-scoped rights clearance. HOLD/DROP cannot export even when license is public-domain. Evaluate full-work boundaries and aggregate excerpts by work/edition; the character limit does not permit a complete short Call. Missing required reception metadata excludes public training rows; legacy mappings require review, not unspecified defaults.
+
 ## Negatives (required themes)
 
 - news / weather / sports
@@ -74,3 +80,7 @@ No lemma-level leak required; page-level leak is the defect to prevent.
 ```
 
 Gold pairs require operator settle. Weak pairs may bootstrap T0 only.
+
+Reported P3a candidate rows: 400 gold + 2424 non-gold KEEP = 2824, subject to independent eligibility verification (NOT_COMPUTABLE here). The committed 63 pairs and 80 negatives are below the T1 thresholds by 137 and 120 respectively. Raw corpus count is not eligible train-row count; thresholds apply after exclusions, grouping and task-specific labeling.
+
+Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 805 Slice N/A + Hash: fd84c7085579f3e7a560b38fc554a4f832fa9c10 (review base)

@@ -5,7 +5,7 @@
 
 | # | Question | Decision | Epistemic |
 |---|----------|----------|-----------|
-| C1 | Org / remote | `scrimshawlife-ctrl/Athanor` (private personal research spine) | OBSERVED |
+| C1 | Org / remote | `scrimshawlife-ctrl/Athanor`; originally described as private. Repository API visibility is public at the review base. | OBSERVED metadata; no visibility change made |
 | C2 | Product shape | Encoder + corpus + retrieve first. Generative fine-tune is a later gated artifact, not the v0 name. | OBSERVED (Danny ALIGN) |
 | C3 | Enochian | **In corpus** (PD Dee/Kelley, Calls, witnesses). **Out of product**: authority-seal mint, summon/compel UX, efficacy scores. | OBSERVED (Danny) |
 | C4 | Goetia / Solomonic | Same split: historical catalogs/diagrams in corpus; no command UX. | INFERRED (constitution V parallel) |
@@ -19,3 +19,7 @@
 | C12 | Living traditions | Prefer PD/historical; no closed initiatory scrape; no coercion cheat-sheets. | LOCKED |
 
 Open items that do **not** block Spec 000 seal: live Wave 0 URL settlement (P0 tasks), exact embedding library choice inside plan bounds.
+
+This historical seal does not certify the later fourteen-stage completion method. The [current decision register](../decisions.md) records remaining implementation/evidence choices. This does not govern or activate.
+
+Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 805 Slice N/A + Hash: fd84c7085579f3e7a560b38fc554a4f832fa9c10 (review base)
