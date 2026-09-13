@@ -252,12 +252,14 @@
           "pattern": "^[a-f0-9]{64}$"
         },
         "work_id": {
+          "pattern": "\\S",
           "type": [
             "string",
             "null"
           ]
         },
         "edition_id": {
+          "pattern": "\\S",
           "type": [
             "string",
             "null"
@@ -1526,7 +1528,11 @@
               "gate_id": {"enum": ["E1", "E2", "E3"]}
             }
           },
-          "then": {"properties": {"value": {"type": "number"}, "control_value": {"type": "number"}}}
+          "then": {"properties": {"value": {"type": "number", "minimum": 0, "maximum": 1}, "control_value": {"type": "number", "minimum": 0, "maximum": 1}}}
+        },
+        {
+          "if": {"properties": {"status": {"enum": ["PASS", "FAIL"]}, "gate_id": {"const": "E7"}}},
+          "then": {"properties": {"value": {"type": "number", "minimum": 0, "maximum": 1}, "control_value": {"type": ["number", "null"], "minimum": 0, "maximum": 1}}}
         }
       ]
     },
@@ -1940,7 +1946,9 @@
             "properties": {
               "path": {
                 "type": "string",
-                "minLength": 1
+                "minLength": 1,
+                "maxLength": 240,
+                "pattern": "^[A-Za-z0-9_-](?:[A-Za-z0-9._-]*[A-Za-z0-9_-])?(?:/[A-Za-z0-9_-](?:[A-Za-z0-9._-]*[A-Za-z0-9_-])?)*(?![\\s\\S])"
               },
               "sha256": {
                 "type": "string",

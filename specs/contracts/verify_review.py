@@ -4,12 +4,13 @@ import json
 from pathlib import Path
 
 from jsonschema import Draft202012Validator
+from validation import is_valid_contract
 
 ROOT = Path(__file__).resolve().parents[2]
 REL = "specs/contracts/proposed.v1.schema.json"
 schema = json.loads((ROOT / REL).read_text(encoding="utf-8"))
 Draft202012Validator.check_schema(schema)
-v = Draft202012Validator(schema)
+v = Draft202012Validator(schema, format_checker=Draft202012Validator.FORMAT_CHECKER)
 H = "a" * 64
 ref = {"id": "synthetic", "sha256": H}
 lens = {"epistemic": "NOT_COMPUTABLE", "text": None, "evidence_refs": [], "reason": "synthetic unavailable evidence"}
@@ -110,7 +111,12 @@ for definition, bad in (("encoder", changed(encoder, outcome="out_of_domain")),
     mutant = copy.deepcopy(schema)
     key = next(k for k, item in mutant["$defs"].items()
                if item.get("properties", {}).get("schema_version", {}).get("const") == "athanor." + definition + ".v1")
-    mutant["$defs"][key]["allOf"].pop()
+    conditions = mutant["$defs"][key]["allOf"]
+    index = next(i for i, condition in enumerate(conditions)
+                 if (definition == "encoder" and "model_ref" in condition["if"]["properties"])
+                 or (definition == "eval_result" and "control_value" in condition["then"]["properties"]
+                     and condition["if"]["properties"].get("gate_id", {}).get("enum") == ["E1", "E2", "E3"]))
+    conditions.pop(index)
     assert Draft202012Validator(mutant).is_valid(bad), "mutation control failed to reproduce original defect"
     assert not v.is_valid(bad), "corrected schema accepted original defect"
 
@@ -119,10 +125,32 @@ transition = next(line for line in workflow.splitlines() if line.startswith("| S
 assert "athanor.error.v1 code UNSUPPORTED_QUERY on stderr and exit code 2" in transition
 assert "packet outcome is MATCH, NO_MATCH or HISTORICAL_ONLY" in transition
 
+for field in ("work_id", "edition_id"):
+    for blank in ("", " ", "\t\n"):
+        negative.append(changed(source, **{field: blank}))
+negative.extend([changed(source, source_url="not a uri"), changed(source, observed_at="2026-02-30T00:00:00Z")])
+for gate in ("E1", "E2", "E3", "E7"):
+    for status in ("PASS", "FAIL"):
+        base = changed(evaluation, gate_id=gate, status=status, snapshot_ref=ref, control_value=0)
+        for boundary in (0, 1):
+            positive.append(changed(base, value=boundary, control_value=boundary))
+        for invalid in (-0.01, 1.01, "balanced", True, float('nan'), float('inf')):
+            negative.extend([changed(base, value=invalid), changed(base, control_value=invalid)])
+
+handoff = {"schema_version": "athanor.handoff.v1", "pack_id": "synthetic", "intended_recipient_ref": "synthetic",
+           "intended_use": "local-test", "approval_ref": ref,
+           "artifacts": [{"path": "data/atoms.jsonl", "sha256": H, "license": "synthetic"}],
+           "excluded_data_statement": "All real corpus data excluded", "reproduction_instructions": "synthetic only",
+           "verification_refs": [ref]}
+positive.append(handoff)
+for path in ("../../private", "/root/file", "C:/file", "C:\\file", "a\\b", "./a", "a//b", "a/../b", "a/", "a.", "a ", "a%2fb", "CON.txt", "a/NUL", "a\n"):
+    negative.append(changed(handoff, artifacts=[{"path": path, "sha256": H, "license": "synthetic"}]))
+for second in ("data/atoms.jsonl", "DATA/ATOMS.JSONL", "data"):
+    negative.append(changed(handoff, artifacts=handoff['artifacts'] + [{"path": second, "sha256": "b" * 64, "license": "synthetic"}]))
 for obj in positive:
-    assert v.is_valid(obj), "positive rejected: " + repr(obj)
+    assert is_valid_contract(obj, schema), "positive rejected: " + repr(obj)
 for obj in negative:
-    assert not v.is_valid(obj), "negative accepted: " + repr(obj)
+    assert not is_valid_contract(obj, schema), "negative accepted: " + repr(obj)
 print(f"REVIEW_CONTRACTS_PASS positive={len(positive)} negative={len(negative)} workflow_consistency=PASS")
 
 # Provenance: Notion Sprint 001 Hub [not inspected; prior Athanor Hub context] + Loop 805 Slice N/A + Hash: ab89a15d0ea4c39295f1918ddb521953ef1f6bbd (reviewed PR head)

@@ -1,0 +1,9 @@
+{
+  "surface": "PROJECTION",
+  "status": "PASSED_LOCAL",
+  "base": "9013b524030b516de7baf6a42c3c1a32b829c958",
+  "scope": "Rate bounds, nonblank source identities, portable handoff paths and semantic uniqueness, required schema format enforcement",
+  "validation": {"positive_cases": 111, "negative_cases": 359, "existing_tests": 22},
+  "boundaries": {"runtime_changed": false, "training": false, "publication": false, "merge": false},
+  "provenance": "Notion Sprint 001 Hub [not inspected] + Loop 805 Slice N/A + Hash: 9013b524030b516de7baf6a42c3c1a32b829c958 (review base)"
+}

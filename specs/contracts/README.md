@@ -74,6 +74,10 @@ See eval-gates.md for the single prerequisite matrix. A release manifest binds m
 
 ## C-010 — offline handoff
 
+The advisory schema limits artifact paths to portable ASCII relative slash-separated components (letters, digits, underscore, hyphen and interior dots; at most 240 characters), excluding absolute paths, dot segments, backslashes, percent encodings, whitespace and trailing dots. `validation.validate_contract` additionally rejects case-folded duplicate paths, reserved Windows device names and file/directory prefix collisions. JSON Schema alone cannot guarantee normalized-path uniqueness. Consumers must use both validation layers, reject symlinks, and verify resolved paths remain under the staging root before any filesystem access. The advisory validator performs no filesystem operations and does not prove file-content integrity by itself.
+
+For reusable validation, install `python -m pip install -r specs/contracts/requirements.txt`; URI/date-time support must be present or validation fails visibly. Use `validation.validate_contract(instance, schema)` to enforce formats and cross-artifact constraints, not a bare jsonschema validator. The regression command uses this same helper. Source work/edition identifiers must be nonblank when non-null. Executed E1/E2/E3/E7 values are numeric proportions in [0,1]; E1/E2/E3 controls are required proportions, while E7 controls may be null or a proportion. No numeric strings, NaN or Infinity are accepted.
+
 Pack manifest: pack_id, intended_recipient_ref, intended_use, scope/approval_ref, artifact list with relative paths/digests/licenses, excluded-data statement, reproduction instructions and verification command references. Paths must be relative, non-traversing and unique. Include only approved files; do not default to copying the full home corpus. Local manifest validation proves VERIFIED_LOCAL; transfer evidence proves DELIVERED; recipient digest acknowledgment proves RECIPIENT_VERIFIED. Pack possession is not authority to train or publish.
 
 ## Compatibility and implementation status
