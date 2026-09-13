@@ -80,6 +80,12 @@ For reusable validation, install `python -m pip install -r specs/contracts/requi
 
 Pack manifest: pack_id, intended_recipient_ref, intended_use, scope/approval_ref, artifact list with relative paths/digests/licenses, excluded-data statement, reproduction instructions and verification command references. Paths must be relative, non-traversing and unique. Include only approved files; do not default to copying the full home corpus. Local manifest validation proves VERIFIED_LOCAL; transfer evidence proves DELIVERED; recipient digest acknowledgment proves RECIPIENT_VERIFIED. Pack possession is not authority to train or publish.
 
+### Cross-field semantic checks
+
+The shared advisory validator enforces the existing numeric gate criteria: E1/E2 must strictly exceed their controls, E3 must meet or exceed its control, and E7 must be at most 0.25. PASS and FAIL must agree with these comparisons; there is no comparison tolerance. This does not replace evidence review or infer outcomes for nonnumeric gates. NOT_COMPUTABLE remains available for missing evidence.
+
+Snapshot split ratios must total one, using an absolute tolerance of 1e-12 and no relative tolerance for floating-point summation. Receipt finished_at must not precede started_at; equality is allowed. UTC timestamps are compared with their full fractional-second precision. JSON Schema alone cannot enforce these cross-field relationships: consumers must call validate_contract. Regression controls demonstrate that each of these three defects passes bare schema validation but is rejected by the shared validator.
+
 ## Compatibility and implementation status
 
 Existing v0 consumers remain unchanged. Implement v1 via explicit opt-in/version negotiation and a documented migration, not by silently changing responses under an old schema ID. Packages 4-5 must add producer/consumer semantic tests, complete JSON Schemas for remaining reference/config manifests, migration/rollback checks, and the global traceability/test matrix. The included wire schema concretizes high-risk atom, approval, settlement, packet, encoder, export, receipt and eval boundaries now; it does not claim full runtime conformance or full corpus validation.

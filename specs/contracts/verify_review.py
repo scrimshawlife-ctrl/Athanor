@@ -25,6 +25,14 @@ def changed(obj, **kw):
     result.update(kw)
     return result
 
+def gate_case(gate, status, **kw):
+    value, control = (0.5, 0.25) if status == 'PASS' else (0.25, 0.5)
+    if gate == 'E7':
+        value, control = (0.25 if status == 'PASS' else 0.5), None
+    fields = {'gate_id': gate, 'status': status, 'value': value, 'control_value': control}
+    fields.update(kw)
+    return changed(evaluation, **fields)
+
 # Unsupported queries are errors, not packets with a fake snapshot.
 bad_packet = changed(packet, outcome="UNSUPPORTED_QUERY", query="!!!")
 negative.append(bad_packet)
@@ -47,12 +55,12 @@ for missing in ({"work_id": None}, {"edition_id": None}, {"work_id": None, "edit
 # Non-dataset checks may lack a snapshot, never all evidence.
 for gate in ("E0", "E4", "E5", "E6", "E8"):
     for status in ("PASS", "FAIL"):
-        case = changed(evaluation, gate_id=gate, status=status, control_value=0)
+        case = gate_case(gate, status)
         positive.extend([case, changed(case, snapshot_ref=ref)])
         negative.extend([changed(case, artifact_ref=None), changed(case, output_refs=[]), changed(case, support=0), changed(case, value=None)])
 for gate in ("E1", "E2", "E3", "E7"):
     for status in ("PASS", "FAIL"):
-        case = changed(evaluation, gate_id=gate, status=status, control_value=0)
+        case = gate_case(gate, status)
         negative.append(case)
         positive.append(changed(case, snapshot_ref=ref))
 negative.extend([changed(evaluation, gate_id="FUTURE_GATE"), changed(evaluation, gate_id="FUTURE_GATE", snapshot_ref=ref)])
@@ -61,7 +69,7 @@ positive.append(changed(evaluation, gate_id="E1", status="NOT_COMPUTABLE", value
 # Every executed gate needs an attributable reviewer, including content-review gates.
 for gate in ("E0", "E1", "E2", "E3", "E4", "E5", "E6", "E7", "E8"):
     for status in ("PASS", "FAIL"):
-        case = changed(evaluation, gate_id=gate, status=status, snapshot_ref=ref, control_value=0)
+        case = gate_case(gate, status, snapshot_ref=ref)
         positive.append(case)
         for reviewer in (None, "", "   "):
             negative.append(changed(case, reviewer=reviewer))
@@ -72,9 +80,10 @@ for gate in ("E0", "E1", "E2", "E3", "E4", "E5", "E6", "E7", "E8"):
 # Executed comparison gates cannot omit their control; zero remains legitimate.
 for gate in ("E1", "E2", "E3"):
     for status in ("PASS", "FAIL"):
-        case = changed(evaluation, gate_id=gate, status=status, snapshot_ref=ref)
+        case = gate_case(gate, status, snapshot_ref=ref, control_value=None)
         negative.append(case)
-        positive.extend([changed(case, control_value=0), changed(case, value=0.5, control_value=0.25)])
+        positive.extend([gate_case(gate, status, snapshot_ref=ref),
+                         changed(case, value=0.5 if status == 'PASS' else 0, control_value=0 if status == 'PASS' or gate != 'E3' else 0.5)])
         for invalid in ("frozen-baseline", "0.5", "", True, {}, []):
             negative.extend([changed(case, control_value=invalid), changed(case, value=invalid, control_value=0)])
         missing = changed(case)
@@ -83,7 +92,7 @@ for gate in ("E1", "E2", "E3"):
     positive.append(changed(evaluation, gate_id=gate, status="NOT_COMPUTABLE", reviewer=None))
 for gate in ("E0", "E4", "E5", "E6", "E7", "E8"):
     for status in ("PASS", "FAIL"):
-        positive.append(changed(evaluation, gate_id=gate, status=status, snapshot_ref=ref, control_value=None))
+        positive.append(gate_case(gate, status, snapshot_ref=ref, control_value=None))
 
 encoder = {"schema_version": "athanor.encoder.v1", "model_ref": None, "snapshot_ref": ref,
            "outcome": "unavailable", "family_id": None, "family_confidence": None,
@@ -133,7 +142,12 @@ for gate in ("E1", "E2", "E3", "E7"):
     for status in ("PASS", "FAIL"):
         base = changed(evaluation, gate_id=gate, status=status, snapshot_ref=ref, control_value=0)
         for boundary in (0, 1):
-            positive.append(changed(base, value=boundary, control_value=boundary))
+            if (gate in ('E1', 'E2') and status == 'FAIL'
+                    or gate == 'E3' and status == 'PASS'
+                    or gate == 'E7' and (status == 'PASS') == (boundary <= 0.25)):
+                positive.append(changed(base, value=boundary, control_value=boundary))
+            else:
+                negative.append(changed(base, value=boundary, control_value=boundary))
         for invalid in (-0.01, 1.01, "balanced", True, float('nan'), float('inf')):
             negative.extend([changed(base, value=invalid), changed(base, control_value=invalid)])
 
@@ -147,6 +161,48 @@ for path in ("../../private", "/root/file", "C:/file", "C:\\file", "a\\b", "./a"
     negative.append(changed(handoff, artifacts=[{"path": path, "sha256": H, "license": "synthetic"}]))
 for second in ("data/atoms.jsonl", "DATA/ATOMS.JSONL", "data"):
     negative.append(changed(handoff, artifacts=handoff['artifacts'] + [{"path": second, "sha256": "b" * 64, "license": "synthetic"}]))
+
+# Numeric gate status must match the existing strict/non-strict criteria.
+for gate in ('E1', 'E2', 'E3'):
+    for value, control, passes in ((0.6, 0.5, True), (0.5, 0.5, gate == 'E3'), (0.4, 0.5, False)):
+        case = changed(evaluation, gate_id=gate, snapshot_ref=ref, value=value, control_value=control,
+                       status='PASS' if passes else 'FAIL')
+        positive.append(case)
+        negative.append(changed(case, status='FAIL' if passes else 'PASS'))
+for value, passes in ((0, True), (0.25, True), (0.2500000000001, False), (1, False)):
+    case = changed(evaluation, gate_id='E7', snapshot_ref=ref, value=value, control_value=None,
+                   status='PASS' if passes else 'FAIL')
+    positive.append(case)
+    negative.append(changed(case, status='FAIL' if passes else 'PASS'))
+
+snapshot = {'schema_version': 'athanor.snapshot.v1', 'snapshot_id': 'synthetic',
+            'row_manifest': ref, 'registry_ref': ref, 'config_hash': H, 'tokenizer_revision': 'synthetic',
+            'grouping_version': 'synthetic', 'seed': 1,
+            'split_ratios': {'train': 0.8, 'validation': 0.1, 'test': 0.1},
+            'split_counts': {'train': 0, 'validation': 0, 'test': 0}, 'family_counts': {},
+            'train_token_total': 0, 'train_family_tokens': {}, 'exclusion_manifest': ref, 'evidence_refs': []}
+for ratios in ((0.8, 0.1, 0.1), (0.1, 0.2, 0.7), (1, 0, 0), (0.8, 0.1, 0.1000000000001)):
+    positive.append(changed(snapshot, split_ratios=dict(zip(('train', 'validation', 'test'), ratios))))
+for ratios in ((0.8, 0.8, 0.8), (0, 0, 0), (0.8, 0.1, 0.09), (0.8, 0.1, 0.10000000001)):
+    negative.append(changed(snapshot, split_ratios=dict(zip(('train', 'validation', 'test'), ratios))))
+
+for start, finish, passes in (
+    ('2026-09-13T00:00:00Z', '2026-09-13T00:00:00Z', True),
+    ('2026-09-13T00:00:00Z', '2026-09-12T23:59:59Z', False),
+    ('2026-09-12T23:59:59.9Z', '2026-09-13T00:00:00Z', True),
+    ('2026-09-13T00:00:00.10000001Z', '2026-09-13T00:00:00.10000000Z', False),
+    ('2026-09-13T00:00:00.1Z', '2026-09-13T00:00:00.100Z', True),
+):
+    (positive if passes else negative).append(changed(receipt, started_at=start, finished_at=finish))
+
+# Each former hole still passes bare schema validation, proving these semantic
+# checks add protection rather than merely retesting a schema type error.
+former_holes = [changed(evaluation, gate_id='E1', snapshot_ref=ref, value=0.5, control_value=0.5),
+                changed(snapshot, split_ratios={'train': 0.8, 'validation': 0.8, 'test': 0.8}),
+                changed(receipt, finished_at='2026-09-12T23:59:59Z')]
+for bad in former_holes:
+    assert v.is_valid(bad), 'former semantic defect not reproduced'
+    assert not is_valid_contract(bad, schema), 'semantic defect still accepted'
 for obj in positive:
     assert is_valid_contract(obj, schema), "positive rejected: " + repr(obj)
 for obj in negative:
