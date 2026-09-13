@@ -51,6 +51,9 @@
     },
     {
       "$ref": "#/$defs/handoff"
+    },
+    {
+      "$ref": "#/$defs/error"
     }
   ],
   "$defs": {
@@ -282,7 +285,38 @@
         "identity_reason",
         "canonicalizer_version"
       ],
-      "additionalProperties": false
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "anyOf": [
+              {
+                "properties": {
+                  "work_id": {
+                    "type": "null"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "edition_id": {
+                    "type": "null"
+                  }
+                }
+              }
+            ]
+          },
+          "then": {
+            "properties": {
+              "identity_reason": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              }
+            }
+          }
+        }
+      ]
     },
     "license_decision": {
       "type": "object",
@@ -946,8 +980,7 @@
           "enum": [
             "MATCH",
             "NO_MATCH",
-            "HISTORICAL_ONLY",
-            "UNSUPPORTED_QUERY"
+            "HISTORICAL_ONLY"
           ]
         },
         "snapshot_ref": {
@@ -1006,8 +1039,7 @@
             "properties": {
               "outcome": {
                 "enum": [
-                  "NO_MATCH",
-                  "UNSUPPORTED_QUERY"
+                  "NO_MATCH"
                 ]
               }
             }
@@ -1423,9 +1455,6 @@
               "artifact_ref": {
                 "$ref": "#/$defs/reference"
               },
-              "snapshot_ref": {
-                "$ref": "#/$defs/reference"
-              },
               "output_refs": {
                 "minItems": 1
               }
@@ -1444,6 +1473,36 @@
             "properties": {
               "status": {
                 "const": "NOT_COMPUTABLE"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "PASS",
+                  "FAIL"
+                ]
+              },
+              "gate_id": {
+                "not": {
+                  "enum": [
+                    "E0",
+                    "E4",
+                    "E5",
+                    "E6",
+                    "E8"
+                  ]
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "snapshot_ref": {
+                "$ref": "#/$defs/reference"
               }
             }
           }
@@ -1908,6 +1967,68 @@
         "verification_refs"
       ],
       "additionalProperties": false
+    },
+    "error": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "athanor.error.v1"
+        },
+        "code": {
+          "enum": [
+            "UNSUPPORTED_QUERY",
+            "InvalidQuery",
+            "InvalidFamily",
+            "InvalidK",
+            "CorpusUnavailable",
+            "CorpusInvalid",
+            "ContractViolation"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "exit_code": {
+          "enum": [
+            1,
+            2
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "code",
+        "reason",
+        "exit_code"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "const": "ContractViolation"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "exit_code": {
+                "const": 1
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "exit_code": {
+                "const": 2
+              }
+            }
+          }
+        }
+      ]
     }
   }
 }

@@ -1,0 +1,25 @@
+{
+  "schema_version": "athanor.advisory.pr_review_receipt.v1",
+  "boundary": "Three advisory schema/prose fixes only. This does not govern or activate. No runtime, constitution, corpus, merge or activation changes.",
+  "evidence_packet": {
+    "pr": "https://github.com/scrimshawlife-ctrl/Athanor/pull/8",
+    "reviewed_head": "ab89a15d0ea4c39295f1918ddb521953ef1f6bbd",
+    "review_comments": [3998497933, 3998497938, 3998497942],
+    "findings": ["UNSUPPORTED_QUERY must use separate error envelope", "Unresolved work or edition requires meaningful identity_reason", "Non-dataset gates must not require fabricated snapshot references"]
+  },
+  "task": "Align proposed wire schema with C-001, C-006 and C-009; preserve all other approval and evidence constraints.",
+  "output_expected": "Updated advisory schema, clarified prose and committed regression checker.",
+  "validation": {
+    "command": "python specs/contracts/verify_review.py",
+    "positive_cases": 41,
+    "negative_cases": 74,
+    "pre_fix_reproduction_controls": 3,
+    "result": "PASS_LOCAL",
+    "existing_tests": 22,
+    "existing_lint": "PASS",
+    "runtime_contract_conformance": "NOT_COMPUTABLE"
+  },
+  "residual_risks": ["Proposed contracts are not runtime implementations", "Original private corpus and gate evidence remain NOT_COMPUTABLE", "Current-head hosted review must be repeated after publishing fixes"],
+  "recommended_next_advisory_action": "Verify follow-up PR head and request current-head review; no merge without separate operator decision.",
+  "provenance": "Provenance: Notion Sprint 001 Hub [not inspected; prior Athanor Hub context] + Loop 805 Slice N/A + Hash: ab89a15d0ea4c39295f1918ddb521953ef1f6bbd (reviewed head)"
+}
