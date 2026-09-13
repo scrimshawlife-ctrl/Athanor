@@ -1,5 +1,7 @@
 # Gold settle protocol
 
+Evidence qualification: the historical apply_gold_p3a.py selects heuristic KEEP candidates and stamps OBSERVED. That does not by itself prove reviewed target labels. The existing 400-row GOLD validity is NOT_COMPUTABLE pending DEC-001; historical reports are retained.
+
 Harvest KEEP is not gold. This protocol is the only path from local SoT to OBSERVED train labels.
 
 ## Inputs
@@ -34,5 +36,9 @@ Harvest KEEP is not gold. This protocol is the only path from local SoT to OBSER
 
 ## Honesty
 
-A script may propose KEEP vs DROP. It may not stamp GOLD.  
+A script may propose KEEP vs DROP. It may not independently decide or stamp GOLD. The proposed [WF-004](workflows.md) permits an executor to apply exact reviewed decisions only after verifying existing operator approval and input hashes; it cannot turn its own heuristic selection into review evidence.
 No gold.jsonl in git.
+
+Target decision/approval fields: [C-004](../contracts/README.md). This documentation does not validate historical approvals, alter the source corpus, or grant promotion authority. This does not govern or activate.
+
+Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 805 Slice N/A + Hash: fd84c7085579f3e7a560b38fc554a4f832fa9c10 (review base)

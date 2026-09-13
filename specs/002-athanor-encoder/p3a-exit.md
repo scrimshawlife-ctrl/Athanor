@@ -1,5 +1,11 @@
 # P3a local exit seal — Spec 002
 
+## Current evidence qualification
+
+This is the historical operator-machine report, not an independent certification of the fourteen-stage method. At review base fd84c708, committed fixtures are independently countable: 63 pairs, 80 negatives, 55 wall prompts. The local corpus, exact label-review evidence and E7 reports are not available in this checkout: independent GOLD validity, current eligible row counts and E7 reproduction are NOT_COMPUTABLE. The 2597 INFERRED atoms must not all be called KEEP; this report separately lists 2424 non-gold KEEP rows.
+
+The original seal and counts below remain historical. Scripts/fixtures and a reported seal do not prove actual model wall behavior, trained metrics or runtime contract conformance. See [eval-gates.md](eval-gates.md) and [DEC-001](../decisions.md). This does not govern or activate.
+
 **Date:** 2026-09-11 PT  
 **Operator:** Danny / Boof (executor on shared box)  
 **Lane:** SHADOW specify — train/Hub still fail-closed  
@@ -32,7 +38,7 @@ Receipt/report: `~/.athanor/settle/balance-report-p3a-20260911T081248Z.{md,json}
 
 ## Scripts sealed for specify
 
-- `scripts/shadow/athanor/apply_gold_p3a.py` — refuses KEEP-as-gold
+- `scripts/shadow/athanor/apply_gold_p3a.py` — historical selection/application helper; reviewed GOLD evidence is NOT_COMPUTABLE. The earlier description "refuses KEEP-as-gold" is not supported by the selection logic.
 - `scripts/shadow/athanor/sanitize_export.py` — excerpt ≤500; required contract fields; no Hub
 
 ## Gated remainder (unchecked)
@@ -51,3 +57,5 @@ Receipt/report: `~/.athanor/settle/balance-report-p3a-20260911T081248Z.{md,json}
 Local (not Hub): `/workspace/athanor-harvest/aaron-train-pack-20260911/`  
 Zip: `/workspace/athanor-harvest/athanor-train-pack-aaron-20260911.zip`  
 Audience: Aaron Godbout (Zero State co-founder). Contact via Danny. Notion publish is parent-owned.
+
+Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 805 Slice N/A + Hash: fd84c7085579f3e7a560b38fc554a4f832fa9c10 (review base)

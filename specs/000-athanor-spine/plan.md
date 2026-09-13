@@ -9,7 +9,11 @@ Stack and how live here. What/why stay in `spec.md`. Constitution I–XII bind.
 
 ---
 
-## Workflows (copied from spec — do not invent)
+## Workflows
+
+Product workflows are [WF-001, WF-002 and WF-011](workflows.md), with [WF-003](../001-offline-retrieve/workflows.md) for retrieval. The following historical skill list supports their execution; it does not substitute for purpose, triggers, failure paths and acceptance criteria. Architecture revision is package 4; this plan's old future-tense instructions are historical where contradicted by shipped Spec 001.
+
+## Execution skills (copied from spec)
 
 | Workflow | Owner | Role |
 |----------|-------|------|
@@ -156,8 +160,12 @@ Topology does **not** jump P0→P5 without exit evidence (Procedural Graphs).
 
 ---
 
-## Next Highest-Leverage Moves
+## Historical next moves (superseded by completion package sequence)
 
 1. Operator review this plan + `tasks.md`  
 2. Start P0 manifest (ops) — still no train  
 3. Hold implement until Danny yes on first harvest / code  
+
+Current next work: [specification completion map](../README.md) and [decision register](../decisions.md). This does not govern or activate.
+
+Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 805 Slice N/A + Hash: fd84c7085579f3e7a560b38fc554a4f832fa9c10 (review base)

@@ -1,0 +1,2 @@
+# Advisory verification only, not runtime dependencies.
+jsonschema[format]==4.26.0

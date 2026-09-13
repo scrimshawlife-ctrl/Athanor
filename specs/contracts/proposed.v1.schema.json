@@ -1,0 +1,2063 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:athanor:spec:proposed:v1",
+  "title": "Athanor proposed v1 wire contracts (advisory; not runtime)",
+  "$comment": "This does not govern or activate. Semantic rights, approval, provenance, split and policy checks require implementation. Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 805 Slice N/A + Hash: fd84c7085579f3e7a560b38fc554a4f832fa9c10 (review base)",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/approval"
+    },
+    {
+      "$ref": "#/$defs/source"
+    },
+    {
+      "$ref": "#/$defs/license_decision"
+    },
+    {
+      "$ref": "#/$defs/settlement"
+    },
+    {
+      "$ref": "#/$defs/atom_envelope"
+    },
+    {
+      "$ref": "#/$defs/encoder"
+    },
+    {
+      "$ref": "#/$defs/packet"
+    },
+    {
+      "$ref": "#/$defs/export_row"
+    },
+    {
+      "$ref": "#/$defs/receipt"
+    },
+    {
+      "$ref": "#/$defs/eval_result"
+    },
+    {
+      "$ref": "#/$defs/trainrow"
+    },
+    {
+      "$ref": "#/$defs/snapshot"
+    },
+    {
+      "$ref": "#/$defs/correspondence"
+    },
+    {
+      "$ref": "#/$defs/negative"
+    },
+    {
+      "$ref": "#/$defs/wall"
+    },
+    {
+      "$ref": "#/$defs/handoff"
+    },
+    {
+      "$ref": "#/$defs/error"
+    }
+  ],
+  "$defs": {
+    "reference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "location": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "lens": {
+      "type": "object",
+      "properties": {
+        "epistemic": {
+          "enum": [
+            "OBSERVED",
+            "INFERRED",
+            "SPECULATIVE",
+            "NOT_COMPUTABLE"
+          ]
+        },
+        "text": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/reference"
+          },
+          "minItems": 0
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "epistemic",
+        "text",
+        "evidence_refs",
+        "reason"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "epistemic": {
+                "const": "NOT_COMPUTABLE"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "text": {
+                "type": "null"
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "evidence_refs": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/reference"
+                },
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "approval": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "athanor.approval_reference.v1"
+        },
+        "approval_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "operator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "action": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "target": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_ref": {
+          "$ref": "#/$defs/reference"
+        },
+        "approved_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?Z$"
+        },
+        "expires_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?Z$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "revoked_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?Z$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "approval_id",
+        "operator",
+        "action",
+        "scope_hash",
+        "target",
+        "evidence_ref",
+        "approved_at"
+      ],
+      "additionalProperties": false
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "athanor.source.v1"
+        },
+        "source_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "observed_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?Z$"
+        },
+        "source_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "work_id": {
+          "pattern": "\\S",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "edition_id": {
+          "pattern": "\\S",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "identity_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "canonicalizer_version": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "schema_version",
+        "source_id",
+        "source_url",
+        "observed_at",
+        "source_sha256",
+        "work_id",
+        "edition_id",
+        "identity_reason",
+        "canonicalizer_version"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "anyOf": [
+              {
+                "properties": {
+                  "work_id": {
+                    "type": "null"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "edition_id": {
+                    "type": "null"
+                  }
+                }
+              }
+            ]
+          },
+          "then": {
+            "properties": {
+              "identity_reason": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "license_decision": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "athanor.license_decision.v1"
+        },
+        "decision_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "intended_use": {
+          "enum": [
+            "ingest",
+            "local_analysis",
+            "export"
+          ]
+        },
+        "outcome": {
+          "enum": [
+            "CLEARED",
+            "HOLD",
+            "DENIED"
+          ]
+        },
+        "reviewer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/reference"
+          },
+          "minItems": 0
+        },
+        "jurisdiction": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "decided_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?Z$"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "schema_version",
+        "decision_id",
+        "source_id",
+        "content_hash",
+        "intended_use",
+        "outcome",
+        "reviewer",
+        "evidence_refs",
+        "jurisdiction",
+        "decided_at",
+        "reason"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "const": "CLEARED"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evidence_refs": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/reference"
+                },
+                "minItems": 1
+              },
+              "jurisdiction": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "labels": {
+      "type": "object",
+      "properties": {
+        "family_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "atom_type": {
+          "enum": [
+            "text",
+            "table",
+            "correspondence",
+            "diagram_desc"
+          ]
+        },
+        "lens_route": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "historical",
+              "symbolic",
+              "operational"
+            ]
+          },
+          "minItems": 0
+        },
+        "reception_layer": {
+          "enum": [
+            "primary_witness",
+            "pd_translation",
+            "historical_commentary",
+            "modern_reception",
+            null
+          ]
+        },
+        "correspondence": {
+          "type": "object",
+          "properties": {
+            "role": {
+              "type": "string",
+              "minLength": 1
+            },
+            "filler": {
+              "type": "string",
+              "minLength": 1
+            },
+            "span": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "role",
+            "filler",
+            "span"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "settlement": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "athanor.settlement.v1"
+        },
+        "decision_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "atom_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "decision": {
+          "enum": [
+            "KEEP",
+            "HOLD",
+            "DROP",
+            "GOLD"
+          ]
+        },
+        "reviewed_targets": {
+          "$ref": "#/$defs/labels"
+        },
+        "label_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/reference"
+          },
+          "minItems": 0
+        },
+        "reviewer": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "approval_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/reference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "decided_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?Z$"
+        },
+        "supersedes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "decision_id",
+        "atom_id",
+        "content_hash",
+        "decision",
+        "reviewed_targets",
+        "label_evidence_refs",
+        "reviewer",
+        "approval_ref",
+        "decided_at",
+        "supersedes"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "decision": {
+                "const": "GOLD"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "reviewed_targets": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/labels"
+                  },
+                  {
+                    "minProperties": 1
+                  }
+                ]
+              },
+              "label_evidence_refs": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/reference"
+                },
+                "minItems": 1
+              },
+              "reviewer": {
+                "type": "string",
+                "minLength": 1
+              },
+              "approval_ref": {
+                "$ref": "#/$defs/reference"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "atom_v0": {
+      "title": "Athanor corpus atom v0",
+      "type": "object",
+      "required": [
+        "atom_id",
+        "family_id",
+        "type",
+        "text",
+        "license",
+        "source_url",
+        "epistemic",
+        "content_hash"
+      ],
+      "properties": {
+        "atom_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "family_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "text",
+            "table",
+            "correspondence",
+            "diagram_desc"
+          ]
+        },
+        "text": {
+          "type": "string"
+        },
+        "license": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_url": {
+          "type": "string",
+          "minLength": 1
+        },
+        "epistemic": {
+          "type": "string",
+          "enum": [
+            "OBSERVED",
+            "INFERRED",
+            "SPECULATIVE",
+            "NOT_COMPUTABLE"
+          ]
+        },
+        "content_hash": {
+          "type": "string",
+          "minLength": 8
+        },
+        "lens_hints": {
+          "type": "object",
+          "properties": {
+            "historical": {
+              "type": "boolean"
+            },
+            "symbolic": {
+              "type": "boolean"
+            },
+            "operational": {
+              "type": "boolean"
+            }
+          }
+        },
+        "table": {
+          "type": "object"
+        },
+        "correspondence": {
+          "type": "object"
+        },
+        "diagram_desc": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "atom_envelope": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "athanor.atom_envelope.v1"
+        },
+        "atom": {
+          "$ref": "#/$defs/atom_v0"
+        },
+        "legacy_blob_ref": {
+          "$ref": "#/$defs/reference"
+        },
+        "source_ref": {
+          "$ref": "#/$defs/reference"
+        },
+        "harvest_receipt_ref": {
+          "$ref": "#/$defs/reference"
+        },
+        "reception_layer": {
+          "enum": [
+            "primary_witness",
+            "pd_translation",
+            "historical_commentary",
+            "modern_reception",
+            null
+          ]
+        },
+        "reception_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "settlement_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/reference"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "schema_version",
+        "atom",
+        "legacy_blob_ref",
+        "source_ref",
+        "harvest_receipt_ref",
+        "reception_layer",
+        "reception_reason",
+        "settlement_refs"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "reception_layer": {
+                "type": "null"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "reception_reason": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "encoder": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "athanor.encoder.v1"
+        },
+        "disposition": {
+          "type": "string",
+          "enum": ["ok", "historical_only", "refuse_or_historical_only"]
+        },
+        "model_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/reference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "snapshot_ref": {
+          "$ref": "#/$defs/reference"
+        },
+        "outcome": {
+          "enum": [
+            "classified",
+            "out_of_domain",
+            "unavailable"
+          ]
+        },
+        "family_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "family_confidence": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "lens_route": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "historical",
+              "symbolic",
+              "operational"
+            ]
+          },
+          "minItems": 0
+        },
+        "reception_layer": {
+          "enum": [
+            "primary_witness",
+            "pd_translation",
+            "historical_commentary",
+            "modern_reception",
+            null
+          ]
+        },
+        "unbind": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "filler": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "span": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "atom_ref": {
+                  "$ref": "#/$defs/reference"
+                }
+              },
+              "required": [
+                "role",
+                "filler",
+                "span",
+                "atom_ref"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "epistemic": {
+          "enum": [
+            "OBSERVED",
+            "INFERRED",
+            "SPECULATIVE",
+            "NOT_COMPUTABLE"
+          ]
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "efficacy": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "schema_version",
+        "model_ref",
+        "snapshot_ref",
+        "outcome",
+        "family_id",
+        "family_confidence",
+        "lens_route",
+        "reception_layer",
+        "unbind",
+        "epistemic",
+        "reason",
+        "efficacy"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "const": "classified"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "model_ref": {
+                "$ref": "#/$defs/reference"
+              },
+              "family_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "family_confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "family_id": {
+                "type": "null"
+              },
+              "family_confidence": {
+                "type": "null"
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {"properties": {"model_ref": {"type": "null"}}},
+          "then": {"properties": {"outcome": {"const": "unavailable"}}}
+        }
+      ]
+    },
+    "hit": {
+      "type": "object",
+      "properties": {
+        "atom_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "family_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "excerpt": {
+          "type": "string",
+          "minLength": 1
+        },
+        "license_decision_ref": {
+          "$ref": "#/$defs/reference"
+        },
+        "source_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "content_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "epistemic": {
+          "enum": [
+            "OBSERVED",
+            "INFERRED",
+            "SPECULATIVE",
+            "NOT_COMPUTABLE"
+          ]
+        }
+      },
+      "required": [
+        "atom_id",
+        "family_id",
+        "excerpt",
+        "license_decision_ref",
+        "source_url",
+        "content_hash",
+        "epistemic"
+      ],
+      "additionalProperties": false
+    },
+    "packet": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "athanor.packet.v1"
+        },
+        "query": {
+          "type": "string",
+          "minLength": 1
+        },
+        "outcome": {
+          "enum": [
+            "MATCH",
+            "NO_MATCH",
+            "HISTORICAL_ONLY"
+          ]
+        },
+        "snapshot_ref": {
+          "$ref": "#/$defs/reference"
+        },
+        "hits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/hit"
+          },
+          "minItems": 0
+        },
+        "synthesis": {
+          "type": "object",
+          "properties": {
+            "historical": {
+              "$ref": "#/$defs/lens"
+            },
+            "symbolic": {
+              "$ref": "#/$defs/lens"
+            },
+            "operational": {
+              "$ref": "#/$defs/lens"
+            }
+          },
+          "required": [
+            "historical",
+            "symbolic",
+            "operational"
+          ],
+          "additionalProperties": false
+        },
+        "efficacy": {
+          "type": "null"
+        },
+        "encoder": {
+          "$ref": "#/$defs/encoder"
+        },
+        "diagnostic_receipt_ref": {
+          "$ref": "#/$defs/reference"
+        }
+      },
+      "required": [
+        "schema_version",
+        "query",
+        "outcome",
+        "snapshot_ref",
+        "hits",
+        "synthesis",
+        "efficacy"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "enum": [
+                  "NO_MATCH"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "hits": {
+                "maxItems": 0
+              },
+              "synthesis": {
+                "properties": {
+                  "historical": {
+                    "properties": {
+                      "epistemic": {
+                        "const": "NOT_COMPUTABLE"
+                      }
+                    }
+                  },
+                  "symbolic": {
+                    "properties": {
+                      "epistemic": {
+                        "const": "NOT_COMPUTABLE"
+                      }
+                    }
+                  },
+                  "operational": {
+                    "properties": {
+                      "epistemic": {
+                        "const": "NOT_COMPUTABLE"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "const": "MATCH"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "hits": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "export_row": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "athanor.export_row.v1"
+        },
+        "atom_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "family_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "text_excerpt": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "source_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "content_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "reception_layer": {
+          "enum": [
+            "primary_witness",
+            "pd_translation",
+            "historical_commentary",
+            "modern_reception"
+          ]
+        },
+        "epistemic": {
+          "enum": [
+            "OBSERVED",
+            "INFERRED",
+            "SPECULATIVE",
+            "NOT_COMPUTABLE"
+          ]
+        },
+        "settlement_decision_ref": {
+          "$ref": "#/$defs/reference"
+        },
+        "license_decision_ref": {
+          "$ref": "#/$defs/reference"
+        }
+      },
+      "required": [
+        "schema_version",
+        "atom_id",
+        "family_id",
+        "text_excerpt",
+        "source_url",
+        "content_hash",
+        "reception_layer",
+        "epistemic",
+        "settlement_decision_ref",
+        "license_decision_ref"
+      ],
+      "additionalProperties": false
+    },
+    "receipt": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "athanor.receipt.v1"
+        },
+        "run_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "workflow_id": {
+          "type": "string",
+          "pattern": "^WF-\\d{3}$"
+        },
+        "job_type": {
+          "enum": [
+            "harvest",
+            "normalize",
+            "gold_settle",
+            "freeze",
+            "sanitize_export",
+            "tooling_check",
+            "train",
+            "eval",
+            "publish",
+            "handoff",
+            "registry_review"
+          ]
+        },
+        "status": {
+          "enum": [
+            "SUCCEEDED",
+            "PARTIAL",
+            "FAILED",
+            "CANCELLED"
+          ]
+        },
+        "started_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?Z$"
+        },
+        "finished_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?Z$"
+        },
+        "engine": {
+          "type": "string",
+          "minLength": 1
+        },
+        "config_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/reference"
+          },
+          "minItems": 0
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/reference"
+          },
+          "minItems": 0
+        },
+        "counts": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "epistemic": {
+          "enum": [
+            "OBSERVED",
+            "INFERRED",
+            "SPECULATIVE",
+            "NOT_COMPUTABLE"
+          ]
+        },
+        "parent_run_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "run_id",
+        "workflow_id",
+        "job_type",
+        "status",
+        "started_at",
+        "finished_at",
+        "engine",
+        "config_hash",
+        "inputs",
+        "outputs",
+        "counts",
+        "errors",
+        "epistemic"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "PARTIAL",
+                  "FAILED",
+                  "CANCELLED"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "errors": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "SUCCEEDED"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "outputs": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "eval_result": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "athanor.eval_result.v1"
+        },
+        "gate_id": {
+          "enum": [
+            "E0",
+            "E1",
+            "E2",
+            "E3",
+            "E4",
+            "E5",
+            "E6",
+            "E7",
+            "E8"
+          ]
+        },
+        "status": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NOT_COMPUTABLE"
+          ]
+        },
+        "applicability": {
+          "enum": [
+            "applicable",
+            "not_applicable"
+          ]
+        },
+        "metric_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "type": [
+            "number",
+            "string",
+            "null"
+          ]
+        },
+        "control_value": {
+          "type": [
+            "number",
+            "string",
+            "null"
+          ]
+        },
+        "support": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "artifact_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/reference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "snapshot_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/reference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "config_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "output_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/reference"
+          },
+          "minItems": 0
+        },
+        "reviewer": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "schema_version",
+        "gate_id",
+        "status",
+        "applicability",
+        "metric_name",
+        "value",
+        "control_value",
+        "support",
+        "artifact_ref",
+        "snapshot_ref",
+        "config_hash",
+        "output_refs",
+        "reviewer",
+        "reason"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "PASS",
+                  "FAIL"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "applicability": {
+                "const": "applicable"
+              },
+              "value": {
+                "type": [
+                  "number",
+                  "string"
+                ]
+              },
+              "support": {
+                "minimum": 1
+              },
+              "artifact_ref": {
+                "$ref": "#/$defs/reference"
+              },
+              "output_refs": {
+                "minItems": 1
+              },
+              "reviewer": {
+                "type": "string",
+                "pattern": "\\S"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "applicability": {
+                "const": "not_applicable"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "status": {
+                "const": "NOT_COMPUTABLE"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "PASS",
+                  "FAIL"
+                ]
+              },
+              "gate_id": {
+                "not": {
+                  "enum": [
+                    "E0",
+                    "E4",
+                    "E5",
+                    "E6",
+                    "E8"
+                  ]
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "snapshot_ref": {
+                "$ref": "#/$defs/reference"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {"enum": ["PASS", "FAIL"]},
+              "gate_id": {"enum": ["E1", "E2", "E3"]}
+            }
+          },
+          "then": {"properties": {"value": {"type": "number", "minimum": 0, "maximum": 1}, "control_value": {"type": "number", "minimum": 0, "maximum": 1}}}
+        },
+        {
+          "if": {"properties": {"status": {"enum": ["PASS", "FAIL"]}, "gate_id": {"const": "E7"}}},
+          "then": {"properties": {"value": {"type": "number", "minimum": 0, "maximum": 1}, "control_value": {"type": ["number", "null"], "minimum": 0, "maximum": 1}}}
+        }
+      ]
+    },
+    "trainrow": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "athanor.trainrow.v1"
+        },
+        "atom_ref": {
+          "$ref": "#/$defs/reference"
+        },
+        "family_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "atom_type": {
+          "enum": [
+            "text",
+            "table",
+            "correspondence",
+            "diagram_desc"
+          ]
+        },
+        "reception_layer": {
+          "enum": [
+            "primary_witness",
+            "pd_translation",
+            "historical_commentary",
+            "modern_reception",
+            null
+          ]
+        },
+        "settlement_decision_ref": {
+          "$ref": "#/$defs/reference"
+        },
+        "supervision": {
+          "enum": [
+            "gold",
+            "weak"
+          ]
+        },
+        "split": {
+          "enum": [
+            "train",
+            "validation",
+            "test"
+          ]
+        },
+        "group_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "labels": {
+          "$ref": "#/$defs/labels"
+        },
+        "loss_mask": {
+          "type": "object",
+          "propertyNames": {
+            "enum": [
+              "family_id",
+              "atom_type",
+              "lens_route",
+              "reception_layer",
+              "correspondence"
+            ]
+          },
+          "additionalProperties": {
+            "type": "boolean"
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "atom_ref",
+        "family_id",
+        "atom_type",
+        "reception_layer",
+        "settlement_decision_ref",
+        "supervision",
+        "split",
+        "group_id",
+        "labels",
+        "loss_mask"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "supervision": {
+                "const": "weak"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "split": {
+                "const": "train"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "snapshot": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "athanor.snapshot.v1"
+        },
+        "snapshot_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "row_manifest": {
+          "$ref": "#/$defs/reference"
+        },
+        "registry_ref": {
+          "$ref": "#/$defs/reference"
+        },
+        "config_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "tokenizer_revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "grouping_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "seed": {
+          "type": "integer"
+        },
+        "split_ratios": {
+          "type": "object",
+          "properties": {
+            "train": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "validation": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "test": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "required": [
+            "train",
+            "validation",
+            "test"
+          ],
+          "additionalProperties": false
+        },
+        "split_counts": {
+          "type": "object",
+          "properties": {
+            "train": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "validation": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "test": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "train",
+            "validation",
+            "test"
+          ],
+          "additionalProperties": false
+        },
+        "family_counts": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "train_token_total": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "train_family_tokens": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "exclusion_manifest": {
+          "$ref": "#/$defs/reference"
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/reference"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "schema_version",
+        "snapshot_id",
+        "row_manifest",
+        "registry_ref",
+        "config_hash",
+        "tokenizer_revision",
+        "grouping_version",
+        "seed",
+        "split_ratios",
+        "split_counts",
+        "family_counts",
+        "train_token_total",
+        "train_family_tokens",
+        "exclusion_manifest",
+        "evidence_refs"
+      ],
+      "additionalProperties": false
+    },
+    "correspondence": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "athanor.correspondence.v1"
+        },
+        "pair_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "family_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1
+        },
+        "filler": {
+          "type": "string",
+          "minLength": 1
+        },
+        "span": {
+          "type": "string",
+          "minLength": 1
+        },
+        "atom_ref": {
+          "$ref": "#/$defs/reference"
+        },
+        "epistemic": {
+          "enum": [
+            "OBSERVED",
+            "INFERRED",
+            "SPECULATIVE",
+            "NOT_COMPUTABLE"
+          ]
+        },
+        "settlement_decision_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/reference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "pair_id",
+        "family_id",
+        "role",
+        "filler",
+        "span",
+        "atom_ref",
+        "epistemic",
+        "settlement_decision_ref"
+      ],
+      "additionalProperties": false
+    },
+    "negative": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "athanor.negative.v1"
+        },
+        "neg_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "theme": {
+          "type": "string",
+          "minLength": 1
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provenance": {
+          "type": "string",
+          "minLength": 1
+        },
+        "license": {
+          "type": "string",
+          "minLength": 1
+        },
+        "expected_outcome": {
+          "const": "out_of_domain"
+        },
+        "fictional_fixture": {
+          "const": true
+        }
+      },
+      "required": [
+        "schema_version",
+        "neg_id",
+        "theme",
+        "text",
+        "provenance",
+        "license",
+        "expected_outcome",
+        "fictional_fixture"
+      ],
+      "additionalProperties": false
+    },
+    "wall": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "athanor.wall.v1"
+        },
+        "prompt_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "query": {
+          "type": "string",
+          "minLength": 1
+        },
+        "expected_disposition": {
+          "enum": [
+            "historical_only",
+            "refuse_or_historical_only"
+          ]
+        },
+        "forbidden_behavior_rubric": {
+          "type": "string",
+          "minLength": 1
+        },
+        "positive_control_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/reference"
+          },
+          "minItems": 1
+        },
+        "efficacy": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "schema_version",
+        "prompt_id",
+        "query",
+        "expected_disposition",
+        "forbidden_behavior_rubric",
+        "positive_control_refs",
+        "efficacy"
+      ],
+      "additionalProperties": false
+    },
+    "handoff": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "athanor.handoff.v1"
+        },
+        "pack_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "intended_recipient_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "intended_use": {
+          "type": "string",
+          "minLength": 1
+        },
+        "approval_ref": {
+          "$ref": "#/$defs/reference"
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240,
+                "pattern": "^[A-Za-z0-9_-](?:[A-Za-z0-9._-]*[A-Za-z0-9_-])?(?:/[A-Za-z0-9_-](?:[A-Za-z0-9._-]*[A-Za-z0-9_-])?)*(?![\\s\\S])"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "license": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "path",
+              "sha256",
+              "license"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "excluded_data_statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reproduction_instructions": {
+          "type": "string",
+          "minLength": 1
+        },
+        "verification_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/reference"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "schema_version",
+        "pack_id",
+        "intended_recipient_ref",
+        "intended_use",
+        "approval_ref",
+        "artifacts",
+        "excluded_data_statement",
+        "reproduction_instructions",
+        "verification_refs"
+      ],
+      "additionalProperties": false
+    },
+    "error": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "athanor.error.v1"
+        },
+        "code": {
+          "enum": [
+            "UNSUPPORTED_QUERY",
+            "InvalidQuery",
+            "InvalidFamily",
+            "InvalidK",
+            "CorpusUnavailable",
+            "CorpusInvalid",
+            "ContractViolation"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "exit_code": {
+          "enum": [
+            1,
+            2
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "code",
+        "reason",
+        "exit_code"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "const": "ContractViolation"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "exit_code": {
+                "const": 1
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "exit_code": {
+                "const": 2
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
