@@ -1457,6 +1457,10 @@
               },
               "output_refs": {
                 "minItems": 1
+              },
+              "reviewer": {
+                "type": "string",
+                "pattern": "\\S"
               }
             }
           }

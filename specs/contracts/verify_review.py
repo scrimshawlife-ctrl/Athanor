@@ -1,21 +1,15 @@
-"""Regression checks for three advisory schema review findings; no runtime or network."""
+"""Reusable advisory contract regressions; no Git history, runtime or network needed."""
 import copy
 import json
-import shutil
-import subprocess
 from pathlib import Path
 
 from jsonschema import Draft202012Validator
 
 ROOT = Path(__file__).resolve().parents[2]
-BASE = "ab89a15d0ea4c39295f1918ddb521953ef1f6bbd"
-GIT = shutil.which("git") or r"C:\Program Files\Git\cmd\git.exe"
 REL = "specs/contracts/proposed.v1.schema.json"
 schema = json.loads((ROOT / REL).read_text(encoding="utf-8"))
 Draft202012Validator.check_schema(schema)
 v = Draft202012Validator(schema)
-old = Draft202012Validator(json.loads(subprocess.check_output(
-    [GIT, "show", BASE + ":" + REL], cwd=ROOT, text=True, encoding="utf-8")))
 H = "a" * 64
 ref = {"id": "synthetic", "sha256": H}
 lens = {"epistemic": "NOT_COMPUTABLE", "text": None, "evidence_refs": [], "reason": "synthetic unavailable evidence"}
@@ -32,7 +26,6 @@ def changed(obj, **kw):
 
 # Unsupported queries are errors, not packets with a fake snapshot.
 bad_packet = changed(packet, outcome="UNSUPPORTED_QUERY", query="!!!")
-assert old.is_valid(bad_packet), "pre-fix control must reproduce packet inconsistency"
 negative.append(bad_packet)
 for code in schema["$defs"]["error"]["properties"]["code"]["enum"]:
     exit_code = 1 if code == "ContractViolation" else 2
@@ -42,7 +35,6 @@ negative.extend([changed(error, snapshot_ref=ref), changed(error, hits=[]), chan
 
 # Every unresolved identity needs a meaningful reason; resolved identities may omit the explanation via null.
 bad_source = changed(source, work_id=None, identity_reason=None)
-assert old.is_valid(bad_source), "pre-fix control must reproduce missing reason"
 for missing in ({"work_id": None}, {"edition_id": None}, {"work_id": None, "edition_id": None}):
     positive.append(changed(source, **missing, identity_reason="Identity unavailable in synthetic source"))
     for reason in (None, "", "   "):
@@ -52,7 +44,6 @@ for missing in ({"work_id": None}, {"edition_id": None}, {"work_id": None, "edit
     negative.append(item)
 
 # Non-dataset checks may lack a snapshot, never all evidence.
-assert not old.is_valid(evaluation), "pre-fix control must reproduce unnecessary snapshot"
 for gate in ("E0", "E4", "E5", "E6", "E8"):
     for status in ("PASS", "FAIL"):
         case = changed(evaluation, gate_id=gate, status=status)
@@ -66,15 +57,26 @@ for gate in ("E1", "E2", "E3", "E7"):
 negative.extend([changed(evaluation, gate_id="FUTURE_GATE"), changed(evaluation, gate_id="FUTURE_GATE", snapshot_ref=ref)])
 positive.append(changed(evaluation, gate_id="E1", status="NOT_COMPUTABLE", value=None, support=0, artifact_ref=None, output_refs=[], reviewer=None, reason="Dataset absent"))
 
+# Every executed gate needs an attributable reviewer, including content-review gates.
+for gate in ("E0", "E1", "E2", "E3", "E4", "E5", "E6", "E7", "E8"):
+    for status in ("PASS", "FAIL"):
+        case = changed(evaluation, gate_id=gate, status=status, snapshot_ref=ref)
+        positive.append(case)
+        for reviewer in (None, "", "   "):
+            negative.append(changed(case, reviewer=reviewer))
+        missing = changed(case)
+        del missing["reviewer"]
+        negative.append(missing)
+
+workflow = (ROOT / "specs/001-offline-retrieve/workflows.md").read_text(encoding="utf-8")
+transition = next(line for line in workflow.splitlines() if line.startswith("| State transitions |"))
+assert "athanor.error.v1 code UNSUPPORTED_QUERY on stderr and exit code 2" in transition
+assert "packet outcome is MATCH, NO_MATCH or HISTORICAL_ONLY" in transition
+
 for obj in positive:
     assert v.is_valid(obj), "positive rejected: " + repr(obj)
 for obj in negative:
     assert not v.is_valid(obj), "negative accepted: " + repr(obj)
-allowed = {REL, "specs/contracts/README.md", "specs/contracts/verify_review.py", "out/audit/pr8-review-fixes.latest.json"}
-paths = set(subprocess.check_output([GIT, "diff", "--name-only", BASE], cwd=ROOT, text=True).splitlines())
-paths.update(subprocess.check_output([GIT, "ls-files", "--others", "--exclude-standard"], cwd=ROOT, text=True).splitlines())
-assert paths and paths <= allowed, paths
-subprocess.run([GIT, "diff", "--check", BASE], cwd=ROOT, check=True)
-print(f"REVIEW_CONTRACTS_PASS positive={len(positive)} negative={len(negative)} pre_fix_controls=3")
+print(f"REVIEW_CONTRACTS_PASS positive={len(positive)} negative={len(negative)} workflow_consistency=PASS")
 
 # Provenance: Notion Sprint 001 Hub [not inspected; prior Athanor Hub context] + Loop 805 Slice N/A + Hash: ab89a15d0ea4c39295f1918ddb521953ef1f6bbd (reviewed PR head)

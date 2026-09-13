@@ -13,7 +13,7 @@ Status: target contract; existing runtime deviations are listed in requirements.
 | Inputs | Query, k, optional live-family ID, corpus path and snapshot identity; optional validated local encoder artifact. |
 | Happy path | Resolve path → validate inputs and corpus → tokenize → rank positive matches with atom-ID tie ordering → clean excerpt display only → attach resolvable citations → emit labeled lenses or unavailable states and efficacy null. |
 | Alternate/failure paths | Missing/corrupt corpus yields documented error; unknown family is invalid input; tokenless query is unsupported with no hits; no lexical matches returns NO_MATCH; absent weights uses lexical path; harmful packaging request may return historical-only evidence but no actionable synthesized procedure. |
-| State transitions | SM-003 attempt lifecycle; packet outcome is MATCH, NO_MATCH, HISTORICAL_ONLY or UNSUPPORTED_QUERY, independent of job success and claim epistemic labels. |
+| State transitions | SM-003 attempt lifecycle; successful packet outcome is MATCH, NO_MATCH or HISTORICAL_ONLY, independent of claim epistemic labels. Tokenless/unsupported input terminates with athanor.error.v1 code UNSUPPORTED_QUERY on stderr and exit code 2; it emits no success packet, snapshot reference or hits. |
 | Terminal states | Successful packet delivery, documented input/corpus error, or cancelled attempt. No pending background task is hidden in retrieve. |
 | Side effects | Read-only corpus access; no training, network, source rewrite or default raw-query log. |
 | Invariants | Efficacy null at every applicable boundary; identical inputs/snapshot/config produce identical ordering; source text stays intact; missing readings are NOT_COMPUTABLE. |
