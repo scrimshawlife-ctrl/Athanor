@@ -917,6 +917,10 @@
               }
             }
           }
+        },
+        {
+          "if": {"properties": {"model_ref": {"type": "null"}}},
+          "then": {"properties": {"outcome": {"const": "unavailable"}}}
         }
       ]
     },
@@ -1510,6 +1514,15 @@
               }
             }
           }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {"enum": ["PASS", "FAIL"]},
+              "gate_id": {"enum": ["E1", "E2", "E3"]}
+            }
+          },
+          "then": {"properties": {"control_value": {"type": ["number", "string"]}}}
         }
       ]
     },

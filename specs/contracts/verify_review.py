@@ -46,12 +46,12 @@ for missing in ({"work_id": None}, {"edition_id": None}, {"work_id": None, "edit
 # Non-dataset checks may lack a snapshot, never all evidence.
 for gate in ("E0", "E4", "E5", "E6", "E8"):
     for status in ("PASS", "FAIL"):
-        case = changed(evaluation, gate_id=gate, status=status)
+        case = changed(evaluation, gate_id=gate, status=status, control_value=0)
         positive.extend([case, changed(case, snapshot_ref=ref)])
         negative.extend([changed(case, artifact_ref=None), changed(case, output_refs=[]), changed(case, support=0), changed(case, value=None)])
 for gate in ("E1", "E2", "E3", "E7"):
     for status in ("PASS", "FAIL"):
-        case = changed(evaluation, gate_id=gate, status=status)
+        case = changed(evaluation, gate_id=gate, status=status, control_value=0)
         negative.append(case)
         positive.append(changed(case, snapshot_ref=ref))
 negative.extend([changed(evaluation, gate_id="FUTURE_GATE"), changed(evaluation, gate_id="FUTURE_GATE", snapshot_ref=ref)])
@@ -60,13 +60,46 @@ positive.append(changed(evaluation, gate_id="E1", status="NOT_COMPUTABLE", value
 # Every executed gate needs an attributable reviewer, including content-review gates.
 for gate in ("E0", "E1", "E2", "E3", "E4", "E5", "E6", "E7", "E8"):
     for status in ("PASS", "FAIL"):
-        case = changed(evaluation, gate_id=gate, status=status, snapshot_ref=ref)
+        case = changed(evaluation, gate_id=gate, status=status, snapshot_ref=ref, control_value=0)
         positive.append(case)
         for reviewer in (None, "", "   "):
             negative.append(changed(case, reviewer=reviewer))
         missing = changed(case)
         del missing["reviewer"]
         negative.append(missing)
+
+# Executed comparison gates cannot omit their control; zero remains legitimate.
+for gate in ("E1", "E2", "E3"):
+    for status in ("PASS", "FAIL"):
+        case = changed(evaluation, gate_id=gate, status=status, snapshot_ref=ref)
+        negative.append(case)
+        positive.extend([changed(case, control_value=0), changed(case, control_value="frozen-baseline")])
+        missing = changed(case)
+        del missing["control_value"]
+        negative.append(missing)
+    positive.append(changed(evaluation, gate_id=gate, status="NOT_COMPUTABLE", reviewer=None))
+for gate in ("E0", "E4", "E5", "E6", "E7", "E8"):
+    for status in ("PASS", "FAIL"):
+        positive.append(changed(evaluation, gate_id=gate, status=status, snapshot_ref=ref, control_value=None))
+
+encoder = {"schema_version": "athanor.encoder.v1", "model_ref": None, "snapshot_ref": ref,
+           "outcome": "unavailable", "family_id": None, "family_confidence": None,
+           "lens_route": [], "reception_layer": None, "unbind": None,
+           "epistemic": "NOT_COMPUTABLE", "reason": "Synthetic missing model", "efficacy": None}
+positive.extend([encoder, changed(encoder, model_ref=ref), changed(encoder, model_ref=ref, outcome="out_of_domain"),
+                 changed(encoder, model_ref=ref, outcome="classified", family_id="hermetic", family_confidence=0.5)])
+negative.extend([changed(encoder, outcome="out_of_domain"),
+                 changed(encoder, outcome="classified", family_id="hermetic", family_confidence=0.5)])
+
+# Mutation controls prove each new conditional rejects its specific former hole.
+for definition, bad in (("encoder", changed(encoder, outcome="out_of_domain")),
+                        ("eval_result", changed(evaluation, gate_id="E1", snapshot_ref=ref))):
+    mutant = copy.deepcopy(schema)
+    key = next(k for k, item in mutant["$defs"].items()
+               if item.get("properties", {}).get("schema_version", {}).get("const") == "athanor." + definition + ".v1")
+    mutant["$defs"][key]["allOf"].pop()
+    assert Draft202012Validator(mutant).is_valid(bad), "mutation control failed to reproduce original defect"
+    assert not v.is_valid(bad), "corrected schema accepted original defect"
 
 workflow = (ROOT / "specs/001-offline-retrieve/workflows.md").read_text(encoding="utf-8")
 transition = next(line for line in workflow.splitlines() if line.startswith("| State transitions |"))

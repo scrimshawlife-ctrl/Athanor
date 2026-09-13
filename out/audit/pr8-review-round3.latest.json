@@ -1,0 +1,9 @@
+{
+  "surface": "PROJECTION",
+  "status": "PASSED_LOCAL",
+  "base": "a86a4a7b675bc70abf3556faa30d01c4df240813",
+  "scope": "Require comparison baselines for executed E1/E2/E3 and unavailable outcome when encoder model_ref is null",
+  "validation": {"positive_cases": 90, "negative_cases": 160, "mutation_controls": 2, "existing_tests": 22},
+  "boundaries": {"runtime_changed": false, "training": false, "publication": false, "merge": false},
+  "provenance": "Notion Sprint 001 Hub [not inspected] + Loop 805 Slice N/A + Hash: a86a4a7b675bc70abf3556faa30d01c4df240813 (review base)"
+}
