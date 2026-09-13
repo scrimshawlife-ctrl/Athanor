@@ -757,6 +757,10 @@
         "schema_version": {
           "const": "athanor.encoder.v1"
         },
+        "disposition": {
+          "type": "string",
+          "enum": ["ok", "historical_only", "refuse_or_historical_only"]
+        },
         "model_ref": {
           "anyOf": [
             {
@@ -1181,7 +1185,7 @@
           "enum": [
             "harvest",
             "normalize",
-            "settlement",
+            "gold_settle",
             "freeze",
             "sanitize_export",
             "tooling_check",
@@ -1522,7 +1526,7 @@
               "gate_id": {"enum": ["E1", "E2", "E3"]}
             }
           },
-          "then": {"properties": {"control_value": {"type": ["number", "string"]}}}
+          "then": {"properties": {"value": {"type": "number"}, "control_value": {"type": "number"}}}
         }
       ]
     },

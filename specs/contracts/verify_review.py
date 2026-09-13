@@ -73,7 +73,9 @@ for gate in ("E1", "E2", "E3"):
     for status in ("PASS", "FAIL"):
         case = changed(evaluation, gate_id=gate, status=status, snapshot_ref=ref)
         negative.append(case)
-        positive.extend([changed(case, control_value=0), changed(case, control_value="frozen-baseline")])
+        positive.extend([changed(case, control_value=0), changed(case, value=0.5, control_value=0.25)])
+        for invalid in ("frozen-baseline", "0.5", "", True, {}, []):
+            negative.extend([changed(case, control_value=invalid), changed(case, value=invalid, control_value=0)])
         missing = changed(case)
         del missing["control_value"]
         negative.append(missing)
@@ -90,6 +92,17 @@ positive.extend([encoder, changed(encoder, model_ref=ref), changed(encoder, mode
                  changed(encoder, model_ref=ref, outcome="classified", family_id="hermetic", family_confidence=0.5)])
 negative.extend([changed(encoder, outcome="out_of_domain"),
                  changed(encoder, outcome="classified", family_id="hermetic", family_confidence=0.5)])
+
+for disposition in ("ok", "historical_only", "refuse_or_historical_only"):
+    positive.append(changed(encoder, disposition=disposition))
+negative.extend(changed(encoder, disposition=value) for value in (None, "summon", 1, ""))
+receipt = {"schema_version": "athanor.receipt.v1", "run_id": "synthetic", "workflow_id": "WF-004",
+           "job_type": "gold_settle", "status": "SUCCEEDED", "started_at": "2026-09-13T00:00:00Z",
+           "finished_at": "2026-09-13T00:00:01Z", "engine": "synthetic", "config_hash": H,
+           "inputs": [ref], "outputs": [ref], "counts": {"gold": 1}, "errors": [], "epistemic": "OBSERVED"}
+positive.append(receipt)
+negative.append(changed(receipt, job_type="settlement"))
+assert "job_type=gold_settle" in (ROOT / "specs/002-athanor-encoder/gold-settle.md").read_text(encoding="utf-8")
 
 # Mutation controls prove each new conditional rejects its specific former hole.
 for definition, bad in (("encoder", changed(encoder, outcome="out_of_domain")),

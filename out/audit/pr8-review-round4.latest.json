@@ -1,0 +1,9 @@
+{
+  "surface": "PROJECTION",
+  "status": "PASSED_LOCAL",
+  "base": "82fcc098a370356a8db9c23e600f03e86c8fefcf",
+  "scope": "Numeric comparison measurements, preserved optional encoder disposition, canonical gold_settle receipt name",
+  "validation": {"positive_cases": 94, "negative_cases": 237, "existing_tests": 22, "mutation_controls": 2},
+  "boundaries": {"runtime_changed": false, "training": false, "publication": false, "merge": false},
+  "provenance": "Notion Sprint 001 Hub [not inspected] + Loop 805 Slice N/A + Hash: 82fcc098a370356a8db9c23e600f03e86c8fefcf (review base)"
+}
