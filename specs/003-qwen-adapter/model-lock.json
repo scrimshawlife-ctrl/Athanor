@@ -1,0 +1,19 @@
+{
+  "schema_version": "athanor.model_selection.v1",
+  "model_id": "Qwen/Qwen3.8-27B",
+  "revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+  "processor_revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+  "revision_evidence": "git ls-remote https://huggingface.co/Qwen/Qwen3.8-27B refs/heads/main",
+  "license_claim": "Apache-2.0, upstream model card",
+  "lane": "separate-text-only-generative-adapter",
+  "weight_downloaded": false,
+  "tokenizer_artifact_hash": null,
+  "chat_template_hash": null,
+  "backend": null,
+  "environment_lock": null,
+  "quantization": null,
+  "resource_envelope": null,
+  "allow_train": false,
+  "allow_hub": false,
+  "status": "MODEL_REVISION_SELECTED_ENVIRONMENT_NOT_COMPUTABLE"
+}
