@@ -1,6 +1,8 @@
 """Synthetic-only recovery fixtures; private data never required by CI."""
+import builtins
 import json
 import os
+import runpy
 import stat
 import struct
 import zipfile
@@ -184,21 +186,30 @@ def test_verified_snapshot_survives_replacement(tmp_path, monkeypatch, target):
     assert actual == expected_hash
 
 
-@pytest.mark.parametrize('kind', ['encrypted', 'unsupported', 'corrupt_deflate'])
+@pytest.mark.parametrize('kind', ['encrypted', 'unsupported', 'corrupt_deflate',
+                                 'corrupt_lzma', 'corrupt_bzip2'])
 @pytest.mark.parametrize('mode', ['summary', 'create', 'verify'])
 def test_unreadable_zip_member_invalid(tmp_path, capsys, kind, mode):
     parent, pack = fixture(tmp_path)
-    if kind == 'corrupt_deflate':
+    compression = {'corrupt_deflate': zipfile.ZIP_DEFLATED,
+                   'corrupt_lzma': zipfile.ZIP_LZMA, 'corrupt_bzip2': zipfile.ZIP_BZIP2}
+    if kind in compression:
         with zipfile.ZipFile(pack) as archive:
             content = archive.read('pack/atoms_full.jsonl')
-        with zipfile.ZipFile(pack, 'w', compression=zipfile.ZIP_DEFLATED) as archive:
+        with zipfile.ZipFile(pack, 'w', compression=compression[kind]) as archive:
             archive.writestr('pack/atoms_full.jsonl', content)
     raw = bytearray(pack.read_bytes())
     local = raw.index(b'PK\x03\x04')
     central = raw.index(b'PK\x01\x02')
-    if kind == 'corrupt_deflate':
+    if kind in compression:
         name_len, extra_len = struct.unpack_from('<HH', raw, local + 26)
-        raw[local + 30 + name_len + extra_len] = 7  # Reserved DEFLATE block type.
+        start = local + 30 + name_len + extra_len
+        if kind == 'corrupt_lzma':
+            raw[start + 4] = 255  # Invalid LZMA filter property after the ZIP header.
+        elif kind == 'corrupt_bzip2':
+            raw[start] = 0  # Invalid bzip2 stream magic.
+        else:
+            raw[start] = 7  # Reserved DEFLATE block type.
     else:
         offsets = (local + 6, central + 8) if kind == 'encrypted' else (local + 8, central + 10)
         for offset in offsets:
@@ -217,3 +228,42 @@ def test_unreadable_zip_member_invalid(tmp_path, capsys, kind, mode):
     result = json.loads(capsys.readouterr().out)
     assert result['status'] == 'INVALID' and result['training_authorized'] is False
     assert not out.exists()
+
+
+@pytest.mark.parametrize('compression', [zipfile.ZIP_STORED, zipfile.ZIP_DEFLATED,
+                                         zipfile.ZIP_BZIP2, zipfile.ZIP_LZMA])
+def test_valid_compression_modes(tmp_path, capsys, compression):
+    parent, pack = fixture(tmp_path)
+    with zipfile.ZipFile(pack) as archive:
+        content = archive.read('pack/atoms_full.jsonl')
+    with zipfile.ZipFile(pack, 'w', compression=compression) as archive:
+        archive.writestr('pack/atoms_full.jsonl', content)
+    manifest = json.loads((parent / 'manifest.json').read_bytes())
+    manifest['source_zip_sha256'] = sha(pack.read_bytes())
+    (parent / 'manifest.json').write_text(canonical(manifest))
+    args = ['--prepared', str(parent), '--pack', str(pack)]
+    assert main(args) == 2
+    out = tmp_path / 'private-output'
+    assert main(args + ['--output', str(out)]) == 2
+    before = {p.name: p.read_bytes() for p in out.iterdir()}
+    assert main(args + ['--output', str(out), '--verify']) == 2
+    assert before == {p.name: p.read_bytes() for p in out.iterdir()}
+    rows = [json.loads(line) for line in before['cleaned.jsonl'].splitlines()]
+    assert rows[0]['inputs']['text'] == 'Marduk and Tiamat. ' * 50
+    assert rows[0]['training_eligible'] is False
+    capsys.readouterr()
+
+
+def test_stored_pack_without_optional_lzma(tmp_path, capsys, monkeypatch):
+    parent, pack = fixture(tmp_path)
+    original_import = builtins.__import__
+
+    def without_lzma(name, *args, **kwargs):
+        if name == 'lzma':
+            raise ImportError('Synthetic missing optional backend')
+        return original_import(name, *args, **kwargs)
+
+    monkeypatch.setattr(builtins, '__import__', without_lzma)
+    namespace = runpy.run_path(str(Path(__file__).parents[1] / 'src/athanor/quarantine.py'))
+    assert namespace['main'](['--prepared', str(parent), '--pack', str(pack)]) == 2
+    capsys.readouterr()

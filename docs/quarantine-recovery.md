@@ -28,7 +28,7 @@ epistemic and content_hash; required nonempty values, type/epistemic enums and t
 minimum content_hash length are checked. This does not authenticate source claims.
 The manifest and ZIP are each parsed from the same captured bytes used for their
 recorded digest; replacing their paths afterward cannot substitute other content.
-Encrypted, unsupported or malformed DEFLATE members return structured INVALID with exit 1,
+Encrypted, unsupported or malformed DEFLATE/LZMA members return structured INVALID with exit 1,
 without creating an output directory.
 Every original quarantined record receives cleaned text, source and cleaned hashes, a removed-line ledger,
 original family/reason, provisional topic evidence offsets, and a recovery route.

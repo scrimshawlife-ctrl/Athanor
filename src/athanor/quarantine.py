@@ -16,6 +16,14 @@ from pathlib import Path
 
 from athanor.readiness import MAX_BYTES, _json
 
+ZIP_READ_ERRORS = (RuntimeError, NotImplementedError, zlib.error)
+try:
+    import lzma
+except ImportError:
+    pass  # zipfile reports missing optional LZMA support as RuntimeError.
+else:
+    ZIP_READ_ERRORS += (lzma.LZMAError,)
+
 # Transparent topic cues, not learned labels or authenticated lineage evidence.
 CUES = {
  'alchemy_lab': ['distill', 'calcination', 'sublimation', 'retort', 'furnace', 'quicksilver'],
@@ -174,7 +182,7 @@ def build(parent, pack):
             if len(names) != 1 or archive.getinfo(names[0]).file_size > 20_000_000:
                 raise ValueError('Unexpected source member')
             atoms_raw = archive.read(names[0])
-    except (RuntimeError, NotImplementedError, zlib.error) as exc:
+    except ZIP_READ_ERRORS as exc:
         raise ValueError('Unreadable source ZIP member') from exc
     atoms = [_json(line) for line in atoms_raw.splitlines()]
     for atom in atoms:
