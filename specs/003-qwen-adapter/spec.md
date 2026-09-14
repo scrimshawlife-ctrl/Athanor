@@ -54,8 +54,8 @@ Use the pinned model's native template when the processor is available; do not t
 |---|---|---|
 | RQ-003-01/05 | WF-014 | Selected model/revision recorded; local processor/backend/resource tests remain NOT_COMPUTABLE |
 | RQ-003-02/03 | WF-013 | Candidate tests reject stale hashes, invented citations and declared cross-split identities; permutation produces identical output |
-| RQ-003-04 | WF-013 | Compiler never marks candidates eligible; actual review/rights joins and grouped freeze remain pending |
-| RQ-003-06 | WF-014 | Processor-level completion-mask/truncation tests required before trainer; not implemented |
+| RQ-003-04 | WF-013 | Candidate component freeze and support report tested; trusted review/rights joins remain pending |
+| RQ-003-06 | WF-014 | Synthetic completion-mask/truncation tests pass; actual pinned processor and trainer remain unverified |
 | RQ-003-07 | WF-015 | Actual paired outputs, support and reviewer evidence required; not implemented |
 
 - [x] A1 Record Qwen model-family decision and observed immutable repository revision.
@@ -65,6 +65,10 @@ Use the pinned model's native template when the processor is available; do not t
 - [ ] A5 Inspect Spark and local artifacts; choose tested backend/environment lock, modules and resource limits.
 - [ ] A6 Implement processor/template mask tests and bounded trainer/checkpoint/resume behavior.
 - [ ] A7 Freeze baseline protocol and execute paired evaluation after separate training approval.
+
+Partial implementation for A4/A5/A6: [pipeline-preflight.md](pipeline-preflight.md).
+Candidate splitting, token-mask primitives and runtime inventory do not complete
+those tasks or waive their external evidence requirements.
 
 Verification: existing pytest and semantic-contract CI plus new adapter candidate tests. Synthetic PASS proves tooling only. No full model training, adapter weights, learned metrics or Notion parity is claimed.
 
