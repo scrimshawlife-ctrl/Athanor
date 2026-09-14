@@ -2,7 +2,9 @@
 import json
 import os
 import stat
+import struct
 import zipfile
+from pathlib import Path
 
 import pytest
 
@@ -156,3 +158,62 @@ def test_source_tampering(tmp_path):
     (parent / 'quarantine.jsonl').write_text('{}')
     with pytest.raises(ValueError, match='digest'):
         build(parent, pack)
+
+
+@pytest.mark.parametrize('target', ['pack', 'manifest'])
+def test_verified_snapshot_survives_replacement(tmp_path, monkeypatch, target):
+    parent, pack = fixture(tmp_path)
+    path = pack if target == 'pack' else parent / 'manifest.json'
+    expected_hash = sha(path.read_bytes())
+    original = Path.read_bytes
+    reads = []
+
+    def replacing_read(self):
+        raw = original(self)
+        if self == path:
+            reads.append(self)
+            self.write_bytes(b'replaced after snapshot')
+        return raw
+
+    monkeypatch.setattr(Path, 'read_bytes', replacing_read)
+    rows, summary = build(parent, pack)
+    assert len(reads) == 1
+    assert rows[0]['inputs']['text'] == 'Marduk and Tiamat. ' * 50
+    actual = (summary['source_zip_sha256'] if target == 'pack'
+              else summary['parent_hashes']['manifest.json'])
+    assert actual == expected_hash
+
+
+@pytest.mark.parametrize('kind', ['encrypted', 'unsupported', 'corrupt_deflate'])
+@pytest.mark.parametrize('mode', ['summary', 'create', 'verify'])
+def test_unreadable_zip_member_invalid(tmp_path, capsys, kind, mode):
+    parent, pack = fixture(tmp_path)
+    if kind == 'corrupt_deflate':
+        with zipfile.ZipFile(pack) as archive:
+            content = archive.read('pack/atoms_full.jsonl')
+        with zipfile.ZipFile(pack, 'w', compression=zipfile.ZIP_DEFLATED) as archive:
+            archive.writestr('pack/atoms_full.jsonl', content)
+    raw = bytearray(pack.read_bytes())
+    local = raw.index(b'PK\x03\x04')
+    central = raw.index(b'PK\x01\x02')
+    if kind == 'corrupt_deflate':
+        name_len, extra_len = struct.unpack_from('<HH', raw, local + 26)
+        raw[local + 30 + name_len + extra_len] = 7  # Reserved DEFLATE block type.
+    else:
+        offsets = (local + 6, central + 8) if kind == 'encrypted' else (local + 8, central + 10)
+        for offset in offsets:
+            struct.pack_into('<H', raw, offset, 1 if kind == 'encrypted' else 99)
+    pack.write_bytes(raw)
+    manifest = json.loads((parent / 'manifest.json').read_bytes())
+    manifest['source_zip_sha256'] = sha(raw)
+    (parent / 'manifest.json').write_text(canonical(manifest))
+    args = ['--prepared', str(parent), '--pack', str(pack)]
+    out = tmp_path / 'must-not-exist'
+    if mode != 'summary':
+        args += ['--output', str(out)]
+    if mode == 'verify':
+        args += ['--verify']
+    assert main(args) == 1
+    result = json.loads(capsys.readouterr().out)
+    assert result['status'] == 'INVALID' and result['training_authorized'] is False
+    assert not out.exists()

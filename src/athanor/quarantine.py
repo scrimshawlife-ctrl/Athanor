@@ -4,11 +4,13 @@ This bulk data transformation never changes sources, promotes gold, or trains.
 """
 import argparse
 import hashlib
+import io
 import json
 import os
 import re
 import unicodedata
 import zipfile
+import zlib
 from collections import Counter, defaultdict
 from pathlib import Path
 
@@ -142,27 +144,39 @@ def build(parent, pack):
         raise ValueError('Unsafe or oversized input')
     if (parent / 'manifest.json').is_symlink() or (parent / 'manifest.json').stat().st_size > MAX_BYTES:
         raise ValueError('Unsafe or oversized manifest')
-    manifest = _json((parent / 'manifest.json').read_bytes())
-    original_hashes = {'manifest.json': sha((parent / 'manifest.json').read_bytes())}
+    manifest_raw = (parent / 'manifest.json').read_bytes()
+    if len(manifest_raw) > MAX_BYTES:
+        raise ValueError('Oversized manifest')
+    manifest = _json(manifest_raw)
+    original_hashes = {'manifest.json': sha(manifest_raw)}
     parsed = {}
     for name in ('features.jsonl', 'targets.jsonl', 'provenance.jsonl', 'quarantine.jsonl'):
         expected = manifest['files'][name]
         if (parent / name).is_symlink() or (parent / name).stat().st_size > MAX_BYTES:
             raise ValueError('Unsafe or oversized prepared file')
         raw = (parent / name).read_bytes()
+        if len(raw) > MAX_BYTES:
+            raise ValueError('Oversized prepared file')
         if sha(raw) != expected['sha256']:
             raise ValueError('Parent digest mismatch')
         original_hashes[name] = sha(raw)
         parsed[name] = [_json(line) for line in raw.splitlines() if line.strip()]
         if len(raw) != expected['bytes'] or len(parsed[name]) != expected['rows']:
             raise ValueError('Prepared size/count mismatch')
-    if sha(pack.read_bytes()) != manifest['source_zip_sha256']:
+    pack_raw = pack.read_bytes()
+    if len(pack_raw) > MAX_BYTES:
+        raise ValueError('Oversized source ZIP')
+    if sha(pack_raw) != manifest['source_zip_sha256']:
         raise ValueError('Source ZIP mismatch')
-    with zipfile.ZipFile(pack) as archive:
-        names = [n for n in archive.namelist() if n.endswith('/atoms_full.jsonl')]
-        if len(names) != 1 or archive.getinfo(names[0]).file_size > 20_000_000:
-            raise ValueError('Unexpected source member')
-        atoms = [_json(line) for line in archive.read(names[0]).splitlines()]
+    try:
+        with zipfile.ZipFile(io.BytesIO(pack_raw)) as archive:
+            names = [n for n in archive.namelist() if n.endswith('/atoms_full.jsonl')]
+            if len(names) != 1 or archive.getinfo(names[0]).file_size > 20_000_000:
+                raise ValueError('Unexpected source member')
+            atoms_raw = archive.read(names[0])
+    except (RuntimeError, NotImplementedError, zlib.error) as exc:
+        raise ValueError('Unreadable source ZIP member') from exc
+    atoms = [_json(line) for line in atoms_raw.splitlines()]
     for atom in atoms:
         if not isinstance(atom, dict):
             raise TypeError('Source atom must be an object')
