@@ -267,3 +267,90 @@ def test_stored_pack_without_optional_lzma(tmp_path, capsys, monkeypatch):
     namespace = runpy.run_path(str(Path(__file__).parents[1] / 'src/athanor/quarantine.py'))
     assert namespace['main'](['--prepared', str(parent), '--pack', str(pack)]) == 2
     capsys.readouterr()
+
+
+def mixed_partition(tmp_path, mutation=None):
+    parent, pack = fixture(tmp_path)
+    with zipfile.ZipFile(pack) as archive:
+        atom = json.loads(archive.read('pack/atoms_full.jsonl'))
+    with zipfile.ZipFile(pack, 'w') as archive:
+        archive.writestr('pack/atoms_full.jsonl', ''.join(
+            canonical({**atom, 'atom_id': rid}) + '\n' for rid in ('r', 's1', 's2')))
+    records = {
+        'features.jsonl': [{'row_id': rid, 'inputs': {'text': atom['text']}}
+                           for rid in ('s1', 's2')],
+        'targets.jsonl': [{'row_id': rid, 'targets': {'family_id': atom['family_id']},
+                          'split': 'UNASSIGNED', 'training_eligible': False}
+                         for rid in ('s2', 's1')],
+        'provenance.jsonl': [{'row_id': rid, 'original_metadata': {'atom_id': rid}}
+                             for rid in ('r', 's1', 's2')],
+        'quarantine.jsonl': [{'row_id': 'r', 'reasons': ['WEAK_NOT_GOLD']}],
+    }
+    if mutation:
+        mutation(records)
+    manifest = json.loads((parent / 'manifest.json').read_bytes())
+    manifest['source_zip_sha256'] = sha(pack.read_bytes())
+    for name, rows in records.items():
+        raw = ''.join(canonical(row) + '\n' for row in rows).encode()
+        (parent / name).write_bytes(raw)
+        manifest['files'][name] = {'sha256': sha(raw), 'bytes': len(raw), 'rows': len(rows)}
+    (parent / 'manifest.json').write_text(canonical(manifest))
+    return parent, pack
+
+
+@pytest.mark.parametrize('mutation', [
+    lambda r: r['targets.jsonl'][0].update(row_id='r'),
+    lambda r: r['targets.jsonl'][0].update(row_id='absent'),
+    lambda r: r['features.jsonl'].append(r['features.jsonl'][0]),
+    lambda r: r['targets.jsonl'].append(r['targets.jsonl'][0]),
+    lambda r: r['targets.jsonl'].clear(),
+    lambda r: r['features.jsonl'].clear(),
+    lambda r: r['targets.jsonl'][0].pop('row_id'),
+    lambda r: r['features.jsonl'][0].update(row_id=' '),
+    lambda r: r['targets.jsonl'][0].update(row_id=3),
+    lambda r: r['targets.jsonl'][0].update(row_id=[]),
+    lambda r: r['targets.jsonl'].append(None),
+    lambda r: r['features.jsonl'].append([]),
+])
+@pytest.mark.parametrize('mode', ['summary', 'create', 'verify'])
+def test_prepared_partition_invalid(tmp_path, capsys, mutation, mode):
+    out = tmp_path / 'must-not-exist'
+    before = None
+    if mode == 'verify':
+        baseline = tmp_path / 'baseline'
+        baseline.mkdir()
+        valid_parent, valid_pack = mixed_partition(baseline)
+        assert main(['--prepared', str(valid_parent), '--pack', str(valid_pack),
+                     '--output', str(out)]) == 2
+        before = {p.name: p.read_bytes() for p in out.iterdir()}
+        capsys.readouterr()
+    parent, pack = mixed_partition(tmp_path, mutation)
+    args = ['--prepared', str(parent), '--pack', str(pack)]
+    if mode != 'summary':
+        args += ['--output', str(out)]
+    if mode == 'verify':
+        args += ['--verify']
+    assert main(args) == 1
+    result = json.loads(capsys.readouterr().out)
+    assert result['status'] == 'INVALID' and result['training_authorized'] is False
+    assert any(token in result['reason'] for token in ('IDs', 'row_id', 'records must be objects'))
+    if before is None:
+        assert not out.exists()
+    else:
+        assert before == {p.name: p.read_bytes() for p in out.iterdir()}
+
+
+def test_valid_mixed_partition_reordered_targets(tmp_path, capsys):
+    parent, pack = mixed_partition(tmp_path)
+    args = ['--prepared', str(parent), '--pack', str(pack)]
+    assert main(args) == 2
+    out = tmp_path / 'private-output'
+    assert main(args + ['--output', str(out)]) == 2
+    before = {p.name: p.read_bytes() for p in out.iterdir()}
+    assert main(args + ['--output', str(out), '--verify']) == 2
+    assert before == {p.name: p.read_bytes() for p in out.iterdir()}
+    rows = [json.loads(line) for line in before['cleaned.jsonl'].splitlines()]
+    assert [r['row_id'] for r in rows] == ['r']
+    assert rows[0]['exact_duplicate_members'] == ['r', 's1', 's2']
+    assert rows[0]['training_eligible'] is False
+    capsys.readouterr()

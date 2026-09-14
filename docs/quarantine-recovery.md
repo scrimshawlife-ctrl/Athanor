@@ -30,6 +30,10 @@ The manifest and ZIP are each parsed from the same captured bytes used for their
 recorded digest; replacing their paths afterward cannot substitute other content.
 Encrypted, unsupported or malformed DEFLATE/LZMA members return structured INVALID with exit 1,
 without creating an output directory.
+Prepared records must be objects with unique nonblank string row IDs in each file.
+Feature and target IDs must match one-to-one, independent of row order; both may
+be empty for quarantine-only recovery. Selected and quarantine IDs must be disjoint
+and together cover provenance IDs. Digest-consistent ID conflicts are INVALID.
 Every original quarantined record receives cleaned text, source and cleaned hashes, a removed-line ledger,
 original family/reason, provisional topic evidence offsets, and a recovery route.
 The output manifest records algorithm and file hashes. Verify compares regenerated

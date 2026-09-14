@@ -14,7 +14,7 @@ import zlib
 from collections import Counter, defaultdict
 from pathlib import Path
 
-from athanor.readiness import MAX_BYTES, _json
+from athanor.readiness import MAX_BYTES, _ids, _json
 
 ZIP_READ_ERRORS = (RuntimeError, NotImplementedError, zlib.error)
 try:
@@ -201,14 +201,20 @@ def build(parent, pack):
         if len(atom['content_hash']) < 8:
             raise ValueError('Invalid source atom content_hash')
     by_id = {a['atom_id']: a for a in atoms}
+    record_ids = {}
+    for name, records in parsed.items():
+        if not all(isinstance(record, dict) for record in records):
+            raise ValueError('Prepared JSONL records must be objects')
+        record_ids[name] = _ids(records)
+    selected = record_ids['features.jsonl']
+    if selected != record_ids['targets.jsonl']:
+        raise ValueError('Feature/target IDs must match one-to-one')
     provenance = {p['row_id']: p for p in parsed['provenance.jsonl']}
-    qids = [r['row_id'] for r in parsed['quarantine.jsonl']]
-    selected = {r['row_id'] for r in parsed['features.jsonl']}
-    if (set(qids) & selected or set(qids) | selected != set(provenance)
-            or len(provenance) != len(parsed['provenance.jsonl'])):
+    qids = record_ids['quarantine.jsonl']
+    if qids & selected or qids | selected != record_ids['provenance.jsonl']:
         raise ValueError('Quarantine is not a disjoint source partition')
-    if len(by_id) != len(atoms) or len(set(qids)) != len(qids):
-        raise ValueError('Duplicate source/quarantine IDs')
+    if len(by_id) != len(atoms):
+        raise ValueError('Duplicate source IDs')
     cleaned_all, duplicate_members = {}, defaultdict(list)
     for rid, p in provenance.items():
         atom = by_id[p['original_metadata']['atom_id']]
