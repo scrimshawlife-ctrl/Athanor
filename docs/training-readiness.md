@@ -31,6 +31,41 @@ Full architecture/acceptance/traceability remains packages 4–5. Do not check U
 
 ## Validation mapping
 
+### Explicit overlap evidence during candidate freeze
+
+`python -m athanor.adapter_freeze --input CANDIDATES --config CONFIG --overlap-groups MAPPING`
+accepts a JSON object mapping every candidate source ID to a nonblank overlap-group ID.
+The mapping must cover exactly the source IDs present, not instruction-row IDs. It adds
+grouping identities without replacing declared work/source/content identities; links
+combine transitively. The receipt binds the mapping's canonical SHA256 and group count.
+The command remains candidate-only with exit2, even when support minima pass.
+
+The mapping is caller-supplied evidence, not authenticated authority. The stronger
+binding path uses `--overlap-registry REGISTRY --overlap-registry-sha256 SHA256
+--source-bindings BINDINGS` instead of `--overlap-groups`. All three arguments are
+required together. BINDINGS maps every candidate source ID to a corpus row ID.
+The registry maps corpus rows to overlap groups and allowed original/derivative text
+hashes. The CLI and direct `freeze_with_registry` API verify the pinned registry bytes, complete source mapping and actual
+candidate text hashes, then uses the additional grouping identities. The receipt
+binds registry bytes, canonical registry contents and source bindings. Registry
+authenticity and completeness still require review; choosing a digest is not approval.
+The direct API accepts a registry file path, not an in-memory registry plus an
+unverified digest. It loads and checks the bytes inside the receipt-producing call;
+`project_overlap_groups` remains available for unpinned in-memory projection without
+claiming a verified registry byte hash.
+The private registry has been generated from verified evidence, but no real instruction
+candidate set has been frozen through this path. Omitting both overlap options
+preserves prior grouping behavior and does not prove absence of overlaps.
+Do not replace work/edition grouping with passage overlap groups or treat a consistent
+split as rights clearance. Explicit existing held-out splits still cannot be reassigned.
+
+`tests/test_adapter_overlap.py` verifies combined/transitive work and overlap grouping,
+determinism, source preservation, evidence hashes, missing/unknown mappings, malformed
+JSON/null, existing holdouts and candidate-only CLI results. Synthetic tests do not
+establish real-corpus completeness or training readiness.
+`tests/test_adapter_overlap_binding.py` also covers direct-API rejection of fabricated
+byte pins and stale pins after byte-only changes that leave decoded JSON unchanged.
+
 REQ-014/015 and WF-004 invariant KEEP != GOLD: tests/test_gold_retired.py verifies HOLD, nonzero exit, unchanged corpus bytes and no new files. This is regression prevention, not completion of settlement.
 
 WF-005 preflight: tests/test_readiness.py covers tampering, counterfeit metadata, duplicate/unmatched row IDs, target leakage into features, invalid labels/splits, empty text, forged authorization, and distinct INVALID/HOLD exits. Full WF-005 acceptance still requires a future frozen dataset builder.

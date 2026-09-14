@@ -12,7 +12,7 @@ from athanor.adapter_data import canonical, compile_candidates, digest
 from athanor.readiness import MAX_BYTES, _json
 
 
-def freeze_candidates(rows, config):
+def freeze_candidates(rows, config, overlap_groups=None):
     """Assign connected source/work/hash components, independent of input row order.
 
     This binds a proposed dataset's bytes and split choices. Human review,
@@ -20,6 +20,14 @@ def freeze_candidates(rows, config):
     Explicit existing splits are rejected to prevent silently moving a held-out set.
     """
     compile_candidates(rows)
+    # Optional evidence is an additional identity, never a replacement for work IDs.
+    # Values are declared grouping evidence, not authenticated review or authority.
+    if overlap_groups is not None:
+        source_ids = {s['id'] for row in rows for s in row['sources']}
+        if not isinstance(overlap_groups, dict) or set(overlap_groups) != source_ids:
+            raise ValueError('Overlap groups must cover exactly all candidate source IDs')
+        if any(not isinstance(group, str) or not group.strip() for group in overlap_groups.values()):
+            raise ValueError('Overlap group identities must be nonblank strings')
     if any(row["split"] != "UNASSIGNED" for row in rows):
         raise ValueError("Freeze requires UNASSIGNED candidates; preserve existing held-out splits")
     expected = {"schema_version", "seed", "ratios", "min_rows", "grouping_revision"}
@@ -62,6 +70,8 @@ def freeze_candidates(rows, config):
         for source in row["sources"]:
             values.update({("id", source["id"]), ("work", source["group_id"]),
                            ("content", source["sha256"])})
+            if overlap_groups is not None:
+                values.add(('overlap', overlap_groups[source['id']]))
         identities[rid] = values
         for value in values:
             if value in owner:
@@ -98,6 +108,10 @@ def freeze_candidates(rows, config):
                "support_deficits": deficits, "projection": projection,
                "unresolved": ["REVIEWED_ANSWERS", "RIGHTS", "COMPLETE_WORK_IDENTITIES",
                               "NEAR_DUPLICATE_REVIEW", "PER_TASK_EVAL_SUPPORT", "TRAIN_APPROVAL"]}
+    if overlap_groups is not None:
+        payload['overlap_groups_sha256'] = digest(canonical(overlap_groups))
+        payload['overlap_group_count'] = len(set(overlap_groups.values()))
+        payload['unresolved'].append('OVERLAP_EVIDENCE_COMPLETENESS_AND_IDENTITY_REVIEW')
     return {**payload, "freeze_sha256": digest(canonical(payload))}
 
 
@@ -105,13 +119,30 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", type=Path, required=True)
     parser.add_argument("--config", type=Path, required=True)
+    parser.add_argument('--overlap-groups', type=Path,
+                        help='Complete JSON source-ID to reviewed overlap-group mapping; no approval implied')
+    parser.add_argument('--overlap-registry', type=Path)
+    parser.add_argument('--overlap-registry-sha256')
+    parser.add_argument('--source-bindings', type=Path)
     args = parser.parse_args(argv)
     try:
-        for path in (args.input, args.config):
+        registry_args = [args.overlap_registry, args.overlap_registry_sha256, args.source_bindings]
+        if any(registry_args) and (not all(registry_args) or args.overlap_groups):
+            raise ValueError('Registry, digest and bindings required together; raw groups are mutually exclusive')
+        for path in (args.input, args.config, *([args.overlap_groups] if args.overlap_groups else []),
+                     *([args.source_bindings] if args.source_bindings else [])):
             if path.is_symlink() or not path.is_file() or path.stat().st_size > MAX_BYTES:
                 raise ValueError("Missing, unsafe or oversized input")
         rows = [_json(line) for line in args.input.read_bytes().splitlines() if line.strip()]
-        result = freeze_candidates(rows, _json(args.config.read_bytes()))
+        overlaps = _json(args.overlap_groups.read_bytes()) if args.overlap_groups else None
+        if args.overlap_groups and not isinstance(overlaps, dict):
+            raise ValueError('Overlap group file must be a JSON object')
+        if args.overlap_registry:
+            from athanor.adapter_overlap import freeze_with_registry
+            result = freeze_with_registry(rows, _json(args.config.read_bytes()), args.overlap_registry,
+                                          _json(args.source_bindings.read_bytes()), args.overlap_registry_sha256)
+        else:
+            result = freeze_candidates(rows, _json(args.config.read_bytes()), overlaps)
     except (ValueError, TypeError, KeyError, OSError, RecursionError) as exc:
         print(json.dumps({"status": "INVALID", "reason": str(exc), "training_authorized": False}))
         return 1
