@@ -30,10 +30,49 @@ def fixture(tmp_path):
 
 def test_cleaning_controls():
     text, removed = clean('p. 12\nHistorical claim remains.\nSacred Texts |')
-    assert text == 'Historical claim remains.' and len(removed) == 2
+    assert text == 'Historical claim remains.\n' and len(removed) == 2
     assert clean(text)[0] == text
     assert clean('A prose URL https://example.org remains.')[0].endswith('remains.')
     assert clean('![](https://example.org/glyph.jpg)')[0].startswith('![](')
+
+
+def test_preserve_prose_and_whitespace():
+    text = '  Verse  \r\nNext: This doctrine was revised...\r\n\r\n\r\n« Previous: substantive prose\n\te\u0301  \n'
+    assert clean(text) == (text, [])
+    assert clean('Next:\nBody\n« Previous:\n[paragraph continues]\n')[0] == 'Body\n'
+
+
+@pytest.mark.parametrize('linked', [False, True])
+def test_no_private_output_in_checkout(tmp_path, capsys, linked):
+    parent, pack = fixture(tmp_path)
+    checkout = tmp_path / 'checkout'
+    checkout.mkdir()
+    marker = checkout / '.git'
+    if linked:
+        marker.write_text('gitdir: elsewhere')
+    else:
+        marker.mkdir()
+    out = checkout / 'nested' / 'private-output'
+    assert main(['--prepared', str(parent), '--pack', str(pack), '--output', str(out)]) == 1
+    assert not out.exists()
+    assert json.loads(capsys.readouterr().out)['status'] == 'INVALID'
+
+
+@pytest.mark.parametrize('field,value', [('text', None), ('text', []), ('text', 3),
+    ('atom_id', {}), ('family_id', False), ('source_url', []), ('license', None), ('type', 7)])
+def test_invalid_atom_types(tmp_path, capsys, field, value):
+    parent, pack = fixture(tmp_path)
+    with zipfile.ZipFile(pack) as archive:
+        atom = json.loads(archive.read('pack/atoms_full.jsonl'))
+    atom[field] = value
+    with zipfile.ZipFile(pack, 'w') as archive:
+        archive.writestr('pack/atoms_full.jsonl', canonical(atom) + '\n')
+    manifest = json.loads((parent / 'manifest.json').read_bytes())
+    manifest['source_zip_sha256'] = sha(pack.read_bytes())
+    (parent / 'manifest.json').write_text(canonical(manifest))
+    assert main(['--prepared', str(parent), '--pack', str(pack)]) == 1
+    result = json.loads(capsys.readouterr().out)
+    assert result['status'] == 'INVALID' and field in result['reason']
 
 
 def test_routing_controls():

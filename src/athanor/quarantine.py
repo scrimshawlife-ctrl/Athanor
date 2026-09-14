@@ -60,12 +60,13 @@ def words(text):
 
 def clean(text):
     retained, removed = [], []
-    for number, raw in enumerate(text.splitlines(), 1):
+    for number, original_line in enumerate(text.splitlines(keepends=True), 1):
+        raw = original_line.rstrip('\r\n')
         line = unicodedata.normalize('NFC', raw).strip()
         reason = None
         if re.fullmatch(r'(?:\{?p\.\s*[\divxlcdm]+\}?|Sacred Texts\s*\|?)', line, re.IGNORECASE):
             reason = 'PAGE_OR_SITE_FOOTER'
-        elif re.match(r'^(?:« Previous:|Next:|\[paragraph continues\]$)', line):
+        elif re.fullmatch(r'(?:« Previous:|Next:|\[paragraph continues\])', line):
             reason = 'READER_NAVIGATION'
         elif line in ('Toggle Sidebar', 'Toggle theme', 'Buy this Book at Amazon.com'):
             reason = 'SITE_CONTROL_OR_AD'
@@ -75,8 +76,8 @@ def clean(text):
         if reason:
             removed.append({'line': number, 'sha256': sha(raw.encode()), 'reason': reason})
         else:
-            retained.append(line)
-    result = re.sub(r'\n{3,}', '\n\n', '\n'.join(retained)).strip()
+            retained.append(original_line)
+    result = ''.join(retained)
     return result, removed
 
 
@@ -160,6 +161,15 @@ def build(parent, pack):
         if len(names) != 1 or archive.getinfo(names[0]).file_size > 20_000_000:
             raise ValueError('Unexpected source member')
         atoms = [_json(line) for line in archive.read(names[0]).splitlines()]
+    for atom in atoms:
+        if not isinstance(atom, dict):
+            raise TypeError('Source atom must be an object')
+        for field in ('atom_id', 'text', 'family_id'):
+            if not isinstance(atom.get(field), str):
+                raise TypeError(f'Source atom {field} must be a string')
+        for field in ('type', 'source_url', 'license'):
+            if field in atom and not isinstance(atom[field], str):
+                raise TypeError(f'Source atom {field} must be a string')
     by_id = {a['atom_id']: a for a in atoms}
     provenance = {p['row_id']: p for p in parsed['provenance.jsonl']}
     qids = [r['row_id'] for r in parsed['quarantine.jsonl']]
@@ -219,6 +229,18 @@ def files(parent, pack):
     return payload, summary
 
 
+def validate_output(output, prepared):
+    """Reject Git checkout destinations, including linked worktrees and aliases."""
+    if output.is_symlink() or output.resolve() == prepared.resolve():
+        raise ValueError('Unsafe output directory')
+    # Check both spellings: a symlink can cross into or out of a checkout.
+    for candidate in (output.absolute(), output.resolve()):
+        for ancestor in (candidate, *candidate.parents):
+            marker = ancestor / '.git'
+            if marker.exists() or marker.is_symlink():
+                raise ValueError('Private output must be outside Git worktrees')
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--prepared', type=Path, required=True)
@@ -229,10 +251,10 @@ def main(argv=None):
     try:
         if args.verify and args.output is None:
             raise ValueError('--verify requires --output')
+        if args.output is not None:
+            validate_output(args.output, args.prepared)
         payload, summary = files(args.prepared, args.pack)
         if args.output is not None:
-            if args.output.is_symlink() or args.output.resolve() == args.prepared.resolve():
-                raise ValueError('Unsafe output directory')
             if args.verify:
                 for name, raw in payload.items():
                     if (args.output / name).is_symlink() or (args.output / name).read_bytes() != raw:

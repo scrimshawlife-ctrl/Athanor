@@ -10,7 +10,9 @@ python -m athanor.quarantine --prepared /private/prepared --pack /private/source
 
 Omit `--output` for a read-only summary. Exit 2 means candidate HOLD, not approval;
 invalid inputs exit 1. The destination must not already exist when creating a pack.
-Keep all generated files outside public repositories. Folder names are not access controls.
+Destinations inside any Git checkout (including linked worktrees) are rejected,
+even if ignored. Keep generated files in private storage outside Git; folder names
+are not access controls.
 
 Inputs are a candidate-preparation manifest, features/targets/provenance/quarantine
 JSONL and its digest-matching ZIP with atoms_full.jsonl. Every original quarantined
@@ -20,7 +22,8 @@ The output manifest records algorithm and file hashes. Verify compares regenerat
 bytes; a changed script requires a new version rather than accepting an old receipt.
 
 Cleaning removes recognized standalone page markers, navigation, social fragments
-and ads, while preserving prose, multilingual text and images. Images are flagged,
+and ads. Unmatched lines retain their exact whitespace, Unicode and line endings;
+navigation prefixes followed by prose are not removed. Images are flagged,
 not transcribed. Labels use transparent lexical cues: at least two distinct cues
 and one qualifying family produce an INFERRED proposal. Ambiguous/missing signal
 is NOT_COMPUTABLE. These rules can miss or misclassify material; they are triage,
