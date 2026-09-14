@@ -15,6 +15,8 @@ File integrity and unique row IDs do not establish label correctness, rights, co
 
 ## Remaining work and exact dependencies
 
+The operator subsequently selected Qwen3.8-27B for the separate generative adapter lane: [Spec 003](../specs/003-qwen-adapter/spec.md). The T0/T1 encoder decisions below remain relevant only to Spec 002; do not block Qwen candidate preparation on choosing MiniLM. `python -m athanor.adapter_data --input PATH` validates and projects source-bound instruction candidates, never training-ready examples. Actual processor/backend/hardware checks and reviewed answers are still required.
+
 | Step | Existing workflow / decision | Required outcome and next implementation |
 |---|---|---|
 | Reviewed labels | WF-004; DEC-001/003 | Supply per-target reviewer decisions bound to exact atom hashes and a selected trusted approval verification mechanism; implement a new settlement executor. Never restore the heuristic mutator. |

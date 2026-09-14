@@ -133,3 +133,18 @@ def test_overflow_number_rejected(tmp_path):
     (tmp_path / "manifest.json").write_text('{"number":1e999}')
     with pytest.raises(ValueError, match="Non-finite"):
         inspect_pack(tmp_path)
+
+
+@pytest.mark.parametrize("filename", ["manifest.json", FILES[0]])
+def test_deep_json_returns_structured_invalid(tmp_path, capsys, filename):
+    manifest = pack(tmp_path)
+    data = ("[" * 100000 + "0" + "]" * 100000).encode()
+    (tmp_path / filename).write_bytes(data)
+    if filename != "manifest.json":
+        manifest["files"][filename] = {"sha256": hashlib.sha256(data).hexdigest(),
+                                      "bytes": len(data), "rows": 1}
+        (tmp_path / "manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+    assert main(["--pack", str(tmp_path)]) == 1
+    result = json.loads(capsys.readouterr().out)
+    assert result["status"] == "INVALID"
+    assert result["reason"] == "JSON nesting exceeds parser limits"

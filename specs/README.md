@@ -17,6 +17,10 @@ Spec Kit's constitution → specify → plan → tasks → implement → converg
 
 002 may propose Wave 3b family ids. Live `registry/families.yaml` does not change until operator yes.
 
+## Separate Qwen generative adapter
+
+The operator selected Qwen3.8-27B for a separate adapter preparation lane. See [Spec 003](003-qwen-adapter/spec.md), its source-bound candidate contract and WF-013 through WF-015. This does not replace Spec 001 retrieval or Spec 002 encoder tiers, amend the constitution, or authorize real training/publication.
+
 ## Precedence and evidence
 
 The existing constitution controls doctrine and authority. Ratified clarification decisions constrain dependent specs. The linked Athanor Notion Hub supplies operator context; factual discrepancies are recorded in [reconciliation](../out/audit/spec-completion.latest.json), not silently resolved by whichever page is newer. No Abraxas canon or Loop 805 authority is imported into Athanor.

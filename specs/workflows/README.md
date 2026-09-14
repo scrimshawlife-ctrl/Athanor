@@ -16,6 +16,9 @@ Status: advisory target specification. This does not govern or activate. IDs are
 | WF-010 | Reviewed publication | [002 workflows](../002-athanor-encoder/workflows.md#wf-010) | JRN-005 |
 | WF-011 | Family registry proposal/review | [000 workflows](../000-athanor-spine/workflows.md#wf-011) | JRN-006 |
 | WF-012 | Offline verification and handoff | [002 workflows](../002-athanor-encoder/workflows.md#wf-012) | JRN-006 |
+| WF-013 | Source-bound instruction candidate preparation and review | [003 workflows](../003-qwen-adapter/workflows.md#wf-013) | JRN-007 |
+| WF-014 | Qwen adapter tooling preflight and approved pilot | [003 workflows](../003-qwen-adapter/workflows.md#wf-014) | JRN-007 |
+| WF-015 | Paired base/adapter evaluation with identical retrieval | [003 workflows](../003-qwen-adapter/workflows.md#wf-015) | JRN-007 |
 
 Every workflow must explicitly state Purpose, Actors, Triggers, Preconditions, Inputs, Happy path, Alternate/failure paths, State transitions, Terminal states, Side effects, Invariants, Permissions, Observability/audit, Acceptance criteria, Dependencies, and Unresolved items. Requirements link to workflows; architecture and tasks reference them rather than inventing independent behavior. Existing agent/skill lists remain execution guidance.
 

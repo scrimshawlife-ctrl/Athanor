@@ -31,7 +31,11 @@ def _json(data):
         if not math.isfinite(parsed):
             raise ValueError("Non-finite JSON number")
         return parsed
-    return json.loads(data, object_pairs_hook=_object, parse_constant=_constant, parse_float=number)
+    try:
+        return json.loads(data, object_pairs_hook=_object, parse_constant=_constant,
+                          parse_float=number)
+    except RecursionError as exc:
+        raise ValueError("JSON nesting exceeds parser limits") from exc
 
 
 def _read(root, name):
