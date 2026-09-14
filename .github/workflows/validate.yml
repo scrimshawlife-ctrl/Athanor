@@ -26,8 +26,10 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install
-        run: pip install -U pip -e ".[dev,schema]"
+        run: pip install -U pip -e ".[dev,schema]" -r specs/contracts/requirements.txt
       - name: Ruff
-        run: ruff check src tests
+        run: ruff check src tests specs/contracts/validation.py specs/contracts/verify_review.py scripts/shadow/athanor/apply_gold_p3a.py
+      - name: Advisory semantic contracts
+        run: python specs/contracts/verify_review.py
       - name: Pytest
         run: pytest -q

@@ -5,7 +5,7 @@ Status: SHADOW advisory completion package. This does not govern or activate.
 1. Read the [constitution](../.specify/memory/constitution.md) for existing doctrine and authority.
 2. Read [specification order and precedence](../specs/README.md), then follow its fourteen-stage map.
 3. For shipped behavior use [Spec 001](../specs/001-offline-retrieve/spec.md) and [quickstart](quickstart.md). Target requirements in this patch are not runtime guarantees.
-4. For encoder readiness read [P3a historical evidence](../specs/002-athanor-encoder/p3a-exit.md), [eval gates](../specs/002-athanor-encoder/eval-gates.md), and [open decisions](../specs/decisions.md).
+4. For encoder readiness start with [candidate audit and remaining gates](training-readiness.md), then read [P3a historical evidence](../specs/002-athanor-encoder/p3a-exit.md), [eval gates](../specs/002-athanor-encoder/eval-gates.md), and [open decisions](../specs/decisions.md).
 5. Check the [reconciliation receipt](../out/audit/spec-completion.latest.json) before repeating corpus, gold, balance, or completion claims.
 
 ## Source surfaces

@@ -1,0 +1,38 @@
+# Training readiness: candidate integrity is not approval
+
+Status: bounded safety remediation on top of main be1ebc9820a2b3a1c7f0596010ac08bab978086e. No training or publication authority is granted.
+
+## Implemented
+
+- The historical apply_gold_p3a.py entry point is retired. It exits 2 with HOLD without reading or writing the corpus, settle lists or receipts. Historical outputs are not rewritten. Heuristic KEEP cannot become reviewed GOLD through this helper.
+- `python -m athanor.readiness --pack PATH` audits an existing Athanor candidate-preparation/1 directory, read-only. Install the local package or set PYTHONPATH=src before running from a checkout.
+- The candidate auditor verifies the exact four file names, bytes, digests, row counts, nonempty unique feature/target ID correspondence, text-only feature boundaries, and basic target/split types. It rejects duplicate JSON keys, nonfinite numbers, unsafe file paths and symlinks.
+- CI installs the contract format dependencies and executes the shared semantic regression suite, alongside runtime and candidate-audit tests.
+
+Exit 1 means invalid/unreadable input. Exit 2 means candidate audit completed but training remains HOLD. This command has no READY path: candidate-preparation/1 carries no authenticated label, rights or operator approval chain. Editing allow_train, state or training_eligible cannot grant authority. The report calls such fields claims and independently verified eligible count remains NOT_COMPUTABLE. Extra local files are not included in the audit and this is not a complete handoff-directory allowlist inspection.
+
+File integrity and unique row IDs do not establish label correctness, rights, corpus completeness, source/work deduplication, train/test independence or GPU compatibility. Nonempty text is not a cleanliness or tokenizer-fit test. The command does not freeze splits, mutate data, run models, download weights or publish.
+
+## Remaining work and exact dependencies
+
+| Step | Existing workflow / decision | Required outcome and next implementation |
+|---|---|---|
+| Reviewed labels | WF-004; DEC-001/003 | Supply per-target reviewer decisions bound to exact atom hashes and a selected trusted approval verification mechanism; implement a new settlement executor. Never restore the heuristic mutator. |
+| Rights / reception | WF-005/006; DEC-007/008 | Reviewed use-specific rights and reception mappings; replace sanitize_export.py's license exclusions and unspecified fallback with decision joins and work-level protection. |
+| Dataset freeze | WF-005; DEC-005 | Select ratios, seed and grouping rules; implement prepare_dataset.py with transitive work/edition/source/hash groups, gold-only evaluation, weak train-only membership and deterministic manifests. |
+| Evaluation coverage | WF-009; DEC-006 | Choose support minima and uncertainty protocol; review thin-family examples, source-bound pairs and held-out queries. Do not fill missing labels with predictions. |
+| Model and resources | WF-007/008; DEC-002/004 | Select immutable backbone/tokenizer revisions and supported tier/languages/resource envelope; then implement train_encoder.py/infer_encoder.py and backend dependencies. |
+| Tooling | WF-007/009 | Synthetic offline tests, head masks, failure receipts, resume identity and missing-weight lexical fallback; implement the real metric/control harness, not constant PASS fixtures. |
+| Real training | WF-008 | Frozen eligible snapshot + tooling evidence + selected resources + exact scoped operator approval. Bounded pilot before any scaling. |
+
+Full architecture/acceptance/traceability remains packages 4–5. Do not check U11–U14 complete merely because candidate auditing is available. E1–E3 remain NOT_COMPUTABLE without exact trained artifacts and measured controls. E7 must measure the actual sampled train tokens, not historical gold balance. Hub remains separately gated.
+
+## Validation mapping
+
+REQ-014/015 and WF-004 invariant KEEP != GOLD: tests/test_gold_retired.py verifies HOLD, nonzero exit, unchanged corpus bytes and no new files. This is regression prevention, not completion of settlement.
+
+WF-005 preflight: tests/test_readiness.py covers tampering, counterfeit metadata, duplicate/unmatched row IDs, target leakage into features, invalid labels/splits, empty text, forged authorization, and distinct INVALID/HOLD exits. Full WF-005 acceptance still requires a future frozen dataset builder.
+
+C-005/C-009 semantics: specs/contracts/verify_review.py runs in CI. It validates contracts, not actual trained gate outcomes.
+
+Provenance: Athanor main be1ebc9820a2b3a1c7f0596010ac08bab978086e, candidate-preparation/1 format and local synthetic regression checks. No Abraxas Loop or Sprint authority applies.
