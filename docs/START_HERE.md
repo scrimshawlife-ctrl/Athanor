@@ -2,6 +2,11 @@
 
 Status: SHADOW advisory completion package. This does not govern or activate.
 
+New harvests: read the [staging boundary](harvest/staging-boundary.md). Legacy
+harvest defaults now write candidates, not the retrieval corpus; no promotion is implied.
+The [signed approval verifier](harvest/signed-approval.md) is read-only and remains
+separate from corpus admission.
+
 1. Read the [constitution](../.specify/memory/constitution.md) for existing doctrine and authority.
 2. Read [specification order and precedence](../specs/README.md), then follow its fourteen-stage map.
 3. For shipped behavior use [Spec 001](../specs/001-offline-retrieve/spec.md) and [quickstart](quickstart.md). Target requirements in this patch are not runtime guarantees.

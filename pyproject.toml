@@ -36,7 +36,9 @@ classifiers = [
 dependencies = []
 
 [project.optional-dependencies]
+approval = ["cryptography>=46,<47"]
 dev = [
+    "cryptography>=46,<47",
     "pytest>=7.0",
     "jsonschema>=4.0",
     "ruff>=0.6",

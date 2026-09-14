@@ -17,7 +17,8 @@ from crawl4ai import AsyncWebCrawler, BrowserConfig, CrawlerRunConfig, CacheMode
 
 # Paths
 HOME = Path.home()
-ATOMS_PATH = HOME / ".athanor" / "corpus" / "atoms.jsonl"
+# Unreviewed harvests are candidates, never automatically admitted to retrieval.
+ATOMS_PATH = HOME / ".athanor" / "staging" / "legacy-harvest" / "candidates.jsonl"
 RECEIPTS_DIR = HOME / ".athanor" / "receipts"
 SCOREBOARD_DIR = Path("/workspace/athanor-harvest")
 ATOMS_PATH.parent.mkdir(parents=True, exist_ok=True)
