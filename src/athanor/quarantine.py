@@ -5,6 +5,7 @@ This bulk data transformation never changes sources, promotes gold, or trains.
 import argparse
 import hashlib
 import json
+import os
 import re
 import unicodedata
 import zipfile
@@ -98,7 +99,8 @@ def classify(text, atom):
     links = len(re.findall(r'https?://', text))
     url_characters = sum(len(m.group()) for m in re.finditer(r'https?://[^\s)]+', text))
     original = atom.get('text', text)
-    catalog_controls = 'Toggle Sidebar' in original and ('\nAuthor\n' in original or '\nTitle\n' in original)
+    original_lines = {line.strip() for line in original.splitlines()}
+    catalog_controls = 'Toggle Sidebar' in original_lines and bool({'Author', 'Title'} & original_lines)
     nav = sum(s.casefold() in text.casefold() for s in (
         'Search the Wayback Machine', 'Browser Extensions', 'Archive-It Subscription',
         'DOWNLOAD OPTIONS', 'An illustration of a', 'Internet Archive Audio'))
@@ -164,12 +166,18 @@ def build(parent, pack):
     for atom in atoms:
         if not isinstance(atom, dict):
             raise TypeError('Source atom must be an object')
-        for field in ('atom_id', 'text', 'family_id'):
+        for field in ('atom_id', 'text', 'family_id', 'type', 'source_url', 'license',
+                      'epistemic', 'content_hash'):
             if not isinstance(atom.get(field), str):
                 raise TypeError(f'Source atom {field} must be a string')
-        for field in ('type', 'source_url', 'license'):
-            if field in atom and not isinstance(atom[field], str):
-                raise TypeError(f'Source atom {field} must be a string')
+            if field != 'text' and not atom[field]:
+                raise ValueError(f'Source atom {field} must not be empty')
+        if atom['type'] not in ('text', 'table', 'correspondence', 'diagram_desc'):
+            raise ValueError('Invalid source atom type')
+        if atom['epistemic'] not in ('OBSERVED', 'INFERRED', 'SPECULATIVE', 'NOT_COMPUTABLE'):
+            raise ValueError('Invalid source atom epistemic')
+        if len(atom['content_hash']) < 8:
+            raise ValueError('Invalid source atom content_hash')
     by_id = {a['atom_id']: a for a in atoms}
     provenance = {p['row_id']: p for p in parsed['provenance.jsonl']}
     qids = [r['row_id'] for r in parsed['quarantine.jsonl']]
@@ -260,9 +268,11 @@ def main(argv=None):
                     if (args.output / name).is_symlink() or (args.output / name).read_bytes() != raw:
                         raise ValueError('Regenerated artifact differs')
             else:
-                args.output.mkdir(parents=True, exist_ok=False)
+                args.output.mkdir(mode=0o700, parents=True, exist_ok=False)
                 for name, raw in payload.items():
-                    with (args.output / name).open('xb') as stream:
+                    fd = os.open(args.output / name, os.O_WRONLY | os.O_CREAT | os.O_EXCL
+                                 | getattr(os, 'O_BINARY', 0), 0o600)
+                    with os.fdopen(fd, 'wb') as stream:
                         stream.write(raw)
         print(canonical(summary))
         return 2  # Candidate HOLD is not a training approval.

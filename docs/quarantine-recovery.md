@@ -13,10 +13,20 @@ invalid inputs exit 1. The destination must not already exist when creating a pa
 Destinations inside any Git checkout (including linked worktrees) are rejected,
 even if ignored. Keep generated files in private storage outside Git; folder names
 are not access controls.
+The final output directory and its files use POSIX modes 0700 and 0600,
+respectively, at creation (subject to a stricter umask). Parent directories use
+normal platform permissions; choose a trusted parent that other users cannot
+replace. Existing parent permissions are not changed. On Windows, these modes
+do not establish a private ACL: use storage
+whose ACL already restricts access to the operator; Windows ACL verification is
+outside this command. Verification compares bytes, not access-control policy.
 
 Inputs are a candidate-preparation manifest, features/targets/provenance/quarantine
-JSONL and its digest-matching ZIP with atoms_full.jsonl. Every original quarantined
-record receives cleaned text, source and cleaned hashes, a removed-line ledger,
+JSONL and its digest-matching ZIP with atoms_full.jsonl. Every source
+atom must supply the eight required string fields in the atom contract, including
+epistemic and content_hash; required nonempty values, type/epistemic enums and the
+minimum content_hash length are checked. This does not authenticate source claims.
+Every original quarantined record receives cleaned text, source and cleaned hashes, a removed-line ledger,
 original family/reason, provisional topic evidence offsets, and a recovery route.
 The output manifest records algorithm and file hashes. Verify compares regenerated
 bytes; a changed script requires a new version rather than accepting an old receipt.
