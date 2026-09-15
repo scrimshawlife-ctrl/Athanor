@@ -2,6 +2,12 @@
 
 Status: advisory. This does not govern or activate. Owners below are roles from the existing constitution, not new authorities.
 
+2026-09-14 DEC-003 implementation update: operator selected locally signed exact-byte
+manifests with operator-controlled signing. The [read-only verifier](../docs/harvest/signed-approval.md)
+implements signature/scope checks; real key provisioning, trusted execution environment,
+evidence adjudication and corpus writer integration remain unresolved. This narrows the
+mechanism choice in the historical table below; it does not close mutating-workflow readiness.
+
 | ID | Question / required evidence | Proposed disposition | Owner / blocks |
 |---|---|---|---|
 | DEC-001 | Do the existing 400 GOLD rows have reviewed label decisions bound to their exact contents? | NOT_COMPUTABLE. Preserve the historical report; do not certify label correctness from heuristic selection or a hard-coded operator string. Obtain reviewed IDs, hashes, labels, and approval scope. | Operator; gold certification and learned metrics |
