@@ -182,3 +182,9 @@
 {"neg_id": "neg.science.07", "theme": "news_science", "text": "Physicists test theories with particle accelerators and observatories.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.finance.08", "theme": "news_finance", "text": "Cryptocurrency markets fluctuate with regulatory announcements.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.health.07", "theme": "news_health", "text": "Healthcare systems adopt electronic records for better patient outcomes.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.entertainment.08", "theme": "entertainment", "text": "Video game industry sees record sales with new console launches.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.science.08", "theme": "news_science", "text": "Climate scientists publish findings on ocean temperature trends.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.finance.09", "theme": "news_finance", "text": "Companies report quarterly earnings amid economic uncertainty.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.health.08", "theme": "news_health", "text": "Hospitals implement new protocols for patient safety and efficiency.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.tech.07", "theme": "product_tech", "text": "Software updates introduce enhanced security features for users.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.auto.07", "theme": "product_auto", "text": "Ride-sharing services expand to new cities with updated apps.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
