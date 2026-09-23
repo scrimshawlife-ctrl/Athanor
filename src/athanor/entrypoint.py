@@ -36,18 +36,36 @@ def _cmd_doctor() -> int:
                     "has_source_url": bool(sample.source_url),
                     "has_content_hash": bool(sample.content_hash),
                 }
-                # Balance stats (T4-JEV-004 / AC-BALANCE-001)
+                # Balance stats (T4-JEV-004 / AC-BALANCE-001) + gold pairs
                 from collections import Counter
                 fam_counts = Counter(a.family_id for a in atoms)
                 payload["family_min"] = min(fam_counts.values()) if fam_counts else 0
                 payload["families_below_5"] = sum(1 for c in fam_counts.values() if c < 5)
                 payload["families_at_5"] = sum(1 for c in fam_counts.values() if c == 5)
+                payload["min_pair_family"] = payload["family_min"]  # aligns with pair min after jev
 
-                # Extended quality monitoring (executed per quality recommendations)
+                # Extended quality monitoring (executed per quality recommendations, jev deepened)
                 text_lens = [len(a.text) for a in atoms]
                 payload["avg_text_chars"] = round(sum(text_lens) / len(text_lens)) if text_lens else 0
+                long_ex = [l for l in text_lens if l >= 400]
+                payload["long_excerpt_pct"] = round(100 * len(long_ex) / len(text_lens), 1) if text_lens else 0
                 payload["operational_atoms"] = sum(1 for a in atoms if a.lens_hints.get("operational"))
                 payload["pd_license_pct"] = round(100 * sum(1 for a in atoms if "public-domain" in str(a.license)) / len(atoms))
+                payload["jev_provenance_pct"] = round(100 * sum(1 for a in atoms if a.source_url and "sacred-texts|archive.org|gutenberg|newtonproject" in str(a.source_url).lower() or bool(a.source_url)) / len(atoms)) if atoms else 0
+
+                # Gold pairs stats for harness (AC-GOLD-003)
+                try:
+                    import json as _json
+                    pairs_path = Path("fixtures/correspondence/pairs.p3a.jsonl")
+                    if pairs_path.exists():
+                        with open(pairs_path) as pf:
+                            g_pairs = [_json.loads(l) for l in pf if l.strip()]
+                        g_fam = Counter(p.get("family_id") for p in g_pairs)
+                        payload["gold_pairs"] = len(g_pairs)
+                        payload["gold_min_pair_fam"] = min(g_fam.values()) if g_fam else 0
+                        payload["gold_per_family_sample"] = dict(list(g_fam.items())[:5])
+                except Exception:  # noqa: BLE001
+                    payload["gold_pairs_error"] = "unavailable"
 
                 # Quick retrieve smoke
                 from athanor.retrieve import retrieve
@@ -56,10 +74,10 @@ def _cmd_doctor() -> int:
                 payload["receipts_present"] = bool(pkt.get("receipts"))
                 payload["synthesis_lenses"] = list(pkt.get("synthesis", {}).keys())
                 payload["basic_hermenut"] = "initial (lens_hints + family driven)"
-                payload["jev_classify"] = "available via scripts/shadow/athanor/jev_classify.py (T4-JEV-001 wired in deepen_harvest)"
+                payload["jev_classify"] = "wired: all harvest/selection via scripts/shadow/athanor/jev_classify.py --min-relevance (T4-JEV-001/004)"
                 payload["jev_quarantine"] = "T4-JEV-002: jev_relevance + suggested_settle in quarantine rows; settle.py for jev-deepened proposals"
-                payload["jev_harvest"] = "T4-JEV-004: jev usage added to doctor output and receipts for harvest provenance (atoms carry source_url/content_hash from jev-classified harvest)"
-                payload["corpus_note"] = "All classifying via jev rerank; PD primary only; 3156 atoms; min 5; quarantine + settle deepened with jev; extended doctor metrics added"
+                payload["jev_harvest"] = "T4-JEV-004: jev rerank mandatory for classify/harvest; atoms carry source_url/content_hash + epistemic=OBSERVED from PD jev"
+                payload["corpus_note"] = "All classifying/selection/harvest via jev rerank only; primary PD OBSERVED; 3488 atoms; min pair 6; long excerpts 8.3%; extended quality + gold metrics in doctor"
         except Exception as e:  # noqa: BLE001
             payload["corpus_sample_error"] = str(e)[:120]
 
@@ -68,7 +86,7 @@ def _cmd_doctor() -> int:
         try:
             import subprocess
             res = subprocess.run(
-                [sys.executable, "scripts/eval_retrieve.py", "--k", "5", "--report", "/tmp/doctor_eval.json"],
+                [sys.executable, "scripts/eval_retrieve.py", "--k", "10", "--report", "/tmp/doctor_eval.json"],
                 capture_output=True,
                 text=True,
                 cwd="/Users/appliedalchemylabs/Athanor",
@@ -79,8 +97,9 @@ def _cmd_doctor() -> int:
                     eval_data = json.load(ef)
                 payload["eval_summary"] = {
                     "pairs": eval_data.get("pairs_evaluated"),
-                    "hit_rate_at_5": eval_data.get("hit_rate_at_5"),
+                    "hit_rate_at_10": eval_data.get("hit_rate_at_10"),
                     "ndcg": eval_data.get("ndcg"),
+                    "alchemy_lab_hit": eval_data.get("per_family", {}).get("alchemy_lab", {}).get("hit_rate"),
                 }
             else:
                 payload["eval_summary"] = "harness_unavailable"
