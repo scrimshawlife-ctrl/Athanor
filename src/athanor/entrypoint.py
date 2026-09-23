@@ -44,7 +44,8 @@ def _cmd_doctor() -> int:
                 payload["basic_hermenut"] = "initial (lens_hints + family driven)"
                 payload["jev_classify"] = "available via scripts/shadow/athanor/jev_classify.py (T4-JEV-001 wired in deepen_harvest)"
                 payload["jev_quarantine"] = "T4-JEV-002: jev_relevance + suggested_settle in quarantine rows; settle.py for jev-deepened proposals"
-                payload["corpus_note"] = "All classifying via jev rerank; PD primary only; >3000 atoms; quarantine + settle deepened with jev"
+                payload["jev_harvest"] = "T4-JEV-004: jev usage added to doctor output and receipts for harvest provenance (atoms carry source_url/content_hash from jev-classified harvest)"
+                payload["corpus_note"] = "All classifying via jev rerank; PD primary only; >3000 atoms; quarantine + settle deepened with jev; harvest provenance in receipts"
         except Exception as e:  # noqa: BLE001
             payload["corpus_sample_error"] = str(e)[:120]
     json.dump(payload, sys.stdout, indent=2)

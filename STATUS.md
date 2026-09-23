@@ -20,7 +20,7 @@ This does not govern or activate. Earlier dated entries remain historical; the c
 | Package | `athanor` CLI `doctor` / `retrieve` / `--version` |
 | CI | `.github/workflows/validate.yml` — local ruff+pytest is the bar; Actions may fail on account billing |
 | Harvest | Wave 0–1 + A–E + F fill3000 · Crawl4AI 0.9.3 · P3a gold sealed |
-| Local SoT | `~/.athanor/corpus/atoms.jsonl` — **3133** high-quality PD atoms (OBSERVED after jev+research classification; FINAL targeted round on andes_amazon + folk_magic_pd: all 6 candidates passed jev rerank; now min 5, 0 families at 4, only 3 <5; jev_classify + jev_quarantine + settle.py (T4-JEV-002 deepened) wired; quarantine emits suggested_settle; AC catalog expanded (new JEV-QUARANTINE/SETTLE/DOCTOR/BALANCE/QUALITY/RECEIPT ACs); NO family at 0; full Package 4 core complete; >3000 rows) |
+| Local SoT | `~/.athanor/corpus/atoms.jsonl` — **3133** high-quality PD atoms (OBSERVED after jev+research classification; FINAL targeted round on andes_amazon + folk_magic_pd: all 6 candidates passed jev rerank; now min 5, 0 families at 4, only 3 <5; jev_classify + jev_quarantine + settle.py (T4-JEV-002 deepened) wired; quarantine emits suggested_settle; AC catalog expanded (new JEV-QUARANTINE/SETTLE/DOCTOR/BALANCE/QUALITY/RECEIPT ACs); T4-JEV-004 complete (doctor + receipts with jev_harvest provenance); NO family at 0; full Package 4 core complete; >3000 rows) |
 | Hub / train | Blocked · Spec 002 P3a specify exit sealed; Aaron pack local-only |
 
 ## Wave 0 harvest (OBSERVED 2026-09-10 PT)
