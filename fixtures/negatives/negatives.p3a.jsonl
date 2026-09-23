@@ -265,3 +265,18 @@
 {"neg_id": "neg.ood.legaltech.01", "theme": "legal_tech", "text": "Smart contracts on blockchain automate enforcement of agreement terms without intermediaries.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.ood.neurosci.01", "theme": "neuroscience", "text": "fMRI scans measure brain activity by detecting changes in blood flow.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.ood.blockchain.01", "theme": "blockchain", "text": "Distributed ledger technology ensures transparent and immutable transaction records.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.round3.tech.01", "theme": "tech_cloud", "text": "Kubernetes orchestrates containerized applications across clusters.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.round3.science.02", "theme": "news_science", "text": "CRISPR gene editing has revolutionized biomedical research.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.round3.finance.03", "theme": "news_finance", "text": "Decentralized finance protocols enable peer-to-peer lending.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.round3.health.04", "theme": "news_health", "text": "Wearable devices monitor heart rate and activity levels continuously.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.round3.law.05", "theme": "news_law", "text": "Intellectual property rights protect software innovations globally.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.round3.edu.06", "theme": "slop_edu", "text": "Open educational resources provide free textbooks and courses.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.round3.env.07", "theme": "news_env", "text": "Reforestation projects restore habitats for wildlife species.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.round3.auto.08", "theme": "news_auto", "text": "Advanced driver assistance systems improve vehicle safety.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.round3.ent.09", "theme": "news_ent", "text": "Streaming platforms recommend content using collaborative filtering.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.round3.retail.10", "theme": "product_retail", "text": "Inventory management systems optimize stock levels in real time.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.round3.tech.11", "theme": "tech_ai", "text": "Neural networks learn hierarchical features from raw data.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.round3.science.12", "theme": "news_science", "text": "Gravitational waves confirm predictions from general relativity.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.round3.finance.13", "theme": "news_finance", "text": "Central banks use quantitative easing to stimulate economies.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.round3.health.14", "theme": "news_health", "text": "mRNA vaccines provide rapid response to emerging pathogens.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.round3.law.15", "theme": "news_law", "text": "Regulatory frameworks govern data protection and privacy.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
