@@ -43,15 +43,16 @@ def evaluate_correspondence(
         fam = p.get("family_id", "unknown")
         per_family[fam]["total"] += 1
 
-        # Enhanced query: role + filler + key terms from span/text for better recall on short excerpts
-        parts = [p.get("role", ""), p.get("filler", "")]
+        # Enhanced query with family hint + more terms for low-hit families (continuation)
+        fam = p.get("family_id", "")
+        parts = [fam, p.get("role", ""), p.get("filler", "")]
         span = p.get("span", "") or p.get("text", "")
-        # extract 3-5 key terms (alphanum >3 chars)
-        terms = re.findall(r"\b[a-zA-Z]{4,}\b", span)[:5]
+        # extract up to 7 key terms
+        terms = re.findall(r"\b[a-zA-Z]{4,}\b", span)[:7]
         parts.extend(terms)
-        query = " ".join([q for q in parts if q]).strip()[:150]
+        query = " ".join([q for q in parts if q]).strip()[:180]
         if not query:
-            query = p.get("family_id", "tradition")
+            query = fam or "tradition"
 
         pkt = retrieve(query, k=max(k, 20), corpus_path=corpus_path)
         hit_ids = [h["atom_id"] for h in pkt.get("hits", [])]
