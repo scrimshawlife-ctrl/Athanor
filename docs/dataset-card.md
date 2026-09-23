@@ -147,3 +147,15 @@ Updated continue: Pairs 1342, Negs 307, Min pair 14, Lowest [('history_magic', 1
 - Min 20
 - Boosted several to 21+
 
+
+## Eval Results (current)
+- Total pairs: 1399 | Negs: 327 | Min pair fam: 20
+- Eval (mixed low+sample, k=10): hit@10=0.8175, ndcg=0.205
+- Per-family highlights (lows):
+  - islamic_occult_pd (20): hit=1.000, ndcg=0.912
+  - grimoire (20): hit=1.000, ndcg=0.941
+  - egypt_magical (21): hit=0.130 (weak), ndcg=1.000
+  - history_magic (21): hit=0.348 (weak), ndcg=1.000
+  - Many others near 1.0 hit/ndcg in sample
+- Note: Some families have high pair count but poor retrieval hit — prioritize sources that improve semantic match for these.
+
