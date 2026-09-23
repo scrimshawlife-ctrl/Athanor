@@ -60,3 +60,15 @@ def test_evaluate_correspondence_ndcg_target():
     results = evaluate_correspondence(pairs, k=5)
     assert "ndcg" in results
     assert results["ndcg"] >= 0.2, f"ndcg target for slice stability after continuation gold/query work + proper NDCG calc; got {results.get('ndcg')}"  # relaxed further for proper IDCG ndcg (scale change)
+
+def test_evaluate_correspondence_expanded_per_family_ndcg_sample():
+    # TDD for Option 2 harness enhancement: expect per_family to support larger sampling
+    pairs = load_pairs(str(PAIRS))[:30]
+    results = evaluate_correspondence(pairs, k=10)
+    per_fam = results.get("per_family", {})
+    assert len(per_fam) >= 5, f"Expected expanded per_family sample support, got {len(per_fam)} families"
+    # Check ndcg present for sampled
+    sample = list(per_fam.items())[:5]
+    for fam, st in sample:
+        assert "ndcg" in st
+        assert isinstance(st["ndcg"], (int, float))

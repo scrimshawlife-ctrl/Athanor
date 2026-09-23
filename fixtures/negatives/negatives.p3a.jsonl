@@ -288,3 +288,15 @@
 {"neg_id": "neg.round3.edu.21", "theme": "slop_edu", "text": "Virtual reality simulations enhance experiential learning.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.round3.env.22", "theme": "news_env", "text": "Carbon offset programs support sustainable development projects.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.round3.auto.23", "theme": "news_auto", "text": "Ride-sharing apps optimize urban transportation efficiency.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.cont4.tech.01", "theme": "tech_ai", "text": "Transformer models use self-attention mechanisms for sequence processing.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.cont4.science.02", "theme": "news_science", "text": "CRISPR-Cas9 enables precise genome editing in living organisms.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.cont4.finance.03", "theme": "news_finance", "text": "Blockchain technology underpins decentralized cryptocurrencies.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.cont4.health.04", "theme": "news_health", "text": "mRNA technology allows rapid development of vaccines against new viruses.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.cont4.law.05", "theme": "news_law", "text": "GDPR regulates data privacy for European Union residents.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.cont4.edu.06", "theme": "slop_edu", "text": "Massive open online courses provide accessible education worldwide.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.cont4.env.07", "theme": "news_env", "text": "Renewable energy sources reduce reliance on fossil fuels.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.cont4.auto.08", "theme": "news_auto", "text": "Electric vehicles use lithium-ion batteries for energy storage.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.cont4.ent.09", "theme": "news_ent", "text": "Streaming services use recommendation algorithms based on user history.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.cont4.retail.10", "theme": "product_retail", "text": "E-commerce platforms leverage logistics networks for fast delivery.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.cont4.tech.11", "theme": "tech_cloud", "text": "Cloud computing provides scalable on-demand infrastructure resources.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.cont4.science.12", "theme": "news_science", "text": "James Webb Space Telescope captures images of distant galaxies.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
