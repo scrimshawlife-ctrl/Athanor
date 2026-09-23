@@ -6,10 +6,10 @@ Packages 1-3 define an advisory target; runtime code and schemas remain unchange
 
 This does not govern or activate. Earlier dated entries remain historical; the canonical fourteen-stage method is not declared complete.
 
-**Package 4 core complete** (2026-09-23): specs/004-architecture/ (spec, plan, architecture, acceptance-catalog 24 ACs, traceability ~60 rows, tasks) polished and marked complete. Jev settle/quarantine/doctor/balance/quality/receipts integrated. 3145 atoms, min 5. All classifying via jev. Gated paths untouched.
+**Package 4 deeper complete (Phases 3+4, 2026-09-23)**: specs/004-architecture/ expanded with eval/gold/harness ACs (30+ total), traceability (65+ rows), dataset-card fixes (3199 atoms, min 7, eval readiness 7.5/10), retrieval eval harness documented. Jev integrated. VERSION 0.1.0a2. Gated paths untouched.
 
 **Lane:** SHADOW — retrieve live · train/Hub gated  
-**Version:** see `VERSION` (0.1.0a1)  
+**Version:** see `VERSION` (0.1.0a2)  
 **Remote:** https://github.com/scrimshawlife-ctrl/Athanor  
 
 | Area | State |

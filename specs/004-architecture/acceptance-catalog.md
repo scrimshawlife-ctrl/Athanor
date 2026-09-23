@@ -1,6 +1,6 @@
 # Acceptance Catalog — Package 4 (Core Complete)
 
-Status: Core complete. 24 ACs (core + full jev harvest/quarantine/settle/doctor/balance/quality/receipts). 3133 atoms, min 5. This does not govern or activate.
+Status: Deeper Package 4 complete (eval/gold/harness ACs added). 30+ ACs. 3199 atoms, min 7/family, eval harness live. This does not govern or activate.
 
 ## Global ACs (examples, to be expanded)
 
@@ -39,3 +39,9 @@ See state-machines.md, contracts/ for state and contract ACs.
 **Package 4 goal**: Turn workflow-local AC-00x into complete, testable global matrix.
 
 Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 805 Slice N/A + Hash: fd84c7085579f3e7a560b38fc554a4f832fa9c10 (review base) + 2026-09-22 work.
+|| AC-EVAL-001 | Retrieval eval harness runs on gold pairs and reports hit@K/MRR per family; used in CI smoke | WF-003 | scripts/eval_retrieve.py + tests |
+|| AC-EVAL-002 | Gold pairs cover >=30 families with real atom_ids; hit rate @10 >=0.65 baseline | WF-003 | eval run + dataset-card |
+|| AC-GOLD-003 | Gold correspondence pairs >=200; negatives >=100; maintained with jev for pair quality | WF-004 | fixtures counts + harness |
+|| AC-PKG4-025 | Traceability matrix covers eval harness, gold expansion, doctor jev metrics | Package 4 | traceability.md |
+|| AC-PKG4-026 | Dataset card updated for current corpus (3199 atoms, min 7/family, eval readiness 7.5/10) | WF-005 | docs/dataset-card.md |
+|| AC-DOCS-001 | All specs/docs synced with current gold counts, harness, ACs, version bump | - | README, STATUS, traceability, dataset-card |

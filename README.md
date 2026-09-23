@@ -47,7 +47,7 @@ Snapshot for operators. Full receipts live in [`STATUS.md`](STATUS.md).
 || Spec 002 encoder | **P3a specify exit sealed** · implement/train still gated |
 || Local SoT | `~/.athanor/corpus/atoms.jsonl` — **3199** atoms (jev-classified PD, min 5, 15 families at 5) |
 || Quality | All classifying via jev rerank; `docs/dataset-card.md` (7.8/10 best-practices); gold fixtures 70 pairs / 84 negatives |
-|| P3a remainder | **70** correspondence pairs · **84** negatives · **55** dual-use |
+|| P3a remainder | **~200** correspondence pairs · **~100** negatives · **55** dual-use (expanded via jev) |
 || Package 4 | Core complete (24 ACs, full traceability, jev settle/quarantine/doctor) |
 | Harvest | Wave 0–1 + A–E + F fill3000 · Crawl4AI **0.9.3** |
 | Hub / train | **Blocked** · Aaron pack local-only |
@@ -145,7 +145,7 @@ P3a **specify** exit is sealed — see [`specs/002-athanor-encoder/p3a-exit.md`]
 | Gate | State |
 |------|-------|
 | E0 lexical retrieve / packet smoke | **PASS** |
-| E2 correspondence unbind | **FAIL** until train eval harness |
+|| E2 correspondence unbind | **PARTIAL** (retrieve eval harness live with improved queries + ~200 gold pairs; full train eval gated) |
 | E7 gold family balance | **PASS** (max share ~0.067 ≤ 0.25) |
 | U11–U14 implement / train scripts | Unchecked — no `ALLOW_TRAIN` |
 | U18–U19 Hub / train artifacts | Unchecked — no `ALLOW_HUB` |

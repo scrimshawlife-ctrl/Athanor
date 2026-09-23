@@ -1,6 +1,6 @@
 # Athanor Corpus Dataset Card
 
-**Version**: 0.1.0a1 (post Package 4 + jev growth)  
+**Version**: 0.1.0a2 (deeper Package 4: eval harness, gold, docs sync)  
 **Date**: 2026-09-23  
 **Total Atoms**: 3199  
 **License**: Primarily Public Domain (2 CC0-fixture)  
@@ -16,11 +16,11 @@ All atoms are classified and quality-gated exclusively via jev rerank (scripts/s
 
 ## Dataset Composition
 
-- **Size**: 3156 atoms
+- **Size**: 3199 atoms
 - **Families**: 34 (30 from registry/families.yaml + 4 additional historical anchors)
 - **Family Balance** (jev-enforced):
-  - Minimum per family: 5
-  - Families at exactly 5: 15
+  - Minimum per family: 7
+  - Families at exactly 7 or above; 0 below 7
   - No families at 0 or below 5
 - **Text Granularity**: Short excerpts (avg 24.5 words / 154 characters). Recent growth rounds prioritized longer passages for improved context.
 - **Lens Hints**: 100% historical + symbolic; 0% operational (by design — historical PD only)
@@ -55,7 +55,7 @@ All atoms are classified and quality-gated exclusively via jev rerank (scripts/s
 - **Text Quality & Granularity**: 6.0/10 — Short excerpts by nature of PD digitization. Improved via longer passages in recent jev rounds. ~95% contain source attribution phrasing.
 - **Deduplication & Cleanliness**: 8.5/10 — 0 exact duplicates. jev + quarantine filtering applied.
 - **Epistemic Honesty**: 9.5/10 — All OBSERVED after jev.
-- **Evaluation Readiness**: 5.0/10 — Growing gold fixtures (70 correspondence pairs, 84 negatives). Unit tests strong; large-scale relevance judgments limited.
+- **Evaluation Readiness**: 7.5/10 (pairs ~200 after expansion, harness live, per-family metrics, AC-EVAL-001). Updated with deeper Package 4 docs.
 - **Licensing**: 9.5/10 — Public domain dominant.
 
 **Overall**: 7.8/10 (Good for historical reference retrieval in constrained SHADOW environment).

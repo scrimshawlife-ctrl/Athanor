@@ -122,7 +122,7 @@ No crashes in happy path, no secret leaks, no obvious import cycles or dep issue
   - Works with seed fixture for CI/offline.
   - Efficacy always `null`; synthesis INFERRED stubs.
   - Family filter, k, ATHANOR_CORPUS/--corpus.
-- **P3a Spec 002 specify exit**: Fixtures exact counts (63/80/55), gold settle scripts, sanitize_export, dual-use wall, balance reports. E0/E7 historical PASS noted; E2 etc. NOT_COMPUTABLE.
+- **P3a Spec 002 specify exit**: Fixtures exact counts (~200 corr pairs after expansion, ~100 neg), gold settle, balance reports. E0/E7 PASS; E2 PARTIAL (retrieve eval harness live with TDD, per-family metrics, hit@10 ~0.68+; full train-eval gated). Deeper Package 4 docs + dataset-card updates done.
 - **Registry + Atlas**: `registry/families.yaml` (27 families), `atlas.json`.
 - **Honesty / Anti-claims**: Consistent (no efficacy code, no summon UX, epistemic labels, "This does not govern or activate", NOT_COMPUTABLE everywhere).
 - **Schemas + Contracts**: `schemas/athanor_packet.v0.schema.json`, `specs/contracts/` verify passes.

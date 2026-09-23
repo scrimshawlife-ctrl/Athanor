@@ -63,6 +63,11 @@
 
 See contracts/README.md, workflows/README.md, 001/requirements.md, and state-machines.md for base definitions.
 
-**Package 4 core complete**: Full traceability (~60 rows), AC catalog (24 entries), jev settle/quarantine/doctor integrated. Gated items remain noted.
+**Package 4 deeper complete (Phase 3/4)**: Full traceability (65+ rows with eval/gold/harness), AC catalog (30+ entries), dataset-card synced, VERSION bumped. Eval harness live. Gated items remain noted.
 
-Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 805 Slice N/A + Hash: fd84c7085579f3e7a560b38fc554a4f832fa9c10 (review base) + 2026-09-22 work.
+Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 805 Slice N/A + Hash: fd84c7085579f3e7a560b38fc554a4f832fa9c10 (review base) + 2026-09-22 work + deeper pkg4 2026-09-23.
+|||| AC-EVAL-002 | Gold pairs >=200 covering 30+ families, jev-maintained quality | WF-004 | AC-GOLD-003 | fixtures/correspondence/pairs.p3a.jsonl + harness | ADDRESSED 2026-09-23 |
+|||| AC-PKG4-025 | Expanded traceability for eval harness, gold expansion, doctor metrics | Package 4 | AC-PKG4-025 | traceability.md, acceptance-catalog.md | ADDRESSED 2026-09-23 |
+|||| AC-PKG4-026 | Dataset card fixes and sync with current 3199 atoms, eval readiness | WF-005 | AC-PKG4-026 | docs/dataset-card.md | ADDRESSED 2026-09-23 |
+|||| WF-EVAL-001 | Standalone eval harness (TDD polished queries, report output, CI smoke) | - | AC-EVAL-001 | scripts/eval_retrieve.py | ADDRESSED 2026-09-23 |
+
