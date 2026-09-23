@@ -168,3 +168,11 @@ Updated continue: Pairs 1342, Negs 307, Min pair 14, Lowest [('history_magic', 1
 - Total pairs 1413
 - Doctor and card updated
 
+
+## Continue
+- Pair expansion for 21s: +20 pairs (grimoire_other, arbatel, buddhism_esoteric_pd, golden_dawn_hist, jyotish_anchors to 25)
+- +5 negs to 337
+- Min 21
+- Total pairs 1433
+- Doctor and card updated
+

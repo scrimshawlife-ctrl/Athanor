@@ -330,3 +330,8 @@
 {"neg_id": "neg.realestate.02", "theme": "realestate", "text": "Interest rates affected the housing market in major cities.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.retail.02", "theme": "retail", "text": "Black Friday sales exceeded expectations for many retailers.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.fashion.02", "theme": "fashion", "text": "Sustainable fashion brands are gaining popularity among consumers.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.travel.02", "theme": "travel", "text": "The new airline route connects major cities with direct flights.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.food.02", "theme": "food", "text": "The restaurant introduced a new menu featuring local ingredients.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.science.02", "theme": "science", "text": "The experiment confirmed the hypothesis about particle behavior.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.law.02", "theme": "law", "text": "The new legislation aims to protect consumer rights online.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.art.02", "theme": "art", "text": "The museum opened an exhibit on modern abstract art.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
