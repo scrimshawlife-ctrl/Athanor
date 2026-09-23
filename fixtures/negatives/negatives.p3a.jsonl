@@ -154,3 +154,7 @@
 {"neg_id": "neg.business.03", "theme": "news_business", "text": "Startup raises record funding for AI-powered healthcare solutions.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.travel.03", "theme": "news_travel", "text": "Tourism industry recovers with new sustainable travel options in popular destinations.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.education.04", "theme": "slop_edu", "text": "Online courses see surge in enrollment for professional development skills.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.climate.04", "theme": "news_climate", "text": "Renewable energy projects expand rapidly in response to global warming concerns.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.sports.05", "theme": "sports", "text": "National team prepares for major international tournament with new coaching staff.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.tech.04", "theme": "product_tech", "text": "Wearable devices track health metrics with improved accuracy using machine learning.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.law.04", "theme": "news_law", "text": "New laws protect consumer data from large tech companies in multiple countries.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
