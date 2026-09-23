@@ -5,7 +5,7 @@ Status: Initial decomposition. This does not govern or activate.
 ## High-Level Tasks (from plan)
 - T4-001: Inventory all existing AC/REQ/WF from 000-003 and root specs. **COMPLETE**
 - T4-002: Define layered architecture (harvest/settle/retrieve/encoder/verification) with diagrams. **Core complete**
-- T4-003: Build global acceptance catalog (expand workflow-local to system). **Core complete (jev harvest ACs added)**
+- T4-003: Build global acceptance catalog (expand workflow-local to system). **Expanded (added AC-JEV-QUARANTINE-001, AC-JEV-SETTLE-002, AC-JEV-DOCTOR-001, AC-BALANCE-001, AC-SETTLE-001, AC-QUALITY-001, AC-RECEIPT-001; 3133 atoms, min 5)**
 - T4-004: Complete traceability matrix (REQ → WF → AC → code/tests). **COMPLETE (full core population ~60 lines)**
 - T4-005: Produce task decomposition and U* items for remaining work. **Core complete**
 - T4-006: Define production verification strategy (receipts, audits, HERMENEUT). **Core complete**
@@ -15,7 +15,7 @@ Status: Initial decomposition. This does not govern or activate.
 - T4-JEV-001: Integrate jev rerank into harvest pipeline (WF-002) for candidate classification. (Wired: post-filter in deepen_harvest.py + jev_classify.py; tested on new harvests)
 - T4-JEV-002: Update quarantine/settle to use jev scores for quality gates (AC-JEV-*). (Deepened: jev_relevance + suggested_settle in quarantine rows; new settle.py for jev-rerank proposals on cleaned/atoms; wired into deepen_harvest.py post-filter; docs updated; custom validation only. AC-JEV-SETTLE-001 advanced.)
 - T4-JEV-003: Run periodic jev-classified harvests to maintain >3000 high-quality PD atoms. (FINAL targeted round: andes_amazon + folk_magic_pd boosted; all 6 candidates passed jev; now min 5, 0 at 4, 3 <5; total 3133; jev rerank only. COMPLETE for this phase.)
-- T4-JEV-004: Add jev usage to doctor output and receipts for harvest provenance. (Next)
+- T4-JEV-004: Add jev usage to doctor output and receipts for harvest provenance. (Next; AC-JEV-DOCTOR-001, AC-RECEIPT-001 started in catalog)
 - Add mermaid diagrams to architecture.md.
 - Cross-link more DEC/C items.
 

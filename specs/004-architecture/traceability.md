@@ -21,8 +21,15 @@
 ||| AC-SIGN-001 | Valid synthetic signature verifies; altered rejects | signed-approval-workflow | - | test_admission_approval.py | Shipped |
 ||| AC-JEV-001 | All corpus classifying tasks route through jev rerank for quality decisions | WF-013 | AC-JEV-001 | jev rerank (analysis), future in quarantine/admission | PARTIAL (analysis only 2026-09-22) |
 ||| AC-JEV-HARVEST-001 | Harvest candidates classified with jev before add | WF-002 | AC-JEV-HARVEST-001 | this session jev + corpus update | ADDRESSED 2026-09-23 |
-||| AC-JEV-SETTLE-001 | Settle uses jev quality + provenance | WF-004 | AC-JEV-SETTLE-001 | quarantine + jev | PARTIAL |
-||| AC-013 | >3000 high-quality PD rows with jev metrics | WF-002, WF-005 | AC-013 | doctor + report | ADDRESSED 2026-09-23 |
+|||| AC-JEV-SETTLE-001 | Settle uses jev quality + provenance | WF-004 | AC-JEV-SETTLE-001 | quarantine + jev | PARTIAL |
+|||| AC-JEV-QUARANTINE-001 | Quarantine emits jev_relevance + suggested_settle | WF-013 | AC-JEV-QUARANTINE-001 | test_quarantine + quarantine.py | ADDRESSED (deepened 2026) |
+|||| AC-JEV-SETTLE-002 | settle.py jev-rerank proposals | WF-004 | AC-JEV-SETTLE-002 | settle.py + deepen_harvest | ADDRESSED (deepened 2026) |
+|||| AC-JEV-DOCTOR-001 | Doctor reports jev_quarantine + balance | WF-003 | AC-JEV-DOCTOR-001 | entrypoint doctor | ADDRESSED (deepened 2026) |
+|||| AC-BALANCE-001 | No family 0; min >=5 after jev | WF-002, WF-005 | AC-BALANCE-001 | doctor + corpus | ADDRESSED (3133, min 5) |
+|||| AC-SETTLE-001 | Settle proposals with jev + reason; operator only | WF-004 | AC-SETTLE-001 | settle.py, docs/settle | ADDRESSED (deepened) |
+|||| AC-QUALITY-001 | Full provenance + jev for added atoms | WF-002 | AC-QUALITY-001 | quarantine + settle | ADDRESSED |
+|||| AC-RECEIPT-001 | Receipts with jev scores/proposals | WF-002/004/003 | AC-RECEIPT-001 | deepen + settle + retrieve | PARTIAL |
+|||| AC-013 | >3000 high-quality PD rows with jev metrics | WF-002, WF-005 | AC-013 | doctor + report | ADDRESSED 2026-09-23 (3133) |
 ||| AC-SIGN-002 | Signed admission rejects altered scopes | WF-016 | AC-SIGN-002 | test_admission_approval.py | Shipped |
 ||| JRN-003 | Dataset reviewer needs reproducible eligible slice | WF-005 | - | adapter_freeze + readiness | Gated prep |
 ||| JRN-005 | Reviewer/operator prepares a public artifact | WF-006, WF-009, WF-010 | - | sanitize + receipts | Gated |

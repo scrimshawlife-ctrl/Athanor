@@ -1,6 +1,6 @@
 # Acceptance Catalog — Package 4 (Skeleton)
 
-Status: Core global catalog expanded (includes jev harvest/settle ACs). Workflow-local ACs from prior specs incorporated. This does not govern or activate.
+Status: Expanded with jev quarantine/settle/doctor/balance ACs (AC-JEV-QUARANTINE-001, AC-JEV-SETTLE-002, AC-JEV-DOCTOR-001, AC-BALANCE-001, AC-SETTLE-001, AC-QUALITY-001, AC-RECEIPT-001). 3133 atoms, min 5. Core global + jev focus. This does not govern or activate.
 
 ## Global ACs (examples, to be expanded)
 
@@ -18,8 +18,15 @@ Status: Core global catalog expanded (includes jev harvest/settle ACs). Workflow
 ||| AC-JEV-001 | All corpus classifying tasks (settle, quarantine, epistemic/family/gold balance, data quality) route through jev rerank (or equivalent) for evidence-bound decisions; custom logic only for validation | WF-013 (quarantine/settle) | jev rerank runs + tests (analysis 2026-09-22); future integration |
 ||| AC-JEV-HARVEST-001 | All new harvest candidates classified with jev rerank before quarantine; only HIGH relevance PD-primary chunks added as OBSERVED atoms | WF-002 | jev rerank + corpus doctor (this session) |
 |||| AC-JEV-SETTLE-001 | Settle decisions use jev-classified quality scores + provenance; HOLD for low relevance or disputed PD. Quarantine emits jev_relevance + suggested_settle; settle.py provides jev-rerank proposals. | WF-004 | quarantine rows, settle.py, deepen_harvest integration (2026) |
-||| AC-013 | Corpus size and quality tracked with jev-classified metrics; >3000 high-quality PD rows maintained | WF-002, WF-005 | doctor + ANALYSIS_REPORT |
-||| AC-SIGN-002 | Signed admission rejects altered or untrusted scopes | WF-016 | test_admission_approval.py |
+|||| AC-JEV-QUARANTINE-001 | Quarantine classify() emits jev_relevance (from rerank) and suggested_settle (KEEP/HOLD/REVIEW); custom cues for validation only. | WF-013 | test_quarantine.py + quarantine.py |
+|||| AC-JEV-SETTLE-002 | settle.py consumes quarantine output / atoms, runs jev rerank, emits proposals with decision + reason + score. | WF-004 | settle.py + doctor |
+|||| AC-JEV-DOCTOR-001 | Doctor reports jev_classify, jev_quarantine (including suggested_settle), corpus metrics, balance. | WF-003 | entrypoint.py doctor + tests |
+|||| AC-BALANCE-001 | After jev rounds: no family at 0; minimum family size >=5; all 30 families represented; tracked in doctor. | WF-002, WF-005 | doctor + corpus balance checks (3133 atoms, min 5) |
+|||| AC-SETTLE-001 | Settle proposals (from settle.py or quarantine) include jev_relevance, suggested_settle, reason; operator review only (no auto-apply). | WF-004 | settle.py, docs/settle/README.md |
+|||| AC-QUALITY-001 | Every added atom has full provenance (source_url, content_hash), lens_hints, epistemic OBSERVED, PD license; jev-classified. | WF-002 | quarantine + settle + corpus |
+|||| AC-RECEIPT-001 | Major operations (harvest, settle, retrieve) produce receipts with jev scores / proposals where applicable. | WF-002, WF-004, WF-003 | deepen_harvest + settle.py + retrieve |
+|||| AC-013 | Corpus size and quality tracked with jev-classified metrics; >3000 high-quality PD rows maintained (3133, min 5, 0 at 4) | WF-002, WF-005 | doctor + ANALYSIS_REPORT |
+|||| AC-SIGN-002 | Signed admission rejects altered or untrusted scopes | WF-016 | test_admission_approval.py |
 
 ## Production Verification Targets
 - Receipts for every major operation (harvest, settle, retrieve, future train).
