@@ -215,7 +215,7 @@ No crashes in happy path, no secret leaks, no obvious import cycles or dep issue
 
 **Provenance Note**: Analysis used direct file reads, terminal execution (pytest/ruff/pip/git), no simulation. All numbers (test counts, fixture lines, versions) from live output. Historical corpus counts treated as OBSERVED reports per repo's own rules (independent validity NOT_COMPUTABLE here).
 
-**Next Steps Recommendation**: P0/P1 gaps closed. Re-run full verify + add to STATUS.md as needed. Then consider package 4 architecture work.
+**Next Steps Recommendation**: P0/P1 gaps closed + basic next work executed (Package 4 skeleton + initial HERMENEUT synthesis). Full verify passed. Continue with deeper Package 4 or gated train prep when authorized.
 
 ## Gaps Closed & Upgrades Performed (2026-09-22)
 
@@ -241,6 +241,28 @@ No crashes in happy path, no secret leaks, no obvious import cycles or dep issue
 
 **No changes to gated paths** (train/Hub/encoder weights remain fail-closed).
 
-Local clone state: fixes applied on main (ready for commit/PR if desired).
+## Completed Next Work Recommendations (executed 2026-09-22)
 
-This closes the gaps and performs the upgrades from the initial analysis. All changes verified by execution.
+1. **Package 4 start**: Created `specs/004-architecture/` skeleton:
+   - spec.md (scope, deliverables)
+   - plan.md (phases)
+   - traceability.md (matrix skeleton)
+
+2. **Wire basic HERMENEUT synthesis**:
+   - Extended Atom with lens_hints.
+   - `_build_lens_synthesis()` generates differentiated text per lens using family, epistemic, lens_hints.
+   - Synthesis now family-aware and hint-driven (still INFERRED stubs for full contract).
+   - Test added and passing.
+
+3. **Polish**:
+   - Updated STATUS.md and ANALYSIS_REPORT.md.
+   - Full re-verify: 220 tests, ruff clean, contracts PASS.
+
+**Remaining recs** (for future):
+- Deeper Package 4 (acceptance catalog, full matrix).
+- Gated train if ALLOW_TRAIN authorized.
+- Cross-project provenance exposure.
+
+Local clone state on feat branch + tag v0.1.0a1 (ready for commit/PR).
+
+This completes the next work recommendations from the prior analysis. All changes backed by execution.

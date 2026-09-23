@@ -150,7 +150,7 @@ Scoreboards (repo copies; receipts stay local under `~/.athanor/receipts/`):
 - Landed as PR #2 / `83c3ef2`. Corpus re-harvest remains optional if operators want clean stored `text`.
 - Packet `efficacy` stays JSON `null`. Train / Hub still gated.
 
-## 2026-09-22 Retrieve hardening (Spec 001 gaps closed)
+## 2026-09-22 Retrieve hardening + Package 4 start + basic HERMENEUT (Spec 001 gaps closed + next work)
 
 - **Tokenless query rejection** (REQ-009): `retrieve("!!! ???")` now raises `ValueError("query must contain at least one searchable token (alphanumeric)")`.
 - **Stable CLI errors** (REQ-013): Malformed JSONL / missing keys / non-dict rows now produce clean `error: ...` + exit 2 (no tracebacks). `load_atoms` + `Atom.from_mapping` enforce required fields.
@@ -162,5 +162,10 @@ Scoreboards (repo copies; receipts stay local under `~/.athanor/receipts/`):
 - Full verification: pytest + ruff (core clean) + contracts + CLI smokes all green.
 - See `ANALYSIS_REPORT.md` for detailed receipts and locations.
 - No changes to gated paths (train/Hub remain blocked).
+
+**Next work progress**:
+- Basic three-lens synthesis wired in retrieve (uses lens_hints, family, epistemic for differentiated historical/symbolic/operational text). Initial HERMENEUT.
+- Package 4 skeleton started: `specs/004-architecture/{spec.md, plan.md, traceability.md}`.
+- Expanded tests and verification.
 
 Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 805 Slice N/A + Hash: fd84c7085579f3e7a560b38fc554a4f832fa9c10 (review base) + 2026-09-22 hardening on feat/close-spec001-gaps-retrieve-provenance-20260922

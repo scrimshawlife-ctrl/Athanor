@@ -102,6 +102,20 @@ def test_athanor_corpus_env(monkeypatch):
     assert packet["receipts"]
 
 
+def test_three_lens_synthesis_differentiated(monkeypatch):
+    """Basic HERMENEUT wiring test: synthesis uses lens_hints/family for differentiation."""
+    monkeypatch.setenv("ATHANOR_CORPUS", str(SEED))
+    packet = retrieve("Enochian Calls", k=1)
+    synth = packet["synthesis"]
+    assert "historical" in synth
+    assert "symbolic" in synth
+    assert "operational" in synth
+    # Should contain family-specific or hint-driven text, not pure stub
+    hist = synth["historical"]["text"]
+    assert "enochian" in hist.lower() or "Retrieved from" in hist
+    assert synth["historical"]["epistemic"] == "INFERRED"
+
+
 def test_tokenless_query_rejected(monkeypatch):
     monkeypatch.setenv("ATHANOR_CORPUS", str(SEED))
     # Pure punctuation (has length but no tokens)

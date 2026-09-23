@@ -15,7 +15,7 @@ import os
 import re
 from collections import Counter
 from collections.abc import Iterable, Mapping, Sequence
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
@@ -58,6 +58,7 @@ class Atom:
     tokens: tuple[str, ...]
     source_url: str | None = None
     content_hash: str | None = None
+    lens_hints: dict = field(default_factory=dict)  # from atom data for three-lens differentiation
 
     @classmethod
     def from_mapping(cls, raw: Mapping[str, Any]) -> Atom:
@@ -67,6 +68,9 @@ class Atom:
             raise ValueError("missing required field 'atom_id'")
         if "family_id" not in raw or not raw.get("family_id"):
             raise ValueError("missing required field 'family_id'")
+        hints = raw.get("lens_hints") or {}
+        if not isinstance(hints, dict):
+            hints = {}
         return cls(
             atom_id=str(raw["atom_id"]),
             family_id=str(raw["family_id"]),
@@ -76,6 +80,7 @@ class Atom:
             tokens=tuple(tokenize(text)),
             source_url=raw.get("source_url"),
             content_hash=raw.get("content_hash"),
+            lens_hints=hints,
         )
 
 
@@ -198,6 +203,45 @@ def rank_atoms(
     return ranked[:k]
 
 
+def _build_lens_synthesis(atom: Atom, query: str) -> dict[str, dict[str, str]]:
+    """Basic three-lens synthesis using atom data (initial HERMENEUT wiring).
+    Uses lens_hints, epistemic, family_id and query for differentiated text.
+    Still INFERRED by design until full HERMENEUT contract.
+    """
+    base_epistemic = atom.epistemic or "INFERRED"
+    family = atom.family_id
+    hints = atom.lens_hints or {}
+
+    historical_text = (
+        f"Retrieved from {family} tradition. "
+        f"Reflects documented witnesses; dating and attribution per source metadata. "
+        f"Epistemic: {base_epistemic}."
+    )
+    if hints.get("historical"):
+        historical_text = f"Historical lens prioritized per source hints. {historical_text}"
+
+    symbolic_text = (
+        f"Lexical match for '{query[:50]}' in {family}. "
+        f"Symbolic readings are interpretive overlays on the cited text."
+    )
+    if hints.get("symbolic"):
+        symbolic_text = f"Symbolic lens active per source. {symbolic_text}"
+
+    operational_text = (
+        "Returns historical/textual context only — "
+        "no practice instructions, efficacy scores, or summon UX. "
+        f"Operational structure from {family} records."
+    )
+    if hints.get("operational"):
+        operational_text = f"Operational arrangement noted in source. {operational_text}"
+
+    return {
+        "historical": {"text": historical_text, "epistemic": "INFERRED"},
+        "symbolic": {"text": symbolic_text, "epistemic": "INFERRED"},
+        "operational": {"text": operational_text, "epistemic": "INFERRED"},
+    }
+
+
 def build_packet(
     query: str,
     ranked: Iterable[tuple[Atom, float]],
@@ -206,6 +250,8 @@ def build_packet(
 ) -> dict[str, Any]:
     tokens = list(query_tokens) if query_tokens is not None else tokenize(query)
     hits: list[dict[str, Any]] = []
+    synthesis = None  # per-packet or first-hit based for now
+
     for atom, _score in ranked:
         hit = {
             "atom_id": atom.atom_id,
@@ -219,6 +265,15 @@ def build_packet(
         if atom.content_hash:
             hit["content_hash"] = atom.content_hash
         hits.append(hit)
+        if synthesis is None:
+            synthesis = _build_lens_synthesis(atom, query)
+
+    if synthesis is None:
+        synthesis = {
+            "historical": dict(_SYNTHESIS_STUBS["historical"]),
+            "symbolic": dict(_SYNTHESIS_STUBS["symbolic"]),
+            "operational": dict(_SYNTHESIS_STUBS["operational"]),
+        }
 
     # Minimal receipt for provenance (closes deviation; can be extended by callers)
     receipts = [{"type": "lexical-retrieve", "epistemic": "INFERRED"}]
@@ -226,11 +281,7 @@ def build_packet(
     return {
         "query": query,
         "hits": hits,
-        "synthesis": {
-            "historical": dict(_SYNTHESIS_STUBS["historical"]),
-            "symbolic": dict(_SYNTHESIS_STUBS["symbolic"]),
-            "operational": dict(_SYNTHESIS_STUBS["operational"]),
-        },
+        "synthesis": synthesis,
         "efficacy": None,
         "epistemic": "INFERRED",
         "receipts": receipts,
