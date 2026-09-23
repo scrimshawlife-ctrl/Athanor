@@ -8,6 +8,7 @@ import io
 import json
 import os
 import re
+import subprocess
 import unicodedata
 import zipfile
 import zlib
@@ -55,6 +56,35 @@ CUES = {
  'theosophy_pd': ['theosoph', 'blavatsky', 'isis unveiled', 'secret doctrine'],
  'veda_upanishad_pd': ['upanishad', 'vedanta', 'brahmana', 'atman', 'rig-veda'],
 }
+
+
+def _jev_relevance(text: str, family: str) -> float | None:
+    """Optional jev rerank relevance score for T4-JEV-002.
+    Returns relevance if jev available and succeeds, else None.
+    Used for evidence-bound quality gates in quarantine/settle.
+    """
+    try:
+        query = "High quality primary PD historical mystical text atom: clean provenance, relevant family, no junk, OBSERVED suitable."
+        payload = {
+            "query": query,
+            "candidates": [{"id": "q", "text": text + " family:" + family}],
+            "top_k": 1,
+        }
+        proc = subprocess.run(
+            ["jev", "rerank"],
+            input=json.dumps(payload),
+            capture_output=True,
+            text=True,
+            timeout=15,
+        )
+        if proc.returncode == 0:
+            result = json.loads(proc.stdout)
+            scores = result.get("scores", {})
+            rel = scores.get("q", {}).get("relevance", 0.0)
+            return float(rel) if rel is not None else None
+    except Exception:
+        pass  # jev not available or failed; custom cues remain for validation
+    return None
 
 
 def sha(raw):
@@ -141,9 +171,12 @@ def classify(text, atom):
         route = 'BODY_LABEL_REVIEW'
     else:
         route = 'BODY_CANDIDATE'
+
+    # T4-JEV-002: jev rerank score for evidence-bound gates (optional, falls back to None)
+    jev_relevance = _jev_relevance(text, atom.get('family_id', ''))
     return {'route': route, 'proposed_family': proposed, 'label_evidence': evidence,
             'classification_status': 'INFERRED' if proposed != 'NOT_COMPUTABLE' else 'NOT_COMPUTABLE',
-            'flags': flags, 'word_count': nwords}
+            'flags': flags, 'word_count': nwords, 'jev_relevance': jev_relevance}
 
 
 def build(parent, pack):
@@ -246,11 +279,13 @@ def build(parent, pack):
                'removed_lines': sum(len(r['removed_lines']) for r in rows),
                'routes': dict(sorted(Counter(r['route'] for r in rows).items())),
                'proposed_families': dict(sorted(Counter(r['proposed_family'] for r in rows).items())),
+               'jev_relevance_available': sum(1 for r in rows if r.get('jev_relevance') is not None),
                'duplicate_affected_quarantine_rows': sum(bool(r['exact_duplicate_members']) for r in rows),
                'limitations': ['Rule-based provisional classification, not exhaustive semantic review.',
                    'No human approval, rights clearance or automatic gold promotion.',
                    'Exact normalized duplicates only; near-duplicate and complete work grouping pending.',
-                   'BODY_CANDIDATE is a review queue, not training eligibility.']}
+                   'BODY_CANDIDATE is a review queue, not training eligibility.',
+                   'jev_relevance (T4-JEV-002) optional; custom cues for validation only.']}
     return rows, summary
 
 
