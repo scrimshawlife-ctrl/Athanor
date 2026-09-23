@@ -9,8 +9,16 @@
 | REQ-012 | Genuine historical quotes, decline efficacy | WF-003 | AC-003, AC-009 | retrieve.py (synthesis), constitution | PARTIAL (stubs + design) |
 | REQ-013 | Stable CLI errors for malformed | WF-003 | AC-003 | entrypoint.py, retrieve.py | ADDRESSED 2026-09-22 |
 | WF-003 | Offline historical retrieval | - | AC-003 | src/athanor/retrieve.py + tests | LIVE + hardened |
-| WF-001 | Source/license review | 000 | - | scripts + quarantine | Historical |
-| ... | Full matrix expansion in Package 4 | ... | ... | ... | TODO |
+| WF-001 | Source/license review | 000 | AC-001 | scripts + quarantine + admission | Historical |
+| WF-002 | Harvest and normalize | 000 | AC-002 | scripts/shadow + quarantine | Historical |
+| WF-004 | Review and apply settlement | 002 | - | apply_gold_p3a.py | Historical (P3a) |
+| WF-005 | Freeze dataset and splits | 002 | - | adapter_freeze.py | Gated prep |
+| WF-011 | Family registry proposal/review | 000 | AC-011 | registry/ + scripts | Historical |
+| JRN-001 | Researcher wants historical context with checkable citations | WF-003 | - | retrieve packet + provenance | ADDRESSED (basic) |
+| JRN-002 | Curator wants questionable source handled responsibly | WF-001,002,004 | - | quarantine + settle | Historical |
+| AC-003 | Tokenless/malformed handling + lenses + provenance | REQ-009/011/013, WF-003 | - | retrieve + tests + entrypoint | ADDRESSED 2026-09-22 |
+| AC-001 / AC-002 | Harvest and source review invariants | WF-001/002 | - | quarantine + scripts | Historical |
+| ... | Full matrix expansion in Package 4 (pull all REQ/JRN/WF/AC from 000-003) | ... | ... | ... | TODO |
 
 See contracts/README.md, workflows/README.md, 001/requirements.md, and state-machines.md for base definitions.
 

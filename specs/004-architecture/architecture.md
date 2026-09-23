@@ -31,6 +31,19 @@ Verification / Receipts / Audits
   - out/audit/
 ```
 
+### Mermaid Diagram (Package 4 draft)
+```mermaid
+graph TD
+    A[Operator / Scripts] --> B[Harvest WF-001/002]
+    B --> C[Settle / Gold WF-004]
+    C --> D[Retrieve WF-003<br/>live + provenance + 3-lens]
+    D --> E[Verification & Receipts]
+    F[Gated Encoder Prep] -.->|ALLOW_TRAIN| D
+    G[Package 4 Architecture] --> H[Acceptance Catalog]
+    G --> I[Traceability Matrix]
+    G --> J[Tasks Decomposition]
+```
+
 ## Components
 - **Core (shipped)**: src/athanor/{retrieve,chrome,entrypoint}.py
 - **Data Model**: Atom (now with source_url, content_hash, lens_hints)

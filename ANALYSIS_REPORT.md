@@ -259,7 +259,7 @@ No crashes in happy path, no secret leaks, no obvious import cycles or dep issue
    - Full re-verify: 220 tests, ruff clean, contracts PASS.
 
 **Remaining recs** (for future):
-- Deeper Package 4 (acceptance catalog, full matrix).
+- Deeper Package 4 (full matrix population, more diagrams, complete AC coverage).
 - Gated train if ALLOW_TRAIN authorized.
 - Cross-project provenance exposure.
 

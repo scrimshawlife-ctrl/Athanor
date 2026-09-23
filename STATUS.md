@@ -166,7 +166,7 @@ Scoreboards (repo copies; receipts stay local under `~/.athanor/receipts/`):
 **Next work progress**:
 - Basic three-lens synthesis wired in retrieve (uses lens_hints, family, epistemic for differentiated historical/symbolic/operational text). Initial HERMENEUT.
 - Package 4 significantly deepened:
-  - `specs/004-architecture/` now includes: spec.md, plan.md, architecture.md (draft layers), acceptance-catalog.md, traceability.md (expanded with real REQ-008..013 + WF examples).
+  - `specs/004-architecture/` now includes: spec.md, plan.md, architecture.md (with mermaid diagram), acceptance-catalog.md, traceability.md (expanded with REQ/JRN/WF/AC entries), tasks.md (decomposition skeleton).
 - 220 tests passing.
 - Full re-verify green.
 

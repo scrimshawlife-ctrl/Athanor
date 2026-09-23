@@ -29,6 +29,7 @@ Current artifacts in this dir:
 - architecture.md (draft)
 - acceptance-catalog.md (skeleton)
 - traceability.md (populated examples)
+- tasks.md (decomposition skeleton)
 
 ## Current State (OBSERVED)
 - Retrieve (Spec 001) live with recent hardening (tokenless rejection, provenance, clean errors).

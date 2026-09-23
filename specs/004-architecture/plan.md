@@ -7,7 +7,7 @@ Status: Skeleton. Advisory.
 2. Define global architecture (layers: harvest, settle, retrieve, (encoder gated), verification). → architecture.md
 3. Acceptance catalog (expand workflow-local ACs to system level). → acceptance-catalog.md
 4. Traceability matrix (link REQ → WF → AC → code/tests). → traceability.md
-5. Task decomposition (U* items for remaining).
+5. Task decomposition (U* items for remaining). → tasks.md
 6. Verification strategy (receipts, audits, HERMENEUT integration).
 
 ## Dependencies
