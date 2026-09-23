@@ -225,3 +225,5 @@
 {"neg_id": "neg.politics.07", "theme": "news_politics", "text": "Elections determine leadership and policy directions in democracies.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.food.06", "theme": "product_food", "text": "Organic farming practices reduce chemical use in food production.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.auto.11", "theme": "news_auto", "text": "Autonomous vehicles are being tested for safety and efficiency.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.ent.05", "theme": "news_ent", "text": "Streaming services dominate home entertainment consumption.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.retail.04", "theme": "product_retail", "text": "E-commerce platforms offer wide selection and fast delivery.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
