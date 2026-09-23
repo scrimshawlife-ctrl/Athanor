@@ -335,3 +335,8 @@
 {"neg_id": "neg.science.02", "theme": "science", "text": "The experiment confirmed the hypothesis about particle behavior.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.law.02", "theme": "law", "text": "The new legislation aims to protect consumer rights online.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.art.02", "theme": "art", "text": "The museum opened an exhibit on modern abstract art.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.business.02", "theme": "business", "text": "The company announced record profits after expanding into new markets.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.education.02", "theme": "education", "text": "The school district implemented new technology in all classrooms.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.law.03", "theme": "law", "text": "The supreme court issued a ruling on digital privacy rights.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.science.03", "theme": "science", "text": "Astronomers discovered a new exoplanet with potential for life.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.tech.03", "theme": "tech", "text": "The software update introduced advanced AI features for users.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}

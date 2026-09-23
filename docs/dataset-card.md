@@ -176,3 +176,11 @@ Updated continue: Pairs 1342, Negs 307, Min pair 14, Lowest [('history_magic', 1
 - Total pairs 1433
 - Doctor and card updated
 
+
+## Astrology West fresh sources
+- Ptolemy's Tetrabiblos (gutenberg 70850): 522k chars, 527 cands extracted, jev 0.5=0 high (quality hold)
+- Pair expansion: +5 pairs for astrology_west (using existing long atoms) to 26
+- +5 negs to 342
+- Min 21
+- Total pairs 1438
+
