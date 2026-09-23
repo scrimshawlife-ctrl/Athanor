@@ -295,7 +295,7 @@ This completes the next work recommendations from the prior analysis. All change
 - Query: "Classify data quality... provenance completeness, valid epistemic, PD license, family balance, tier HIGH/MEDIUM/LOW... flag risks"
 - 2026-09-23 continue: Wired jev_classify into deepen_harvest.py (post-filter step); added 5 jev-high atoms for astrology_west / neoplatonism / runes_eddic; corpus 3023; doctor now reports jev_classify availability.
 - Additional rounds: Multiple jev-classified harvests targeting ALL zero/low families.
-- Deeper balance rounds continue: Boosted grimoire_other, neoplatonism, mystery_cults, mesopotamia, coptic_gnostic, hebrew_bible_magical, islamic_occult_pd, jyotish_anchors, veda_upanishad_pd, tantra_hist_pd, golden_dawn_hist etc. Now min 4, only 6 families at 4, 9 <5. Total 3123. All via jev rerank.
+- Deeper balance rounds continue: Boosted grimoire_other, neoplatonism, mystery_cults, mesopotamia, coptic, hebrew, islamic, jyotish, veda, tantra, golden_dawn, astrology_west, mesoamerica, theosophy, chaos etc. Now min 4, only 2 families at 4, 5 <5. Total 3127. All via jev rerank.
 - Results (ranked by relevance, answerable 0.92-0.94):
   1. schema-quality (0.94): Defines strict required fields + lens_hints. HIGH signal for quality gates.
   2. sample1 (enochian call, OBSERVED) (0.93): Complete source_url + content_hash, valid epistemic, CC0.

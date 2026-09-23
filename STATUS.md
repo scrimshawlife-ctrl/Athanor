@@ -18,7 +18,7 @@ This does not govern or activate. Earlier dated entries remain historical; the c
 | Package | `athanor` CLI `doctor` / `retrieve` / `--version` |
 | CI | `.github/workflows/validate.yml` — local ruff+pytest is the bar; Actions may fail on account billing |
 | Harvest | Wave 0–1 + A–E + F fill3000 · Crawl4AI 0.9.3 · P3a gold sealed |
-| Local SoT | `~/.athanor/corpus/atoms.jsonl` — **3123** high-quality PD atoms (OBSERVED after jev+research classification; deeper balance rounds: boosted grimoire_other, neoplatonism, mystery_cults, mesopotamia, coptic_gnostic, hebrew, islamic, jyotish, veda, tantra, golden_dawn etc.; now min 4, only 6 families at 4, 9 <5; jev_classify wired; NO family at 0; full Package 4 core complete; >3000 rows) |
+| Local SoT | `~/.athanor/corpus/atoms.jsonl` — **3127** high-quality PD atoms (OBSERVED after jev+research classification; deeper balance rounds: boosted grimoire_other, neoplatonism, mystery_cults, mesopotamia, coptic, hebrew, islamic, jyotish, veda, tantra, golden_dawn, astrology_west, mesoamerica, theosophy, chaos etc.; now min 4, only 2 families at 4, 5 <5; jev_classify wired; NO family at 0; full Package 4 core complete; >3000 rows) |
 | Hub / train | Blocked · Spec 002 P3a specify exit sealed; Aaron pack local-only |
 
 ## Wave 0 harvest (OBSERVED 2026-09-10 PT)
