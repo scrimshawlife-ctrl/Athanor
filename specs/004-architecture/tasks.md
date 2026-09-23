@@ -14,7 +14,7 @@ Status: Initial decomposition. This does not govern or activate.
 - **Core Package 4 complete** (traceability full, acceptance expanded, jev ACs added, docs polished).
 - T4-JEV-001: Integrate jev rerank into harvest pipeline (WF-002) for candidate classification. (Wired: post-filter in deepen_harvest.py + jev_classify.py; tested on new harvests)
 - T4-JEV-002: Update quarantine/settle to use jev scores for quality gates (AC-JEV-*). (Next)
-- T4-JEV-003: Run periodic jev-classified harvests to maintain >3000 high-quality PD atoms. (Deeper balance continue: boosted jyotish_anchors to 4+, alchemy_spirit, solomonic, grimoire_other, astrology_west etc.; now min 4, 3 families <5, no families at 3; total 3110; jev rerank only)
+- T4-JEV-003: Run periodic jev-classified harvests to maintain >3000 high-quality PD atoms. (Deeper balance continue: boosted jyotish_anchors to 4+, alchemy_spirit, solomonic, grimoire_other, astrology_west etc.; now min 4, 17 families at 4, no families at 3; total 3111; jev rerank only)
 - T4-JEV-004: Add jev usage to doctor output and receipts for harvest provenance. (Next)
 - Add mermaid diagrams to architecture.md.
 - Cross-link more DEC/C items.
