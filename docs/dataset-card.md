@@ -112,3 +112,12 @@ Negatives: 302=== Option 3: Harness/Doctor Enhancements ===
 
 
 Updated continue: Pairs 1342, Negs 307, Min pair 14, Lowest [('history_magic', 14), ('mesoamerica', 15), ('mesopotamia', 16), ('shinto_onmyodo', 16)]
+
+## Continue update
+- Boosted pairs for history_magic (to 17), mesoamerica (18), mesopotamia (18), shinto (18)
+- Min pair fam now 17
+- Lowest at 17: grimoire_other, golden_dawn_hist, andes_amazon, astrology_west, chaos_spare_hist
+- +5 negs to 312
+- New source attempt for history_magic (Levi History of Magic) - jev 0 hold
+- Total pairs 1352
+

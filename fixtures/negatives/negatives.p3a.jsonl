@@ -305,3 +305,8 @@
 {"neg_id": "neg.science.01", "theme": "science", "text": "Researchers discovered a new exoplanet in the habitable zone using the latest telescope array.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.sports.01", "theme": "sports", "text": "The home team clinched the championship with a dramatic last second play.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.finance.01", "theme": "finance", "text": "Stock markets rose sharply following the positive earnings reports from major tech companies.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.literature.01", "theme": "literature", "text": "The novel explored themes of identity and belonging in a rapidly changing world.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.environment.01", "theme": "environment", "text": "Climate scientists reported record temperatures and melting ice caps this year.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.health.01", "theme": "health", "text": "The study showed significant benefits from regular exercise and balanced diet.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.travel.01", "theme": "travel", "text": "The new high-speed rail line reduced travel time between cities by half.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.food.01", "theme": "food", "text": "The recipe called for fresh herbs and a slow simmer to develop deep flavors.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
