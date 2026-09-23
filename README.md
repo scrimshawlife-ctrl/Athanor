@@ -45,7 +45,7 @@ Snapshot for operators. Full receipts live in [`STATUS.md`](STATUS.md).
 || Spec Kit spine (000) | Sealed |
 || Spec 001 retrieve | Live on main · T5 chrome strip landed |
 || Spec 002 encoder | **P3a specify exit sealed** · implement/train still gated |
-|| Local SoT | `~/.athanor/corpus/atoms.jsonl` — **3164** atoms (jev-classified PD, min 5, 15 families at 5) |
+|| Local SoT | `~/.athanor/corpus/atoms.jsonl` — **3168** atoms (jev-classified PD, min 5, 15 families at 5) |
 || Quality | All classifying via jev rerank; `docs/dataset-card.md` (7.8/10 best-practices); gold fixtures 70 pairs / 84 negatives |
 || P3a remainder | **70** correspondence pairs · **84** negatives · **55** dual-use |
 || Package 4 | Core complete (24 ACs, full traceability, jev settle/quarantine/doctor) |
