@@ -176,3 +176,9 @@
 {"neg_id": "neg.law.06", "theme": "news_law", "text": "Legislators debate new regulations for artificial intelligence development.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.climate.06", "theme": "news_climate", "text": "Scientists report record temperatures and extreme weather patterns worldwide.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.education.06", "theme": "slop_edu", "text": "Schools implement new curricula focusing on critical thinking and digital literacy.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.sports.07", "theme": "sports", "text": "Teams compete in professional leagues with updated rules and technology.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.tech.06", "theme": "product_tech", "text": "Cloud computing providers expand data center infrastructure globally.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.entertainment.07", "theme": "entertainment", "text": "Music festivals return with diverse lineups and large audiences.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.science.07", "theme": "news_science", "text": "Physicists test theories with particle accelerators and observatories.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.finance.08", "theme": "news_finance", "text": "Cryptocurrency markets fluctuate with regulatory announcements.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.health.07", "theme": "news_health", "text": "Healthcare systems adopt electronic records for better patient outcomes.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
