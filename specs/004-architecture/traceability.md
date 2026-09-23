@@ -31,8 +31,28 @@
 ||| WF-006 | Sanitize export | 002 | AC for export | scripts | Gated prep |
 ||| WF-016 | Signed admission-scope verification | 000 | AC-SIGN-00x | signed-approval-workflow.md | Shipped |
 ||| WF-013 | Source-bound instruction candidate preparation | 003 | - | 003-qwen-adapter | Gated |
-|| JRN-004 | Training operator bounded experimental run | WF-007/008/009 | - | adapter_* + contracts | Gated |
-|| ... | Full matrix expansion in Package 4 (pull all REQ/JRN/WF/AC from 000-003 + root) | ... | ... | ... | TODO |
+||| JRN-004 | Training operator bounded experimental run | WF-007/008/009 | - | adapter_* + contracts | Gated |
+||| JRN-005 | Reviewer/operator prepares a public artifact | WF-006, WF-009, WF-010 | - | sanitize + receipts | Gated |
+||| JRN-006 | Maintainer/recipient needs a controlled extension or handoff | WF-011, WF-012 | - | registry + pack | Gated |
+||| JRN-007 | Qwen adapter prep and eval | WF-013-015 | - | 003 workflows | Gated (Spec 003) |
+||| WF-006 | Sanitize export | 002 | AC for export | scripts | Gated prep |
+||| WF-007 | Synthetic encoder tooling check | 002 | - | adapter_* | Gated |
+||| WF-008 | Authorized training | 002 | - | adapter_* | Gated |
+||| WF-009 | Evaluate exact artifacts | 002 | - | adapter_* + contracts | Gated |
+||| WF-010 | Reviewed publication | 002 | - | 002 workflows | Gated |
+||| WF-011 | Family registry proposal/review | 000 | AC-011 | registry/ + scripts | Historical |
+||| WF-012 | Offline verification and handoff | 002 | - | 002 workflows | Gated |
+||| WF-013 | Source-bound instruction candidate preparation and review | 003 | - | 003-qwen-adapter | Gated |
+||| WF-014 | Qwen adapter tooling preflight and approved pilot | 003 | - | 003 workflows | Gated |
+||| WF-015 | Paired base/adapter evaluation with identical retrieval | 003 | - | 003 workflows | Gated |
+||| WF-016 | Signed admission-scope verification | 000 | AC-SIGN-00x | signed-approval-workflow.md | Shipped |
+||| DEC-001 | Existing 400 GOLD rows reviewed label decisions? | - | - | decisions.md | NOT_COMPUTABLE |
+||| DEC-005 | Duplicate-work grouping and split ratios approved? | WF-005 | AC-013 | decisions.md | Historical |
+||| DEC-006 | Metric support minima and uncertainty reporting? | - | - | decisions.md | Historical |
+||| C-001 | Immutable raw-source blobs and versioned atom envelope | 000 | - | contracts/README.md + data-model | Historical |
+||| C-003 | Hash semantics for source-byte and normalized-text | 000 | - | contracts | Historical |
+||| AC-JEV-HARVEST-001 | Harvest candidates classified with jev before add (Arbatel, Grimoire, etc. added) | WF-002 | AC-JEV-HARVEST-001 | this session jev + corpus update | ADDRESSED 2026-09-23 |
+||| ... | Full matrix populated from 000-003 + journeys + workflows + decisions + contracts (core + jev harvest focus); additional in contracts/decisions.md | ... | ... | ... | Populated (2026-09-23) |
 
 See contracts/README.md, workflows/README.md, 001/requirements.md, and state-machines.md for base definitions.
 

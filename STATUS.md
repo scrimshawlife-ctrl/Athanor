@@ -18,7 +18,7 @@ This does not govern or activate. Earlier dated entries remain historical; the c
 | Package | `athanor` CLI `doctor` / `retrieve` / `--version` |
 | CI | `.github/workflows/validate.yml` — local ruff+pytest is the bar; Actions may fail on account billing |
 | Harvest | Wave 0–1 + A–E + F fill3000 · Crawl4AI 0.9.3 · P3a gold sealed |
-| Local SoT | `~/.athanor/corpus/atoms.jsonl` — **3008** high-quality PD atoms (OBSERVED after jev+research classification; junk replaced; deeper jev harvests added goetia chunks; >3000 rows) |
+| Local SoT | `~/.athanor/corpus/atoms.jsonl` — **3012** high-quality PD atoms (OBSERVED after jev+research classification; more sources: Kabalah, Arbatel, Grimoire, Ceremonial, Invocation; full Package 4 traceability populated; >3000 rows) |
 | Hub / train | Blocked · Spec 002 P3a specify exit sealed; Aaron pack local-only |
 
 ## Wave 0 harvest (OBSERVED 2026-09-10 PT)
