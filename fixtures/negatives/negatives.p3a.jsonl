@@ -128,3 +128,6 @@
 {"neg_id": "neg.literature.01", "theme": "entertainment_literature", "text": "The author won the prestigious award for her groundbreaking novel exploring themes of identity.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.health.02", "theme": "news_health", "text": "Health officials recommend annual flu shots as cases rise in several regions this season.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.realestate.01", "theme": "news_realestate", "text": "Housing market shows signs of stabilization with median prices holding steady in major cities.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.travel.02", "theme": "news_travel", "text": "Airlines expand routes to Asia as international travel demand surges post-pandemic.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.education.02", "theme": "slop_edu", "text": "Universities adopt hybrid learning models to accommodate diverse student needs.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.finance.02", "theme": "product_finance", "text": "Central banks raise interest rates to combat inflation affecting global markets.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
