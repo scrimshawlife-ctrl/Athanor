@@ -6,6 +6,8 @@ import asyncio
 import hashlib
 import json
 import re
+import subprocess
+import sys
 import uuid
 import urllib.request
 from collections import Counter
@@ -744,7 +746,33 @@ async def main() -> None:
         "sample_ids": sample_ids,
         "enochian_book_pages": enoch_book_pages,
     }
-    print("\n==== DONE ====")
+    # Jev post-filter for high quality (T4-JEV-001 wiring)
+    jev_script = Path(__file__).parent / "jev_classify.py"
+    if jev_script.exists() and ATOMS_PATH.exists():
+        try:
+            with ATOMS_PATH.open() as f:
+                cand_lines = [line for line in f if line.strip()]
+            if cand_lines:
+                input_data = "".join(cand_lines)
+                proc = subprocess.run(
+                    [sys.executable, str(jev_script), "--min-relevance", "0.7"],
+                    input=input_data,
+                    capture_output=True,
+                    text=True,
+                    timeout=60,
+                )
+                if proc.returncode == 0 and proc.stdout.strip():
+                    high_lines = proc.stdout.strip().splitlines()
+                    high_path = ATOMS_PATH.with_suffix(".jev_high.jsonl")
+                    with high_path.open("w") as f:
+                        f.write("\n".join(high_lines) + "\n")
+                    print(f"Jev filtered {len(high_lines)} high-quality atoms -> {high_path}")
+                    # Optionally, replace candidates with high only for this run
+                    # ATOMS_PATH.write_text("\n".join(high_lines) + "\n")
+        except Exception as e:
+            print(f"Jev filter error: {e}")
+
+    print("\\n==== DONE ====")
     print(json.dumps(summary, indent=2))
 
 

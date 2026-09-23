@@ -64,7 +64,8 @@ Jev is used for:
 - Chunk quality ranking before adding atoms (via scripts/shadow/athanor/jev_classify.py).
 - Balance and epistemic checks.
 - Replacing junk/low-quality with better primary sources.
-- Pipeline integration started for WF-002 harvests.
+- Pipeline integration wired: deepen_harvest.py now runs jev post-filter on candidates (T4-JEV-001).
+- All new harvests use jev rerank (e.g. 3023 total, added to astrology_west, neoplatonism, runes_eddic).
 1. Source → WF-001 (review/rights) → WF-002 (harvest/normalize) → atoms + receipts
 2. Settle (quarantine/gold/approval) → eligible corpus
 3. Retrieve (WF-003): load → rank (BM25) → strip_chrome → build_packet (provenance + 3-lens synthesis)

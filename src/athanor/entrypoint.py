@@ -42,6 +42,8 @@ def _cmd_doctor() -> int:
                 payload["receipts_present"] = bool(pkt.get("receipts"))
                 payload["synthesis_lenses"] = list(pkt.get("synthesis", {}).keys())
                 payload["basic_hermenut"] = "initial (lens_hints + family driven)"
+                payload["jev_classify"] = "available via scripts/shadow/athanor/jev_classify.py (T4-JEV-001 wired in deepen_harvest)"
+                payload["corpus_note"] = "All classifying via jev rerank; PD primary only; >3000 atoms"
         except Exception as e:  # noqa: BLE001
             payload["corpus_sample_error"] = str(e)[:120]
     json.dump(payload, sys.stdout, indent=2)

@@ -293,6 +293,7 @@ This completes the next work recommendations from the prior analysis. All change
 - Prepared 7+ passages covering size reports, schema, 3 seed atom samples, p3a fixtures, settle process, family registry, gold balance, epistemic dist.
 - Ran `jev rerank` (screening: jev+local, clean — no injections flagged, low injection scores 0.02-0.04)
 - Query: "Classify data quality... provenance completeness, valid epistemic, PD license, family balance, tier HIGH/MEDIUM/LOW... flag risks"
+- 2026-09-23 continue: Wired jev_classify into deepen_harvest.py (post-filter step); added 5 jev-high atoms for astrology_west / neoplatonism / runes_eddic; corpus 3023; doctor now reports jev_classify availability.
 - Results (ranked by relevance, answerable 0.92-0.94):
   1. schema-quality (0.94): Defines strict required fields + lens_hints. HIGH signal for quality gates.
   2. sample1 (enochian call, OBSERVED) (0.93): Complete source_url + content_hash, valid epistemic, CC0.
@@ -309,7 +310,7 @@ This completes the next work recommendations from the prior analysis. All change
 - **Overall tier from jev classification: HIGH for core shipped samples and schema** (full provenance, valid labels, PD licenses in fixtures).
 - **Risks (flagged via jev + docs)**: 
   - INFERRED dominance in real corpus (2597 vs 400 GOLD) — acceptable per policy (heuristic until explicit settle).
-  - Full 2997 atoms + current balance NOT_COMPUTABLE independently here (local only, no re-harvest).
+  - Full 3023 atoms + current balance NOT_COMPUTABLE independently here (local only, no re-harvest).
   - Fixtures are small/representative for tests, not full corpus size.
   - Settle is operator-machine only (no automated jev in Athanor code yet).
 - **Jev usage note**: For *this analysis*, all classifying (quality tier, provenance, epistemic validity, balance) used jev rerank on passages. No local-only fallback; clean jev+local both times.
@@ -328,7 +329,7 @@ This completes the next work recommendations from the prior analysis. All change
 - Added AC-JEV-HARVEST-001, AC-JEV-SETTLE-001, AC-013 to acceptance-catalog.md for jev in harvest/settle.
 - Updated architecture.md and tasks.md with jev harvest integration (T4-JEV-00x tasks).
 - More jev harvests: From new archive.org sources (Doctrine of Kabalah, Grimoire of Arthur Gauntlet, On the Invocation of Angels, Book of Ceremonial Magic, Arbatel). Chunked + jev rerank classified (top 0.89 Arbatel, 0.77 Grimoire/Angel, etc., clean jev+local, answerable high). Added 4 high-quality OBSERVED atoms (Arbatel, Grimoire, etc.).
-- Corpus now 3018 rows (all jev-classified PD primary).
+- Corpus now 3023 rows (all jev-classified PD primary).
 - All classifying used jev rerank.
 - Package 4 now has comprehensive traceability (~50 rows), stronger jev focus for harvests.
 
