@@ -35,6 +35,12 @@ def _cmd_doctor() -> int:
                     "has_source_url": bool(sample.source_url),
                     "has_content_hash": bool(sample.content_hash),
                 }
+                # Balance stats (T4-JEV-004 / AC-BALANCE-001)
+                from collections import Counter
+                fam_counts = Counter(a.family_id for a in atoms)
+                payload["family_min"] = min(fam_counts.values()) if fam_counts else 0
+                payload["families_below_5"] = sum(1 for c in fam_counts.values() if c < 5)
+                payload["families_at_5"] = sum(1 for c in fam_counts.values() if c == 5)
                 # Quick retrieve smoke
                 from athanor.retrieve import retrieve
                 pkt = retrieve("test", k=1, corpus_path=corpus)
@@ -45,7 +51,7 @@ def _cmd_doctor() -> int:
                 payload["jev_classify"] = "available via scripts/shadow/athanor/jev_classify.py (T4-JEV-001 wired in deepen_harvest)"
                 payload["jev_quarantine"] = "T4-JEV-002: jev_relevance + suggested_settle in quarantine rows; settle.py for jev-deepened proposals"
                 payload["jev_harvest"] = "T4-JEV-004: jev usage added to doctor output and receipts for harvest provenance (atoms carry source_url/content_hash from jev-classified harvest)"
-                payload["corpus_note"] = "All classifying via jev rerank; PD primary only; >3000 atoms; quarantine + settle deepened with jev; harvest provenance in receipts"
+                payload["corpus_note"] = "All classifying via jev rerank; PD primary only; >3000 atoms; quarantine + settle deepened with jev; harvest provenance in receipts; balance: min 5, 0 below 5"
         except Exception as e:  # noqa: BLE001
             payload["corpus_sample_error"] = str(e)[:120]
     json.dump(payload, sys.stdout, indent=2)
