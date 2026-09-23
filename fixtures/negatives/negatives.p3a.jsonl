@@ -218,3 +218,10 @@
 {"neg_id": "neg.science.11", "theme": "news_science", "text": "Astronomers discover exoplanets using advanced telescope technology.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.law.09", "theme": "news_law", "text": "Courts handle cases involving digital privacy and data protection.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.auto.10", "theme": "product_auto", "text": "Electric cars gain popularity with improved battery technology.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.sport.07", "theme": "news_sport", "text": "Athletes train rigorously for major international competitions.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.travel.06", "theme": "product_travel", "text": "Modern airlines offer frequent flights to popular destinations worldwide.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.edu.10", "theme": "news_edu", "text": "Universities offer online degrees in various fields of study.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.env.08", "theme": "news_env", "text": "Conservation efforts protect endangered species and habitats.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.politics.07", "theme": "news_politics", "text": "Elections determine leadership and policy directions in democracies.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.food.06", "theme": "product_food", "text": "Organic farming practices reduce chemical use in food production.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.auto.11", "theme": "news_auto", "text": "Autonomous vehicles are being tested for safety and efficiency.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}

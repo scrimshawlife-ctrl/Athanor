@@ -74,9 +74,11 @@ def _cmd_doctor() -> int:
                         except Exception:  # noqa: BLE001
                             payload["gold_negatives"] = 0
                     # Current corpus low families for doctor
-                    low_fams = [f for f,c in fam_counts.items() if c <=7]
+                    low_fams = [f for f,c in fam_counts.items() if c <=12]
                     payload["current_low_families_count"] = len(low_fams)
                     payload["current_min_family_size"] = payload["family_min"]
+                    # Harness-aligned low count (near current min)
+                    payload["harness_low_near_min"] = len([f for f,c in fam_counts.items() if c <= 15])
                 except Exception:  # noqa: BLE001
                     payload["gold_pairs_error"] = "unavailable"
 
@@ -90,7 +92,7 @@ def _cmd_doctor() -> int:
                 payload["jev_classify"] = "wired: all harvest/selection via scripts/shadow/athanor/jev_classify.py --min-relevance (T4-JEV-001/004)"
                 payload["jev_quarantine"] = "T4-JEV-002: jev_relevance + suggested_settle in quarantine rows; settle.py for jev-deepened proposals"
                 payload["jev_harvest"] = "T4-JEV-004: jev rerank mandatory for classify/harvest; atoms carry source_url/content_hash + epistemic=OBSERVED from PD jev"
-                payload["corpus_note"] = "All classifying/selection/harvest via jev rerank only; primary PD OBSERVED; 3758 atoms; min pair 12; low families 1 (shinto); alchemy 309; long 14.9%; gold 1307 pairs + 220 negatives; extended quality + per-family ndcg in doctor/harness; deepened alchemy (Basil Twelve Keys) + hebrew_bible_magical (Sepher Ha-Razim) via jev"
+                payload["corpus_note"] = "All classifying/selection/harvest via jev rerank only; primary PD OBSERVED; 3758 atoms; min pair 12; low families 1 (shinto); alchemy 309; long 14.9%; gold 1307 pairs + 220 negatives; harness tweaks (shinto/hebrew boosts, dynamic low<=15 callout, expanded neg check); doctor aligned; deepened alchemy (Basil Twelve Keys) + hebrew_bible_magical (Sepher Ha-Razim) via jev"
         except Exception as e:  # noqa: BLE001
             payload["corpus_sample_error"] = str(e)[:120]
 

@@ -62,6 +62,8 @@ def evaluate_correspondence(
             "iching_daoist": ["hexagram", "trigram", "qian", "kun", "yi", "change"],
             "alchemy_lab": ["stone", "elixir", "hermetic", "philosopher", "sulphur", "gold"],
             "kabbalah_pd": ["sephiroth", "yetzirah", "zohar", "tree", "emanation", "sefirot"],
+            "shinto_onmyodo": ["kami", "shinto", "kojiki", "onmyodo", "yin", "yang", "divination", "spirit", "ritual", "omikuji"],
+            "hebrew_bible_magical": ["sephir", "razim", "raziel", "angels", "demons", "grimoire", "mysteries"],
         }.get(fam, [])
 
         # More terms (3+ chars + numbers) + extra hexagram numbers for I Ching; use full span for more signal
@@ -180,21 +182,30 @@ def main():
     for fam, st in sorted_fams:
         print(f"  {fam}: hit={st['hit_rate']} mrr={st['mrr']} ndcg={st.get('ndcg',0)} n={st['n']}")
 
-    # Low family callout for doctor/harness
-    low_fams = [ (f, st["n"]) for f, st in results.get("per_family", {}).items() if st["n"] <= 6 ]
+    # Low family callout for doctor/harness (dynamic to current min; track shinto and others <=15)
+    per_fam = results.get("per_family", {})
+    min_n = min((st["n"] for st in per_fam.values()), default=0)
+    low_fams = [ (f, st["n"]) for f, st in per_fam.items() if st["n"] <= 15 ]
+    current_low_count = len([f for f, n in low_fams if n < min_n + 3])  # families near or at min
     if low_fams:
-        print(f"\nLow pair families in gold (n<=6): {low_fams}")
+        print(f"\\nLow/near-min pair families (n<=15, min={min_n}): {sorted(low_fams, key=lambda x:x[1])[:8]}")
+        print(f"Current low families count (near min): {current_low_count}")
 
     # Also report a quick negative test using a sample negative (expanded OOD)
     try:
         with open("fixtures/negatives/negatives.p3a.jsonl") as nf:
-            negs = [json.loads(l) for l in nf if l.strip()][:8]
-        print("\nQuick negative check (should not strongly match tradition atoms):")
-        for neg in negs[:4]:
+            negs = [json.loads(l) for l in nf if l.strip()][:12]
+        print("\\nQuick negative check (should not strongly match tradition atoms; expanded OOD):")
+        neg_hits = 0
+        for neg in negs[:6]:
             q = neg.get("text", "")[:80]
             pkt = retrieve(q, k=3, corpus_path=corpus_path)
             top_fams = [h.get("family_id") for h in pkt.get("hits", [])]
+            trad_hit = any(f and ("alchemy" in f or "kabbalah" in f or "shinto" in f or "iching" in f or "hebrew" in f) for f in top_fams)
+            if trad_hit:
+                neg_hits += 1
             print(f"  Query: {q[:50]}... -> top families: {top_fams}")
+        print(f"  Negative trad-family spillover: {neg_hits}/{len(negs[:6])} (target low)")
     except Exception:  # noqa: BLE001
         print("(Negative check skipped)")
 
