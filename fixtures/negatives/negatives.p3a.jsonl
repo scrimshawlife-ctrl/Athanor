@@ -160,3 +160,19 @@
 {"neg_id": "neg.law.04", "theme": "news_law", "text": "New laws protect consumer data from large tech companies in multiple countries.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.entertainment.05", "theme": "entertainment", "text": "Popular podcast discusses current events with expert guests.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.science.05", "theme": "news_science", "text": "Biologists sequence genome of rare species for conservation efforts.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.finance.06", "theme": "news_finance", "text": "Stock markets react to new economic data releases from central banks.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.health.05", "theme": "news_health", "text": "Medical researchers develop new treatments for chronic conditions.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.auto.05", "theme": "product_auto", "text": "Electric vehicle sales continue to rise with new model releases.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.law.05", "theme": "news_law", "text": "Courts rule on major cases involving technology companies and privacy.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.education.05", "theme": "slop_edu", "text": "Universities launch new programs in data science and AI ethics.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.climate.05", "theme": "news_climate", "text": "International agreements aim to reduce carbon emissions globally.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.sports.06", "theme": "sports", "text": "Athletes train for upcoming Olympic events with specialized coaching.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.tech.05", "theme": "product_tech", "text": "New smartphone models feature advanced AI capabilities for photography.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.entertainment.06", "theme": "entertainment", "text": "Streaming services release new original series based on popular books.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.science.06", "theme": "news_science", "text": "Astronomers discover new exoplanets using advanced telescope arrays.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.finance.07", "theme": "news_finance", "text": "Investors monitor inflation reports and interest rate decisions closely.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.health.06", "theme": "news_health", "text": "Public health campaigns promote vaccination and preventive care measures.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.auto.06", "theme": "product_auto", "text": "Automakers introduce hybrid models to meet stricter emissions standards.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.law.06", "theme": "news_law", "text": "Legislators debate new regulations for artificial intelligence development.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.climate.06", "theme": "news_climate", "text": "Scientists report record temperatures and extreme weather patterns worldwide.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.education.06", "theme": "slop_edu", "text": "Schools implement new curricula focusing on critical thinking and digital literacy.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
