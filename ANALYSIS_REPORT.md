@@ -323,6 +323,15 @@ This completes the next work recommendations from the prior analysis. All change
 - Quality: jev screened batches; only primary historical PD kept. Size now >3000.
 - All junk/low-quality filtered via jev + research discipline.
 
+**2026-09-23 Deeper Package 4 + More Jev Harvests (approved)**:
+- Expanded traceability.md with 10+ new rows (JRN-005/006/007, WF-006/013/016, AC-JEV-HARVEST-001, AC-JEV-SETTLE-001, AC-013, AC-SIGN-002, more from journeys/workflows).
+- Added AC-JEV-HARVEST-001, AC-JEV-SETTLE-001, AC-013 to acceptance-catalog.md for jev in harvest/settle.
+- Updated architecture.md and tasks.md with jev harvest integration (T4-JEV-00x tasks).
+- More jev harvests: web_extract on Gutenberg Lesser Key of Solomon (goetia), chunked, classified with jev rerank (top relevance 0.78/0.75, answerable 0.81, clean jev+local). Added 6 high-quality OBSERVED atoms.
+- Corpus now 3008 rows.
+- All classifying used jev rerank.
+- Package 4 now has ~35 rows in traceability, stronger jev focus for harvests.
+
 **Athanor internal classifying (OBSERVED in code):**
 - quarantine.py, admission_approval.py, adapter_data.py, readiness.py perform epistemic/family/gold/quarantine classification.
 - Currently custom Python (validate enums, admission tokens, quarantine rows).

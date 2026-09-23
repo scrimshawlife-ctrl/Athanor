@@ -20,7 +20,17 @@
 || AC-001 / AC-002 | Harvest and source review invariants | WF-001/002 | - | quarantine + scripts | Historical |
 ||| AC-SIGN-001 | Valid synthetic signature verifies; altered rejects | signed-approval-workflow | - | test_admission_approval.py | Shipped |
 ||| AC-JEV-001 | All corpus classifying tasks route through jev rerank for quality decisions | WF-013 | AC-JEV-001 | jev rerank (analysis), future in quarantine/admission | PARTIAL (analysis only 2026-09-22) |
+||| AC-JEV-HARVEST-001 | Harvest candidates classified with jev before add | WF-002 | AC-JEV-HARVEST-001 | this session jev + corpus update | ADDRESSED 2026-09-23 |
+||| AC-JEV-SETTLE-001 | Settle uses jev quality + provenance | WF-004 | AC-JEV-SETTLE-001 | quarantine + jev | PARTIAL |
+||| AC-013 | >3000 high-quality PD rows with jev metrics | WF-002, WF-005 | AC-013 | doctor + report | ADDRESSED 2026-09-23 |
+||| AC-SIGN-002 | Signed admission rejects altered scopes | WF-016 | AC-SIGN-002 | test_admission_approval.py | Shipped |
 ||| JRN-003 | Dataset reviewer needs reproducible eligible slice | WF-005 | - | adapter_freeze + readiness | Gated prep |
+||| JRN-005 | Reviewer/operator prepares a public artifact | WF-006, WF-009, WF-010 | - | sanitize + receipts | Gated |
+||| JRN-006 | Maintainer/recipient needs a controlled extension or handoff | WF-011, WF-012 | - | registry + pack | Gated |
+||| JRN-007 | Qwen adapter prep and eval | WF-013-015 | - | 003 workflows | Gated (Spec 003) |
+||| WF-006 | Sanitize export | 002 | AC for export | scripts | Gated prep |
+||| WF-016 | Signed admission-scope verification | 000 | AC-SIGN-00x | signed-approval-workflow.md | Shipped |
+||| WF-013 | Source-bound instruction candidate preparation | 003 | - | 003-qwen-adapter | Gated |
 || JRN-004 | Training operator bounded experimental run | WF-007/008/009 | - | adapter_* + contracts | Gated |
 || ... | Full matrix expansion in Package 4 (pull all REQ/JRN/WF/AC from 000-003 + root) | ... | ... | ... | TODO |
 

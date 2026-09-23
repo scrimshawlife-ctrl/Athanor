@@ -15,7 +15,11 @@ Status: Initial. Workflow-local ACs exist in prior specs; this is the global/sys
 || AC-002 (harvest) | Normalize produces deduped envelopes, records outcomes | WF-002 | harvest scripts + receipts |
 || AC-011 (registry) | Unapproved proposals leave live registry unchanged | WF-011 | registry/ + tests |
 || AC-SIGN-001 | Valid synthetic signature verifies; altered rejects | WF-016 (signed-approval) | test_admission_approval.py |
-|| AC-JEV-001 | All corpus classifying tasks (settle, quarantine, epistemic/family/gold balance, data quality) route through jev rerank (or equivalent) for evidence-bound decisions; custom logic only for validation | WF-013 (quarantine/settle) | jev rerank runs + tests (analysis 2026-09-22); future integration |
+||| AC-JEV-001 | All corpus classifying tasks (settle, quarantine, epistemic/family/gold balance, data quality) route through jev rerank (or equivalent) for evidence-bound decisions; custom logic only for validation | WF-013 (quarantine/settle) | jev rerank runs + tests (analysis 2026-09-22); future integration |
+||| AC-JEV-HARVEST-001 | All new harvest candidates classified with jev rerank before quarantine; only HIGH relevance PD-primary chunks added as OBSERVED atoms | WF-002 | jev rerank + corpus doctor (this session) |
+||| AC-JEV-SETTLE-001 | Settle decisions use jev-classified quality scores + provenance; HOLD for low relevance or disputed PD | WF-004 | quarantine + jev logs |
+||| AC-013 | Corpus size and quality tracked with jev-classified metrics; >3000 high-quality PD rows maintained | WF-002, WF-005 | doctor + ANALYSIS_REPORT |
+||| AC-SIGN-002 | Signed admission rejects altered or untrusted scopes | WF-016 | test_admission_approval.py |
 
 ## Production Verification Targets
 - Receipts for every major operation (harvest, settle, retrieve, future train).

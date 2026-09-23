@@ -17,6 +17,10 @@ Status: Initial decomposition. This does not govern or activate.
 - Define ACs for gated paths (even if not implemented).
 - Cross-link to 001/002/003 requirements.
 - Add section for DEC-00x dependencies.
+- T4-JEV-001: Integrate jev rerank into harvest pipeline (WF-002) for candidate classification.
+- T4-JEV-002: Update quarantine/settle to use jev scores for quality gates (AC-JEV-*).
+- T4-JEV-003: Run periodic jev-classified harvests to maintain >3000 high-quality PD atoms.
+- T4-JEV-004: Add jev usage to doctor output and receipts for harvest provenance.
 
 ## Dependencies
 - Prior Package 4 artifacts (spec, plan, architecture, acceptance, traceability).
