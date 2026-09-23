@@ -208,3 +208,8 @@
 {"neg_id": "neg.science.10", "theme": "news_science", "text": "Biologists study biodiversity in remote ecosystems to protect species.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.law.08", "theme": "news_law", "text": "Lawyers argue cases involving intellectual property in digital age.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.auto.09", "theme": "product_auto", "text": "Car manufacturers focus on electric and hybrid vehicle development.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.tech.10", "theme": "product_tech", "text": "Blockchain technology enables secure decentralized transactions.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.sports.10", "theme": "sports", "text": "Coaches develop strategies for team performance improvement.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.finance.12", "theme": "news_finance", "text": "Markets react to geopolitical events and trade agreements.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.health.11", "theme": "news_health", "text": "Nutritionists recommend balanced diets for optimal wellness.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.entertainment.11", "theme": "entertainment", "text": "Authors publish novels exploring human emotions and society.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
