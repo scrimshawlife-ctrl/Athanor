@@ -76,3 +76,8 @@ Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 
 ||||| WF-EVAL-002 | Standalone eval harness TDD + nDCG + report | - | AC-EVAL-001 | scripts/eval_retrieve.py + tests | ADDRESSED 2026-09-23 |
 ||||| AC-EVAL-003 | Harness reports ndcg + per-family hit/mrr for low families | WF-003 | eval run | scripts/eval_retrieve.py | ADDRESSED 2026-09-23 |
 ||||| AC-GOLD-004 | Gold pairs >=250 covering low-hit families (alchemy/iching etc.) | WF-004 | fixtures + harness | fixtures/correspondence/pairs.p3a.jsonl | ADDRESSED 2026-09-23 |
+||||| C-004 | State machine for retrieve packet (efficacy null, receipts always) | WF-003 | AC-011 | retrieve.py build_packet | ADDRESSED 2026-09-23 |
+||||| DEC-007 | Eval harness as CI gate for correspondence unbind | - | AC-EVAL-001 | scripts/eval_retrieve.py + .github/workflows | ADDRESSED 2026-09-23 |
+||||| WF-EVAL-002 | Standalone eval harness TDD + nDCG + report | - | AC-EVAL-001 | scripts/eval_retrieve.py + tests | ADDRESSED 2026-09-23 |
+||||| AC-EVAL-003 | Harness reports ndcg + per-family hit/mrr for low families | WF-003 | eval run | scripts/eval_retrieve.py | ADDRESSED 2026-09-23 |
+||||| AC-GOLD-004 | Gold pairs >=250 covering low-hit families (alchemy/iching etc.) | WF-004 | fixtures + harness | fixtures/correspondence/pairs.p3a.jsonl | ADDRESSED 2026-09-23 |
