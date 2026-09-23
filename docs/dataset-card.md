@@ -133,3 +133,10 @@ Updated continue: Pairs 1342, Negs 307, Min pair 14, Lowest [('history_magic', 1
 - Total pairs: 1364
 - Min pair fam: 18
 
+
+## Continue
+- Pair/neg expansion for current lows at 18 (egypt_magical, mesopotamia, shinto_onmyodo, veda_upanishad_pd, mesoamerica): +15 pairs → to 21 each
+- +5 negs → 322
+- Total pairs 1379, min 19
+- Sources attempts for 18s ongoing (fetch challenges on sacred/wikisource, jev hold on prior)
+

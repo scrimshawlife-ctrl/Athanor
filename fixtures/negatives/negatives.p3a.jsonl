@@ -315,3 +315,8 @@
 {"neg_id": "neg.law.01", "theme": "law", "text": "The court ruled in favor of the plaintiff in the landmark intellectual property case.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.art.01", "theme": "art", "text": "The exhibition featured contemporary works exploring themes of identity and memory.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.science2.01", "theme": "science", "text": "Quantum computing advances could revolutionize cryptography and drug discovery.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.entertainment.01", "theme": "entertainment", "text": "The movie broke box office records in its opening weekend.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.automotive.01", "theme": "automotive", "text": "The new electric vehicle model offers 400 miles of range on a single charge.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.realestate.01", "theme": "realestate", "text": "Housing prices continued to rise in major metropolitan areas.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.retail.01", "theme": "retail", "text": "Online shopping surged during the holiday season with record sales.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.fashion.01", "theme": "fashion", "text": "The designer launched a sustainable clothing line using recycled materials.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
