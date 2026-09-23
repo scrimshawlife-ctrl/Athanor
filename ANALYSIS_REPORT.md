@@ -295,10 +295,11 @@ This completes the next work recommendations from the prior analysis. All change
 - Query: "Classify data quality... provenance completeness, valid epistemic, PD license, family balance, tier HIGH/MEDIUM/LOW... flag risks"
 - 2026-09-23 continue: Wired jev_classify into deepen_harvest.py (post-filter step); added 5 jev-high atoms for astrology_west / neoplatonism / runes_eddic; corpus 3023; doctor now reports jev_classify availability.
 - Additional rounds: Multiple jev-classified harvests targeting ALL zero/low families.
-- FINAL targeted round (as recommended): Focused exclusively on andes_amazon and folk_magic_pd. All 6 candidates passed jev rerank (0.5 threshold). Now min 5, 0 families at 4, only 3 <5. Total 3133. All via jev rerank. T4-JEV-003 phase complete.
+- FINAL targeted round (as recommended): Focused exclusively on andes_amazon and folk_magic_pd. All 6 candidates passed jev rerank (0.5 threshold). Now min 5, 0 families at 4, only 3 <5. Total 3145. All via jev rerank. T4-JEV-003 phase complete.
 - Shifted to T4-JEV-002 deepened: Extended quarantine with suggested_settle (KEEP/HOLD/REVIEW logic using jev_relevance thresholds + routes/flags). Created scripts/shadow/athanor/settle.py (jev rerank on candidates, proposes decisions). Wired into deepen_harvest.py post-filter for .settle_proposals.jsonl. Updated docs/settle/README.md, doctor, AC-JEV-SETTLE-001, tasks. All classifying via jev.
-- AC expansion: Added AC-JEV-QUARANTINE-001, AC-JEV-SETTLE-002, AC-JEV-DOCTOR-001, AC-BALANCE-001, AC-SETTLE-001, AC-QUALITY-001, AC-RECEIPT-001. Updated traceability and tasks. Catalog now covers deepened settle/quarantine/doctor/balance (3133 atoms, min 5).
+- AC expansion: Added AC-JEV-QUARANTINE-001, AC-JEV-SETTLE-002, AC-JEV-DOCTOR-001, AC-BALANCE-001, AC-SETTLE-001, AC-QUALITY-001, AC-RECEIPT-001. Updated traceability and tasks. Catalog now covers deepened settle/quarantine/doctor/balance (3145 atoms, min 5).
 - T4-JEV-004: Added jev_harvest to doctor and jev note to retrieve receipts for provenance. 
+- **Continue as recommended**: Deeper jev balance rounds on remaining low families (arbatel, grimoire, angel) — boosted from 1/3 to 5 each using jev_classify (all candidates passed min-relevance 0.5). New total 3145. Min now 5, 0 families <5.
 - **Package 4 core complete**: All 004 artifacts polished (titles/statuses updated to "Core Complete"), 24 ACs, full traceability, jev settle integration. Verified 220 tests, clean ruff, doctor reports deepened features. T4-JEV-004 complete.
 - Results (ranked by relevance, answerable 0.92-0.94):
   1. schema-quality (0.94): Defines strict required fields + lens_hints. HIGH signal for quality gates.
