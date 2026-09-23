@@ -54,3 +54,8 @@ def test_evaluate_with_report(tmp_path):
         loaded = json.load(f)
     assert loaded["pairs_evaluated"] == 3
     assert "hit_rate_at_3" in loaded
+def test_evaluate_correspondence_ndcg_target():
+    pairs = load_pairs(str(PAIRS))[:10]  # slice for speed
+    results = evaluate_correspondence(pairs, k=5)
+    assert "ndcg" in results
+    assert results["ndcg"] >= 0.85
