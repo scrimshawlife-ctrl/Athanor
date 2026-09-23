@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -61,6 +62,29 @@ def _cmd_doctor() -> int:
                 payload["corpus_note"] = "All classifying via jev rerank; PD primary only; 3156 atoms; min 5; quarantine + settle deepened with jev; extended doctor metrics added"
         except Exception as e:  # noqa: BLE001
             payload["corpus_sample_error"] = str(e)[:120]
+
+    # TDD doctor --eval integration (AC-PKG4-028): run harness and attach summary (minimal, subprocess to avoid direct dep)
+    if "--eval" in sys.argv or os.environ.get("ATHANOR_EVAL"):
+        try:
+            import subprocess
+            res = subprocess.run(
+                [sys.executable, "scripts/eval_retrieve.py", "--k", "5", "--report", "/tmp/doctor_eval.json"],
+                capture_output=True,
+                text=True,
+                cwd="/Users/appliedalchemylabs/Athanor",
+            )
+            if res.returncode == 0 and Path("/tmp/doctor_eval.json").exists():
+                with open("/tmp/doctor_eval.json") as ef:
+                    eval_data = json.load(ef)
+                payload["eval_summary"] = {
+                    "pairs": eval_data.get("pairs_evaluated"),
+                    "hit_rate_at_5": eval_data.get("hit_rate_at_5"),
+                    "ndcg": eval_data.get("ndcg"),
+                }
+            else:
+                payload["eval_summary"] = "harness_unavailable"
+        except Exception as e:  # noqa: BLE001
+            payload["eval_summary"] = f"unavailable: {type(e).__name__}"
     json.dump(payload, sys.stdout, indent=2)
     print()
     return 0
@@ -104,7 +128,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--version", action="store_true", help="Print version and exit")
     sub = parser.add_subparsers(dest="cmd")
 
-    sub.add_parser("doctor", help="Environment / corpus smoke")
+    doctor_p = sub.add_parser("doctor", help="Environment / corpus smoke")
+    doctor_p.add_argument("--eval", action="store_true", help="Include eval summary (TDD integration)")
 
     retrieve_p = sub.add_parser(
         "retrieve",

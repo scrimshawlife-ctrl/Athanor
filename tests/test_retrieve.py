@@ -146,3 +146,12 @@ def test_gated_train_eval_readiness_exits_hold():
     assert "EVAL-TRAIN-HARNESS: HOLD" in result.stdout
     assert "read-only skeleton only" in result.stdout
     assert "no ALLOW_TRAIN" in result.stdout
+
+def test_doctor_reports_eval_if_flag(monkeypatch, capsys):
+    monkeypatch.setenv("ATHANOR_CORPUS", str(SEED))
+    monkeypatch.setenv("ATHANOR_EVAL", "1")
+    from athanor.entrypoint import main
+    code = main(["doctor", "--eval"])
+    out = capsys.readouterr().out
+    assert code == 0
+    assert "eval" in out or "ndcg" in out.lower() or "eval_summary" in out
