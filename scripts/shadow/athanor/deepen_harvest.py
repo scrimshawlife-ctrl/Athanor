@@ -8,15 +8,15 @@ import json
 import re
 import subprocess
 import sys
-import uuid
 import urllib.request
+import uuid
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 from urllib.parse import urljoin, urlparse
 
-from crawl4ai import AsyncWebCrawler, BrowserConfig, CrawlerRunConfig, CacheMode
+from crawl4ai import AsyncWebCrawler, BrowserConfig, CacheMode, CrawlerRunConfig
 
 HOME = Path.home()
 # Unreviewed harvests are candidates, never automatically admitted to retrieval.
@@ -294,7 +294,7 @@ def clean_markdown(md: str) -> str:
     ]
     for line in md.splitlines():
         s = line.strip()
-        if any(re.match(p, s, re.I) for p in skip_patterns):
+        if any(re.match(p, s, re.IGNORECASE) for p in skip_patterns):
             if re.match(r"^---+", s) or re.match(r"^===+", s):
                 lines.append("")
             continue
@@ -393,12 +393,12 @@ def extract_same_host_links(
                 continue
             if abs_u.rstrip("/") == base_url.rstrip("/"):
                 continue
-            if not re.search(r"\.(htm|html)/?$", parsed.path, re.I) and not parsed.path.endswith("/"):
+            if not re.search(r"\.(htm|html)/?$", parsed.path, re.IGNORECASE) and not parsed.path.endswith("/"):
                 if "." in Path(parsed.path).name:
                     continue
         if child_glob:
             name = Path(parsed.path).name
-            if not re.search(child_glob, name, re.I):
+            if not re.search(child_glob, name, re.IGNORECASE):
                 continue
         seen.add(abs_u)
         links.append(abs_u)
@@ -681,10 +681,10 @@ async def main() -> None:
 
     all_fams = sorted(set(before) | set(after) | set(by_family))
     lines = [
-        f"# Deepen harvest scoreboard",
-        f"",
+        "# Deepen harvest scoreboard",
+        "",
         f"- run_id: `{RUN_ID}`",
-        f"- engine: crawl4ai 0.9.3 (+ urllib for IA plaintext)",
+        "- engine: crawl4ai 0.9.3 (+ urllib for IA plaintext)",
         f"- timestamp_utc: {receipt['timestamp_utc']}",
         f"- atoms_written (net new): **{atoms_written}**",
         f"- atoms_skipped_dupe: {atoms_skipped_dupe}",
@@ -694,12 +694,12 @@ async def main() -> None:
         f"- failures: {len(failures)}",
         f"- receipt: `{receipt_path}`",
         f"- atoms: `{ATOMS_PATH}`",
-        f"- allowlist: sacred-texts.com, archive.org",
-        f"",
-        f"## Before / After by family_id",
-        f"",
-        f"| family_id | before | after | delta |",
-        f"|---|---:|---:|---:|",
+        "- allowlist: sacred-texts.com, archive.org",
+        "",
+        "## Before / After by family_id",
+        "",
+        "| family_id | before | after | delta |",
+        "|---|---:|---:|---:|",
     ]
     for fid in sorted(all_fams, key=lambda x: (-(after.get(x, 0)), x)):
         b = before.get(fid, 0)
