@@ -64,6 +64,8 @@ def _cmd_doctor() -> int:
                         payload["gold_pairs"] = len(g_pairs)
                         payload["gold_min_pair_fam"] = min(g_fam.values()) if g_fam else 0
                         payload["gold_per_family_sample"] = dict(list(g_fam.items())[:5])
+                        low_gold = sorted([(f, c) for f, c in g_fam.items() if c <= 6], key=lambda x: x[1])
+                        payload["gold_low_families"] = low_gold[:3]  # top remaining low
                 except Exception:  # noqa: BLE001
                     payload["gold_pairs_error"] = "unavailable"
 
