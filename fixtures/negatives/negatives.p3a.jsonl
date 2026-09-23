@@ -158,3 +158,5 @@
 {"neg_id": "neg.sports.05", "theme": "sports", "text": "National team prepares for major international tournament with new coaching staff.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.tech.04", "theme": "product_tech", "text": "Wearable devices track health metrics with improved accuracy using machine learning.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.law.04", "theme": "news_law", "text": "New laws protect consumer data from large tech companies in multiple countries.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.entertainment.05", "theme": "entertainment", "text": "Popular podcast discusses current events with expert guests.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.science.05", "theme": "news_science", "text": "Biologists sequence genome of rare species for conservation efforts.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
