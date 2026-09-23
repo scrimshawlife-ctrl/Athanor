@@ -1,6 +1,6 @@
 # Acceptance Catalog — Package 4 (Skeleton)
 
-Status: Initial. Workflow-local ACs exist in prior specs; this is the global/system catalog target.
+Status: Core global catalog expanded (includes jev harvest/settle ACs). Workflow-local ACs from prior specs incorporated. This does not govern or activate.
 
 ## Global ACs (examples, to be expanded)
 

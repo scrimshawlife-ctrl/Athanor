@@ -1,6 +1,6 @@
 # Architecture — Package 4
 
-Status: Initial skeleton. This does not govern or activate.
+Status: Core phase complete (traceability populated, acceptance catalog expanded, jev harvest integration started). This does not govern or activate.
 
 Architecture, full acceptance catalog, traceability, task decomposition, and production verification (per specs/README.md). Builds on packages 1-3 (spine, retrieve live, encoder specify).
 
@@ -24,12 +24,12 @@ See root specs/ for shared artifacts.
 - Production verification plan (including receipts, audits).
 
 Current artifacts in this dir:
-- spec.md
-- plan.md
-- architecture.md (draft)
-- acceptance-catalog.md (skeleton)
-- traceability.md (populated examples)
-- tasks.md (decomposition skeleton)
+- spec.md (core complete)
+- plan.md (core complete)
+- architecture.md (core description + data flow)
+- acceptance-catalog.md (expanded with jev harvest ACs)
+- traceability.md (full core population from 000-003 + journeys + workflows + decisions + contracts)
+- tasks.md (decomposition with jev items)
 
 ## Current State (OBSERVED)
 - Retrieve (Spec 001) live with recent hardening (tokenless rejection, provenance, clean errors).

@@ -1,6 +1,6 @@
 # Architecture — Athanor (Package 4 Draft)
 
-Status: Initial text description. Diagrams to follow in later passes. This does not govern or activate.
+Status: Core description complete for this phase (layers, data flow, jev harvest integration noted). This does not govern or activate.
 
 ## High-Level Layers
 ```

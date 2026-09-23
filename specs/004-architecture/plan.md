@@ -1,6 +1,6 @@
 # Plan — Package 4 Architecture
 
-Status: Skeleton. Advisory.
+Status: Core phase complete. Advisory. (Traceability populated; jev harvests executed to 3012+ atoms.)
 
 ## Phases
 1. Inventory existing (retrieve packet, synthesis, contracts, workflows).
