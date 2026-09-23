@@ -227,3 +227,24 @@
 {"neg_id": "neg.auto.11", "theme": "news_auto", "text": "Autonomous vehicles are being tested for safety and efficiency.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.ent.05", "theme": "news_ent", "text": "Streaming services dominate home entertainment consumption.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.retail.04", "theme": "product_retail", "text": "E-commerce platforms offer wide selection and fast delivery.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.ai.01", "theme": "tech_ai", "text": "Large language models generate text based on patterns in training data.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.space.02", "theme": "news_space", "text": "Satellites orbit Earth to provide global communication and weather data.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.bio.03", "theme": "news_bio", "text": "CRISPR technology allows precise editing of genetic material in organisms.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.edu.05", "theme": "slop_edu", "text": "Online platforms provide courses in programming, history, and sciences.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.sport.09", "theme": "news_sport", "text": "Olympic games bring together athletes from around the world every four years.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.travel.10", "theme": "product_travel", "text": "High-speed rail networks connect major cities efficiently.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.ent.11", "theme": "news_ent", "text": "Blockbuster films often feature advanced visual effects and sound design.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.retail.12", "theme": "product_retail", "text": "Supply chain logistics ensure products reach consumers worldwide.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.tech.13", "theme": "news_tech", "text": "Quantum computing promises to solve complex problems faster than classical computers.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.env.14", "theme": "news_env", "text": "Biodiversity hotspots are critical for maintaining ecological balance.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.politics.15", "theme": "news_politics", "text": "Diplomacy and treaties help resolve international conflicts peacefully.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.food.16", "theme": "product_food", "text": "Sustainable agriculture focuses on soil health and reduced pesticide use.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.auto.17", "theme": "news_auto", "text": "Electric vehicle adoption is accelerating with improved battery technology.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.ai.18", "theme": "tech_ai", "text": "Reinforcement learning agents learn optimal strategies through trial and error.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.space.19", "theme": "news_space", "text": "Mars rovers collect data on the planet's geology and potential for past life.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.bio.20", "theme": "news_bio", "text": "Synthetic biology engineers new biological systems for medicine and industry.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.climate.21", "theme": "news_climate", "text": "Carbon capture technologies aim to remove CO2 from the atmosphere.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.edu.22", "theme": "slop_edu", "text": "MOOCs have democratized access to higher education globally.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.finance.23", "theme": "news_finance", "text": "Cryptocurrencies use blockchain for decentralized transactions.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.health.24", "theme": "news_health", "text": "Telemedicine allows remote consultations with healthcare providers.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.law.25", "theme": "news_law", "text": "Data privacy regulations like GDPR protect user information.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
