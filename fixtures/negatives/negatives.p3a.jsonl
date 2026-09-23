@@ -149,3 +149,6 @@
 {"neg_id": "neg.climate.03", "theme": "news_climate", "text": "International summit agrees on new targets to reduce carbon emissions by 2030.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.education.03", "theme": "slop_edu", "text": "Schools implement new curriculum focusing on critical thinking and digital literacy.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.finance.04", "theme": "news_finance", "text": "Cryptocurrency regulations tighten as governments seek to stabilize markets.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.entertainment.04", "theme": "entertainment", "text": "Award-winning film explores themes of identity and belonging in modern society.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.science.04", "theme": "news_science", "text": "Astronomers discover new exoplanet with potential for liquid water.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.business.03", "theme": "news_business", "text": "Startup raises record funding for AI-powered healthcare solutions.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
