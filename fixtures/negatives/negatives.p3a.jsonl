@@ -340,3 +340,8 @@
 {"neg_id": "neg.law.03", "theme": "law", "text": "The supreme court issued a ruling on digital privacy rights.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.science.03", "theme": "science", "text": "Astronomers discovered a new exoplanet with potential for life.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.tech.03", "theme": "tech", "text": "The software update introduced advanced AI features for users.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.entertainment.03", "theme": "entertainment", "text": "The streaming service launched a new series based on classic novels.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.automotive.03", "theme": "automotive", "text": "Autonomous driving technology is advancing rapidly with new sensors.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.realestate.03", "theme": "realestate", "text": "Commercial real estate saw a surge in demand for flexible workspaces.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.retail.03", "theme": "retail", "text": "E-commerce platforms integrated AI for personalized shopping experiences.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.fashion.03", "theme": "fashion", "text": "Vintage clothing trends made a comeback in urban fashion scenes.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}

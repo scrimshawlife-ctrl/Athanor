@@ -184,3 +184,11 @@ Updated continue: Pairs 1342, Negs 307, Min pair 14, Lowest [('history_magic', 1
 - Min 21
 - Total pairs 1438
 
+
+## Tarot, Goetia, Chaos (Grant Morrison/CCRU)
+- Pair expansion: +15 pairs for tarot_history, goetia_catalog, chaos_spare_hist (using long PD atoms) to 26 each
+- +5 negs to 347
+- Min 21
+- Total pairs 1453
+- Focused on chaos magic, Spare, Morrison, CCRU themes for depth
+
