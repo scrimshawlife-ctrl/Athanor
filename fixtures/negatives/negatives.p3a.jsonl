@@ -135,3 +135,5 @@
 {"neg_id": "neg.sports.03", "theme": "sports", "text": "Star athlete signs record contract extension with championship team amid fan excitement.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.tech.02", "theme": "product_tech", "text": "Quantum computing breakthrough promises faster simulations for drug discovery and materials science.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.law.02", "theme": "news_law", "text": "New legislation aims to regulate AI ethics and data privacy in tech industry practices.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.environment.01", "theme": "news_env", "text": "Conservation efforts protect endangered species in critical habitats worldwide.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.entertainment.02", "theme": "entertainment_film", "text": "Critics praise the new documentary for its insightful look at social issues.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
