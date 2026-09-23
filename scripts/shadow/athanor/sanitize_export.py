@@ -47,9 +47,7 @@ def _license_drop(license_val: str | None) -> bool:
     for sub in DROP_LICENSE_SUBSTR:
         if sub in lic:
             return True
-    if lic == "unknown" or lic.startswith("unknown"):
-        return True
-    return False
+    return bool(lic == "unknown" or lic.startswith("unknown"))
 
 
 def _excerpt(text: str | None, cap: int = EXCERPT_CAP) -> str:
@@ -72,9 +70,8 @@ def sanitize_row(atom: dict) -> dict | None:
     if text is None:
         return None
     # drop seal binaries / non-text
-    if atom.get("type") not in (None, "text", "table", "diagram_desc"):
-        if atom.get("type") in ("image", "seal", "binary"):
-            return None
+    if atom.get("type") in ("image", "seal", "binary"):
+        return None
     row = {
         "atom_id": atom["atom_id"],
         "family_id": atom["family_id"],

@@ -11,6 +11,13 @@ Status: proposed target contract extending shipped behavior. This does not gover
 | REQ-012 | MUST keep genuine historical quotations available while declining efficacy/compulsion packaging; a generic disclaimer alone is not behavioral proof. | ADVERSARY | WF-003, WF-009 / AC-003, AC-009 |
 | REQ-013 | MUST provide stable library exceptions and CLI outcomes for malformed JSONL, non-object rows, missing fields and unavailable paths, without uncaught tracebacks in normal CLI errors. | Retrieve maintainer | WF-003 / AC-003 |
 
-Current deviations: ASCII tokenizer produces tokenless inputs; ranker returns arbitrary zero-score hits for those inputs; malformed row errors are not all caught by CLI; packets omit source URL/hash and contain empty receipts; current lens objects are generic INFERRED stubs. These remain implementation tasks, not fixed by this document. Maximum k and expanded language/performance support depend on DEC-004.
+Current deviations status (2026-09-22): 
+- Tokenless queries: **ADDRESSED** (retrieve() now raises ValueError for queries with no alphanumeric tokens; ranker guard retained).
+- Malformed rows / CLI errors: **ADDRESSED** (load_atoms + from_mapping raise ValueError for missing keys; _cmd_retrieve catches ValueError/TypeError/KeyError/Exception and returns clean exit 2 + stderr, no tracebacks).
+- Packets source URL/hash + receipts: **ADDRESSED** (Atom now carries source_url/content_hash; hits include them when present; receipts now carries minimal [{"type": "lexical-retrieve", "epistemic": "INFERRED"}]).
+- Lens objects: still generic INFERRED stubs (by design until HERMENEUT wiring; not a deviation for retrieve core).
+Maximum k and expanded language/performance support depend on DEC-004.
+
+All core REQ-009/013/011 provenance items now satisfied for v0. See ANALYSIS_REPORT.md for verification.
 
 Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 805 Slice N/A + Hash: fd84c7085579f3e7a560b38fc554a4f832fa9c10 (review base)
