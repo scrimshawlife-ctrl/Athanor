@@ -45,3 +45,8 @@ Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 
 || AC-PKG4-025 | Traceability matrix covers eval harness, gold expansion, doctor jev metrics | Package 4 | traceability.md |
 || AC-PKG4-026 | Dataset card updated for current corpus (3199 atoms, min 7/family, eval readiness 7.5/10) | WF-005 | docs/dataset-card.md |
 || AC-DOCS-001 | All specs/docs synced with current gold counts, harness, ACs, version bump | - | README, STATUS, traceability, dataset-card |
+|||| AC-EVAL-003 | Harness includes ndcg + per-family for low-hit families; CI smoke | WF-003 | scripts/eval_retrieve.py + tests |
+|||| AC-GOLD-004 | Gold pairs >=250; jev-maintained for eval quality | WF-004 | fixtures + harness |
+|||| AC-PKG4-027 | Traceability full matrix (contracts/state-machines + eval) | Package 4 | traceability.md |
+|||| AC-PKG4-028 | Doctor reports eval summary (if --eval) + ndcg | WF-003 | entrypoint.py |
+|||| AC-DOCS-002 | Provenance/lens_hints flow documented to HERMENEUT | - | new docs section |

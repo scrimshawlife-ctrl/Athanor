@@ -71,3 +71,8 @@ Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 
 |||| AC-PKG4-026 | Dataset card fixes and sync with current 3199 atoms, eval readiness | WF-005 | AC-PKG4-026 | docs/dataset-card.md | ADDRESSED 2026-09-23 |
 |||| WF-EVAL-001 | Standalone eval harness (TDD polished queries, report output, CI smoke) | - | AC-EVAL-001 | scripts/eval_retrieve.py | ADDRESSED 2026-09-23 |
 
+||||| C-004 | State machine for retrieve packet (efficacy null, receipts always) | WF-003 | AC-011 | retrieve.py build_packet | ADDRESSED 2026-09-23 |
+||||| DEC-007 | Eval harness as CI gate for correspondence unbind | - | AC-EVAL-001 | scripts/eval_retrieve.py + .github/workflows | ADDRESSED 2026-09-23 |
+||||| WF-EVAL-002 | Standalone eval harness TDD + nDCG + report | - | AC-EVAL-001 | scripts/eval_retrieve.py + tests | ADDRESSED 2026-09-23 |
+||||| AC-EVAL-003 | Harness reports ndcg + per-family hit/mrr for low families | WF-003 | eval run | scripts/eval_retrieve.py | ADDRESSED 2026-09-23 |
+||||| AC-GOLD-004 | Gold pairs >=250 covering low-hit families (alchemy/iching etc.) | WF-004 | fixtures + harness | fixtures/correspondence/pairs.p3a.jsonl | ADDRESSED 2026-09-23 |
