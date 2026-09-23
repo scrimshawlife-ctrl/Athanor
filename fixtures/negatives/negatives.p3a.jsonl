@@ -310,3 +310,8 @@
 {"neg_id": "neg.health.01", "theme": "health", "text": "The study showed significant benefits from regular exercise and balanced diet.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.travel.01", "theme": "travel", "text": "The new high-speed rail line reduced travel time between cities by half.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.food.01", "theme": "food", "text": "The recipe called for fresh herbs and a slow simmer to develop deep flavors.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.business.01", "theme": "business", "text": "The startup secured funding after a successful pitch to venture capitalists.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.education.01", "theme": "education", "text": "The university launched a new program in data science and artificial intelligence.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.law.01", "theme": "law", "text": "The court ruled in favor of the plaintiff in the landmark intellectual property case.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.art.01", "theme": "art", "text": "The exhibition featured contemporary works exploring themes of identity and memory.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.science2.01", "theme": "science", "text": "Quantum computing advances could revolutionize cryptography and drug discovery.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}

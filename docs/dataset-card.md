@@ -121,3 +121,15 @@ Updated continue: Pairs 1342, Negs 307, Min pair 14, Lowest [('history_magic', 1
 - New source attempt for history_magic (Levi History of Magic) - jev 0 hold
 - Total pairs 1352
 
+
+## Sources for remaining 17s + pair/neg expansion
+- Attempted fresh PD sources:
+  - astrology_west: Ptolemy Tetrabiblos (sacred-texts.com/astro/ptb) - 18 cands, jev 0
+  - grimoire_other: Lesser Key of Solomon Goetia (gutenberg 72679) - 164 cands, jev 0
+  - history_magic: The History of Magic - Eliphas Levi (gutenberg 70033)
+  - Others (golden_dawn_hist, andes_amazon, chaos_spare_hist): wikisource/sacred attempts had fetch issues (404/blocks), quality hold maintained
+- Pair expansion: +12 pairs for the 6 families at 17 → all to 19, min now 18
+- Neg expansion: +5 → 317 total
+- Total pairs: 1364
+- Min pair fam: 18
+
