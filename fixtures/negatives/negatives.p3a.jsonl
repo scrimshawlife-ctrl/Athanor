@@ -320,3 +320,8 @@
 {"neg_id": "neg.realestate.01", "theme": "realestate", "text": "Housing prices continued to rise in major metropolitan areas.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.retail.01", "theme": "retail", "text": "Online shopping surged during the holiday season with record sales.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.fashion.01", "theme": "fashion", "text": "The designer launched a sustainable clothing line using recycled materials.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.tech.02", "theme": "tech", "text": "The new smartphone features a 108MP camera and 5G connectivity.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.sports.02", "theme": "sports", "text": "The team won the championship after a thrilling overtime victory.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.politics.02", "theme": "politics", "text": "The election results were announced after a close race.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.health.02", "theme": "health", "text": "Vaccination rates increased significantly in the region.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.environment.02", "theme": "environment", "text": "The conservation project protected 1000 acres of rainforest.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}

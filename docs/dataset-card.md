@@ -140,3 +140,10 @@ Updated continue: Pairs 1342, Negs 307, Min pair 14, Lowest [('history_magic', 1
 - Total pairs 1379, min 19
 - Sources attempts for 18s ongoing (fetch challenges on sacred/wikisource, jev hold on prior)
 
+
+## Fresh sources
+- Gilgamesh (gutenberg 11000) for mesopotamia: 21 cands, jev 0 hold
+- Pair/neg expansion: +20 pairs for 19s families, +5 negs to 327
+- Min 20
+- Boosted several to 21+
+
