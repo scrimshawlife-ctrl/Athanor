@@ -165,7 +165,9 @@ Scoreboards (repo copies; receipts stay local under `~/.athanor/receipts/`):
 
 **Next work progress**:
 - Basic three-lens synthesis wired in retrieve (uses lens_hints, family, epistemic for differentiated historical/symbolic/operational text). Initial HERMENEUT.
-- Package 4 skeleton started: `specs/004-architecture/{spec.md, plan.md, traceability.md}`.
-- Expanded tests and verification.
+- Package 4 significantly deepened:
+  - `specs/004-architecture/` now includes: spec.md, plan.md, architecture.md (draft layers), acceptance-catalog.md, traceability.md (expanded with real REQ-008..013 + WF examples).
+- 220 tests passing.
+- Full re-verify green.
 
 Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 805 Slice N/A + Hash: fd84c7085579f3e7a560b38fc554a4f832fa9c10 (review base) + 2026-09-22 hardening on feat/close-spec001-gaps-retrieve-provenance-20260922

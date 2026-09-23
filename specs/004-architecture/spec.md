@@ -17,11 +17,18 @@ Follows constitution, domain model, requirements (000/001/002), journeys, workfl
 See root specs/ for shared artifacts.
 
 ## Key Deliverables (target)
-- Architecture diagram(s) and description.
-- Complete acceptance criteria (AC-*) catalog.
-- Traceability matrix (CSV or MD).
+- Architecture diagram(s) and description. (architecture.md started)
+- Complete acceptance criteria (AC-*) catalog. (acceptance-catalog.md started)
+- Traceability matrix (CSV or MD). (traceability.md expanded)
 - Updated task lists with package 4 items.
 - Production verification plan (including receipts, audits).
+
+Current artifacts in this dir:
+- spec.md
+- plan.md
+- architecture.md (draft)
+- acceptance-catalog.md (skeleton)
+- traceability.md (populated examples)
 
 ## Current State (OBSERVED)
 - Retrieve (Spec 001) live with recent hardening (tokenless rejection, provenance, clean errors).

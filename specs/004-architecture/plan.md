@@ -4,9 +4,9 @@ Status: Skeleton. Advisory.
 
 ## Phases
 1. Inventory existing (retrieve packet, synthesis, contracts, workflows).
-2. Define global architecture (layers: harvest, settle, retrieve, (encoder gated), verification).
-3. Acceptance catalog (expand workflow-local ACs to system level).
-4. Traceability matrix (link REQ → WF → AC → code/tests).
+2. Define global architecture (layers: harvest, settle, retrieve, (encoder gated), verification). → architecture.md
+3. Acceptance catalog (expand workflow-local ACs to system level). → acceptance-catalog.md
+4. Traceability matrix (link REQ → WF → AC → code/tests). → traceability.md
 5. Task decomposition (U* items for remaining).
 6. Verification strategy (receipts, audits, HERMENEUT integration).
 
