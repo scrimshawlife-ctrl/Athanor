@@ -110,3 +110,5 @@ Negatives: 302=== Option 3: Harness/Doctor Enhancements ===
 - State: 3775 atoms, 1336 pairs (est), 307 negs, min 14
 - Harness/doctor from Option 3 active
 
+
+Updated continue: Pairs 1342, Negs 307, Min pair 14, Lowest [('history_magic', 14), ('mesoamerica', 15), ('mesopotamia', 16), ('shinto_onmyodo', 16)]
