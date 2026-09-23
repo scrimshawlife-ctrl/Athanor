@@ -66,6 +66,13 @@ def _cmd_doctor() -> int:
                         payload["gold_per_family_sample"] = dict(list(g_fam.items())[:5])
                         low_gold = sorted([(f, c) for f, c in g_fam.items() if c <= 6], key=lambda x: x[1])
                         payload["gold_low_families"] = low_gold[:3]  # top remaining low
+                        # Gold negatives
+                        try:
+                            with open("fixtures/negatives/negatives.p3a.jsonl") as nf:
+                                negs = [line for line in nf if line.strip()]
+                            payload["gold_negatives"] = len(negs)
+                        except Exception:  # noqa: BLE001
+                            payload["gold_negatives"] = 0
                 except Exception:  # noqa: BLE001
                     payload["gold_pairs_error"] = "unavailable"
 
@@ -79,7 +86,7 @@ def _cmd_doctor() -> int:
                 payload["jev_classify"] = "wired: all harvest/selection via scripts/shadow/athanor/jev_classify.py --min-relevance (T4-JEV-001/004)"
                 payload["jev_quarantine"] = "T4-JEV-002: jev_relevance + suggested_settle in quarantine rows; settle.py for jev-deepened proposals"
                 payload["jev_harvest"] = "T4-JEV-004: jev rerank mandatory for classify/harvest; atoms carry source_url/content_hash + epistemic=OBSERVED from PD jev"
-                payload["corpus_note"] = "All classifying/selection/harvest via jev rerank only; primary PD OBSERVED; 3488 atoms; min pair 6; long excerpts 8.3%; extended quality + gold metrics in doctor"
+                payload["corpus_note"] = "All classifying/selection/harvest via jev rerank only; primary PD OBSERVED; 3548 atoms; min pair 7; 0 low; alchemy 290; long 9.9%; gold 1097 pairs + 130 negatives; extended quality + per-family ndcg in doctor/harness"
         except Exception as e:  # noqa: BLE001
             payload["corpus_sample_error"] = str(e)[:120]
 
