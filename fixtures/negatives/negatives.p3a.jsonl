@@ -300,3 +300,8 @@
 {"neg_id": "neg.cont4.retail.10", "theme": "product_retail", "text": "E-commerce platforms leverage logistics networks for fast delivery.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.cont4.tech.11", "theme": "tech_cloud", "text": "Cloud computing provides scalable on-demand infrastructure resources.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.cont4.science.12", "theme": "news_science", "text": "James Webb Space Telescope captures images of distant galaxies.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.tech_ai.01", "theme": "tech_ai", "text": "The new AI model achieved state of the art results on the benchmark dataset after extensive training on diverse corpora.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.politics.01", "theme": "politics", "text": "The senate passed the infrastructure bill with bipartisan support after months of negotiations.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.science.01", "theme": "science", "text": "Researchers discovered a new exoplanet in the habitable zone using the latest telescope array.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.sports.01", "theme": "sports", "text": "The home team clinched the championship with a dramatic last second play.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.finance.01", "theme": "finance", "text": "Stock markets rose sharply following the positive earnings reports from major tech companies.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}

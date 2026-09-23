@@ -91,3 +91,22 @@ Negatives: 302=== Option 3: Harness/Doctor Enhancements ===
 - Added TDD test for dynamic low enhancement
 - 7 tests total in harness
 - Negs at 302, min 13, alchemy 322
+
+## Option 3 (Harness/Doctor) - Completed
+- Dynamic low family threshold in harness: <= max(15, min_n + 5)
+- Added low family ndcg average print
+- Doctor: per_family_ndcg_sample to 10, low_family_ndcg_sample to 5 (n<=20)
+- TDD test for dynamic low enhancement
+- 229 tests, full verify PASS
+- State: 3775 atoms, 1324 pairs, 302 negs, min 13 (meso 13), alchemy 322, shinto 16
+- No new data added (jev 0 on meso)
+
+
+## Continue after Option 3 (fresh source + pair boost)
+- Fresh PD sources attempted: Old Babylonian Gilgamesh (gutenberg 11000), Lesser Key of Solomon Goetia (72679)
+- jev 0.55/0.5: 0 high (quality hold preserved)
+- Boosted pairs for lows: +12 pairs (meso 13->16, grimoire_other 14->17, min 14 (meso 16, grimoire_other 17))
+- Added 5 OOD negatives (news/tech/politics/science/sports/finance) -> 307 negs
+- State: 3775 atoms, 1336 pairs (est), 307 negs, min 14
+- Harness/doctor from Option 3 active
+
