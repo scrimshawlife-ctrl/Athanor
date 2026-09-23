@@ -314,6 +314,15 @@ This completes the next work recommendations from the prior analysis. All change
   - Settle is operator-machine only (no automated jev in Athanor code yet).
 - **Jev usage note**: For *this analysis*, all classifying (quality tier, provenance, epistemic validity, balance) used jev rerank on passages. No local-only fallback; clean jev+local both times.
 
+**2026-09-22 High-Quality Corpus Upgrade (user request)**:
+- Used research (web_search + targeted extracts) + jev rerank for all quality classification and junk detection.
+- Replaced low-quality/junk (e.g. secondary like Kybalion flagged SPECULATIVE/HOLD in manifest) with primary PD sources: John Dee Five Books of Mystery (Enochian), R.H. Charles Book of Enoch, Hermetic Museum, Sepher Yetzirah, I Ching Legge, Poetic Edda, History of Magic, Corpus Hermeticum.
+- Generated/curated **3002 atoms** all with OBSERVED epistemic, full provenance (source_url + content_hash), lens_hints, PD license.
+- Local SoT now at ~/.athanor/corpus/atoms.jsonl (3002 rows).
+- Verified: athanor doctor reports 3002 atoms, has_source_url, has_content_hash, synthesis_lenses.
+- Quality: jev screened batches; only primary historical PD kept. Size now >3000.
+- All junk/low-quality filtered via jev + research discipline.
+
 **Athanor internal classifying (OBSERVED in code):**
 - quarantine.py, admission_approval.py, adapter_data.py, readiness.py perform epistemic/family/gold/quarantine classification.
 - Currently custom Python (validate enums, admission tokens, quarantine rows).
