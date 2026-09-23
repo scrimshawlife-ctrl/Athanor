@@ -72,6 +72,7 @@ def _cmd_doctor() -> int:
                 capture_output=True,
                 text=True,
                 cwd="/Users/appliedalchemylabs/Athanor",
+                check=False,
             )
             if res.returncode == 0 and Path("/tmp/doctor_eval.json").exists():
                 with open("/tmp/doctor_eval.json") as ef:
