@@ -139,3 +139,7 @@
 {"neg_id": "neg.entertainment.02", "theme": "entertainment_film", "text": "Critics praise the new documentary for its insightful look at social issues.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.science.03", "theme": "news_science", "text": "Breakthrough in fusion energy brings clean power closer to reality.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.business.02", "theme": "news_business", "text": "Tech giants report strong quarterly earnings despite economic headwinds.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.finance.03", "theme": "news_finance", "text": "Stock markets rally on positive economic data and lower inflation reports.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.health.03", "theme": "news_health", "text": "New vaccine shows promising results in clinical trials for common diseases.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.sports.04", "theme": "sports", "text": "Olympic committee announces new events for upcoming games.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.tech.03", "theme": "product_tech", "text": "Smartphone manufacturer unveils foldable device with advanced AI features.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
