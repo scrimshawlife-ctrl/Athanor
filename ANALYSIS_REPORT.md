@@ -257,6 +257,7 @@ No crashes in happy path, no secret leaks, no obvious import cycles or dep issue
 3. **Polish**:
    - Updated STATUS.md and ANALYSIS_REPORT.md.
    - Full re-verify: 220 tests, ruff clean, contracts PASS.
+- Doctor polish: now surfaces synthesis_lenses and basic_hermenut.
 
 **Remaining recs** (for future):
 - Deeper Package 4 (full matrix population, more diagrams, complete AC coverage).

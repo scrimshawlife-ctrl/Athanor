@@ -169,5 +169,6 @@ Scoreboards (repo copies; receipts stay local under `~/.athanor/receipts/`):
   - `specs/004-architecture/` now includes: spec.md, plan.md, architecture.md (with mermaid diagram), acceptance-catalog.md, traceability.md (expanded with REQ/JRN/WF/AC entries), tasks.md (decomposition skeleton).
 - 220 tests passing.
 - Full re-verify green.
+- Doctor enhanced: reports synthesis_lenses + basic_hermenut status.
 
 Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 805 Slice N/A + Hash: fd84c7085579f3e7a560b38fc554a4f832fa9c10 (review base) + 2026-09-22 hardening on feat/close-spec001-gaps-retrieve-provenance-20260922

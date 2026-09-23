@@ -40,6 +40,8 @@ def _cmd_doctor() -> int:
                 pkt = retrieve("test", k=1, corpus_path=corpus)
                 payload["retrieve_smoke_ok"] = len(pkt.get("hits", [])) >= 0
                 payload["receipts_present"] = bool(pkt.get("receipts"))
+                payload["synthesis_lenses"] = list(pkt.get("synthesis", {}).keys())
+                payload["basic_hermenut"] = "initial (lens_hints + family driven)"
         except Exception as e:  # noqa: BLE001
             payload["corpus_sample_error"] = str(e)[:120]
     json.dump(payload, sys.stdout, indent=2)

@@ -57,10 +57,20 @@ graph TD
 - Full SoT or gold in git
 - Production weights without operator authorization
 
+## Data Flow (High Level)
+1. Source → WF-001 (review/rights) → WF-002 (harvest/normalize) → atoms + receipts
+2. Settle (quarantine/gold/approval) → eligible corpus
+3. Retrieve (WF-003): load → rank (BM25) → strip_chrome → build_packet (provenance + 3-lens synthesis)
+4. (Gated) Encoder: adapter prep → freeze → train/eval (when ALLOW_TRAIN)
+5. Verification: receipts, audits, tests, contracts
+
+Provenance flows via atom fields (source_url, content_hash, lens_hints) into packets and future exports.
+
 ## Next Architecture Work (Package 4)
-- Detailed component diagrams (e.g. plantuml or mermaid)
-- Data flow for provenance end-to-end
+- Detailed component diagrams (e.g. plantuml or mermaid) — Mermaid added
+- Data flow for provenance end-to-end — sketched above
 - Integration points for HERMENEUT full contract
 - Scalability notes (current in-memory load ok for ~3k-10k atoms)
+- Full AC coverage and test matrix
 
 Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 805 Slice N/A + Hash: fd84c7085579f3e7a560b38fc554a4f832fa9c10 (review base) + 2026-09-22 work.

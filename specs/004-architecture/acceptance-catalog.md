@@ -10,7 +10,11 @@ Status: Initial. Workflow-local ACs exist in prior specs; this is the global/sys
 | AC-003 | Tokenless queries rejected cleanly; malformed rows give stable errors without tracebacks | REQ-009, REQ-013, WF-003 | test_retrieve.py, CLI probes (2026-09-22) |
 | AC-011 | Packets include resolvable provenance (source_url, content_hash) and non-empty receipts | REQ-011 | build_packet + tests |
 | AC-012 | Three-lens synthesis provided (historical/symbolic/operational) with epistemic labels | REQ-011 | _build_lens_synthesis test |
-| AC-009 | No efficacy claims; genuine historical text preserved | REQ-012 | synthesis + constitution review |
+|| AC-009 | No efficacy claims; genuine historical text preserved | REQ-012 | synthesis + constitution review |
+|| AC-001 (harvest) | Source review invariants (rights evidence, HOLD on unclear) | WF-001 | quarantine + admission tests |
+|| AC-002 (harvest) | Normalize produces deduped envelopes, records outcomes | WF-002 | harvest scripts + receipts |
+|| AC-011 (registry) | Unapproved proposals leave live registry unchanged | WF-011 | registry/ + tests |
+|| AC-SIGN-001 | Valid synthetic signature verifies; altered rejects | WF-016 (signed-approval) | test_admission_approval.py |
 
 ## Production Verification Targets
 - Receipts for every major operation (harvest, settle, retrieve, future train).
