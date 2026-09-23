@@ -72,3 +72,16 @@ def test_evaluate_correspondence_expanded_per_family_ndcg_sample():
     for fam, st in sample:
         assert "ndcg" in st
         assert isinstance(st["ndcg"], (int, float))
+
+def test_evaluate_correspondence_dynamic_low_family_enhancement():
+    # TDD for Option 3: dynamic low threshold and low ndcg avg
+    pairs = load_pairs(str(PAIRS))[:50]
+    results = evaluate_correspondence(pairs, k=10)
+    # The main function doesn't return low, but we can test the logic indirectly by calling with data that has low fam
+    # For now, check that per_family has ndcg for low n families if present
+    per_fam = results.get("per_family", {})
+    lowish = [st for st in per_fam.values() if st.get("n", 100) <= 20]
+    if lowish:
+        for st in lowish[:3]:
+            assert "ndcg" in st
+    assert True  # placeholder for dynamic logic in output

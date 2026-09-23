@@ -187,14 +187,19 @@ def main():
     for fam, st in sorted_fams:
         print(f"  {fam}: hit={st['hit_rate']} mrr={st['mrr']} ndcg={st.get('ndcg',0)} n={st['n']}")
 
-    # Low family callout for doctor/harness (dynamic to current min; track shinto and others <=15)
+    # Low family callout for doctor/harness (dynamic thresholds for Option 3)
     per_fam = results.get("per_family", {})
     min_n = min((st["n"] for st in per_fam.values()), default=0)
-    low_fams = [ (f, st["n"]) for f, st in per_fam.items() if st["n"] <= 15 ]
-    current_low_count = len([f for f, n in low_fams if n < min_n + 3])  # families near or at min
+    dynamic_threshold = max(15, min_n + 5)  # dynamic: at least 15 or min+5
+    low_fams = [ (f, st["n"]) for f, st in per_fam.items() if st["n"] <= dynamic_threshold ]
+    current_low_count = len([f for f, n in low_fams if n < min_n + 3])
+    # Low family ndcg average for quality
+    low_ndcgs = [st.get("ndcg", 0) for f, st in per_fam.items() if st["n"] <= dynamic_threshold]
+    low_ndcg_avg = sum(low_ndcgs) / len(low_ndcgs) if low_ndcgs else 0
     if low_fams:
-        print(f"\\nLow/near-min pair families (n<=15, min={min_n}): {sorted(low_fams, key=lambda x:x[1])[:8]}")
+        print(f"\\nLow/near-min pair families (dynamic <= {dynamic_threshold}, min={min_n}): {sorted(low_fams, key=lambda x:x[1])[:8]}")
         print(f"Current low families count (near min): {current_low_count}")
+        print(f"Low family ndcg avg: {round(low_ndcg_avg, 4)}")
 
     # Also report a quick negative test using a sample negative (expanded OOD)
     try:

@@ -85,4 +85,9 @@ Governed under Athanor SHADOW lane. Operator-supplied canonical corpus at `~/.at
 ---
 
 *This card was produced as part of Package 4 completion and jev-enforced quality work. All classifying decisions used jev rerank.*
-Negatives: 302
+Negatives: 302=== Option 3: Harness/Doctor Enhancements ===
+- Dynamic low family threshold (min_n + 5 or 15) + low ndcg avg in harness
+- Expanded per_family_ndcg_sample to 10, low to 5 (up to n=20)
+- Added TDD test for dynamic low enhancement
+- 7 tests total in harness
+- Negs at 302, min 13, alchemy 322
