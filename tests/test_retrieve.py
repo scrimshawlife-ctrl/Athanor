@@ -51,7 +51,15 @@ def test_retrieve_packet_efficacy_null_and_schema(packet_schema, monkeypatch):
     assert packet["query"] == "Enochian Calls"
     assert len(packet["hits"]) >= 1
     for hit in packet["hits"]:
-        assert {"atom_id", "family_id", "excerpt", "license", "epistemic"} <= set(hit)
+        base = {"atom_id", "family_id", "excerpt", "license", "epistemic"}
+        assert base <= set(hit)
+        # Provenance fields now populated when present in corpus (closes deviation)
+        if "source_url" in hit:
+            assert isinstance(hit.get("source_url"), str)
+        if "content_hash" in hit:
+            assert isinstance(hit.get("content_hash"), str)
+    assert packet["receipts"]  # now has minimal receipt (closes deviation)
+    assert packet["receipts"][0]["type"] == "lexical-retrieve"
     for lens in ("historical", "symbolic", "operational"):
         assert packet["synthesis"][lens]["epistemic"] == "INFERRED"
 
@@ -89,3 +97,27 @@ def test_athanor_corpus_env(monkeypatch):
     packet = retrieve("Emerald Tablet", k=1, family="hermetic")
     assert packet["hits"][0]["atom_id"] == "fixture.hermetic.emerald.01"
     assert packet["efficacy"] is None
+    # Provenance surfaced
+    assert "source_url" in packet["hits"][0]
+    assert packet["receipts"]
+
+
+def test_tokenless_query_rejected(monkeypatch):
+    monkeypatch.setenv("ATHANOR_CORPUS", str(SEED))
+    # Pure punctuation (has length but no tokens)
+    with pytest.raises(ValueError, match="searchable token"):
+        retrieve("!!! ???", k=1)
+    # Whitespace-only hits non-empty first (acceptable per strip guard)
+    with pytest.raises(ValueError, match="non-empty"):
+        retrieve("   ", k=1)
+
+
+def test_cli_malformed_rows_clean_error(capsys, monkeypatch, tmp_path):
+    bad = tmp_path / "bad.jsonl"
+    bad.write_text('{"text": "no id"}\n')
+    monkeypatch.setenv("ATHANOR_CORPUS", str(bad))
+    code = main(["retrieve", "test"])
+    assert code == 2
+    err = capsys.readouterr().err
+    assert "invalid atom" in err or "missing required field" in err
+    assert "Traceback" not in err  # no raw tracebacks (REQ-013)

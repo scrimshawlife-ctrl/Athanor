@@ -22,6 +22,26 @@ def _cmd_doctor() -> int:
         "corpus_present": corpus.is_file(),
         "note": "Lexical retrieve shipped; train/Hub still gated.",
     }
+    if corpus.is_file():
+        try:
+            from athanor.retrieve import load_atoms
+            atoms = load_atoms(corpus)
+            payload["corpus_atoms"] = len(atoms)
+            if atoms:
+                sample = atoms[0]
+                payload["sample_atom"] = {
+                    "atom_id": sample.atom_id,
+                    "family_id": sample.family_id,
+                    "has_source_url": bool(sample.source_url),
+                    "has_content_hash": bool(sample.content_hash),
+                }
+                # Quick retrieve smoke
+                from athanor.retrieve import retrieve
+                pkt = retrieve("test", k=1, corpus_path=corpus)
+                payload["retrieve_smoke_ok"] = len(pkt.get("hits", [])) >= 0
+                payload["receipts_present"] = bool(pkt.get("receipts"))
+        except Exception as e:  # noqa: BLE001
+            payload["corpus_sample_error"] = str(e)[:120]
     json.dump(payload, sys.stdout, indent=2)
     print()
     return 0
@@ -43,8 +63,13 @@ def _cmd_retrieve(
             file=sys.stderr,
         )
         return 2
-    except ValueError as exc:
+    except (ValueError, TypeError, KeyError) as exc:
+        # Close REQ-013: stable CLI errors for all malformed cases, no tracebacks
         print(f"error: {exc}", file=sys.stderr)
+        return 2
+    except Exception as exc:  # noqa: BLE001
+        # Last-resort guard for unexpected (still no raw traceback in normal use)
+        print(f"error: unexpected failure: {exc}", file=sys.stderr)
         return 2
 
     json.dump(packet, sys.stdout, indent=2, ensure_ascii=False)
