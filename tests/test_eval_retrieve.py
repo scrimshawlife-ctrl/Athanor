@@ -1,5 +1,6 @@
 """Tests for scripts/eval_retrieve.py retrieval eval harness (TDD)."""
 from __future__ import annotations
+
 import json
 import subprocess
 from pathlib import Path
@@ -40,8 +41,7 @@ def test_gated_train_eval_readiness_exits_hold():
 
 def test_evaluate_with_report(tmp_path):
     """Test --report flag produces valid JSON (TDD addition)."""
-    import tempfile
-    from scripts.eval_retrieve import load_pairs, evaluate_correspondence
+    from scripts.eval_retrieve import evaluate_correspondence, load_pairs
     pairs = load_pairs(str(PAIRS))[:3]
     results = evaluate_correspondence(pairs, k=3)
     report_path = tmp_path / "test_report.json"
