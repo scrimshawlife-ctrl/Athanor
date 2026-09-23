@@ -296,7 +296,7 @@ This completes the next work recommendations from the prior analysis. All change
 - 2026-09-23 continue: Wired jev_classify into deepen_harvest.py (post-filter step); added 5 jev-high atoms for astrology_west / neoplatonism / runes_eddic; corpus 3023; doctor now reports jev_classify availability.
 - Additional rounds: Multiple jev-classified harvests targeting ALL zero/low families.
 - FINAL targeted round (as recommended): Focused exclusively on andes_amazon and folk_magic_pd. All 6 candidates passed jev rerank (0.5 threshold). Now min 5, 0 families at 4, only 3 <5. Total 3133. All via jev rerank. T4-JEV-003 phase complete.
-- Shifted to T4-JEV-002: Wired optional jev_relevance into src/athanor/quarantine.py (classify() + summary). _jev_relevance helper calls jev rerank (graceful None fallback). Custom CUES remain for validation only. Doctor updated. Settle gates can now consume the score from quarantine output.
+- Shifted to T4-JEV-002 deepened: Extended quarantine with suggested_settle (KEEP/HOLD/REVIEW logic using jev_relevance thresholds + routes/flags). Created scripts/shadow/athanor/settle.py (jev rerank on candidates, proposes decisions). Wired into deepen_harvest.py post-filter for .settle_proposals.jsonl. Updated docs/settle/README.md, doctor, AC-JEV-SETTLE-001, tasks. All classifying via jev.
 - Results (ranked by relevance, answerable 0.92-0.94):
   1. schema-quality (0.94): Defines strict required fields + lens_hints. HIGH signal for quality gates.
   2. sample1 (enochian call, OBSERVED) (0.93): Complete source_url + content_hash, valid epistemic, CC0.

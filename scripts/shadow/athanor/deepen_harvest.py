@@ -760,6 +760,7 @@ async def main() -> None:
                     capture_output=True,
                     text=True,
                     timeout=60,
+                    check=False,
                 )
                 if proc.returncode == 0 and proc.stdout.strip():
                     high_lines = proc.stdout.strip().splitlines()
@@ -769,8 +770,33 @@ async def main() -> None:
                     print(f"Jev filtered {len(high_lines)} high-quality atoms -> {high_path}")
                     # Optionally, replace candidates with high only for this run
                     # ATOMS_PATH.write_text("\n".join(high_lines) + "\n")
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             print(f"Jev filter error: {e}")
+
+    # Deepened settle (T4-JEV-002): jev-based proposals for harvested atoms
+    settle_script = Path(__file__).parent / "settle.py"
+    if settle_script.exists() and ATOMS_PATH.exists():
+        try:
+            with ATOMS_PATH.open() as f:
+                atom_lines = [line for line in f if line.strip()]
+            if atom_lines:
+                input_data = "".join(atom_lines)
+                proc = subprocess.run(
+                    [sys.executable, str(settle_script), "--min-relevance", "0.6"],
+                    input=input_data,
+                    capture_output=True,
+                    text=True,
+                    timeout=60,
+                    check=False,
+                )
+                if proc.returncode == 0 and proc.stdout.strip():
+                    prop_lines = proc.stdout.strip().splitlines()
+                    prop_path = ATOMS_PATH.with_suffix(".settle_proposals.jsonl")
+                    with prop_path.open("w") as f:
+                        f.write("\n".join(prop_lines) + "\n")
+                    print(f"Settle proposals (jev deepened) -> {prop_path}")
+        except Exception as e:  # noqa: BLE001
+            print(f"Settle proposals error: {e}")
 
     print("\\n==== DONE ====")
     print(json.dumps(summary, indent=2))

@@ -92,6 +92,21 @@ def _jev_relevance(text: str, family: str) -> float | None:
     return None
 
 
+def _suggested_settle(classification: dict) -> str:
+    """Deepened settle suggestion using jev_relevance (T4-JEV-002).
+    Custom cues for validation; jev for evidence-bound proposal.
+    """
+    jev = classification.get('jev_relevance') or 0.0
+    route = classification.get('route', '')
+    flags = classification.get('flags', [])
+    if jev >= 0.75 and route == 'BODY_CANDIDATE' and not flags:
+        return 'KEEP'
+    elif jev < 0.4 or route in ('HOLD_RIGHTS_OR_INTERNAL', 'REEXTRACT_WEB_ARTIFACT', 'INDEX_OR_LINKS_REVIEW'):
+        return 'HOLD'
+    else:
+        return 'REVIEW'
+
+
 def sha(raw):
     return hashlib.sha256(raw).hexdigest()
 
@@ -267,6 +282,7 @@ def build(parent, pack):
         normalized_hash = sha(' '.join(words(text)).encode())
         classification = classify(text, atom)
         members = sorted(duplicate_members.get(normalized_hash, []))
+        suggested = _suggested_settle(classification)
         rows.append({'row_id': rid, 'atom_id': atom['atom_id'], 'inputs': {'text': text},
                      'source_text_sha256': sha(atom.get('text', '').encode()),
                      'cleaned_text_sha256': sha(text.encode()), 'source_family': atom['family_id'],
@@ -276,7 +292,8 @@ def build(parent, pack):
                      **classification, 'exact_duplicate_members': members if len(members) > 1 else [],
                      'source_page_group': sha(atom.get('source_url', '').encode()),
                      'work_edition_group': None, 'rights_status': 'NOT_COMPUTABLE',
-                     'split': 'UNASSIGNED', 'training_eligible': False})
+                     'split': 'UNASSIGNED', 'training_eligible': False,
+                     'suggested_settle': suggested})
     summary = {'schema_version': 'athanor.quarantine_recovery.v1', 'status': 'CANDIDATE_ONLY',
                'training_authorized': False, 'source_zip_sha256': manifest['source_zip_sha256'],
                'parent_hashes': original_hashes, 'script_sha256': sha(Path(__file__).read_bytes()),
@@ -285,12 +302,13 @@ def build(parent, pack):
                'routes': dict(sorted(Counter(r['route'] for r in rows).items())),
                'proposed_families': dict(sorted(Counter(r['proposed_family'] for r in rows).items())),
                'jev_relevance_available': sum(1 for r in rows if r.get('jev_relevance') is not None),
+               'suggested_settle': dict(sorted(Counter(r.get('suggested_settle', 'REVIEW') for r in rows).items())),
                'duplicate_affected_quarantine_rows': sum(bool(r['exact_duplicate_members']) for r in rows),
                'limitations': ['Rule-based provisional classification, not exhaustive semantic review.',
                    'No human approval, rights clearance or automatic gold promotion.',
                    'Exact normalized duplicates only; near-duplicate and complete work grouping pending.',
                    'BODY_CANDIDATE is a review queue, not training eligibility.',
-                   'jev_relevance (T4-JEV-002) optional; custom cues for validation only.']}
+                   'jev_relevance + suggested_settle (T4-JEV-002 deepened) for settle gates; custom cues validation only.']}
     return rows, summary
 
 

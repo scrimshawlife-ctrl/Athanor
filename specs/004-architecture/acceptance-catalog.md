@@ -17,7 +17,7 @@ Status: Core global catalog expanded (includes jev harvest/settle ACs). Workflow
 || AC-SIGN-001 | Valid synthetic signature verifies; altered rejects | WF-016 (signed-approval) | test_admission_approval.py |
 ||| AC-JEV-001 | All corpus classifying tasks (settle, quarantine, epistemic/family/gold balance, data quality) route through jev rerank (or equivalent) for evidence-bound decisions; custom logic only for validation | WF-013 (quarantine/settle) | jev rerank runs + tests (analysis 2026-09-22); future integration |
 ||| AC-JEV-HARVEST-001 | All new harvest candidates classified with jev rerank before quarantine; only HIGH relevance PD-primary chunks added as OBSERVED atoms | WF-002 | jev rerank + corpus doctor (this session) |
-||| AC-JEV-SETTLE-001 | Settle decisions use jev-classified quality scores + provenance; HOLD for low relevance or disputed PD | WF-004 | quarantine + jev logs |
+|||| AC-JEV-SETTLE-001 | Settle decisions use jev-classified quality scores + provenance; HOLD for low relevance or disputed PD. Quarantine emits jev_relevance + suggested_settle; settle.py provides jev-rerank proposals. | WF-004 | quarantine rows, settle.py, deepen_harvest integration (2026) |
 ||| AC-013 | Corpus size and quality tracked with jev-classified metrics; >3000 high-quality PD rows maintained | WF-002, WF-005 | doctor + ANALYSIS_REPORT |
 ||| AC-SIGN-002 | Signed admission rejects altered or untrusted scopes | WF-016 | test_admission_approval.py |
 
