@@ -2,10 +2,11 @@
 
 **Version**: 0.1.0a1 (post Package 4 + jev growth)  
 **Date**: 2026-09-23  
-**Total Atoms**: 3156  
+**Total Atoms**: 3199  
 **License**: Primarily Public Domain (2 CC0-fixture)  
 **Epistemic Status**: 100% OBSERVED (after jev rerank classification)  
-**Primary Sources**: sacred-texts.com, archive.org (high-quality PD editions)
+**Primary Sources**: sacred-texts.com, archive.org (high-quality PD editions)  
+**Dataset Status**: Work finished (min 7, all families >=7, jev-only classification)
 
 ## Summary
 
@@ -50,7 +51,7 @@ All atoms are classified and quality-gated exclusively via jev rerank (scripts/s
 
 - **Provenance & Trustworthiness**: 9.5/10 — Full source_url + content_hash + PD license on every atom.
 - **Schema & Structure**: 9.5/10 — 100% v0 schema compliance.
-- **Balance & Coverage**: 7.5/10 — Min 5 enforced; 15 families remain at 5 after growth. Strong Western esoteric coverage with global anchors (Jyotish, Veda, Tantra, Mesoamerica, etc.).
+- **Balance & Coverage**: 9/10 — Min 7 achieved; 0 families below 7. Strong Western esoteric coverage with global anchors (Jyotish, Veda, Tantra, Mesoamerica, etc.). All families >=7.
 - **Text Quality & Granularity**: 6.0/10 — Short excerpts by nature of PD digitization. Improved via longer passages in recent jev rounds. ~95% contain source attribution phrasing.
 - **Deduplication & Cleanliness**: 8.5/10 — 0 exact duplicates. jev + quarantine filtering applied.
 - **Epistemic Honesty**: 9.5/10 — All OBSERVED after jev.
