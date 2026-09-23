@@ -213,3 +213,8 @@
 {"neg_id": "neg.finance.12", "theme": "news_finance", "text": "Markets react to geopolitical events and trade agreements.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.health.11", "theme": "news_health", "text": "Nutritionists recommend balanced diets for optimal wellness.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.entertainment.11", "theme": "entertainment", "text": "Authors publish novels exploring human emotions and society.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.climate.09", "theme": "news_climate", "text": "Scientists study ice core samples to understand historical climate patterns.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.education.09", "theme": "slop_edu", "text": "Online courses provide accessible education for lifelong learning.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.science.11", "theme": "news_science", "text": "Astronomers discover exoplanets using advanced telescope technology.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.law.09", "theme": "news_law", "text": "Courts handle cases involving digital privacy and data protection.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.auto.10", "theme": "product_auto", "text": "Electric cars gain popularity with improved battery technology.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
