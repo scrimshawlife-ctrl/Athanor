@@ -102,6 +102,7 @@ def _cmd_doctor() -> int:
                     "hit_rate_at_10": eval_data.get("hit_rate_at_10"),
                     "ndcg": eval_data.get("ndcg"),
                     "alchemy_lab_hit": eval_data.get("per_family", {}).get("alchemy_lab", {}).get("hit_rate"),
+                    "per_family_ndcg_sample": {k: v.get("ndcg") for k,v in list(eval_data.get("per_family", {}).items())[:3]},
                 }
             else:
                 payload["eval_summary"] = "harness_unavailable"
