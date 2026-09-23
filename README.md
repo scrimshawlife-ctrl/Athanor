@@ -132,8 +132,9 @@ Crawl4AI **0.9.3** is the scrape default. Paid Firecrawl needs an explicit opera
 | Local SoT | `~/.athanor/corpus/atoms.jsonl` | **No** |
 | Gold / KEEP / quarantine | `~/.athanor/settle/` · `~/.athanor/quarantine/` | **No** |
 | Seed fixtures (CI smoke) | `fixtures/seed/` | Yes |
-| P3a correspondence / negatives / dual-use | `fixtures/correspondence/` · `fixtures/negatives/` · `fixtures/dual_use/` | Yes (counts only; no full SoT) |
+| P3a correspondence (150 pairs) / negatives / dual-use | `fixtures/correspondence/` · `fixtures/negatives/` · `fixtures/dual_use/` | Yes (counts only; no full SoT) |
 | Sanitize export | `scripts/shadow/athanor/sanitize_export.py` | Yes — excerpt ≤500; no Hub |
+| Retrieval eval harness | `scripts/eval_retrieve.py` (gold pairs @k metrics + per-family) | Yes |
 
 Settle rules (short): heuristic KEEP stays **INFERRED** until gold settle; chrome/stub DROP may be quarantined locally; modern sacred-texts Rowe/Achadian `/book/` essays **HOLD** without an operator license call. Details: [`docs/settle/README.md`](docs/settle/README.md).
 
