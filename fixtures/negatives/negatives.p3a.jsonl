@@ -203,3 +203,8 @@
 {"neg_id": "neg.finance.11", "theme": "news_finance", "text": "Venture capital funds invest in startups focused on sustainable technologies.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.health.10", "theme": "news_health", "text": "Mental health awareness campaigns reduce stigma around seeking help.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.entertainment.10", "theme": "entertainment", "text": "Television series explore complex themes with high production values.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.climate.08", "theme": "news_climate", "text": "Environmental organizations advocate for stronger policies on plastic pollution.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.education.08", "theme": "slop_edu", "text": "Educators integrate technology into classrooms for interactive learning.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.science.10", "theme": "news_science", "text": "Biologists study biodiversity in remote ecosystems to protect species.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.law.08", "theme": "news_law", "text": "Lawyers argue cases involving intellectual property in digital age.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.auto.09", "theme": "product_auto", "text": "Car manufacturers focus on electric and hybrid vehicle development.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
