@@ -260,9 +260,10 @@ No crashes in happy path, no secret leaks, no obvious import cycles or dep issue
 - Doctor polish: now surfaces synthesis_lenses and basic_hermenut.
 
 **Remaining recs** (for future):
-- Deeper Package 4 (full matrix population, more diagrams, complete AC coverage).
-- Gated train if ALLOW_TRAIN authorized.
-- Cross-project provenance exposure.
+- Deeper Package 4 (full matrix population to 50+ rows, complete AC coverage, integration with contracts/state-machines).
+- Gated train scripts + eval harness (only on explicit ALLOW_TRAIN).
+- Cross-project: document provenance/lens_hints flow to HERMENEUT/Abraxas.
+- More polish (e.g. full Unicode support per DEC-004).
 
 Local clone state on feat branch + tag v0.1.0a1 (ready for commit/PR).
 
