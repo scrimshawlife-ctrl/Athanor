@@ -15,6 +15,7 @@ Status: Initial. Workflow-local ACs exist in prior specs; this is the global/sys
 || AC-002 (harvest) | Normalize produces deduped envelopes, records outcomes | WF-002 | harvest scripts + receipts |
 || AC-011 (registry) | Unapproved proposals leave live registry unchanged | WF-011 | registry/ + tests |
 || AC-SIGN-001 | Valid synthetic signature verifies; altered rejects | WF-016 (signed-approval) | test_admission_approval.py |
+|| AC-JEV-001 | All corpus classifying tasks (settle, quarantine, epistemic/family/gold balance, data quality) route through jev rerank (or equivalent) for evidence-bound decisions; custom logic only for validation | WF-013 (quarantine/settle) | jev rerank runs + tests (analysis 2026-09-22); future integration |
 
 ## Production Verification Targets
 - Receipts for every major operation (harvest, settle, retrieve, future train).

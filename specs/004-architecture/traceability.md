@@ -18,8 +18,9 @@
 | JRN-002 | Curator wants questionable source handled responsibly | WF-001,002,004 | - | quarantine + settle | Historical |
 | AC-003 | Tokenless/malformed handling + lenses + provenance | REQ-009/011/013, WF-003 | - | retrieve + tests + entrypoint | ADDRESSED 2026-09-22 |
 || AC-001 / AC-002 | Harvest and source review invariants | WF-001/002 | - | quarantine + scripts | Historical |
-|| AC-SIGN-001 | Valid synthetic signature verifies; altered rejects | signed-approval-workflow | - | test_admission_approval.py | Shipped |
-|| JRN-003 | Dataset reviewer needs reproducible eligible slice | WF-005 | - | adapter_freeze + readiness | Gated prep |
+||| AC-SIGN-001 | Valid synthetic signature verifies; altered rejects | signed-approval-workflow | - | test_admission_approval.py | Shipped |
+||| AC-JEV-001 | All corpus classifying tasks route through jev rerank for quality decisions | WF-013 | AC-JEV-001 | jev rerank (analysis), future in quarantine/admission | PARTIAL (analysis only 2026-09-22) |
+||| JRN-003 | Dataset reviewer needs reproducible eligible slice | WF-005 | - | adapter_freeze + readiness | Gated prep |
 || JRN-004 | Training operator bounded experimental run | WF-007/008/009 | - | adapter_* + contracts | Gated |
 || ... | Full matrix expansion in Package 4 (pull all REQ/JRN/WF/AC from 000-003 + root) | ... | ... | ... | TODO |
 
