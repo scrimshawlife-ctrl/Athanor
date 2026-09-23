@@ -121,3 +121,6 @@
 {"neg_id": "neg.law.01", "theme": "news_law", "text": "The supreme court ruled on the landmark case involving digital privacy rights yesterday.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.music.01", "theme": "entertainment_music", "text": "The band released their highly anticipated new album to critical acclaim across the board.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.science.02", "theme": "news_science", "text": "Researchers develop new method for carbon capture using advanced nanomaterials.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.space.01", "theme": "news_space", "text": "NASA announces successful test of new rocket engine for deep space missions.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.fashion.01", "theme": "entertainment_fashion", "text": "Designers unveil spring collection featuring sustainable materials and bold colors.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.politics.02", "theme": "news_politics", "text": "Election results show close race in key districts with voter turnout at historic highs.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
