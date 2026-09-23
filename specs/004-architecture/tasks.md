@@ -12,7 +12,7 @@ Status: Initial decomposition. This does not govern or activate.
 
 ## Detailed / Next Steps
 - **Core Package 4 complete** (traceability full, acceptance expanded, jev ACs added, docs polished).
-- T4-JEV-001: Integrate jev rerank into harvest pipeline (WF-002) for candidate classification. (Next)
+- T4-JEV-001: Integrate jev rerank into harvest pipeline (WF-002) for candidate classification. (Started: scripts/shadow/athanor/jev_classify.py added)
 - T4-JEV-002: Update quarantine/settle to use jev scores for quality gates (AC-JEV-*). (Next)
 - T4-JEV-003: Run periodic jev-classified harvests to maintain >3000 high-quality PD atoms. (In progress, 3012 current)
 - T4-JEV-004: Add jev usage to doctor output and receipts for harvest provenance. (Next)

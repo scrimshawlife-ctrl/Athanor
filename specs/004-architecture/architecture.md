@@ -61,9 +61,10 @@ graph TD
 Harvest uses jev rerank for quality classification of candidates (PD-primary only, high relevance for OBSERVED). Settle/quarantine integrates jev scores. Retrieve uses the classified corpus. All classifying tasks route through jev per AC-JEV-*.
 
 Jev is used for:
-- Chunk quality ranking before adding atoms.
+- Chunk quality ranking before adding atoms (via scripts/shadow/athanor/jev_classify.py).
 - Balance and epistemic checks.
 - Replacing junk/low-quality with better primary sources.
+- Pipeline integration started for WF-002 harvests.
 1. Source → WF-001 (review/rights) → WF-002 (harvest/normalize) → atoms + receipts
 2. Settle (quarantine/gold/approval) → eligible corpus
 3. Retrieve (WF-003): load → rank (BM25) → strip_chrome → build_packet (provenance + 3-lens synthesis)

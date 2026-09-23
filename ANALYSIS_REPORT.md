@@ -328,7 +328,7 @@ This completes the next work recommendations from the prior analysis. All change
 - Added AC-JEV-HARVEST-001, AC-JEV-SETTLE-001, AC-013 to acceptance-catalog.md for jev in harvest/settle.
 - Updated architecture.md and tasks.md with jev harvest integration (T4-JEV-00x tasks).
 - More jev harvests: From new archive.org sources (Doctrine of Kabalah, Grimoire of Arthur Gauntlet, On the Invocation of Angels, Book of Ceremonial Magic, Arbatel). Chunked + jev rerank classified (top 0.89 Arbatel, 0.77 Grimoire/Angel, etc., clean jev+local, answerable high). Added 4 high-quality OBSERVED atoms (Arbatel, Grimoire, etc.).
-- Corpus now 3015 rows (all jev-classified PD primary).
+- Corpus now 3018 rows (all jev-classified PD primary).
 - All classifying used jev rerank.
 - Package 4 now has comprehensive traceability (~50 rows), stronger jev focus for harvests.
 
