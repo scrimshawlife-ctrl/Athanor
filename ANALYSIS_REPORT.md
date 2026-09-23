@@ -299,7 +299,7 @@ This completes the next work recommendations from the prior analysis. All change
 - Shifted to T4-JEV-002 deepened: Extended quarantine with suggested_settle (KEEP/HOLD/REVIEW logic using jev_relevance thresholds + routes/flags). Created scripts/shadow/athanor/settle.py (jev rerank on candidates, proposes decisions). Wired into deepen_harvest.py post-filter for .settle_proposals.jsonl. Updated docs/settle/README.md, doctor, AC-JEV-SETTLE-001, tasks. All classifying via jev.
 - AC expansion: Added AC-JEV-QUARANTINE-001, AC-JEV-SETTLE-002, AC-JEV-DOCTOR-001, AC-BALANCE-001, AC-SETTLE-001, AC-QUALITY-001, AC-RECEIPT-001. Updated traceability and tasks. Catalog now covers deepened settle/quarantine/doctor/balance (3145 atoms, min 5).
 - T4-JEV-004: Added jev_harvest to doctor and jev note to retrieve receipts for provenance. 
-- **Continue**: Jev growth round on remaining families at 5 (longer excerpts). 15 candidates → 5 high via jev. Added 5. New total 3161, min 5, 10 families at exactly 5. All via jev rerank.
+- **Continue**: Additional jev growth on remaining families at 5 (longer excerpts). 10 + 9 candidates → 1 + 2 high via jev. Added 3. New total 3164, min 5, 7 families at exactly 5. All via jev rerank.
 - Gold fixtures and docs (dataset-card, operational-plan, doctor) from prior round remain current.
 - **Package 4 core complete**: All 004 artifacts polished (titles/statuses updated to "Core Complete"), 24 ACs, full traceability, jev settle integration. Verified 220 tests, clean ruff, doctor reports deepened features. T4-JEV-004 complete.
 - Results (ranked by relevance, answerable 0.92-0.94):
