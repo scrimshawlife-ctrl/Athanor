@@ -198,3 +198,8 @@
 {"neg_id": "neg.science.09", "theme": "news_science", "text": "Researchers publish papers on quantum computing advancements.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.law.07", "theme": "news_law", "text": "International courts address human rights violations in conflict zones.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.auto.08", "theme": "product_auto", "text": "Autonomous vehicles undergo testing for safety and regulatory approval.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.tech.09", "theme": "product_tech", "text": "Cybersecurity firms develop new tools to protect against ransomware attacks.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.sports.09", "theme": "sports", "text": "Olympic athletes prepare for competitions with intensive training regimens.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.finance.11", "theme": "news_finance", "text": "Venture capital funds invest in startups focused on sustainable technologies.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.health.10", "theme": "news_health", "text": "Mental health awareness campaigns reduce stigma around seeking help.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.entertainment.10", "theme": "entertainment", "text": "Television series explore complex themes with high production values.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
