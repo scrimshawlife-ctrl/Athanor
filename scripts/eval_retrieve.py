@@ -39,12 +39,11 @@ def evaluate_correspondence(
         fam = p.get("family_id", "unknown")
         per_family[fam]["total"] += 1
 
-        # Construct a simple query from the pair structure
-        query = f"{p.get('role', '')} {p.get('filler', '')}".strip()
+        # Improved query (TDD polish): span + filler + role for better lexical recall on PD excerpts
+        query_parts = [p.get("span", ""), p.get("filler", ""), p.get("role", "")]
+        query = " ".join([q for q in query_parts if q]).strip()[:120]
         if not query:
-            query = p.get("span", "")
-        if not query:
-            continue
+            query = p.get("family_id", "tradition")
 
         pkt = retrieve(query, k=max(k, 20), corpus_path=corpus_path)
         hit_ids = [h["atom_id"] for h in pkt.get("hits", [])]
@@ -95,6 +94,7 @@ def main():
         default=None,
         help="Optional corpus path (defaults to ATHANOR_CORPUS or ~/.athanor/...)",
     )
+    parser.add_argument("--report", default=None, help="Optional path to write JSON results")
     args = parser.parse_args()
 
     pairs_path = Path(args.pairs)
@@ -116,6 +116,13 @@ def main():
     print(f"avg_rank_of_hits: {results['avg_rank_of_hits']}")
     print(f"hits: {results['hits']}")
 
+    if getattr(args, 'report', None):
+        report_path = Path(args.report)
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(report_path, "w") as rf:
+            json.dump(results, rf, indent=2)
+        print(f"Report written: {args.report}")
+
     print("\nPer-family hit rates (top 10 by n):")
     sorted_fams = sorted(results.get("per_family", {}).items(), key=lambda x: -x[1]["n"])[:10]
     for fam, st in sorted_fams:
@@ -133,6 +140,12 @@ def main():
             print(f"  Query: {q[:50]}... -> top families: {top_fams}")
     except Exception:  # noqa: BLE001
         print("(Negative check skipped)")
+
+    if args.report:
+        Path(args.report).parent.mkdir(parents=True, exist_ok=True)
+        with open(args.report, "w") as rf:
+            json.dump(results, rf, indent=2)
+        print(f"Report written: {args.report}")
 
     return 0
 
