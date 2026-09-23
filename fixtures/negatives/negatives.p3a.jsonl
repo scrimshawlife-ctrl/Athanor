@@ -188,3 +188,13 @@
 {"neg_id": "neg.health.08", "theme": "news_health", "text": "Hospitals implement new protocols for patient safety and efficiency.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.tech.07", "theme": "product_tech", "text": "Software updates introduce enhanced security features for users.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.auto.07", "theme": "product_auto", "text": "Ride-sharing services expand to new cities with updated apps.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.tech.08", "theme": "product_tech", "text": "Artificial intelligence models are trained on large datasets for natural language tasks.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.sports.08", "theme": "sports", "text": "Professional athletes sign new contracts with major sports franchises.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.finance.10", "theme": "news_finance", "text": "Central banks adjust monetary policy in response to inflation data.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.health.09", "theme": "news_health", "text": "Pharmaceutical companies develop vaccines for emerging infectious diseases.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.entertainment.09", "theme": "entertainment", "text": "Blockbuster films dominate box office with high production budgets.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.climate.07", "theme": "news_climate", "text": "Governments invest in renewable energy to combat climate change.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.education.07", "theme": "slop_edu", "text": "Students use online platforms for remote learning and skill development.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.science.09", "theme": "news_science", "text": "Researchers publish papers on quantum computing advancements.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.law.07", "theme": "news_law", "text": "International courts address human rights violations in conflict zones.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.auto.08", "theme": "product_auto", "text": "Autonomous vehicles undergo testing for safety and regulatory approval.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
