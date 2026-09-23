@@ -2,7 +2,7 @@
 
 **Version**: 0.1.0a2 (deeper Package 4: eval harness, gold, docs sync)  
 **Date**: 2026-09-23  
-******Total Atoms**: 3225 (with longer PD excerpts)  
+********Total Atoms**: 3228 (jev long PD growth)
 **License**: Primarily Public Domain (2 CC0-fixture)  
 **Epistemic Status**: 100% OBSERVED (after jev rerank classification)  
 **Primary Sources**: sacred-texts.com, archive.org (high-quality PD editions)  
@@ -55,7 +55,7 @@ All atoms are classified and quality-gated exclusively via jev rerank (scripts/s
 - **Text Quality & Granularity**: 6.0/10 — Short excerpts by nature of PD digitization. Improved via longer passages in recent jev rounds. ~95% contain source attribution phrasing.
 - **Deduplication & Cleanliness**: 8.5/10 — 0 exact duplicates. jev + quarantine filtering applied.
 - **Epistemic Honesty**: 9.5/10 — All OBSERVED after jev.
-- **Evaluation Readiness: 682 pairs (jev-expanded with longer PD sources), hit@10 0.265, ndcg 0.784, strong per-family gains on iching/kabbalah.
+- **Evaluation Readiness: 773 pairs (jev on low families + longer excerpts), hit@10 0.278, ndcg 0.815, per-family gains (iching 0.20, enochian boosted).
 - **Licensing**: 9.5/10 — Public domain dominant.
 
 **Overall**: 7.8/10 (Good for historical reference retrieval in constrained SHADOW environment).
