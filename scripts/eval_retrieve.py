@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+
+import re
+
 """Retrieval evaluation harness using gold correspondence pairs.
 
 Usage:
@@ -9,6 +12,7 @@ Usage:
 import argparse
 import collections
 import json
+import math
 from pathlib import Path
 from typing import Any
 
@@ -39,9 +43,13 @@ def evaluate_correspondence(
         fam = p.get("family_id", "unknown")
         per_family[fam]["total"] += 1
 
-        # Improved query (TDD polish): span + filler + role for better lexical recall on PD excerpts
-        query_parts = [p.get("span", ""), p.get("filler", ""), p.get("role", "")]
-        query = " ".join([q for q in query_parts if q]).strip()[:120]
+        # Enhanced query: role + filler + key terms from span/text for better recall on short excerpts
+        parts = [p.get("role", ""), p.get("filler", "")]
+        span = p.get("span", "") or p.get("text", "")
+        # extract 3-5 key terms (alphanum >3 chars)
+        terms = re.findall(r"\b[a-zA-Z]{4,}\b", span)[:5]
+        parts.extend(terms)
+        query = " ".join([q for q in parts if q]).strip()[:150]
         if not query:
             query = p.get("family_id", "tradition")
 
@@ -71,11 +79,22 @@ def evaluate_correspondence(
                 "n": stats["total"]
             }
 
+    # nDCG@ k (simple, using ranks of hits)
+    ndcg = 0.0
+    if ranks:
+        for r in ranks:
+            dcg = 1.0 / math.log2(r + 1)
+            idcg = 1.0  # ideal rank 1
+            ndcg += dcg / idcg
+        ndcg /= len(ranks)  # mean over hits; for full could normalize by ideal
+    ndcg = round(ndcg, 4)
+
     return {
         "pairs_evaluated": total,
         f"hit_rate_at_{k}": round(hit_rate, 4),
         "mrr": round(mrr, 4),
         "avg_rank_of_hits": round(avg_rank, 2),
+        "ndcg": ndcg,
         "hits": hits_at_k,
         "per_family": family_stats,
     }
@@ -114,6 +133,7 @@ def main():
     print(f"hit_rate_at_{args.k}: {results[f'hit_rate_at_{args.k}']}")
     print(f"mrr: {results['mrr']}")
     print(f"avg_rank_of_hits: {results['avg_rank_of_hits']}")
+    if 'ndcg' in results: print(f"ndcg: {results['ndcg']}")
     print(f"hits: {results['hits']}")
 
     if getattr(args, 'report', None):
