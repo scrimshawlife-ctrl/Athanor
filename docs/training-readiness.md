@@ -73,3 +73,6 @@ WF-005 preflight: tests/test_readiness.py covers tampering, counterfeit metadata
 C-005/C-009 semantics: specs/contracts/verify_review.py runs in CI. It validates contracts, not actual trained gate outcomes.
 
 Provenance: Athanor main be1ebc9820a2b3a1c7f0596010ac08bab978086e, candidate-preparation/1 format and local synthetic regression checks. No Abraxas Loop or Sprint authority applies.
+
+## Gated eval_train_readiness skeleton (Phase 5)
+`scripts/eval_train_readiness.py` is a strict HOLD skeleton (exit 2 immediately with "EVAL-TRAIN-HARNESS: HOLD" message). It never enables training, imports no training code, checks no ALLOW_* flags, and references this document + eval-gates.md. Tested via `test_gated_train_eval_readiness_exits_hold` in test_retrieve.py. Mirrors the candidate auditor's fail-closed pattern. No activation path present.

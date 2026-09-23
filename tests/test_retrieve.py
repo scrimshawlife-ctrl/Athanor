@@ -135,3 +135,14 @@ def test_cli_malformed_rows_clean_error(capsys, monkeypatch, tmp_path):
     err = capsys.readouterr().err
     assert "invalid atom" in err or "missing required field" in err
     assert "Traceback" not in err  # no raw tracebacks (REQ-013)
+
+
+def test_gated_train_eval_readiness_exits_hold():
+    """Phase 5: gated skeleton for train eval harness must exit exactly 2 with HOLD (strictly non-activating, mirrors training-readiness.md)."""
+    import subprocess
+    script = ROOT / "scripts" / "eval_train_readiness.py"
+    result = subprocess.run([str(script)], capture_output=True, text=True, check=False)
+    assert result.returncode == 2, f"Expected HOLD exit code 2, got {result.returncode}"
+    assert "EVAL-TRAIN-HARNESS: HOLD" in result.stdout
+    assert "read-only skeleton only" in result.stdout
+    assert "no ALLOW_TRAIN" in result.stdout
