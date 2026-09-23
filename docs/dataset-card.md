@@ -63,7 +63,7 @@ All atoms are classified and quality-gated exclusively via jev rerank (scripts/s
 ## Known Limitations
 
 - Text chunks are relatively short (suitable for lexical but limited semantic depth).
-- Family distribution remains skewed toward early core families (enochian, hermetic, alchemy_lab).
+- Family distribution remains skewed toward early core families (enochian, hermetic, alchemy_lab: 263 pairs (hit improved via long PD)
 - No operational lens content (gated; would require separate modern/PD-cleared track).
 - Gold evaluation data is fixture-scale rather than benchmark-scale.
 
