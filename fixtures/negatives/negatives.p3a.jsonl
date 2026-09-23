@@ -280,3 +280,11 @@
 {"neg_id": "neg.round3.finance.13", "theme": "news_finance", "text": "Central banks use quantitative easing to stimulate economies.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.round3.health.14", "theme": "news_health", "text": "mRNA vaccines provide rapid response to emerging pathogens.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.round3.law.15", "theme": "news_law", "text": "Regulatory frameworks govern data protection and privacy.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.round3.tech.16", "theme": "tech_blockchain", "text": "Smart contracts automate agreements on decentralized networks.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.round3.science.17", "theme": "news_science", "text": "Exoplanet atmospheres are analyzed using spectroscopy.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.round3.finance.18", "theme": "news_finance", "text": "Algorithmic trading executes orders based on market data.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.round3.health.19", "theme": "news_health", "text": "Telehealth services expanded access during global health crises.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.round3.law.20", "theme": "news_law", "text": "Antitrust laws prevent monopolistic practices in tech industries.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.round3.edu.21", "theme": "slop_edu", "text": "Virtual reality simulations enhance experiential learning.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.round3.env.22", "theme": "news_env", "text": "Carbon offset programs support sustainable development projects.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.round3.auto.23", "theme": "news_auto", "text": "Ride-sharing apps optimize urban transportation efficiency.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}

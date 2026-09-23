@@ -85,4 +85,4 @@ Governed under Athanor SHADOW lane. Operator-supplied canonical corpus at `~/.at
 ---
 
 *This card was produced as part of Package 4 completion and jev-enforced quality work. All classifying decisions used jev rerank.*
-Negatives: 282
+Negatives: 290
