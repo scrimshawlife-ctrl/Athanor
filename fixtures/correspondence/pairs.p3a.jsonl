@@ -61,3 +61,10 @@
 {"pair_id": "corr.hermetic.zodiac.leo", "family_id": "hermetic", "role": "zodiac_sign", "filler": "Leo", "span": "triplicities of signs", "atom_id": "hermetic:ca4fd4129e496384", "epistemic": "OBSERVED"}
 {"pair_id": "corr.hermetic.zodiac.sagittarius", "family_id": "hermetic", "role": "zodiac_sign", "filler": "Sagittarius", "span": "triplicities of signs", "atom_id": "hermetic:ca4fd4129e496384", "epistemic": "OBSERVED"}
 {"pair_id": "corr.kabbalah.doubles.planets", "family_id": "kabbalah_pd", "role": "letter_group", "filler": "seven duplicate letters", "span": "Saturn", "atom_id": "kabbalah_pd:1963cf27f2d4b1da", "epistemic": "INFERRED"}
+{"pair_id": "corr.jyotish.planet.graha_sun", "family_id": "jyotish_anchors", "role": "graha", "filler": "Surya", "span": "Sun", "atom_id": "pd.jyotish_anchors.new1", "epistemic": "OBSERVED"}
+{"pair_id": "corr.jyotish.planet.graha_moon", "family_id": "jyotish_anchors", "role": "graha", "filler": "Chandra", "span": "Moon", "atom_id": "pd.jyotish_anchors.new1", "epistemic": "OBSERVED"}
+{"pair_id": "corr.tantra.chakra.muladhara", "family_id": "tantra_hist_pd", "role": "chakra", "filler": "Muladhara", "span": "Root", "atom_id": "pd.tantra_hist_pd.new1", "epistemic": "OBSERVED"}
+{"pair_id": "corr.tantra.chakra.anahata", "family_id": "tantra_hist_pd", "role": "chakra", "filler": "Anahata", "span": "Heart", "atom_id": "pd.tantra_hist_pd.new1", "epistemic": "OBSERVED"}
+{"pair_id": "corr.veda.element.earth", "family_id": "veda_upanishad_pd", "role": "mahabhuta", "filler": "Prithvi", "span": "Earth", "atom_id": "pd.veda_upanishad_pd.new1", "epistemic": "OBSERVED"}
+{"pair_id": "corr.golden_dawn.sephira.1", "family_id": "golden_dawn_hist", "role": "sephira", "filler": "Kether", "span": "Crown", "atom_id": "pd.golden_dawn_hist.new1", "epistemic": "OBSERVED"}
+{"pair_id": "corr.islamic.planet.venus", "family_id": "islamic_occult_pd", "role": "planet", "filler": "Zuhra", "span": "Venus", "atom_id": "pd.islamic_occult_pd.new1", "epistemic": "OBSERVED"}

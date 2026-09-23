@@ -20,7 +20,7 @@ This does not govern or activate. Earlier dated entries remain historical; the c
 | Package | `athanor` CLI `doctor` / `retrieve` / `--version` |
 | CI | `.github/workflows/validate.yml` — local ruff+pytest is the bar; Actions may fail on account billing |
 | Harvest | Wave 0–1 + A–E + F fill3000 · Crawl4AI 0.9.3 · P3a gold sealed |
-| Local SoT | `~/.athanor/corpus/atoms.jsonl` — **3152** high-quality PD atoms (OBSERVED after jev+research classification; continued deeper jev rounds boosting families at 5; now min 5, 0 families <5, 17 at exactly 5; T4-JEV-004 complete (doctor now reports family_min / families_below_5 / families_at_5 + receipts with jev_harvest provenance); jev rerank only for all classifying; full Package 4 core complete; >3000 rows) |
+| Local SoT | `~/.athanor/corpus/atoms.jsonl` — **3156** high-quality PD atoms (OBSERVED after jev+research classification; continued jev growth on families at 5 using longer excerpts for granularity; now min 5, 0 <5, 15 at exactly 5; doctor extended with avg_text_chars / operational / pd_license_pct; jev rerank ONLY for all classifying; full Package 4 core complete; dataset-card.md + operational-track-plan.md created; gold fixtures expanded) |
 | Hub / train | Blocked · Spec 002 P3a specify exit sealed; Aaron pack local-only |
 
 ## Wave 0 harvest (OBSERVED 2026-09-10 PT)

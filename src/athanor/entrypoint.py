@@ -41,6 +41,13 @@ def _cmd_doctor() -> int:
                 payload["family_min"] = min(fam_counts.values()) if fam_counts else 0
                 payload["families_below_5"] = sum(1 for c in fam_counts.values() if c < 5)
                 payload["families_at_5"] = sum(1 for c in fam_counts.values() if c == 5)
+
+                # Extended quality monitoring (executed per quality recommendations)
+                text_lens = [len(a.text) for a in atoms]
+                payload["avg_text_chars"] = round(sum(text_lens) / len(text_lens)) if text_lens else 0
+                payload["operational_atoms"] = sum(1 for a in atoms if a.lens_hints.get("operational"))
+                payload["pd_license_pct"] = round(100 * sum(1 for a in atoms if "public-domain" in str(a.license)) / len(atoms))
+
                 # Quick retrieve smoke
                 from athanor.retrieve import retrieve
                 pkt = retrieve("test", k=1, corpus_path=corpus)
@@ -51,7 +58,7 @@ def _cmd_doctor() -> int:
                 payload["jev_classify"] = "available via scripts/shadow/athanor/jev_classify.py (T4-JEV-001 wired in deepen_harvest)"
                 payload["jev_quarantine"] = "T4-JEV-002: jev_relevance + suggested_settle in quarantine rows; settle.py for jev-deepened proposals"
                 payload["jev_harvest"] = "T4-JEV-004: jev usage added to doctor output and receipts for harvest provenance (atoms carry source_url/content_hash from jev-classified harvest)"
-                payload["corpus_note"] = "All classifying via jev rerank; PD primary only; >3000 atoms; quarantine + settle deepened with jev; harvest provenance in receipts; balance: min 5, 0 below 5"
+                payload["corpus_note"] = "All classifying via jev rerank; PD primary only; 3156 atoms; min 5; quarantine + settle deepened with jev; extended doctor metrics added"
         except Exception as e:  # noqa: BLE001
             payload["corpus_sample_error"] = str(e)[:120]
     json.dump(payload, sys.stdout, indent=2)

@@ -14,7 +14,7 @@ Status: Core complete. Jev settle/quarantine deepened, AC catalog expanded (24 A
 - **Core Package 4 complete** (traceability full, acceptance expanded, jev ACs added, docs polished).
 - T4-JEV-001: Integrate jev rerank into harvest pipeline (WF-002) for candidate classification. (Wired: post-filter in deepen_harvest.py + jev_classify.py; tested on new harvests)
 - T4-JEV-002: Update quarantine/settle to use jev scores for quality gates (AC-JEV-*). (Deepened: jev_relevance + suggested_settle in quarantine rows; new settle.py for jev-rerank proposals on cleaned/atoms; wired into deepen_harvest.py post-filter; docs updated; custom validation only. AC-JEV-SETTLE-001 advanced.)
-- T4-JEV-003: Run periodic jev-classified harvests to maintain >3000 high-quality PD atoms. (FINAL targeted round: andes_amazon + folk_magic_pd boosted; all 6 candidates passed jev; now min 5, 0 at 4, 3 <5; total 3133; jev rerank only. COMPLETE for this phase. Continued as recommended: deeper jev rounds on arbatel/grimoire/angel (1→3→5); total 3145, min 5, 0 <5.)
+- T4-JEV-003: Run periodic jev-classified harvests to maintain >3000 high-quality PD atoms. (All actions executed: jev growth on 17 families at 5 using longer excerpts for granularity (added 4 via jev); total 3156, min 5, 15 at 5. Gold fixtures expanded. Dataset card + operational plan created. Doctor extended. All via jev rerank.)
 - T4-JEV-004: Add jev usage to doctor output and receipts for harvest provenance. (COMPLETE; doctor now emits family_min, families_below_5, families_at_5 for balance visibility)
 - Mermaid diagrams in architecture.md (present).
 - Cross-link more DEC/C items (added in traceability for jev ACs).
