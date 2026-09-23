@@ -116,3 +116,5 @@
 {"neg_id": "neg.tech.01", "theme": "product_tech", "text": "The latest AI model achieves state-of-the-art results on natural language understanding benchmarks.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.food.01", "theme": "slop_food", "text": "This simple pasta recipe uses fresh tomatoes, basil, and garlic for a quick weeknight meal.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.business.01", "theme": "news_business", "text": "Major corporation announces quarterly earnings beat expectations with strong growth in emerging markets.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.climate.01", "theme": "news_climate", "text": "Global temperatures hit record highs this year according to latest climate data reports.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.gaming.01", "theme": "entertainment_gaming", "text": "New video game console sells out within hours of launch at major retailers worldwide.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
