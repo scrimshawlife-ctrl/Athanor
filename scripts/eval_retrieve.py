@@ -91,15 +91,23 @@ def evaluate_correspondence(
     mrr = sum(1.0 / r for r in ranks) / total if ranks and total > 0 else 0.0
     avg_rank = sum(ranks) / len(ranks) if ranks else 0.0
 
-    # Per family breakdown
+    # Per family breakdown (with ndcg for quality tracking)
     family_stats = {}
     for fam, stats in per_family.items():
         if stats["total"] > 0:
             fr = stats["hits"] / stats["total"]
             fmrr = sum(1.0 / r for r in stats["ranks"]) / stats["total"] if stats["ranks"] else 0
+            # per-family ndcg (simple mean over hits in family)
+            fndcg = 0.0
+            if stats["ranks"]:
+                for r in stats["ranks"]:
+                    dcg = 1.0 / math.log2(r + 1)
+                    fndcg += dcg
+                fndcg /= len(stats["ranks"])
             family_stats[fam] = {
                 "hit_rate": round(fr, 3),
                 "mrr": round(fmrr, 3),
+                "ndcg": round(fndcg, 4),
                 "n": stats["total"]
             }
 
@@ -167,10 +175,10 @@ def main():
             json.dump(results, rf, indent=2)
         print(f"Report written: {args.report}")
 
-    print("\nPer-family hit rates (top 10 by n):")
+    print("\nPer-family hit rates (top 10 by n, with ndcg):")
     sorted_fams = sorted(results.get("per_family", {}).items(), key=lambda x: -x[1]["n"])[:10]
     for fam, st in sorted_fams:
-        print(f"  {fam}: hit={st['hit_rate']} mrr={st['mrr']} n={st['n']}")
+        print(f"  {fam}: hit={st['hit_rate']} mrr={st['mrr']} ndcg={st.get('ndcg',0)} n={st['n']}")
 
     # Low family callout for doctor/harness
     low_fams = [ (f, st["n"]) for f, st in results.get("per_family", {}).items() if st["n"] <= 6 ]
