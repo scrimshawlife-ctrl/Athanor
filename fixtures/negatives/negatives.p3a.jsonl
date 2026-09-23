@@ -152,3 +152,5 @@
 {"neg_id": "neg.entertainment.04", "theme": "entertainment", "text": "Award-winning film explores themes of identity and belonging in modern society.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.science.04", "theme": "news_science", "text": "Astronomers discover new exoplanet with potential for liquid water.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.business.03", "theme": "news_business", "text": "Startup raises record funding for AI-powered healthcare solutions.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.travel.03", "theme": "news_travel", "text": "Tourism industry recovers with new sustainable travel options in popular destinations.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.education.04", "theme": "slop_edu", "text": "Online courses see surge in enrollment for professional development skills.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
