@@ -113,14 +113,14 @@ def evaluate_correspondence(
                 "n": stats["total"]
             }
 
-    # nDCG@ k (simple, using ranks of hits)
+    # nDCG@ k (proper mean, using ranks of hits; IDCG for @k)
     ndcg = 0.0
     if ranks:
         for r in ranks:
             dcg = 1.0 / math.log2(r + 1)
-            idcg = 1.0  # ideal rank 1
-            ndcg += dcg / idcg
-        ndcg /= len(ranks)  # mean over hits; for full could normalize by ideal
+            idcg = sum(1.0 / math.log2(i + 1) for i in range(1, min(11, len(ranks)+1)))  # approx ideal for k=10
+            ndcg += dcg / max(idcg, 1)
+        ndcg /= len(ranks)
     ndcg = round(ndcg, 4)
 
     return {
@@ -169,6 +169,11 @@ def main():
     print(f"avg_rank_of_hits: {results['avg_rank_of_hits']}")
     if 'ndcg' in results: print(f"ndcg: {results['ndcg']}")
     print(f"hits: {results['hits']}")
+
+    # Alchemy focus callout (per ongoing deepen)
+    alch = results.get("per_family", {}).get("alchemy_lab", {})
+    if alch:
+        print(f"alchemy_lab: hit={alch.get('hit_rate')} ndcg={alch.get('ndcg')} n={alch.get('n')}")
 
     if getattr(args, 'report', None):
         report_path = Path(args.report)
