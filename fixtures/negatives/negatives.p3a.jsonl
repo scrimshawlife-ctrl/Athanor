@@ -137,3 +137,5 @@
 {"neg_id": "neg.law.02", "theme": "news_law", "text": "New legislation aims to regulate AI ethics and data privacy in tech industry practices.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.environment.01", "theme": "news_env", "text": "Conservation efforts protect endangered species in critical habitats worldwide.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.entertainment.02", "theme": "entertainment_film", "text": "Critics praise the new documentary for its insightful look at social issues.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.science.03", "theme": "news_science", "text": "Breakthrough in fusion energy brings clean power closer to reality.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.business.02", "theme": "news_business", "text": "Tech giants report strong quarterly earnings despite economic headwinds.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
