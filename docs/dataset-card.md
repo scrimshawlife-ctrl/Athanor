@@ -159,3 +159,12 @@ Updated continue: Pairs 1342, Negs 307, Min pair 14, Lowest [('history_magic', 1
   - Many others near 1.0 hit/ndcg in sample
 - Note: Some families have high pair count but poor retrieval hit — prioritize sources that improve semantic match for these.
 
+
+## Continue after eval
+- Fresh sources attempts: Book of the Dead (gutenberg 7145) for egypt_magical (115 cands, jev 0); Magic of the Horse-Shoe (gutenberg 57411) for history_magic (348 cands, jev 0)
+- Pair expansion: +8 for 20s (islamic/grimoire to 24), +6 for weak (egypt/history to 24)
+- +5 negs to 332
+- Min now 21
+- Total pairs 1413
+- Doctor and card updated
+

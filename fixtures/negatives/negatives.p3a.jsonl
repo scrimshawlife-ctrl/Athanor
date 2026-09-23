@@ -325,3 +325,8 @@
 {"neg_id": "neg.politics.02", "theme": "politics", "text": "The election results were announced after a close race.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.health.02", "theme": "health", "text": "Vaccination rates increased significantly in the region.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.environment.02", "theme": "environment", "text": "The conservation project protected 1000 acres of rainforest.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.entertainment.02", "theme": "entertainment", "text": "The concert sold out within minutes of tickets going on sale.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.automotive.02", "theme": "automotive", "text": "Electric vehicles are becoming more affordable with new battery technology.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.realestate.02", "theme": "realestate", "text": "Interest rates affected the housing market in major cities.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.retail.02", "theme": "retail", "text": "Black Friday sales exceeded expectations for many retailers.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.fashion.02", "theme": "fashion", "text": "Sustainable fashion brands are gaining popularity among consumers.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
