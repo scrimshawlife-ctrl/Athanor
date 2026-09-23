@@ -1,6 +1,6 @@
 # Plan — Package 4 Architecture
 
-Status: Core phase complete. Advisory. (Traceability populated; jev harvests executed to 3012+ atoms.)
+Status: Core complete. Advisory. (Traceability full ~60 rows; AC catalog 24 entries; jev settle/quarantine/doctor deepened; 3133 atoms, min 5.)
 
 ## Phases
 1. Inventory existing (retrieve packet, synthesis, contracts, workflows).

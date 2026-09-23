@@ -1,4 +1,4 @@
-# Traceability Matrix — Package 4 (Skeleton)
+# Traceability Matrix — Package 4 (Core Complete)
 
 | ID | Requirement | Workflow | Acceptance | Code/Test | Status |
 |----|-------------|----------|------------|-----------|--------|
@@ -63,6 +63,6 @@
 
 See contracts/README.md, workflows/README.md, 001/requirements.md, and state-machines.md for base definitions.
 
-**Next Package 4 steps**: Expand to all REQ from 000-003, link to AC-*, add code coverage column.
+**Package 4 core complete**: Full traceability (~60 rows), AC catalog (24 entries), jev settle/quarantine/doctor integrated. Gated items remain noted.
 
 Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 805 Slice N/A + Hash: fd84c7085579f3e7a560b38fc554a4f832fa9c10 (review base) + 2026-09-22 work.

@@ -298,6 +298,7 @@ This completes the next work recommendations from the prior analysis. All change
 - FINAL targeted round (as recommended): Focused exclusively on andes_amazon and folk_magic_pd. All 6 candidates passed jev rerank (0.5 threshold). Now min 5, 0 families at 4, only 3 <5. Total 3133. All via jev rerank. T4-JEV-003 phase complete.
 - Shifted to T4-JEV-002 deepened: Extended quarantine with suggested_settle (KEEP/HOLD/REVIEW logic using jev_relevance thresholds + routes/flags). Created scripts/shadow/athanor/settle.py (jev rerank on candidates, proposes decisions). Wired into deepen_harvest.py post-filter for .settle_proposals.jsonl. Updated docs/settle/README.md, doctor, AC-JEV-SETTLE-001, tasks. All classifying via jev.
 - AC expansion: Added AC-JEV-QUARANTINE-001, AC-JEV-SETTLE-002, AC-JEV-DOCTOR-001, AC-BALANCE-001, AC-SETTLE-001, AC-QUALITY-001, AC-RECEIPT-001. Updated traceability and tasks. Catalog now covers deepened settle/quarantine/doctor/balance (3133 atoms, min 5).
+- **Package 4 core complete**: All 004 artifacts polished (titles/statuses updated to "Core Complete"), 24 ACs, full traceability, jev settle integration. Verified 220 tests, clean ruff, doctor reports deepened features.
 - Results (ranked by relevance, answerable 0.92-0.94):
   1. schema-quality (0.94): Defines strict required fields + lens_hints. HIGH signal for quality gates.
   2. sample1 (enochian call, OBSERVED) (0.93): Complete source_url + content_hash, valid epistemic, CC0.

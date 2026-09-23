@@ -1,11 +1,11 @@
-# Tasks — Package 4 (Skeleton)
+# Tasks — Package 4 (Core Complete)
 
-Status: Initial decomposition. This does not govern or activate.
+Status: Core complete. Jev settle/quarantine deepened, AC catalog expanded (24 ACs), traceability full. This does not govern or activate.
 
 ## High-Level Tasks (from plan)
 - T4-001: Inventory all existing AC/REQ/WF from 000-003 and root specs. **COMPLETE**
 - T4-002: Define layered architecture (harvest/settle/retrieve/encoder/verification) with diagrams. **Core complete**
-- T4-003: Build global acceptance catalog (expand workflow-local to system). **Expanded (added AC-JEV-QUARANTINE-001, AC-JEV-SETTLE-002, AC-JEV-DOCTOR-001, AC-BALANCE-001, AC-SETTLE-001, AC-QUALITY-001, AC-RECEIPT-001; 3133 atoms, min 5)**
+- T4-003: Build global acceptance catalog (expand workflow-local to system). **COMPLETE** (24 ACs including full jev quarantine/settle/doctor/balance/quality/receipts; 3133 atoms, min 5)
 - T4-004: Complete traceability matrix (REQ → WF → AC → code/tests). **COMPLETE (full core population ~60 lines)**
 - T4-005: Produce task decomposition and U* items for remaining work. **Core complete**
 - T4-006: Define production verification strategy (receipts, audits, HERMENEUT). **Core complete**

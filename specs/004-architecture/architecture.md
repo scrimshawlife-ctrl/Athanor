@@ -1,6 +1,6 @@
-# Architecture — Athanor (Package 4 Draft)
+# Architecture — Athanor (Package 4 Core Complete)
 
-Status: Core description complete for this phase (layers, data flow, jev harvest integration noted). This does not govern or activate.
+Status: Core complete (layers, data flow, jev harvest + settle/quarantine integration). This does not govern or activate.
 
 ## High-Level Layers
 ```
@@ -74,11 +74,11 @@ Jev is used for:
 
 Provenance flows via atom fields (source_url, content_hash, lens_hints) into packets and future exports.
 
-## Next Architecture Work (Package 4)
-- Detailed component diagrams (e.g. plantuml or mermaid) — Mermaid added
-- Data flow for provenance end-to-end — sketched above
-- Integration points for HERMENEUT full contract
-- Scalability notes (current in-memory load ok for ~3k-10k atoms)
-- Full AC coverage and test matrix
+## Architecture Work (Package 4 - Core Complete)
+- Layers, data flow, and jev integration (harvest + settle/quarantine) complete
+- Mermaid diagram present
+- Provenance end-to-end sketched
+- Full AC coverage and test matrix in acceptance-catalog.md + traceability.md
+- HERMENEUT and gated prep noted (no changes to fail-closed paths)
 
 Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 805 Slice N/A + Hash: fd84c7085579f3e7a560b38fc554a4f832fa9c10 (review base) + 2026-09-22 work.

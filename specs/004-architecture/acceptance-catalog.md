@@ -1,6 +1,6 @@
-# Acceptance Catalog — Package 4 (Skeleton)
+# Acceptance Catalog — Package 4 (Core Complete)
 
-Status: Expanded with jev quarantine/settle/doctor/balance ACs (AC-JEV-QUARANTINE-001, AC-JEV-SETTLE-002, AC-JEV-DOCTOR-001, AC-BALANCE-001, AC-SETTLE-001, AC-QUALITY-001, AC-RECEIPT-001). 3133 atoms, min 5. Core global + jev focus. This does not govern or activate.
+Status: Core complete. 24 ACs (core + full jev harvest/quarantine/settle/doctor/balance/quality/receipts). 3133 atoms, min 5. This does not govern or activate.
 
 ## Global ACs (examples, to be expanded)
 

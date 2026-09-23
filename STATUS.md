@@ -6,6 +6,8 @@ Packages 1-3 define an advisory target; runtime code and schemas remain unchange
 
 This does not govern or activate. Earlier dated entries remain historical; the canonical fourteen-stage method is not declared complete.
 
+**Package 4 core complete** (2026-09-23): specs/004-architecture/ (spec, plan, architecture, acceptance-catalog 24 ACs, traceability ~60 rows, tasks) polished and marked complete. Jev settle/quarantine/doctor/balance/quality/receipts integrated. 3133 atoms, min 5. All classifying via jev. Gated paths untouched.
+
 **Lane:** SHADOW — retrieve live · train/Hub gated  
 **Version:** see `VERSION` (0.1.0a1)  
 **Remote:** https://github.com/scrimshawlife-ctrl/Athanor  
