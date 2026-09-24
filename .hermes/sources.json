@@ -1,0 +1,55 @@
+{
+  "theosophy_pd": [
+    "https://www.sacred-texts.com/the/tdoa/tdoa00.htm",
+    "https://www.sacred-texts.com/the/iu/iu00.htm"
+  ],
+  "runes_eddic": [
+    "https://www.sacred-texts.com/neu/poe/poe00.htm"
+  ],
+  "arbatel": [
+    "https://www.esotericarchives.com/arbatel/arbatel.htm"
+  ],
+  "buddhism_esoteric_pd": [
+    "https://www.sacred-texts.com/bud/ebt/ebt00.htm",
+    "https://www.sacred-texts.com/bud/tib/btm.htm"
+  ],
+  "golden_dawn_hist": [
+    "https://www.sacred-texts.com/oto/gd.htm"
+  ],
+  "jyotish_anchors": [
+    "https://www.sacred-texts.com/hin/bri/bri00.htm"
+  ],
+  "andes_amazon": [
+    "https://www.sacred-texts.com/latin/hoi/hoi00.htm"
+  ],
+  "astrology_west": [
+    "https://www.sacred-texts.com/ast/pta/pta00.htm"
+  ],
+  "tarot_history": [
+    "https://www.sacred-texts.com/tarot/pkt/pkt00.htm"
+  ],
+  "chaos_spare_hist": [
+    "https://www.esotericarchives.com/spare/spare.htm"
+  ],
+  "mesopotamia": [
+    "https://www.sacred-texts.com/ane/sum/sum00.htm"
+  ],
+  "alchemy_spirit": [
+    "https://www.sacred-texts.com/alchemy/ha/ha00.htm"
+  ],
+  "goetia_catalog": [
+    "https://www.sacred-texts.com/grim/lks/lks00.htm"
+  ],
+  "shinto_onmyodo": [
+    "https://www.sacred-texts.com/shi/kj/kj00.htm"
+  ],
+  "coptic_gnostic": [
+    "https://www.sacred-texts.com/chr/gnostic.htm"
+  ],
+  "veda_upanishad_pd": [
+    "https://www.sacred-texts.com/hin/up/up00.htm"
+  ],
+  "mesoamerica": [
+    "https://www.sacred-texts.com/latin/pop/pop00.htm"
+  ]
+}

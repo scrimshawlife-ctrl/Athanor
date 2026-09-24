@@ -1440,10 +1440,10 @@ async def main() -> None:
     receipt_path.write_text(json.dumps(receipt, indent=2, ensure_ascii=False))
 
     lines = [
-        f"# Ingest Priority F scoreboard — fill3000",
-        f"",
+        "# Ingest Priority F scoreboard — fill3000",
+        "",
         f"- run_id: `{RUN_ID}`",
-        f"- job_type: harvest | priority: **F** | goal: **fill3000** | engine: crawl4ai 0.9.3 (+ urllib)",
+        "- job_type: harvest | priority: **F** | goal: **fill3000** | engine: crawl4ai 0.9.3 (+ urllib)",
         f"- timestamp_utc: {receipt['timestamp_utc']}",
         f"- pages_ok: **{pages_ok}** | pages_fail: **{pages_fail}**",
         f"- atoms_written: **{atoms_written}** | dupes: {atoms_skipped_dupe} | quality_skips: {atoms_skipped_quality}",
@@ -1452,11 +1452,11 @@ async def main() -> None:
         f"- kinds: `{dict(by_kind)}`",
         f"- receipt: `{receipt_path}`",
         f"- backup: `{backup}`",
-        f"",
-        f"## Per-family NEW",
-        f"",
-        f"| family_id | before | after | delta | % of NEW |",
-        f"|---|---:|---:|---:|---:|",
+        "",
+        "## Per-family NEW",
+        "",
+        "| family_id | before | after | delta | % of NEW |",
+        "|---|---:|---:|---:|---:|",
     ]
     for fid in FOCUS_FAMILIES:
         delta = family_delta.get(fid, 0)
@@ -1465,32 +1465,32 @@ async def main() -> None:
             f"| {fid} | {before.get(fid, 0)} | {after.get(fid, 0)} | **{delta}** | {share:.1f}% |"
         )
     lines += [
-        f"",
-        f"## HOLD / DROP notes (proposals only — no settle)",
-        f"",
+        "",
+        "## HOLD / DROP notes (proposals only — no settle)",
+        "",
     ]
     for h in holds[:40]:
         lines.append(f"- {h}")
     if len(holds) > 40:
         lines.append(f"- … +{len(holds)-40} more in receipt")
     lines += [
-        f"",
-        f"## FAILED (sample)",
-        f"",
+        "",
+        "## FAILED (sample)",
+        "",
     ]
     for f in failures[:25]:
         lines.append(f"- {f}")
     if len(failures) > 25:
         lines.append(f"- … +{len(failures)-25} more in receipt")
     lines += [
-        f"",
-        f"## Hard locks honored",
-        f"",
-        f"- no Firecrawl / no Enochian flood / no Wave 3b harvest / no HF upload / no git-commit atoms",
+        "",
+        "## Hard locks honored",
+        "",
+        "- no Firecrawl / no Enochian flood / no Wave 3b harvest / no HF upload / no git-commit atoms",
         f"- Crawl4AI 0.9.3 from Hyperlex venv; UA `{UA}`; ≤1 req / {SLEEP_SEC}s / host; robots.txt",
-        f"- chrome strip via `athanor.chrome.strip_chrome`; epistemic=INFERRED; efficacy=null",
+        "- chrome strip via `athanor.chrome.strip_chrome`; epistemic=INFERRED; efficacy=null",
         f"- balance soft-cap ≤25% NEW; family soft_cap={FAMILY_SOFT_CAP}",
-        f"",
+        "",
     ]
     scoreboard_path = SCOREBOARD_DIR / f"ingest-priority-f-fill3000-{TS_FILE}.md"
     scoreboard_path.write_text("\n".join(lines) + "\n")

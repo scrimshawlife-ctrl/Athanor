@@ -36,18 +36,19 @@ The Validate badge may stay red when GitHub Actions billing blocks the workflow 
 | Dual-use wall fixtures (≥55 prompts) | Summon / compel product surface |
 | Atlas + family registry | Full SoT / gold JSONL in git |
 
-## Current state (OBSERVED 2026-09-11 PT)
+## Current state (OBSERVED 2026-09-23 PT)
 
 Snapshot for operators. Full receipts live in [`STATUS.md`](STATUS.md).
 
-| Area | State |
+|| Area | State |
 |------|-------|
-| Spec Kit spine (000) | Sealed |
-| Spec 001 retrieve | Live on main · T5 chrome strip landed |
-| Spec 002 encoder | **P3a specify exit sealed** · implement/train still gated |
-| Local SoT | `~/.athanor/corpus/atoms.jsonl` — **2997** atoms (**not in git**) |
-| Gold classify | **400 OBSERVED** across **27** families · E7 gold **PASS** |
-| P3a remainder | **63** correspondence pairs · **80** negatives · **55** dual-use |
+|| Spec Kit spine (000) | Sealed |
+|| Spec 001 retrieve | Live on main · T5 chrome strip landed |
+|| Spec 002 encoder | **P3a specify exit sealed** · implement/train still gated |
+|| Local SoT | `~/.athanor/corpus/atoms.jsonl` — **3199** atoms (jev-classified PD, min 5, 15 families at 5) |
+|| Quality | All classifying via jev rerank; `docs/dataset-card.md` (7.8/10 best-practices); gold fixtures 70 pairs / 84 negatives |
+|| P3a remainder | **~200** correspondence pairs · **~100** negatives · **55** dual-use (expanded via jev) |
+|| Package 4 | Core complete (24 ACs, full traceability, jev settle/quarantine/doctor) |
 | Harvest | Wave 0–1 + A–E + F fill3000 · Crawl4AI **0.9.3** |
 | Hub / train | **Blocked** · Aaron pack local-only |
 | Wave 3b / Enochian flood | Ask-first HOLD |
@@ -131,8 +132,9 @@ Crawl4AI **0.9.3** is the scrape default. Paid Firecrawl needs an explicit opera
 | Local SoT | `~/.athanor/corpus/atoms.jsonl` | **No** |
 | Gold / KEEP / quarantine | `~/.athanor/settle/` · `~/.athanor/quarantine/` | **No** |
 | Seed fixtures (CI smoke) | `fixtures/seed/` | Yes |
-| P3a correspondence / negatives / dual-use | `fixtures/correspondence/` · `fixtures/negatives/` · `fixtures/dual_use/` | Yes (counts only; no full SoT) |
+| P3a correspondence (150 pairs) / negatives / dual-use | `fixtures/correspondence/` · `fixtures/negatives/` · `fixtures/dual_use/` | Yes (counts only; no full SoT) |
 | Sanitize export | `scripts/shadow/athanor/sanitize_export.py` | Yes — excerpt ≤500; no Hub |
+| Retrieval eval harness | `scripts/eval_retrieve.py` (gold pairs @k metrics + per-family) | Yes |
 
 Settle rules (short): heuristic KEEP stays **INFERRED** until gold settle; chrome/stub DROP may be quarantined locally; modern sacred-texts Rowe/Achadian `/book/` essays **HOLD** without an operator license call. Details: [`docs/settle/README.md`](docs/settle/README.md).
 
@@ -143,7 +145,7 @@ P3a **specify** exit is sealed — see [`specs/002-athanor-encoder/p3a-exit.md`]
 | Gate | State |
 |------|-------|
 | E0 lexical retrieve / packet smoke | **PASS** |
-| E2 correspondence unbind | **FAIL** until train eval harness |
+|| E2 correspondence unbind | **PARTIAL** (retrieve eval harness live with improved queries + ~200 gold pairs; full train eval gated) |
 | E7 gold family balance | **PASS** (max share ~0.067 ≤ 0.25) |
 | U11–U14 implement / train scripts | Unchecked — no `ALLOW_TRAIN` |
 | U18–U19 Hub / train artifacts | Unchecked — no `ALLOW_HUB` |

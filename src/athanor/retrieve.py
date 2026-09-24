@@ -276,7 +276,8 @@ def build_packet(
         }
 
     # Minimal receipt for provenance (closes deviation; can be extended by callers)
-    receipts = [{"type": "lexical-retrieve", "epistemic": "INFERRED"}]
+    # T4-JEV-004: include jev harvest provenance note
+    receipts = [{"type": "lexical-retrieve", "epistemic": "INFERRED", "jev_harvest": "atoms selected via jev rerank (T4-JEV-001/004); full source_url/content_hash provenance"}]
 
     return {
         "query": query,

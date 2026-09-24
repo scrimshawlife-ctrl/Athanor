@@ -19,7 +19,7 @@ from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urlparse
 from urllib.robotparser import RobotFileParser
 
 sys.path.insert(0, "/workspace/Athanor/src")
@@ -965,11 +965,11 @@ async def main() -> None:
         "solomonic", "kabbalah_pd", "runes_eddic",
     ]
     lines = [
-        f"# Ingest Priority A scoreboard",
-        f"",
+        "# Ingest Priority A scoreboard",
+        "",
         f"- run_id: `{RUN_ID}`",
-        f"- job_type: harvest",
-        f"- engine: crawl4ai 0.9.3 (+ urllib static mirror)",
+        "- job_type: harvest",
+        "- engine: crawl4ai 0.9.3 (+ urllib static mirror)",
         f"- timestamp_utc: {receipt['timestamp_utc']}",
         f"- pages_ok: **{pages_ok}**",
         f"- pages_fail: **{pages_fail}**",
@@ -979,13 +979,13 @@ async def main() -> None:
         f"- receipt: `{receipt_path}`",
         f"- atoms: `{ATOMS_PATH}`",
         f"- UA: `{UA}`",
-        f"- chrome_strip: yes (athanor.chrome.strip_chrome before length/store)",
-        f"- no Firecrawl; no Wave 3b harvest; no Enochian flood",
-        f"",
-        f"## Priority A family deltas",
-        f"",
-        f"| family_id | before | after | delta |",
-        f"|---|---:|---:|---:|",
+        "- chrome_strip: yes (athanor.chrome.strip_chrome before length/store)",
+        "- no Firecrawl; no Wave 3b harvest; no Enochian flood",
+        "",
+        "## Priority A family deltas",
+        "",
+        "| family_id | before | after | delta |",
+        "|---|---:|---:|---:|",
     ]
     for fid in priority_a:
         b = before.get(fid, 0)

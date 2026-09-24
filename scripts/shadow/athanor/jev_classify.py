@@ -5,7 +5,12 @@ Takes candidate jsonl (id, text, family), runs jev rerank, outputs high quality 
 Usage: cat candidates.jsonl | python jev_classify.py --min-relevance 0.7 > high.jsonl
 Requires jev CLI in PATH.
 """
-import sys, json, subprocess, argparse, hashlib
+import argparse
+import hashlib
+import json
+import subprocess
+import sys
+
 
 def main():
     parser = argparse.ArgumentParser()

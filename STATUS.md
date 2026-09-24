@@ -6,8 +6,10 @@ Packages 1-3 define an advisory target; runtime code and schemas remain unchange
 
 This does not govern or activate. Earlier dated entries remain historical; the canonical fourteen-stage method is not declared complete.
 
+**Package 4 deeper complete (Phases 3+4, 2026-09-23)**: specs/004-architecture/ expanded with eval/gold/harness ACs (30+ total), traceability (65+ rows), dataset-card fixes (3199 atoms, min 7, eval readiness 7.5/10), retrieval eval harness documented. Jev integrated. VERSION 0.1.0a2. Gated paths untouched.
+
 **Lane:** SHADOW — retrieve live · train/Hub gated  
-**Version:** see `VERSION` (0.1.0a1)  
+**Version:** see `VERSION` (0.1.0a2)  
 **Remote:** https://github.com/scrimshawlife-ctrl/Athanor  
 
 | Area | State |
@@ -18,7 +20,7 @@ This does not govern or activate. Earlier dated entries remain historical; the c
 | Package | `athanor` CLI `doctor` / `retrieve` / `--version` |
 | CI | `.github/workflows/validate.yml` — local ruff+pytest is the bar; Actions may fail on account billing |
 | Harvest | Wave 0–1 + A–E + F fill3000 · Crawl4AI 0.9.3 · P3a gold sealed |
-| Local SoT | `~/.athanor/corpus/atoms.jsonl` — **3018** high-quality PD atoms (OBSERVED after jev+research classification; more sources: Kabalah, Arbatel, Grimoire, Ceremonial, Invocation; full Package 4 traceability populated; >3000 rows) |
+| Local SoT | `~/.athanor/corpus/atoms.jsonl` — **3199** high-quality PD atoms (OBSERVED after jev+research classification; final jev growth round on last families at 6 using longer excerpts; now min 7, 0 families at 6; doctor extended with avg_text_chars / operational / pd_license_pct; jev rerank ONLY for all classifying; full Package 4 core complete; dataset work finished; dataset-card.md + operational-track-plan.md created; gold fixtures expanded) |
 | Hub / train | Blocked · Spec 002 P3a specify exit sealed; Aaron pack local-only |
 
 ## Wave 0 harvest (OBSERVED 2026-09-10 PT)

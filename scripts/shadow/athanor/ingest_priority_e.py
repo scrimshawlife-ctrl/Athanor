@@ -1396,10 +1396,10 @@ async def main() -> None:
     receipt_path.write_text(json.dumps(receipt, indent=2, ensure_ascii=False))
 
     lines = [
-        f"# Ingest Priority E scoreboard — Wave 3 PD reception",
-        f"",
+        "# Ingest Priority E scoreboard — Wave 3 PD reception",
+        "",
         f"- run_id: `{RUN_ID}`",
-        f"- job_type: harvest | priority: **E** | engine: crawl4ai 0.9.3 (+ urllib + Gutenberg cache)",
+        "- job_type: harvest | priority: **E** | engine: crawl4ai 0.9.3 (+ urllib + Gutenberg cache)",
         f"- timestamp_utc: {receipt['timestamp_utc']}",
         f"- pages_ok: **{pages_ok}** | pages_fail: **{pages_fail}**",
         f"- atoms_written: **{atoms_written}** | dupes: {atoms_skipped_dupe} | quality_skips: {atoms_skipped_quality}",
@@ -1408,13 +1408,13 @@ async def main() -> None:
         f"- kinds: `{dict(by_kind)}`",
         f"- receipt: `{receipt_path}`",
         f"- backup: `{backup}`",
-        f"- script: `/workspace/Athanor/scripts/shadow/athanor/ingest_priority_e.py`",
-        f"- chrome_strip: yes | allowlist respected | no Firecrawl | no Wave 3b | no Enochian | no efficacy | no Hub | STOP after E",
-        f"",
-        f"## Priority E family deltas",
-        f"",
-        f"| family_id | before | after | delta | % of NEW |",
-        f"|---|---:|---:|---:|---:|",
+        "- script: `/workspace/Athanor/scripts/shadow/athanor/ingest_priority_e.py`",
+        "- chrome_strip: yes | allowlist respected | no Firecrawl | no Wave 3b | no Enochian | no efficacy | no Hub | STOP after E",
+        "",
+        "## Priority E family deltas",
+        "",
+        "| family_id | before | after | delta | % of NEW |",
+        "|---|---:|---:|---:|---:|",
     ]
     for fid in FOCUS_FAMILIES:
         b = before.get(fid, 0)
@@ -1423,28 +1423,28 @@ async def main() -> None:
         pct = (100.0 * d / atoms_written) if atoms_written else 0.0
         lines.append(f"| `{fid}` | {b} | {a} | {d:+d} | {pct:.1f}% |")
     lines += [
-        f"",
-        f"## Sources used",
-        f"",
-        f"- sacred-texts: Westcott Historic Lecture (G.D.)",
-        f"- sacred-texts: Mathers Kabbalah Unveiled (1887) historical leaves",
-        f"- sacred-texts: Waite Book of Ceremonial Magic historical survey (conjuration HOLD)",
-        f"- sacred-texts: Blavatsky Isis Unveiled + Secret Doctrine",
-        f"- Gutenberg #55618: Blavatsky Key to Theosophy",
-        f"- sacred-texts: Leadbeater Textbook of Theosophy (1912); Steiner Theosophy (1910)",
-        f"- sacred-texts: Frazer Golden Bough folk-magic anthropological leaves",
-        f"- sacred-texts: Grimm Household Tales tradition-prose folk motifs",
-        f"- sacred-texts: Spare Focus of Life (1921) + Anathema of Zos (1927) PD-US only",
-        f"",
-        f"## HOLD (with reason)",
-        f"",
+        "",
+        "## Sources used",
+        "",
+        "- sacred-texts: Westcott Historic Lecture (G.D.)",
+        "- sacred-texts: Mathers Kabbalah Unveiled (1887) historical leaves",
+        "- sacred-texts: Waite Book of Ceremonial Magic historical survey (conjuration HOLD)",
+        "- sacred-texts: Blavatsky Isis Unveiled + Secret Doctrine",
+        "- Gutenberg #55618: Blavatsky Key to Theosophy",
+        "- sacred-texts: Leadbeater Textbook of Theosophy (1912); Steiner Theosophy (1910)",
+        "- sacred-texts: Frazer Golden Bough folk-magic anthropological leaves",
+        "- sacred-texts: Grimm Household Tales tradition-prose folk motifs",
+        "- sacred-texts: Spare Focus of Life (1921) + Anathema of Zos (1927) PD-US only",
+        "",
+        "## HOLD (with reason)",
+        "",
     ]
     for h in holds:
         lines.append(f"- {json.dumps(h, ensure_ascii=False)}")
     lines += [
-        f"",
-        f"## FAILED",
-        f"",
+        "",
+        "## FAILED",
+        "",
     ]
     if not failures:
         lines.append("- (none)")
@@ -1452,32 +1452,32 @@ async def main() -> None:
         for fail in failures[:100]:
             lines.append(f"- {fail.get('url')}: {fail.get('error')} (status={fail.get('status')})")
     lines += [
-        f"",
-        f"## INFERRED license notes",
-        f"",
+        "",
+        "## INFERRED license notes",
+        "",
     ]
     for n in license_notes:
         lines.append(f"- {n}")
     lines += [
-        f"",
-        f"## Sample atom_ids",
-        f"",
+        "",
+        "## Sample atom_ids",
+        "",
     ]
     for s in sample_ids:
         lines.append(f"- `{s}`")
     keep = [f for f in FOCUS_FAMILIES if by_family_new.get(f)]
     lines += [
-        f"",
-        f"## Propose (never GOLD)",
-        f"",
+        "",
+        "## Propose (never GOLD)",
+        "",
         f"- KEEP: {', '.join(keep) if keep else '(none)'}",
-        f"- HOLD: Regardie GD; Grant Cults of the Shadow; modern Spare commentary; TOPY/chaos_late; Pow-Wow efficacy charms; Waite conjuration leaves; Wave 3b; Enochian/Priority F; Spare UK term caveat",
-        f"- DROP: SPA chrome-only after strip; HTTP failures; efficacy-framed chunks",
-        f"",
-        f"## STOP",
-        f"",
-        f"- Priority E complete for this run. Do **not** start Wave 3b. Priority F = no new Enochian.",
-        f"",
+        "- HOLD: Regardie GD; Grant Cults of the Shadow; modern Spare commentary; TOPY/chaos_late; Pow-Wow efficacy charms; Waite conjuration leaves; Wave 3b; Enochian/Priority F; Spare UK term caveat",
+        "- DROP: SPA chrome-only after strip; HTTP failures; efficacy-framed chunks",
+        "",
+        "## STOP",
+        "",
+        "- Priority E complete for this run. Do **not** start Wave 3b. Priority F = no new Enochian.",
+        "",
     ]
     scoreboard_path = SCOREBOARD_DIR / f"ingest-priority-e-{TS_FILE}.md"
     scoreboard_path.write_text("\n".join(lines) + "\n")

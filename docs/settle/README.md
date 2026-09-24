@@ -25,3 +25,16 @@ Spec 001 T5 (`src/athanor/chrome.py`) strips sacred-texts SPA nav when building 
 - Crawl4AI 0.9.3 is the scrape default. Paid Firecrawl needs an operator yes.
 - Train / Hub stay gated.
 - Packet `efficacy` stays JSON `null`. No summon UX.
+
+## Jev-deepened settle (T4-JEV-002)
+
+Settle decisions route through jev rerank for evidence-bound quality.
+- Quarantine rows now include `jev_relevance` (from rerank) and `suggested_settle` (KEEP/HOLD/REVIEW based on threshold + flags).
+- `scripts/shadow/athanor/settle.py` consumes cleaned.jsonl (or atoms), re-ranks with jev, proposes final decisions.
+- High jev (>=0.75) + BODY_CANDIDATE + no flags -> suggested KEEP.
+- Low jev (<0.4) or problematic routes -> HOLD.
+- Operator reviews proposals; custom cues only for validation.
+- Run: `cat ~/.athanor/quarantine/.../cleaned.jsonl | python scripts/shadow/athanor/settle.py --min-relevance 0.6 > proposals.jsonl`
+- Deepen harvest also emits `.settle_proposals.jsonl` for new atoms.
+
+All classifying (including settle) uses jev rerank.

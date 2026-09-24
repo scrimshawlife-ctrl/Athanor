@@ -6,15 +6,17 @@ import asyncio
 import hashlib
 import json
 import re
-import uuid
+import subprocess
+import sys
 import urllib.request
+import uuid
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 from urllib.parse import urljoin, urlparse
 
-from crawl4ai import AsyncWebCrawler, BrowserConfig, CrawlerRunConfig, CacheMode
+from crawl4ai import AsyncWebCrawler, BrowserConfig, CacheMode, CrawlerRunConfig
 
 HOME = Path.home()
 # Unreviewed harvests are candidates, never automatically admitted to retrieval.
@@ -292,7 +294,7 @@ def clean_markdown(md: str) -> str:
     ]
     for line in md.splitlines():
         s = line.strip()
-        if any(re.match(p, s, re.I) for p in skip_patterns):
+        if any(re.match(p, s, re.IGNORECASE) for p in skip_patterns):
             if re.match(r"^---+", s) or re.match(r"^===+", s):
                 lines.append("")
             continue
@@ -391,12 +393,12 @@ def extract_same_host_links(
                 continue
             if abs_u.rstrip("/") == base_url.rstrip("/"):
                 continue
-            if not re.search(r"\.(htm|html)/?$", parsed.path, re.I) and not parsed.path.endswith("/"):
+            if not re.search(r"\.(htm|html)/?$", parsed.path, re.IGNORECASE) and not parsed.path.endswith("/"):
                 if "." in Path(parsed.path).name:
                     continue
         if child_glob:
             name = Path(parsed.path).name
-            if not re.search(child_glob, name, re.I):
+            if not re.search(child_glob, name, re.IGNORECASE):
                 continue
         seen.add(abs_u)
         links.append(abs_u)
@@ -679,10 +681,10 @@ async def main() -> None:
 
     all_fams = sorted(set(before) | set(after) | set(by_family))
     lines = [
-        f"# Deepen harvest scoreboard",
-        f"",
+        "# Deepen harvest scoreboard",
+        "",
         f"- run_id: `{RUN_ID}`",
-        f"- engine: crawl4ai 0.9.3 (+ urllib for IA plaintext)",
+        "- engine: crawl4ai 0.9.3 (+ urllib for IA plaintext)",
         f"- timestamp_utc: {receipt['timestamp_utc']}",
         f"- atoms_written (net new): **{atoms_written}**",
         f"- atoms_skipped_dupe: {atoms_skipped_dupe}",
@@ -692,12 +694,12 @@ async def main() -> None:
         f"- failures: {len(failures)}",
         f"- receipt: `{receipt_path}`",
         f"- atoms: `{ATOMS_PATH}`",
-        f"- allowlist: sacred-texts.com, archive.org",
-        f"",
-        f"## Before / After by family_id",
-        f"",
-        f"| family_id | before | after | delta |",
-        f"|---|---:|---:|---:|",
+        "- allowlist: sacred-texts.com, archive.org",
+        "",
+        "## Before / After by family_id",
+        "",
+        "| family_id | before | after | delta |",
+        "|---|---:|---:|---:|",
     ]
     for fid in sorted(all_fams, key=lambda x: (-(after.get(x, 0)), x)):
         b = before.get(fid, 0)
@@ -744,7 +746,59 @@ async def main() -> None:
         "sample_ids": sample_ids,
         "enochian_book_pages": enoch_book_pages,
     }
-    print("\n==== DONE ====")
+    # Jev post-filter for high quality (T4-JEV-001 wiring)
+    jev_script = Path(__file__).parent / "jev_classify.py"
+    if jev_script.exists() and ATOMS_PATH.exists():
+        try:
+            with ATOMS_PATH.open() as f:
+                cand_lines = [line for line in f if line.strip()]
+            if cand_lines:
+                input_data = "".join(cand_lines)
+                proc = subprocess.run(
+                    [sys.executable, str(jev_script), "--min-relevance", "0.7"],
+                    input=input_data,
+                    capture_output=True,
+                    text=True,
+                    timeout=60,
+                    check=False,
+                )
+                if proc.returncode == 0 and proc.stdout.strip():
+                    high_lines = proc.stdout.strip().splitlines()
+                    high_path = ATOMS_PATH.with_suffix(".jev_high.jsonl")
+                    with high_path.open("w") as f:
+                        f.write("\n".join(high_lines) + "\n")
+                    print(f"Jev filtered {len(high_lines)} high-quality atoms -> {high_path}")
+                    # Optionally, replace candidates with high only for this run
+                    # ATOMS_PATH.write_text("\n".join(high_lines) + "\n")
+        except Exception as e:  # noqa: BLE001
+            print(f"Jev filter error: {e}")
+
+    # Deepened settle (T4-JEV-002): jev-based proposals for harvested atoms
+    settle_script = Path(__file__).parent / "settle.py"
+    if settle_script.exists() and ATOMS_PATH.exists():
+        try:
+            with ATOMS_PATH.open() as f:
+                atom_lines = [line for line in f if line.strip()]
+            if atom_lines:
+                input_data = "".join(atom_lines)
+                proc = subprocess.run(
+                    [sys.executable, str(settle_script), "--min-relevance", "0.6"],
+                    input=input_data,
+                    capture_output=True,
+                    text=True,
+                    timeout=60,
+                    check=False,
+                )
+                if proc.returncode == 0 and proc.stdout.strip():
+                    prop_lines = proc.stdout.strip().splitlines()
+                    prop_path = ATOMS_PATH.with_suffix(".settle_proposals.jsonl")
+                    with prop_path.open("w") as f:
+                        f.write("\n".join(prop_lines) + "\n")
+                    print(f"Settle proposals (jev deepened) -> {prop_path}")
+        except Exception as e:  # noqa: BLE001
+            print(f"Settle proposals error: {e}")
+
+    print("\\n==== DONE ====")
     print(json.dumps(summary, indent=2))
 
 

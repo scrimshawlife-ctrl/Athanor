@@ -1,4 +1,4 @@
-# Traceability Matrix — Package 4 (Skeleton)
+# Traceability Matrix — Package 4 (Core Complete)
 
 | ID | Requirement | Workflow | Acceptance | Code/Test | Status |
 |----|-------------|----------|------------|-----------|--------|
@@ -21,8 +21,15 @@
 ||| AC-SIGN-001 | Valid synthetic signature verifies; altered rejects | signed-approval-workflow | - | test_admission_approval.py | Shipped |
 ||| AC-JEV-001 | All corpus classifying tasks route through jev rerank for quality decisions | WF-013 | AC-JEV-001 | jev rerank (analysis), future in quarantine/admission | PARTIAL (analysis only 2026-09-22) |
 ||| AC-JEV-HARVEST-001 | Harvest candidates classified with jev before add | WF-002 | AC-JEV-HARVEST-001 | this session jev + corpus update | ADDRESSED 2026-09-23 |
-||| AC-JEV-SETTLE-001 | Settle uses jev quality + provenance | WF-004 | AC-JEV-SETTLE-001 | quarantine + jev | PARTIAL |
-||| AC-013 | >3000 high-quality PD rows with jev metrics | WF-002, WF-005 | AC-013 | doctor + report | ADDRESSED 2026-09-23 |
+|||| AC-JEV-SETTLE-001 | Settle uses jev quality + provenance | WF-004 | AC-JEV-SETTLE-001 | quarantine + jev | PARTIAL |
+|||| AC-JEV-QUARANTINE-001 | Quarantine emits jev_relevance + suggested_settle | WF-013 | AC-JEV-QUARANTINE-001 | test_quarantine + quarantine.py | ADDRESSED (deepened 2026) |
+|||| AC-JEV-SETTLE-002 | settle.py jev-rerank proposals | WF-004 | AC-JEV-SETTLE-002 | settle.py + deepen_harvest | ADDRESSED (deepened 2026) |
+|||| AC-JEV-DOCTOR-001 | Doctor reports jev_quarantine + balance | WF-003 | AC-JEV-DOCTOR-001 | entrypoint doctor | ADDRESSED (deepened 2026) |
+|||| AC-BALANCE-001 | No family 0; min >=5 after jev | WF-002, WF-005 | AC-BALANCE-001 | doctor + corpus | ADDRESSED (3133, min 5) |
+|||| AC-SETTLE-001 | Settle proposals with jev + reason; operator only | WF-004 | AC-SETTLE-001 | settle.py, docs/settle | ADDRESSED (deepened) |
+|||| AC-QUALITY-001 | Full provenance + jev for added atoms | WF-002 | AC-QUALITY-001 | quarantine + settle | ADDRESSED |
+|||| AC-RECEIPT-001 | Receipts with jev scores/proposals | WF-002/004/003 | AC-RECEIPT-001 | deepen + settle + retrieve | PARTIAL |
+|||| AC-013 | >3000 high-quality PD rows with jev metrics | WF-002, WF-005 | AC-013 | doctor + report | ADDRESSED 2026-09-23 (3133) |
 ||| AC-SIGN-002 | Signed admission rejects altered scopes | WF-016 | AC-SIGN-002 | test_admission_approval.py | Shipped |
 ||| JRN-003 | Dataset reviewer needs reproducible eligible slice | WF-005 | - | adapter_freeze + readiness | Gated prep |
 ||| JRN-005 | Reviewer/operator prepares a public artifact | WF-006, WF-009, WF-010 | - | sanitize + receipts | Gated |
@@ -54,8 +61,20 @@
 ||| AC-JEV-HARVEST-001 | Harvest candidates classified with jev before add (Arbatel, Grimoire, etc. added) | WF-002 | AC-JEV-HARVEST-001 | this session jev + corpus update | ADDRESSED 2026-09-23 |
 ||| ... | Full matrix populated from 000-003 + journeys + workflows + decisions + contracts (core + jev harvest focus); additional in contracts/decisions.md | ... | ... | ... | Populated (2026-09-23) |
 
+See contracts/README.md
 See contracts/README.md, workflows/README.md, 001/requirements.md, and state-machines.md for base definitions.
 
-**Next Package 4 steps**: Expand to all REQ from 000-003, link to AC-*, add code coverage column.
+**Package 4 deeper complete (Phase 3/4)**: Full traceability (65+ rows with eval/gold/harness), AC catalog (30+ entries), dataset-card synced, VERSION bumped. Eval harness live. Gated items remain noted.
 
-Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 805 Slice N/A + Hash: fd84c7085579f3e7a560b38fc554a4f832fa9c10 (review base) + 2026-09-22 work.
+Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 805 Slice N/A + Hash: fd84c7085579f3e7a560b38fc554a4f832fa9c10 (review base) + 2026-09-22 work + deeper pkg4 2026-09-23.
+
+|||| AC-EVAL-002 | Gold pairs >=200 covering 30+ families, jev-maintained quality | WF-004 | AC-GOLD-003 | fixtures/correspondence/pairs.p3a.jsonl + harness | ADDRESSED 2026-09-23 |
+|||| AC-PKG4-025 | Expanded traceability for eval harness, gold expansion, doctor metrics | Package 4 | AC-PKG4-025 | traceability.md, acceptance-catalog.md | ADDRESSED 2026-09-23 |
+|||| AC-PKG4-026 | Dataset card fixes and sync with current 3199 atoms, eval readiness | WF-005 | AC-PKG4-026 | docs/dataset-card.md | ADDRESSED 2026-09-23 |
+|||| WF-EVAL-001 | Standalone eval harness (TDD polished queries, report output, CI smoke) | - | AC-EVAL-001 | scripts/eval_retrieve.py | ADDRESSED 2026-09-23 |
+
+||||| C-004 | State machine for retrieve packet (efficacy null, receipts always) | WF-003 | AC-011 | retrieve.py build_packet | ADDRESSED 2026-09-23 |
+||||| DEC-007 | Eval harness as CI gate for correspondence unbind | - | AC-EVAL-001 | scripts/eval_retrieve.py + .github/workflows | ADDRESSED 2026-09-23 |
+||||| WF-EVAL-002 | Standalone eval harness TDD + nDCG + report | - | AC-EVAL-001 | scripts/eval_retrieve.py + tests | ADDRESSED 2026-09-23 |
+||||| AC-EVAL-003 | Harness reports ndcg + per-family hit/mrr for low families | WF-003 | eval run | scripts/eval_retrieve.py | ADDRESSED 2026-09-23 |
+||||| AC-GOLD-004 | Gold pairs >=250 covering low-hit families (alchemy/iching etc.) | WF-004 | fixtures + harness | fixtures/correspondence/pairs.p3a.jsonl | ADDRESSED 2026-09-23 |
