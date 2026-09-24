@@ -251,3 +251,10 @@ Updated continue: Pairs 1342, Negs 307, Min pair 14, Lowest [('history_magic', 1
 - Total pairs 1654
 - Solomonic source (Lesser Key of Solomon) 158 cands, jev 0.5=0 high
 
+
+## Continue 29s boost
+- +15 pairs for mystery_cults, tantra_hist_pd, angel (to 34 each)
+- +5 negs to 387
+- Min 31
+- Total pairs 1669
+

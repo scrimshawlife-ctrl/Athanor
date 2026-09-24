@@ -380,3 +380,8 @@
 {"neg_id": "neg.env.10", "theme": "env", "text": "Conservation efforts are protecting endangered species habitats.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.gov.10", "theme": "gov", "text": "Governments are implementing digital transformation initiatives.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.manuf.10", "theme": "manuf", "text": "Automation is revolutionizing manufacturing processes.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.health.11", "theme": "health", "text": "Mental health awareness has increased significantly in recent years.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.travel.11", "theme": "travel", "text": "Sustainable tourism is becoming a priority for many destinations.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.food.11", "theme": "food", "text": "Plant-based diets are gaining popularity for health and environmental reasons.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.education.11", "theme": "education", "text": "Lifelong learning is essential in the modern job market.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.science.11", "theme": "science", "text": "Quantum computing is advancing rapidly with new breakthroughs.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
