@@ -92,7 +92,7 @@ def _cmd_doctor() -> int:
                 payload["jev_classify"] = "wired: all harvest/selection via scripts/shadow/athanor/jev_classify.py --min-relevance (T4-JEV-001/004)"
                 payload["jev_quarantine"] = "T4-JEV-002: jev_relevance + suggested_settle in quarantine rows; settle.py for jev-deepened proposals"
                 payload["jev_harvest"] = "T4-JEV-004: jev rerank mandatory for classify/harvest; atoms carry source_url/content_hash + epistemic=OBSERVED from PD jev"
-                payload["corpus_note"] = "All classifying/selection/harvest via jev rerank only; primary PD OBSERVED; 3775 atoms; min pair 27; andes_amazon, astrology_west, tarot_history, chaos_spare_hist, mesopotamia, goetia_catalog, shinto_onmyodo, coptic_gnostic, veda, mesoamerica boosted to 31; previous 31s at 31; alchemy 322; long 15.3%; gold 1630 pairs + 377 negatives; 26s boost (andes source Popol Vuh jev 0). Full verify PASS."
+                payload["corpus_note"] = "All classifying/selection/harvest via jev rerank only; primary PD OBSERVED; 3775 atoms; min pair 29; folk_magic_pd 33, solomonic 34, enochian 34, neoplatonism 34; previous lows boosted; alchemy 322; long 15.3%; gold 1654 pairs + 382 negatives; 27s boost (solomonic source attempt jev 0). Full verify PASS."
         except Exception as e:  # noqa: BLE001
             payload["corpus_sample_error"] = str(e)[:120]
 

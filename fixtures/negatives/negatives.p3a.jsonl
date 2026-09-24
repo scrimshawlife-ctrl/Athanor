@@ -375,3 +375,8 @@
 {"neg_id": "neg.retail.09", "theme": "retail", "text": "Online shopping continues to grow at the expense of physical stores.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.finance.09", "theme": "finance", "text": "Central banks are exploring digital currencies.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.sports.09", "theme": "sports", "text": "Major leagues are investing in data analytics for player performance.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.med.10", "theme": "med", "text": "New medical treatments are extending human lifespan significantly.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.edu.10", "theme": "edu", "text": "Online education platforms are democratizing access to knowledge.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.env.10", "theme": "env", "text": "Conservation efforts are protecting endangered species habitats.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.gov.10", "theme": "gov", "text": "Governments are implementing digital transformation initiatives.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.manuf.10", "theme": "manuf", "text": "Automation is revolutionizing manufacturing processes.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}

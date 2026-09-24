@@ -243,3 +243,11 @@ Updated continue: Pairs 1342, Negs 307, Min pair 14, Lowest [('history_magic', 1
 - Min 27
 - Total pairs 1630
 
+
+## Continue 27s boost
+- +24 pairs for folk_magic_pd, solomonic, enochian, neoplatonism (to 33/34)
+- +5 negs to 382
+- Min 29
+- Total pairs 1654
+- Solomonic source (Lesser Key of Solomon) 158 cands, jev 0.5=0 high
+
