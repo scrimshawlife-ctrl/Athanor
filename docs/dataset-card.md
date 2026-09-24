@@ -201,3 +201,12 @@ Updated continue: Pairs 1342, Negs 307, Min pair 14, Lowest [('history_magic', 1
 - Fresh source attempts (Popol Vuh 96k, Vedic 1M) jev 0 hold
 - Pair expansion from long PD atoms
 
+
+## Hermetic boost
+- Fresh source: The Mirror of Alchimy by Roger Bacon (gutenberg 58393, 148k chars)
+- 89 cands extracted, jev 0.5 = 0 high (quality hold)
+- +10 pairs for hermetic (using existing 501 atoms) to 32
+- +5 negs to 357
+- Min 23
+- Total pairs 1488
+

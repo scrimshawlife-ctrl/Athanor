@@ -350,3 +350,8 @@
 {"neg_id": "neg.education.04", "theme": "education", "text": "Online learning platforms expanded access to higher education worldwide.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.environment.04", "theme": "environment", "text": "Renewable energy projects received significant government subsidies.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.healthcare.04", "theme": "healthcare", "text": "Telemedicine services became standard practice in many hospitals.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.technology.05", "theme": "technology", "text": "Quantum computing breakthroughs are accelerating the development of new algorithms.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.finance.05", "theme": "finance", "text": "Cryptocurrency markets experienced significant volatility in the last quarter.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.politics.05", "theme": "politics", "text": "International summits addressed climate change and economic cooperation.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.science.05", "theme": "science", "text": "Recent studies in particle physics confirmed new subatomic interactions.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.arts.05", "theme": "arts", "text": "Contemporary art exhibitions featured immersive digital installations.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
