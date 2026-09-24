@@ -226,3 +226,12 @@ Updated continue: Pairs 1342, Negs 307, Min pair 14, Lowest [('history_magic', 1
 - Total pairs 1538
 - Note: egypt/history use short atoms for pair count (long source attempts pending better jev)
 
+
+## Continue 25s boost
+- +42 pairs for grimoire_other, runes_eddic, arbatel, buddhism_esoteric_pd, golden_dawn_hist, jyotish_anchors, alchemy_spirit (to 31 each)
+- +5 negs to 372
+- Min 26
+- Total pairs 1580
+- runes_eddic used short atoms (like previous)
+- runes source (Volsunga Saga/Edda gutenberg) jev 0 hold
+

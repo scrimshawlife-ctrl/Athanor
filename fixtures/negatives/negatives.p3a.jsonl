@@ -365,3 +365,8 @@
 {"neg_id": "neg.education.07", "theme": "education", "text": "Universities are adopting hybrid learning models post-pandemic.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.health.07", "theme": "health", "text": "Vaccination campaigns have reduced incidence of several infectious diseases.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.space.07", "theme": "space", "text": "Private companies are advancing reusable rocket technology.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.crypto.08", "theme": "crypto", "text": "Blockchain technology enables decentralized finance applications.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.robotics.08", "theme": "robotics", "text": "Industrial robots are increasing productivity in manufacturing.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.biotech.08", "theme": "biotech", "text": "CRISPR gene editing is advancing medical research rapidly.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.logistics.08", "theme": "logistics", "text": "Supply chain optimization uses AI for predictive analytics.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.entertainment.08", "theme": "entertainment", "text": "Streaming services dominate media consumption habits.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
