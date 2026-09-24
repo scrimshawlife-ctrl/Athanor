@@ -258,3 +258,15 @@ Updated continue: Pairs 1342, Negs 307, Min pair 14, Lowest [('history_magic', 1
 - Min 31
 - Total pairs 1669
 
+
+## Re-eval (full harness @k=10 on 1669 pairs)
+- hit_rate_at_10: 0.6645
+- ndcg: 0.2047
+- mrr: 0.6035
+- hits: 1109/1669
+- Weak families (low hit): iching_daoist 0.203 (n=148), enochian 0.206 (34), kabbalah_pd 0.254 (197), runes_eddic 0.355 (31), alchemy_lab 0.401 (322)
+- Low/near-min families (n<=36): grimoire_other 31, theosophy_pd 31, runes_eddic 31, arbatel 31, buddhism_esoteric_pd 31, golden_dawn_hist 31, jyotish_anchors 31, andes_amazon 31
+- Low family ndcg avg: ~0.9365 (strong on mins)
+- Negative spillover: 3/6 (target low)
+- Note: alchemy_lab hit lower than expected (0.401) despite depth; iching/enochian/kab still weak spots.
+
