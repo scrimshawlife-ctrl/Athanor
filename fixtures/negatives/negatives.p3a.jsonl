@@ -345,3 +345,8 @@
 {"neg_id": "neg.realestate.03", "theme": "realestate", "text": "Commercial real estate saw a surge in demand for flexible workspaces.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.retail.03", "theme": "retail", "text": "E-commerce platforms integrated AI for personalized shopping experiences.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.fashion.03", "theme": "fashion", "text": "Vintage clothing trends made a comeback in urban fashion scenes.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.travel.04", "theme": "travel", "text": "International tourism rebounded strongly after the global health crisis.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.sports.04", "theme": "sports", "text": "The championship game drew record viewership across multiple platforms.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.education.04", "theme": "education", "text": "Online learning platforms expanded access to higher education worldwide.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.environment.04", "theme": "environment", "text": "Renewable energy projects received significant government subsidies.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.healthcare.04", "theme": "healthcare", "text": "Telemedicine services became standard practice in many hospitals.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}

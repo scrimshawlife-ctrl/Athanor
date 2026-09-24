@@ -192,3 +192,12 @@ Updated continue: Pairs 1342, Negs 307, Min pair 14, Lowest [('history_magic', 1
 - Total pairs 1453
 - Focused on chaos magic, Spare, Morrison, CCRU themes for depth
 
+
+## Continue low family pair/neg boost
+- +25 pairs for andes_amazon, mesopotamia, shinto_onmyodo, veda_upanishad_pd, mesoamerica (to 26 each)
+- +5 negs to 352
+- Min now 22 (hermetic 22)
+- Total pairs 1478
+- Fresh source attempts (Popol Vuh 96k, Vedic 1M) jev 0 hold
+- Pair expansion from long PD atoms
+
