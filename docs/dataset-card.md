@@ -218,3 +218,11 @@ Updated continue: Pairs 1342, Negs 307, Min pair 14, Lowest [('history_magic', 1
 - Min 24
 - Total pairs 1506
 
+
+## 24s boost (recommended)
+- +32 pairs for egypt_magical, history_magic, islamic_occult_pd, grimoire (to 32 each)
+- +5 negs to 367
+- Min now 25
+- Total pairs 1538
+- Note: egypt/history use short atoms for pair count (long source attempts pending better jev)
+

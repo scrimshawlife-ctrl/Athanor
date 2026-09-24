@@ -360,3 +360,8 @@
 {"neg_id": "neg.housing.06", "theme": "housing", "text": "Urban housing markets faced challenges from rising interest rates.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.food.06", "theme": "food", "text": "Sustainable farming practices gained traction among consumers.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.energy.06", "theme": "energy", "text": "Solar and wind power projects expanded in rural areas.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.ai.07", "theme": "ai", "text": "Large language models are being integrated into enterprise workflows at scale.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.climate.07", "theme": "climate", "text": "International agreements aim to reduce carbon emissions by 2030.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.education.07", "theme": "education", "text": "Universities are adopting hybrid learning models post-pandemic.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.health.07", "theme": "health", "text": "Vaccination campaigns have reduced incidence of several infectious diseases.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.space.07", "theme": "space", "text": "Private companies are advancing reusable rocket technology.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
