@@ -355,3 +355,8 @@
 {"neg_id": "neg.politics.05", "theme": "politics", "text": "International summits addressed climate change and economic cooperation.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.science.05", "theme": "science", "text": "Recent studies in particle physics confirmed new subatomic interactions.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.arts.05", "theme": "arts", "text": "Contemporary art exhibitions featured immersive digital installations.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.media.06", "theme": "media", "text": "Social media algorithms shape public opinion and information consumption.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.transport.06", "theme": "transport", "text": "Electric vehicles are transforming the automotive industry.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.housing.06", "theme": "housing", "text": "Urban housing markets faced challenges from rising interest rates.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.food.06", "theme": "food", "text": "Sustainable farming practices gained traction among consumers.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.energy.06", "theme": "energy", "text": "Solar and wind power projects expanded in rural areas.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}

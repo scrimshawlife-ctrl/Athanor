@@ -210,3 +210,11 @@ Updated continue: Pairs 1342, Negs 307, Min pair 14, Lowest [('history_magic', 1
 - Min 23
 - Total pairs 1488
 
+
+## Continue: mystery_cults / tantra / angel boost
+- Fresh source: The Gnosis of the Light (gutenberg 30799, 139k chars) for mystery_cults; 89 cands, jev 0.5=0 high
+- +18 pairs: mystery_cults/tantra_hist_pd/angel to 29 each
+- +5 negs to 362
+- Min 24
+- Total pairs 1506
+
