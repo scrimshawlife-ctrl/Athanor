@@ -1031,11 +1031,11 @@ async def main() -> None:
     receipt_path.write_text(json.dumps(receipt, indent=2, ensure_ascii=False))
 
     lines = [
-        f"# Ingest Priority B scoreboard — correspondence / table atoms",
-        f"",
+        "# Ingest Priority B scoreboard — correspondence / table atoms",
+        "",
         f"- run_id: `{RUN_ID}`",
-        f"- job_type: harvest | priority: B",
-        f"- engine: crawl4ai 0.9.3 (+ urllib static mirror)",
+        "- job_type: harvest | priority: B",
+        "- engine: crawl4ai 0.9.3 (+ urllib static mirror)",
         f"- timestamp_utc: {receipt['timestamp_utc']}",
         f"- pages_ok: **{pages_ok}** | pages_fail: **{pages_fail}**",
         f"- atoms_written: **{atoms_written}** | dupes: {atoms_skipped_dupe} | quality_skips: {atoms_skipped_quality}",
@@ -1045,13 +1045,13 @@ async def main() -> None:
         f"- receipt: `{receipt_path}`",
         f"- atoms: `{ATOMS_PATH}`",
         f"- UA: `{UA}`",
-        f"- chrome_strip: yes | allowlist respected | no Firecrawl | no Wave 3b | no Enochian flood | no efficacy",
-        f"- balance: max family share of NEW checked (limit 25%)",
-        f"",
-        f"## Priority B family deltas",
-        f"",
-        f"| family_id | before | after | delta | % of NEW |",
-        f"|---|---:|---:|---:|---:|",
+        "- chrome_strip: yes | allowlist respected | no Firecrawl | no Wave 3b | no Enochian flood | no efficacy",
+        "- balance: max family share of NEW checked (limit 25%)",
+        "",
+        "## Priority B family deltas",
+        "",
+        "| family_id | before | after | delta | % of NEW |",
+        "|---|---:|---:|---:|---:|",
     ]
     total_new = sum(by_family_this.values()) or 1
     focus = [

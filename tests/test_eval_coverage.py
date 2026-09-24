@@ -1,4 +1,3 @@
-import pytest
 from athanor.eval_coverage import compute_coverage
 
 def test_eval_coverage_flags_unsupported_family():

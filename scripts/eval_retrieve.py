@@ -28,12 +28,39 @@ def load_pairs(path: str) -> list[dict[str, Any]]:
     return pairs
 
 
+import random
+
 def evaluate_correspondence(
     pairs: list[dict[str, Any]],
     k: int = 10,
     corpus_path: Path | None = None,
+    sample_limit: int | None = None,
 ) -> dict[str, Any]:
     """Evaluate how often the gold atom appears in top-k for constructed queries."""
+    # If sample_limit specified, take a stratified sample to ensure family diversity
+    if sample_limit and len(pairs) > sample_limit:
+        # Group by family
+        fam_groups = collections.defaultdict(list)
+        for p in pairs:
+            fam_groups[p.get("family_id", "unknown")].append(p)
+        
+        # Take proportional samples from each family
+        sampled = []
+        families = list(fam_groups.keys())
+        per_fam = max(1, sample_limit // len(families))
+        for fam in families:
+            fam_pairs = fam_groups[fam]
+            take = min(per_fam, len(fam_pairs))
+            sampled.extend(random.sample(fam_pairs, take) if len(fam_pairs) > take else fam_pairs)
+        
+        # If still need more, fill from remaining
+        if len(sampled) < sample_limit:
+            remaining = [p for p in pairs if p not in sampled]
+            extra = random.sample(remaining, min(sample_limit - len(sampled), len(remaining)))
+            sampled.extend(extra)
+        
+        pairs = sampled[:sample_limit]
+    
     total = len(pairs)
     hits_at_k = 0
     ranks = []
@@ -148,6 +175,7 @@ def main():
         help="Optional corpus path (defaults to ATHANOR_CORPUS or ~/.athanor/...)",
     )
     parser.add_argument("--report", default=None, help="Optional path to write JSON results")
+    parser.add_argument("--sample-limit", type=int, default=None, help="Optional stratified sample limit for faster eval")
     args = parser.parse_args()
 
     pairs_path = Path(args.pairs)
@@ -161,7 +189,7 @@ def main():
     print(f"Evaluating {len(pairs)} gold pairs @k={args.k}")
     print("-" * 50)
 
-    results = evaluate_correspondence(pairs, k=args.k, corpus_path=corpus_path)
+    results = evaluate_correspondence(pairs, k=args.k, corpus_path=corpus_path, sample_limit=args.sample_limit)
 
     print(f"pairs_evaluated: {results['pairs_evaluated']}")
     print(f"hit_rate_at_{args.k}: {results[f'hit_rate_at_{args.k}']}")

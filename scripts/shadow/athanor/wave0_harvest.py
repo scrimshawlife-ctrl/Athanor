@@ -6,7 +6,6 @@ import asyncio
 import hashlib
 import json
 import re
-import time
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
@@ -482,7 +481,7 @@ async def main() -> None:
                 # Cap extremely long archive txt to first ~120k chars to avoid memory blow
                 if len(md) > 120_000:
                     md = md[:120_000]
-                    print(f"    truncated long text to 120k chars")
+                    print("    truncated long text to 120k chars")
 
                 chunks = chunk_paragraphs(md)
                 print(f"    text={len(md)} chars -> {len(chunks)} chunks")
@@ -533,10 +532,10 @@ async def main() -> None:
 
     # Scoreboard
     lines = [
-        f"# Wave 0 Enochian harvest scoreboard",
-        f"",
+        "# Wave 0 Enochian harvest scoreboard",
+        "",
         f"- run_id: `{RUN_ID}`",
-        f"- engine: crawl4ai 0.9.3",
+        "- engine: crawl4ai 0.9.3",
         f"- timestamp_utc: {receipt['timestamp_utc']}",
         f"- atoms_written: **{atoms_written}**",
         f"- atoms_skipped_dupe: {atoms_skipped_dupe}",
@@ -544,9 +543,9 @@ async def main() -> None:
         f"- failures: {len(failures)}",
         f"- receipt: `{receipt_path}`",
         f"- atoms: `{ATOMS_PATH}`",
-        f"",
-        f"## Counts by family_id",
-        f"",
+        "",
+        "## Counts by family_id",
+        "",
     ]
     for fid, n in sorted(by_family.items(), key=lambda x: (-x[1], x[0])):
         lines.append(f"- `{fid}`: {n}")

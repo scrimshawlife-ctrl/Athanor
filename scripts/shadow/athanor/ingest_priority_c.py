@@ -1012,10 +1012,10 @@ async def main() -> None:
     b = before.get(fid, 0)
     a = after.get(fid, 0)
     lines = [
-        f"# Ingest Priority C scoreboard — islamic_occult_pd (Picatrix / Arabic occult-scientific PD)",
-        f"",
+        "# Ingest Priority C scoreboard — islamic_occult_pd (Picatrix / Arabic occult-scientific PD)",
+        "",
         f"- run_id: `{RUN_ID}`",
-        f"- job_type: harvest | priority: **C** | engine: crawl4ai 0.9.3 (+ urllib + local Gutenberg)",
+        "- job_type: harvest | priority: **C** | engine: crawl4ai 0.9.3 (+ urllib + local Gutenberg)",
         f"- timestamp_utc: {receipt['timestamp_utc']}",
         f"- pages_ok: **{pages_ok}** | pages_fail: **{pages_fail}**",
         f"- atoms_written: **{atoms_written}** | dupes: {atoms_skipped_dupe} | quality_skips: {atoms_skipped_quality}",
@@ -1025,31 +1025,31 @@ async def main() -> None:
         f"- kinds: `{dict(by_kind)}`",
         f"- receipt: `{receipt_path}`",
         f"- backup: `{backup}`",
-        f"- script: `/workspace/Athanor/scripts/shadow/athanor/ingest_priority_c.py`",
-        f"- chrome_strip: yes | allowlist respected | no Firecrawl | no Wave 3b | no Enochian | no efficacy | no Hub",
-        f"",
-        f"## Priority C family delta",
-        f"",
-        f"| family_id | before | after | delta | % of NEW |",
-        f"|---|---:|---:|---:|---:|",
+        "- script: `/workspace/Athanor/scripts/shadow/athanor/ingest_priority_c.py`",
+        "- chrome_strip: yes | allowlist respected | no Firecrawl | no Wave 3b | no Enochian | no efficacy | no Hub",
+        "",
+        "## Priority C family delta",
+        "",
+        "| family_id | before | after | delta | % of NEW |",
+        "|---|---:|---:|---:|---:|",
         f"| `{fid}` | {b} | {a} | {a - b:+d} | {100.0 if atoms_written else 0:.1f}% |",
-        f"",
-        f"## Sources used",
-        f"",
-        f"- Gutenberg Thorndike 1923 vol1 ch28 Arabic occult science; ch30 Gerbert/Arabic astrology",
-        f"- Gutenberg Thorndike 1923 vol2 ch38 Arabic astrology translators; ch66 Picatrix",
-        f"- sacred-texts: de Boer HPI (Brethren/Kindi/natural phil.); O'Leary Arabic Thought (translators/Arab period)",
-        f"- sacred-texts: Pavitt Book of Talismans (Arab/Islamic-historical leaves only)",
-        f"",
-        f"## HOLD (with reason)",
-        f"",
+        "",
+        "## Sources used",
+        "",
+        "- Gutenberg Thorndike 1923 vol1 ch28 Arabic occult science; ch30 Gerbert/Arabic astrology",
+        "- Gutenberg Thorndike 1923 vol2 ch38 Arabic astrology translators; ch66 Picatrix",
+        "- sacred-texts: de Boer HPI (Brethren/Kindi/natural phil.); O'Leary Arabic Thought (translators/Arab period)",
+        "- sacred-texts: Pavitt Book of Talismans (Arab/Islamic-historical leaves only)",
+        "",
+        "## HOLD (with reason)",
+        "",
     ]
     for h in holds:
         lines.append(f"- {json.dumps(h, ensure_ascii=False)}")
     lines += [
-        f"",
-        f"## FAILED",
-        f"",
+        "",
+        "## FAILED",
+        "",
     ]
     if not failures:
         lines.append("- (none)")
@@ -1057,27 +1057,27 @@ async def main() -> None:
         for fail in failures[:80]:
             lines.append(f"- {fail.get('url')}: {fail.get('error')} (status={fail.get('status')})")
     lines += [
-        f"",
-        f"## INFERRED license notes",
-        f"",
+        "",
+        "## INFERRED license notes",
+        "",
     ]
     for n in license_notes:
         lines.append(f"- {n}")
     lines += [
-        f"",
-        f"## Sample atom_ids",
-        f"",
+        "",
+        "## Sample atom_ids",
+        "",
     ]
     for s in sample_ids:
         lines.append(f"- `{s}`")
     lines += [
-        f"",
-        f"## Propose (never GOLD)",
-        f"",
+        "",
+        "## Propose (never GOLD)",
+        "",
         f"- KEEP: islamic_occult_pd ({atoms_written} NEW via Thorndike Picatrix/Arabic occult PD + sacred-texts Islamic scientific)",
-        f"- HOLD: modern English Picatrix (Warnock/Greer/Atallah/Hashem); Alfonso concordance CC-BY-ND; Arabic Ghayat license-unclear; Wave 3b; Enochian",
-        f"- DROP: SPA chrome-only after strip; HTTP failures (no invented excerpt)",
-        f"",
+        "- HOLD: modern English Picatrix (Warnock/Greer/Atallah/Hashem); Alfonso concordance CC-BY-ND; Arabic Ghayat license-unclear; Wave 3b; Enochian",
+        "- DROP: SPA chrome-only after strip; HTTP failures (no invented excerpt)",
+        "",
     ]
     scoreboard_path = SCOREBOARD_DIR / f"ingest-priority-c-{TS_FILE}.md"
     scoreboard_path.write_text("\n".join(lines) + "\n")

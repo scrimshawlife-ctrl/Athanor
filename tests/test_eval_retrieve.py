@@ -63,8 +63,8 @@ def test_evaluate_correspondence_ndcg_target():
 
 def test_evaluate_correspondence_expanded_per_family_ndcg_sample():
     # TDD for Option 2 harness enhancement: expect per_family to support larger sampling
-    pairs = load_pairs(str(PAIRS))[:30]
-    results = evaluate_correspondence(pairs, k=10)
+    pairs = load_pairs(str(PAIRS))
+    results = evaluate_correspondence(pairs, k=10, sample_limit=30)
     per_fam = results.get("per_family", {})
     assert len(per_fam) >= 5, f"Expected expanded per_family sample support, got {len(per_fam)} families"
     # Check ndcg present for sampled
@@ -75,8 +75,8 @@ def test_evaluate_correspondence_expanded_per_family_ndcg_sample():
 
 def test_evaluate_correspondence_dynamic_low_family_enhancement():
     # TDD for Option 3: dynamic low threshold and low ndcg avg
-    pairs = load_pairs(str(PAIRS))[:50]
-    results = evaluate_correspondence(pairs, k=10)
+    pairs = load_pairs(str(PAIRS))
+    results = evaluate_correspondence(pairs, k=10, sample_limit=50)
     # The main function doesn't return low, but we can test the logic indirectly by calling with data that has low fam
     # For now, check that per_family has ndcg for low n families if present
     per_fam = results.get("per_family", {})

@@ -1070,10 +1070,10 @@ async def main() -> None:
     receipt_path.write_text(json.dumps(receipt, indent=2, ensure_ascii=False))
 
     lines = [
-        f"# Ingest Priority D scoreboard — Wave 2 PD families",
-        f"",
+        "# Ingest Priority D scoreboard — Wave 2 PD families",
+        "",
         f"- run_id: `{RUN_ID}`",
-        f"- job_type: harvest | priority: **D** | engine: crawl4ai 0.9.3 (+ urllib + Met OA API)",
+        "- job_type: harvest | priority: **D** | engine: crawl4ai 0.9.3 (+ urllib + Met OA API)",
         f"- timestamp_utc: {receipt['timestamp_utc']}",
         f"- pages_ok: **{pages_ok}** | pages_fail: **{pages_fail}**",
         f"- atoms_written: **{atoms_written}** | dupes: {atoms_skipped_dupe} | quality_skips: {atoms_skipped_quality}",
@@ -1082,13 +1082,13 @@ async def main() -> None:
         f"- kinds: `{dict(by_kind)}`",
         f"- receipt: `{receipt_path}`",
         f"- backup: `{backup}`",
-        f"- script: `/workspace/Athanor/scripts/shadow/athanor/ingest_priority_d.py`",
-        f"- chrome_strip: yes | allowlist respected | no Firecrawl | no Wave 3b | no Enochian | no efficacy | no Hub",
-        f"",
-        f"## Priority D family deltas",
-        f"",
-        f"| family_id | before | after | delta | % of NEW |",
-        f"|---|---:|---:|---:|---:|",
+        "- script: `/workspace/Athanor/scripts/shadow/athanor/ingest_priority_d.py`",
+        "- chrome_strip: yes | allowlist respected | no Firecrawl | no Wave 3b | no Enochian | no efficacy | no Hub",
+        "",
+        "## Priority D family deltas",
+        "",
+        "| family_id | before | after | delta | % of NEW |",
+        "|---|---:|---:|---:|---:|",
     ]
     for fid in FOCUS_FAMILIES:
         b = before.get(fid, 0)
@@ -1097,26 +1097,26 @@ async def main() -> None:
         pct = (100.0 * d / atoms_written) if atoms_written else 0.0
         lines.append(f"| `{fid}` | {b} | {a} | {d:+d} | {pct:.1f}% |")
     lines += [
-        f"",
-        f"## Sources used",
-        f"",
-        f"- sacred-texts: Müller Upanishads SBE1/15; Griffith Rig-Veda hymn leaves",
-        f"- sacred-texts: Hindu Book of Astrology (1902) zodiac anchors (efficacy ch. HOLD)",
-        f"- sacred-texts: Avalon/Woodroffe Mahanirvana + Shakti and Shâkta + Hymns intro (historical leaves)",
-        f"- sacred-texts: Schlagintweit Buddhism in Tibet; SBE49/Lotus doctrinal description",
-        f"- sacred-texts: Legge I Ching ic23–50 + intros; Taoist PD deepen leaves",
-        f"- sacred-texts: Brinton Rig Veda Americanus (1890); Roys Chilam Balam (non-renewal claim)",
-        f"- Met Open Access API: Mesoamerican public-domain object metadata (CC0)",
-        f"",
-        f"## HOLD (with reason)",
-        f"",
+        "",
+        "## Sources used",
+        "",
+        "- sacred-texts: Müller Upanishads SBE1/15; Griffith Rig-Veda hymn leaves",
+        "- sacred-texts: Hindu Book of Astrology (1902) zodiac anchors (efficacy ch. HOLD)",
+        "- sacred-texts: Avalon/Woodroffe Mahanirvana + Shakti and Shâkta + Hymns intro (historical leaves)",
+        "- sacred-texts: Schlagintweit Buddhism in Tibet; SBE49/Lotus doctrinal description",
+        "- sacred-texts: Legge I Ching ic23–50 + intros; Taoist PD deepen leaves",
+        "- sacred-texts: Brinton Rig Veda Americanus (1890); Roys Chilam Balam (non-renewal claim)",
+        "- Met Open Access API: Mesoamerican public-domain object metadata (CC0)",
+        "",
+        "## HOLD (with reason)",
+        "",
     ]
     for h in holds:
         lines.append(f"- {json.dumps(h, ensure_ascii=False)}")
     lines += [
-        f"",
-        f"## FAILED",
-        f"",
+        "",
+        "## FAILED",
+        "",
     ]
     if not failures:
         lines.append("- (none)")
@@ -1124,28 +1124,28 @@ async def main() -> None:
         for fail in failures[:100]:
             lines.append(f"- {fail.get('url')}: {fail.get('error')} (status={fail.get('status')})")
     lines += [
-        f"",
-        f"## INFERRED license notes",
-        f"",
+        "",
+        "## INFERRED license notes",
+        "",
     ]
     for n in license_notes:
         lines.append(f"- {n}")
     lines += [
-        f"",
-        f"## Sample atom_ids",
-        f"",
+        "",
+        "## Sample atom_ids",
+        "",
     ]
     for s in sample_ids:
         lines.append(f"- `{s}`")
     keep = [f for f in FOCUS_FAMILIES if by_family_new.get(f)]
     lines += [
-        f"",
-        f"## Propose (never GOLD)",
-        f"",
+        "",
+        "## Propose (never GOLD)",
+        "",
         f"- KEEP: {', '.join(keep) if keep else '(none)'}",
-        f"- HOLD: ETTT Musés 1961; Gates Yucatan 1937; Thompson MHW 1950; Mahanirvana ritual-formation ch.; HBA efficacy ch.; BM pages; Wave 3b; Enochian",
-        f"- DROP: SPA chrome-only after strip; non-Meso Met false positives; HTTP failures",
-        f"",
+        "- HOLD: ETTT Musés 1961; Gates Yucatan 1937; Thompson MHW 1950; Mahanirvana ritual-formation ch.; HBA efficacy ch.; BM pages; Wave 3b; Enochian",
+        "- DROP: SPA chrome-only after strip; non-Meso Met false positives; HTTP failures",
+        "",
     ]
     scoreboard_path = SCOREBOARD_DIR / f"ingest-priority-d-{TS_FILE}.md"
     scoreboard_path.write_text("\n".join(lines) + "\n")

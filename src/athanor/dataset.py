@@ -2,7 +2,6 @@ from __future__ import annotations
 import json
 import random
 from pathlib import Path
-from typing import Any
 import sys
 
 def prepare_dataset(gold_path: Path, weak_path: Path, out_manifest: Path, ratios: dict, seed: int = 42) -> dict:
