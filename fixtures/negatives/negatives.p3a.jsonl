@@ -370,3 +370,8 @@
 {"neg_id": "neg.biotech.08", "theme": "biotech", "text": "CRISPR gene editing is advancing medical research rapidly.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.logistics.08", "theme": "logistics", "text": "Supply chain optimization uses AI for predictive analytics.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
 {"neg_id": "neg.entertainment.08", "theme": "entertainment", "text": "Streaming services dominate media consumption habits.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.tech.09", "theme": "tech", "text": "Cloud computing services have become essential for modern businesses.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.auto.09", "theme": "auto", "text": "Electric cars are gaining market share worldwide.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.retail.09", "theme": "retail", "text": "Online shopping continues to grow at the expense of physical stores.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.finance.09", "theme": "finance", "text": "Central banks are exploring digital currencies.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}
+{"neg_id": "neg.sports.09", "theme": "sports", "text": "Major leagues are investing in data analytics for player performance.", "epistemic": "OBSERVED", "license": "CC0-fixture", "source": "fixture"}

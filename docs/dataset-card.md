@@ -235,3 +235,11 @@ Updated continue: Pairs 1342, Negs 307, Min pair 14, Lowest [('history_magic', 1
 - runes_eddic used short atoms (like previous)
 - runes source (Volsunga Saga/Edda gutenberg) jev 0 hold
 
+
+## Continue 26s boost
+- Fresh: Popol Vuh (gutenberg 56550) for andes_amazon, 95 cands, jev 0.5=0 high
+- +50 pairs for andes_amazon, astrology_west, tarot_history, chaos_spare_hist, mesopotamia, goetia_catalog, shinto_onmyodo, coptic_gnostic, veda_upanishad_pd, mesoamerica (to 31 each)
+- +5 negs to 377
+- Min 27
+- Total pairs 1630
+
