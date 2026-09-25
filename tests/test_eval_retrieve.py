@@ -31,7 +31,7 @@ def _write_corpus(tmp_path: Path, pairs: list[dict]) -> Path:
                 "epistemic": "OBSERVED",
             }
         )
-    corpus.write_text("".join(json.dumps(row) + "\\n" for row in rows), encoding="utf-8")
+    corpus.write_text("".join(json.dumps(row) + "\n" for row in rows), encoding="utf-8")
     return corpus
 
 
