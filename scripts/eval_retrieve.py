@@ -1,7 +1,4 @@
 #!/usr/bin/env python3
-
-import re
-
 """Retrieval evaluation harness using gold correspondence pairs.
 
 Usage:
@@ -13,6 +10,8 @@ import argparse
 import collections
 import json
 import math
+import random
+import re
 from pathlib import Path
 from typing import Any
 
@@ -28,16 +27,16 @@ def load_pairs(path: str) -> list[dict[str, Any]]:
     return pairs
 
 
-import random
-
 def evaluate_correspondence(
     pairs: list[dict[str, Any]],
     k: int = 10,
     corpus_path: Path | None = None,
     sample_limit: int | None = None,
+    seed: int = 0,
 ) -> dict[str, Any]:
     """Evaluate how often the gold atom appears in top-k for constructed queries."""
-    # If sample_limit specified, take a stratified sample to ensure family diversity
+    # If sample_limit is specified, use deterministic stratified sampling.
+    rng = random.Random(seed)
     if sample_limit and len(pairs) > sample_limit:
         # Group by family
         fam_groups = collections.defaultdict(list)
@@ -51,12 +50,12 @@ def evaluate_correspondence(
         for fam in families:
             fam_pairs = fam_groups[fam]
             take = min(per_fam, len(fam_pairs))
-            sampled.extend(random.sample(fam_pairs, take) if len(fam_pairs) > take else fam_pairs)
+            sampled.extend(rng.sample(fam_pairs, take) if len(fam_pairs) > take else fam_pairs)
         
         # If still need more, fill from remaining
         if len(sampled) < sample_limit:
             remaining = [p for p in pairs if p not in sampled]
-            extra = random.sample(remaining, min(sample_limit - len(sampled), len(remaining)))
+            extra = rng.sample(remaining, min(sample_limit - len(sampled), len(remaining)))
             sampled.extend(extra)
         
         pairs = sampled[:sample_limit]
@@ -126,13 +125,12 @@ def evaluate_correspondence(
         if stats["total"] > 0:
             fr = stats["hits"] / stats["total"]
             fmrr = sum(1.0 / r for r in stats["ranks"]) / stats["total"] if stats["ranks"] else 0
-            # per-family ndcg (simple mean over hits in family)
-            fndcg = 0.0
-            if stats["ranks"]:
-                for r in stats["ranks"]:
-                    dcg = 1.0 / math.log2(r + 1)
-                    fndcg += dcg
-                fndcg /= len(stats["ranks"])
+            # One relevant target per query: IDCG is 1.0. Misses contribute zero.
+            fndcg = (
+                sum(1.0 / math.log2(r + 1) for r in stats["ranks"]) / stats["total"]
+                if stats["total"]
+                else 0.0
+            )
             family_stats[fam] = {
                 "hit_rate": round(fr, 3),
                 "mrr": round(fmrr, 3),
@@ -140,14 +138,12 @@ def evaluate_correspondence(
                 "n": stats["total"]
             }
 
-    # nDCG@ k (proper mean, using ranks of hits; IDCG for @k)
-    ndcg = 0.0
-    if ranks:
-        for r in ranks:
-            dcg = 1.0 / math.log2(r + 1)
-            idcg = sum(1.0 / math.log2(i + 1) for i in range(1, min(11, len(ranks)+1)))  # approx ideal for k=10
-            ndcg += dcg / max(idcg, 1)
-        ndcg /= len(ranks)
+    # One relevant target per query: IDCG@k is 1.0; misses contribute zero.
+    ndcg = (
+        sum(1.0 / math.log2(r + 1) for r in ranks) / total
+        if total
+        else 0.0
+    )
     ndcg = round(ndcg, 4)
 
     return {
@@ -175,7 +171,10 @@ def main():
         help="Optional corpus path (defaults to ATHANOR_CORPUS or ~/.athanor/...)",
     )
     parser.add_argument("--report", default=None, help="Optional path to write JSON results")
-    parser.add_argument("--sample-limit", type=int, default=None, help="Optional stratified sample limit for faster eval")
+    parser.add_argument(
+        "--sample-limit", type=int, default=None, help="Optional stratified sample limit for faster eval"
+    )
+    parser.add_argument("--seed", type=int, default=0, help="Deterministic sampling seed")
     args = parser.parse_args()
 
     pairs_path = Path(args.pairs)
@@ -189,7 +188,13 @@ def main():
     print(f"Evaluating {len(pairs)} gold pairs @k={args.k}")
     print("-" * 50)
 
-    results = evaluate_correspondence(pairs, k=args.k, corpus_path=corpus_path, sample_limit=args.sample_limit)
+    results = evaluate_correspondence(
+        pairs,
+        k=args.k,
+        corpus_path=corpus_path,
+        sample_limit=args.sample_limit,
+        seed=args.seed,
+    )
 
     print(f"pairs_evaluated: {results['pairs_evaluated']}")
     print(f"hit_rate_at_{args.k}: {results[f'hit_rate_at_{args.k}']}")

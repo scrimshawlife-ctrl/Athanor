@@ -1,7 +1,9 @@
 from __future__ import annotations
+
 import json
 from pathlib import Path
 from typing import Any
+
 
 class SettlementExecutor:
     def apply(self, proposals_path: Path, approval_ref: str | None = None) -> dict[str, Any]:

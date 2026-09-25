@@ -148,3 +148,77 @@ def test_deep_json_returns_structured_invalid(tmp_path, capsys, filename):
     result = json.loads(capsys.readouterr().out)
     assert result["status"] == "INVALID"
     assert result["reason"] == "JSON nesting exceeds parser limits"
+
+
+
+def test_component_leakage_audit_passes_disjoint_components(tmp_path):
+    def rows(records):
+        names = ("train", "validation", "test")
+        records[FILES[0]] = [
+            {"row_id": name, "inputs": {"text": "Synthetic " + name}} for name in names
+        ]
+        records[FILES[1]] = [
+            {
+                "row_id": name,
+                "split": name,
+                "training_eligible": False,
+                "targets": {"family_id": "hermetic"},
+            }
+            for name in names
+        ]
+        records[FILES[2]] = [
+            {
+                "row_id": name,
+                "source_component_id": "component-" + name,
+                "content_hash": "hash-" + name,
+            }
+            for name in names
+        ]
+
+    pack(tmp_path, rows)
+    report = inspect_pack(tmp_path)
+    assert report["leakage_audit"]["status"] == "PASS"
+    assert report["leakage_audit"]["component_overlap_count"] == 0
+    assert "WORK_EDITION_GROUPING_AND_LEAKAGE_PROOF" not in report["blockers"]
+
+
+def test_component_leakage_audit_blocks_cross_split_component(tmp_path):
+    def rows(records):
+        names = ("train", "validation", "test")
+        records[FILES[0]] = [
+            {"row_id": name, "inputs": {"text": "Synthetic " + name}} for name in names
+        ]
+        records[FILES[1]] = [
+            {
+                "row_id": name,
+                "split": name,
+                "training_eligible": False,
+                "targets": {"family_id": "hermetic"},
+            }
+            for name in names
+        ]
+        records[FILES[2]] = [
+            {
+                "row_id": name,
+                "source_component_id": "shared" if name != "test" else "test-only",
+                "content_hash": "hash-" + name,
+            }
+            for name in names
+        ]
+
+    pack(tmp_path, rows)
+    report = inspect_pack(tmp_path)
+    assert report["leakage_audit"]["status"] == "FAIL"
+    assert report["leakage_audit"]["component_overlap_count"] == 1
+    assert "WORK_EDITION_GROUPING_AND_LEAKAGE_PROOF" in report["blockers"]
+
+
+def test_component_leakage_audit_is_not_computable_without_component_ids(tmp_path):
+    def rows(records):
+        records[FILES[2]] = [{"row_id": "synthetic", "content_hash": "hash-only"}]
+
+    pack(tmp_path, rows)
+    report = inspect_pack(tmp_path)
+    assert report["leakage_audit"]["status"] == "NOT_COMPUTABLE"
+    assert report["leakage_audit"]["missing_source_components"] == 1
+    assert "WORK_EDITION_GROUPING_AND_LEAKAGE_PROOF" in report["blockers"]

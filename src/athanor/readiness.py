@@ -57,6 +57,66 @@ def _ids(rows):
     return ids
 
 
+
+def _leakage_audit(targets, provenance):
+    split_by_row = {row["row_id"]: row["split"] for row in targets}
+    by_row = {}
+    for row in provenance:
+        if not isinstance(row, dict):
+            raise TypeError("Provenance records must be objects")
+        row_id = row.get("row_id")
+        if row_id is None:
+            continue
+        if not isinstance(row_id, str) or not row_id.strip() or row_id in by_row:
+            raise ValueError("Missing or duplicate provenance row_id")
+        by_row[row_id] = row
+
+    missing = sorted(set(split_by_row) - set(by_row))
+    if missing:
+        return {
+            "status": "NOT_COMPUTABLE",
+            "missing_provenance_rows": len(missing),
+            "component_overlap_count": "NOT_COMPUTABLE",
+            "content_hash_overlap_count": "NOT_COMPUTABLE",
+        }
+
+    component_splits = {}
+    hash_splits = {}
+    missing_components = 0
+    for row_id, split in split_by_row.items():
+        provenance_row = by_row[row_id]
+        component = provenance_row.get("source_component_id") or provenance_row.get("work_edition_id")
+        if not isinstance(component, str) or not component.strip():
+            missing_components += 1
+        else:
+            component_splits.setdefault(component, set()).add(split)
+
+        content_hash = provenance_row.get("content_hash")
+        if isinstance(content_hash, str) and content_hash.strip():
+            hash_splits.setdefault(content_hash, set()).add(split)
+
+    if missing_components:
+        return {
+            "status": "NOT_COMPUTABLE",
+            "missing_provenance_rows": 0,
+            "missing_source_components": missing_components,
+            "component_overlap_count": "NOT_COMPUTABLE",
+            "content_hash_overlap_count": "NOT_COMPUTABLE",
+        }
+
+    component_overlap = sum(1 for splits in component_splits.values() if len(splits) > 1)
+    hash_overlap = sum(1 for splits in hash_splits.values() if len(splits) > 1)
+    return {
+        "status": "PASS" if component_overlap == 0 and hash_overlap == 0 else "FAIL",
+        "missing_provenance_rows": 0,
+        "missing_source_components": 0,
+        "component_overlap_count": component_overlap,
+        "content_hash_overlap_count": hash_overlap,
+        "components": len(component_splits),
+        "content_hashes": len(hash_splits),
+    }
+
+
 def inspect_pack(root: Path) -> dict:
     """Verify candidate-preparation/1; even edited approval claims remain untrusted."""
     if root.is_symlink() or not root.is_dir():
@@ -113,14 +173,17 @@ def inspect_pack(root: Path) -> dict:
         families[labels["family_id"]] += 1
         heads.update(labels.keys())
         eligible += row["training_eligible"]
+    leakage = _leakage_audit(targets, files["provenance.jsonl"])
     blockers = ["INDEPENDENT_LABEL_REVIEW", "USE_SCOPED_RIGHTS_REVIEW",
-                "WORK_EDITION_GROUPING_AND_LEAKAGE_PROOF", "MODEL_TOKENIZER_CONFIG_PIN",
+                "MODEL_TOKENIZER_CONFIG_PIN",
                 "EVALUATION_SUPPORT_PROTOCOL", "TRAINER_AND_EVALUATOR_IMPLEMENTATION",
                 "RESOURCE_PREFLIGHT", "SCOPED_OPERATOR_TRAIN_APPROVAL"]
     if splits["UNASSIGNED"]:
         blockers.append("UNASSIGNED_SPLITS")
     if not (splits["train"] and splits["test"] and (splits["val"] or splits["validation"])):
         blockers.append("MISSING_TRAIN_VALIDATION_TEST_PARTITION")
+    if leakage["status"] != "PASS":
+        blockers.append("WORK_EDITION_GROUPING_AND_LEAKAGE_PROOF")
     return {
         "schema_version": "athanor.candidate_audit.v1", "status": "HOLD",
         "integrity": "PASS", "training_authorized": False,
@@ -132,6 +195,7 @@ def inspect_pack(root: Path) -> dict:
         "family_counts": dict(sorted(families.items())),
         "target_field_counts": dict(sorted(heads.items())),
         "training_eligible_claims": eligible,
+        "leakage_audit": leakage,
         "independently_verified_eligible_rows": "NOT_COMPUTABLE", "blockers": blockers,
         "scope": "Candidate storage and joins only; no review authentication or content adjudication",
     }

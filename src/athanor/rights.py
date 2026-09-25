@@ -1,5 +1,7 @@
 from __future__ import annotations
+
 from typing import Any
+
 
 class RightsJoiner:
     def join(self, decision: dict[str, Any], reception: dict[str, Any] | None = None) -> dict[str, Any]:

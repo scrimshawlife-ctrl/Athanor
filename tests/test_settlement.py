@@ -1,7 +1,10 @@
 # tests/test_settlement.py
-import pytest
 from pathlib import Path
+
+import pytest
+
 from athanor.settlement import SettlementExecutor
+
 
 def test_settlement_executor_rejects_unapproved(tmp_path: Path):
     # Minimal input: proposals + no approval
