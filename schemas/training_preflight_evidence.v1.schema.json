@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://athanor.local/schemas/training_preflight_evidence.v1.schema.json",
+  "title": "Athanor Training Preflight Evidence v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "kind",
+    "status",
+    "candidate_manifest_sha256",
+    "evidence_sha256"
+  ],
+  "properties": {
+    "kind": {
+      "enum": [
+        "provenance_rights",
+        "independent_gold_holdout",
+        "untrained_baseline",
+        "training_config"
+      ]
+    },
+    "status": {"const": "PASS"},
+    "candidate_manifest_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "repo_sha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40,64}$"
+    },
+    "evidence_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

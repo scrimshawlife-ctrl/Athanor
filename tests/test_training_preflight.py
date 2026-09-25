@@ -57,3 +57,61 @@ def test_failed_integrity_rejected():
     audit["integrity"] = "FAIL"
     with pytest.raises(ValueError, match="integrity"):
         receipt_from_audit(audit, REPO_SHA)
+
+
+
+def _evidence(kind, manifest="b" * 64, repo_sha=REPO_SHA):
+    return {
+        "kind": kind,
+        "status": "PASS",
+        "candidate_manifest_sha256": manifest,
+        "repo_sha": repo_sha,
+        "evidence_sha256": "c" * 64,
+    }
+
+
+def test_explicit_bound_evidence_can_satisfy_g3_g6_g7_g8():
+    receipt = receipt_from_audit(
+        _audit(),
+        REPO_SHA,
+        rights_evidence=_evidence("provenance_rights"),
+        gold_evidence=_evidence("independent_gold_holdout"),
+        baseline_evidence=_evidence("untrained_baseline"),
+        config_evidence=_evidence("training_config"),
+    )
+    assert receipt["state"] == "PREFLIGHT_PASS"
+    assert receipt["blocking_gates"] == []
+    assert receipt["training_authorized"] is False
+
+
+def test_evidence_for_different_candidate_manifest_is_rejected():
+    receipt = receipt_from_audit(
+        _audit(),
+        REPO_SHA,
+        rights_evidence=_evidence("provenance_rights", manifest="d" * 64),
+    )
+    gate = receipt["gates"]["G3_PROVENANCE_RIGHTS"]
+    assert gate["status"] == "HOLD"
+    assert gate["reason"] == "CANDIDATE_MANIFEST_MISMATCH"
+
+
+def test_wrong_evidence_kind_cannot_satisfy_gate():
+    receipt = receipt_from_audit(
+        _audit(),
+        REPO_SHA,
+        gold_evidence=_evidence("provenance_rights"),
+    )
+    gate = receipt["gates"]["G6_GOLD_HOLDOUT"]
+    assert gate["status"] == "HOLD"
+    assert gate["reason"] == "WRONG_EVIDENCE_KIND"
+
+
+def test_evidence_repo_sha_mismatch_is_rejected():
+    receipt = receipt_from_audit(
+        _audit(),
+        REPO_SHA,
+        config_evidence=_evidence("training_config", repo_sha="d" * 40),
+    )
+    gate = receipt["gates"]["G8_TRAINING_CONFIG_FREEZE"]
+    assert gate["status"] == "HOLD"
+    assert gate["reason"] == "REPO_SHA_MISMATCH"
