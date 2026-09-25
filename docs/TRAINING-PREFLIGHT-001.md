@@ -51,3 +51,23 @@ A future `training-readiness.json` MUST be generated from evidence rather than h
 ## Acceptance
 
 Training remains **HOLD** until G0-G8 are PASS. A high retrieval score alone cannot satisfy G5-G8.
+
+
+## Executable receipt
+
+Generate the current fail-closed G2-G8 receipt from a candidate pack:
+
+```bash
+python -m athanor.training_preflight \
+  --pack /path/to/candidate-pack \
+  --repo-sha "$(git rev-parse HEAD)" \
+  --output out/training-readiness.json
+```
+
+Exit codes:
+
+- `0`: all represented G2-G8 gates PASS (this still does not authorize training).
+- `2`: valid evidence, but one or more gates remain HOLD.
+- `1`: invalid or unsafe evidence input.
+
+The current receipt intentionally keeps G3, G6, G7, and G8 on HOLD until authenticated rights review, independent content-bound GOLD review, an untouched-test baseline receipt, and a pinned training configuration are supplied by later contracts.
