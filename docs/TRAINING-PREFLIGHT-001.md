@@ -71,3 +71,25 @@ Exit codes:
 - `1`: invalid or unsafe evidence input.
 
 The current receipt intentionally keeps G3, G6, G7, and G8 on HOLD until authenticated rights review, independent content-bound GOLD review, an untouched-test baseline receipt, and a pinned training configuration are supplied by later contracts.
+
+
+## G3/G6/G7/G8 evidence binding
+
+The receipt generator accepts four optional private evidence sidecars:
+
+```bash
+python -m athanor.training_preflight \
+  --pack /path/to/candidate-pack \
+  --repo-sha "$(git rev-parse HEAD)" \
+  --rights-evidence /private/provenance-rights.json \
+  --gold-evidence /private/independent-gold.json \
+  --baseline-evidence /private/untrained-baseline.json \
+  --config-evidence /private/training-config.json \
+  --output out/training-readiness.json
+```
+
+Each sidecar must identify the expected evidence kind, report PASS, bind the exact candidate manifest SHA256, and carry a SHA256 evidence digest. A repo SHA may also be supplied; if present it must match the evaluated checkout. Wrong-kind, stale-manifest, stale-repo, non-PASS, or malformed evidence remains HOLD.
+
+The generic envelope is `schemas/training_preflight_evidence.v1.schema.json`. This envelope proves binding only. It does not prove that a rights reviewer, GOLD reviewer, baseline harness, or training configuration is substantively correct. Those producers remain separate workflows.
+
+Even when G2-G8 all PASS, the generated receipt keeps `training_authorized=false`. Pilot execution still requires a separate, explicit, scoped operator authorization after preflight.
