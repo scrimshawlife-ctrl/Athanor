@@ -1,6 +1,9 @@
-import pytest
 from pathlib import Path
+
+import pytest
+
 from athanor.dataset import prepare_dataset
+
 
 def test_prepare_dataset_produces_manifest_and_exits_hold(tmp_path: Path):
     # minimal gold + weak input
