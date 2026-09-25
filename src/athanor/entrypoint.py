@@ -51,7 +51,21 @@ def _cmd_doctor() -> int:
                 payload["long_excerpt_pct"] = round(100 * len(long_ex) / len(text_lens), 1) if text_lens else 0
                 payload["operational_atoms"] = sum(1 for a in atoms if a.lens_hints.get("operational"))
                 payload["pd_license_pct"] = round(100 * sum(1 for a in atoms if "public-domain" in str(a.license)) / len(atoms))
-                payload["jev_provenance_pct"] = round(100 * sum(1 for a in atoms if a.source_url and "sacred-texts|archive.org|gutenberg|newtonproject" in str(a.source_url).lower() or bool(a.source_url)) / len(atoms)) if atoms else 0
+                provenance_hosts = ("sacred-texts.com", "archive.org", "gutenberg.org", "newtonproject.ox.ac.uk")
+                payload["jev_provenance_pct"] = (
+                    round(
+                        100
+                        * sum(
+                            1
+                            for a in atoms
+                            if a.source_url
+                            and any(host in str(a.source_url).lower() for host in provenance_hosts)
+                        )
+                        / len(atoms)
+                    )
+                    if atoms
+                    else 0
+                )
 
                 # Gold pairs stats for harness (AC-GOLD-003)
                 try:
@@ -104,7 +118,7 @@ def _cmd_doctor() -> int:
                 [sys.executable, "scripts/eval_retrieve.py", "--k", "10", "--report", "/tmp/doctor_eval.json"],
                 capture_output=True,
                 text=True,
-                cwd="/Users/appliedalchemylabs/Athanor",
+                cwd=str(Path(__file__).resolve().parents[2]),
                 check=False,
             )
             if res.returncode == 0 and Path("/tmp/doctor_eval.json").exists():
