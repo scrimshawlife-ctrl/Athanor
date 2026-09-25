@@ -63,7 +63,7 @@ def _leakage_audit(targets, provenance):
     by_row = {}
     for row in provenance:
         if not isinstance(row, dict):
-            raise ValueError("Provenance records must be objects")
+            raise TypeError("Provenance records must be objects")
         row_id = row.get("row_id")
         if row_id is None:
             continue
