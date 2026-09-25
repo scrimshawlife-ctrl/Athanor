@@ -93,3 +93,19 @@ Each sidecar must identify the expected evidence kind, report PASS, bind the exa
 The generic envelope is `schemas/training_preflight_evidence.v1.schema.json`. This envelope proves binding only. It does not prove that a rights reviewer, GOLD reviewer, baseline harness, or training configuration is substantively correct. Those producers remain separate workflows.
 
 Even when G2-G8 all PASS, the generated receipt keeps `training_authorized=false`. Pilot execution still requires a separate, explicit, scoped operator authorization after preflight.
+
+
+## G3 rights-audit producer
+
+Before any training-rights approval is possible, triage the exact corpus atom snapshot:
+
+```bash
+python -m athanor.training_rights \
+  --atoms ~/.athanor/corpus/atoms.jsonl \
+  --candidate-manifest-sha256 <64-hex-candidate-manifest> \
+  --output out/training-rights-audit.json
+```
+
+This command is deliberately non-authorizing and exits 2 for a valid audit. It treats recognizable public-domain/open-license strings only as `candidate_clearable`; all other claims are explicit unresolved rows. It never converts a nonempty `license` field, an allowlisted host, or a public-domain-looking string into G3 PASS.
+
+The resulting audit is the queue for work/edition/source evidence review. A later authenticated review may produce the `provenance_rights` PASS sidecar consumed by `athanor.training_preflight`; this triage report cannot be used as that sidecar because its evidence kind/status intentionally differ.
