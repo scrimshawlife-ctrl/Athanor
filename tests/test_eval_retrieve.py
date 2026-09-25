@@ -123,3 +123,24 @@ def test_evaluate_correspondence_dynamic_low_family_enhancement(tmp_path):
         for st in lowish[:3]:
             assert "ndcg" in st
     assert True  # placeholder for dynamic logic in output
+
+
+
+def test_ndcg_counts_misses_as_zero(tmp_path):
+    pairs = load_pairs(str(PAIRS))[:2]
+    corpus = _write_corpus(tmp_path, pairs[:1])
+    results = evaluate_correspondence(pairs, k=5, corpus_path=corpus)
+    assert results["hits"] == 1
+    assert 0.0 < results["ndcg"] <= 0.5
+
+
+def test_stratified_sampling_is_deterministic(tmp_path):
+    pairs = _diverse_pairs(load_pairs(str(PAIRS)), per_family=2)
+    corpus = _write_corpus(tmp_path, pairs)
+    first = evaluate_correspondence(
+        pairs, k=5, corpus_path=corpus, sample_limit=20, seed=17
+    )
+    second = evaluate_correspondence(
+        pairs, k=5, corpus_path=corpus, sample_limit=20, seed=17
+    )
+    assert first == second
