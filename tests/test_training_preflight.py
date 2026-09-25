@@ -4,7 +4,6 @@ import pytest
 
 from athanor.training_preflight import receipt_from_audit
 
-
 REPO_SHA = "a" * 40
 
 
