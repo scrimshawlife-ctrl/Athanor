@@ -1,7 +1,6 @@
 """Tests for deterministic training-preflight receipt generation."""
 
 import pytest
-
 from athanor.training_preflight import receipt_from_audit
 
 
