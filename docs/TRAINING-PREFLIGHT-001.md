@@ -109,3 +109,21 @@ python -m athanor.training_rights \
 This command is deliberately non-authorizing and exits 2 for a valid audit. It treats recognizable public-domain/open-license strings only as `candidate_clearable`; all other claims are explicit unresolved rows. It never converts a nonempty `license` field, an allowlisted host, or a public-domain-looking string into G3 PASS.
 
 The resulting audit is the queue for work/edition/source evidence review. A later authenticated review may produce the `provenance_rights` PASS sidecar consumed by `athanor.training_preflight`; this triage report cannot be used as that sidecar because its evidence kind/status intentionally differ.
+
+
+## G3 model-training rights settlement
+
+The existing corpus-admission approval covers `local_analysis` only and MUST NOT be reused as model-training clearance.
+
+After `athanor.training_rights` produces the review queue, an independent reviewer resolves the exact work/edition/source evidence into `athanor.training_rights_review.v1`. Every included source must be explicitly `CLEARED` for `intended_use=model_training`, with evidence digests and a candidate-manifest binding.
+
+Convert a completed review into the G3 sidecar:
+
+```bash
+python -m athanor.training_rights_review \
+  --review /private/training-rights-review.json \
+  --repo-sha "$(git rev-parse HEAD)" \
+  --output /private/provenance-rights.json
+```
+
+Any HOLD source, missing evidence, wrong use scope, stale manifest, or malformed review fails closed. This converter validates the review contract; it does not perform or substitute for legal review.
