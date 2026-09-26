@@ -1,0 +1,12 @@
+{
+  "base_model": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+  "merged_model": "/home/delphi/Athanor/merged-nemotron-ath",
+  "test_samples": 606,
+  "evaluated_samples": 100,
+  "base_loss": 5.288618295192719,
+  "base_ppl": 198.06951904296875,
+  "merged_loss": 5.284265077114105,
+  "merged_ppl": 197.20919799804688,
+  "loss_improvement": 0.004353218078613885,
+  "ppl_improvement": 0.860321044921875
+}
