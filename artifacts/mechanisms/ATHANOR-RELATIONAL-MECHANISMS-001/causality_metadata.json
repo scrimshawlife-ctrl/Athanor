@@ -1,0 +1,35 @@
+{
+  "total_items": 157,
+  "conditions": [
+    "SAME_RELATION_DIFFERENT_DOMAIN",
+    "SEEN",
+    "DISTRACTOR",
+    "UNSEEN_COMBINATION",
+    "SAME_DOMAIN_DIFFERENT_RELATION",
+    "COUNTERFACTUAL"
+  ],
+  "relations": [
+    "causes",
+    "precedes",
+    "greater_than",
+    "enables",
+    "requires"
+  ],
+  "domains": [
+    "engineering",
+    "finance",
+    "history",
+    "everyday",
+    "medicine",
+    "biology",
+    "law"
+  ],
+  "conditions_count": {
+    "SEEN": 21,
+    "UNSEEN_COMBINATION": 42,
+    "SAME_RELATION_DIFFERENT_DOMAIN": 32,
+    "SAME_DOMAIN_DIFFERENT_RELATION": 42,
+    "COUNTERFACTUAL": 10,
+    "DISTRACTOR": 10
+  }
+}

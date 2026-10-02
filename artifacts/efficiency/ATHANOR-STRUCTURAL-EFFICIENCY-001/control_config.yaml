@@ -1,0 +1,22 @@
+base_model: nvidia/Llama-3.1-Nemotron-Nano-8B-v1
+adapter_name_or_path: /home/delphi/Athanor/lora-out-transfer-001-t1/checkpoint-48
+peft_type: LORA
+datasets:
+  - path: /home/delphi/Athanor/artifacts/efficiency/ATHANOR-STRUCTURAL-EFFICIENCY-001/control_training_data_fixed.jsonl
+    type: completion
+output_dir: /home/delphi/Athanor/lora-out-efficiency-001-control
+overwrite_output_dir: true
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 8
+learning_rate: 2e-4
+max_steps: 48
+logging_steps: 1
+save_steps: 24
+eval_steps: 24
+warmup_steps: 10
+lr_scheduler_type: cosine
+bf16: true
+gradient_checkpointing: true
+remove_unused_columns: false
+report_to: none
+seed: 42

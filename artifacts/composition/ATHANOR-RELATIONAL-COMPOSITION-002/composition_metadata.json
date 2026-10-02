@@ -1,0 +1,23 @@
+{
+  "experiment": "ATHANOR-RELATIONAL-COMPOSITION-002",
+  "total_items": 84,
+  "depths": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    10
+  ],
+  "relations": 6,
+  "inference_modes": [
+    "DIRECT",
+    "COT",
+    "SELECTIVE_COMPUTE",
+    "VERIFY",
+    "SELECTIVE_VERIFY"
+  ],
+  "threshold_reliable": 0.7,
+  "threshold_confidence": 0.8
+}

@@ -1,0 +1,247 @@
+[2026-10-02 01:52:31,002] [INFO] [axolotl.cli.config] config:
+{
+  "activation_offloading": false,
+  "attn_decontaminates_packing": false,
+  "attn_needs_dtype_cast": false,
+  "attn_supports_packing": false,
+  "attn_uses_flash_lib": false,
+  "axolotl_config_path": "structural_config.yaml",
+  "base_model": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+  "base_model_config": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+  "batch_size": 8,
+  "bf16": true,
+  "capabilities": {
+    "bf16": true,
+    "compute_capability": "sm_121",
+    "fp8": true,
+    "n_gpu": 1,
+    "n_node": 1,
+    "tf32": true
+  },
+  "context_parallel_size": 1,
+  "dataloader_num_workers": 1,
+  "dataloader_pin_memory": true,
+  "dataloader_prefetch_factor": 256,
+  "dataset_num_proc": 20,
+  "datasets": [
+    {
+      "message_property_mappings": {
+        "content": "content",
+        "role": "role"
+      },
+      "path": "/home/delphi/Athanor/artifacts/efficiency/ATHANOR-STRUCTURAL-EFFICIENCY-001/structural_training_data_fixed.jsonl",
+      "trust_remote_code": false,
+      "type": "completion"
+    }
+  ],
+  "ddp": false,
+  "device": "cuda:0",
+  "device_map": "auto",
+  "dion_rank_fraction": 1.0,
+  "dion_rank_multiple_of": 1,
+  "eaft_alpha": 1.0,
+  "eaft_k": 20,
+  "env_capabilities": {
+    "torch_version": "2.15.0.dev20260924"
+  },
+  "eval_batch_size": 1,
+  "eval_causal_lm_metrics": [
+    "sacrebleu",
+    "comet",
+    "ter",
+    "chrf"
+  ],
+  "eval_max_new_tokens": 128,
+  "eval_steps": 24,
+  "eval_table_size": 0,
+  "experimental_skip_move_to_device": true,
+  "fp16": false,
+  "generate_samples": false,
+  "generation_do_sample": true,
+  "generation_max_new_tokens": 50,
+  "generation_prompt_ratio": 0.5,
+  "generation_temperature": 0.7,
+  "gradient_accumulation_steps": 8,
+  "gradient_checkpointing": true,
+  "gradient_checkpointing_kwargs": {
+    "use_reentrant": true
+  },
+  "include_tkps": true,
+  "is_llama_derived_model": true,
+  "layer_offloading": false,
+  "learning_rate": 0.0002,
+  "lisa_layers_attribute": "model.layers",
+  "load_best_model_at_end": false,
+  "load_in_4bit": false,
+  "load_in_8bit": false,
+  "local_rank": 0,
+  "logging_steps": 1,
+  "lora_dropout": 0.0,
+  "loraplus_lr_embedding": 1e-06,
+  "lr_scheduler": "cosine",
+  "max_steps": 48,
+  "mean_resizing_embeddings": false,
+  "merge_method": "memory_efficient",
+  "micro_batch_size": 1,
+  "model_config_type": "llama",
+  "num_epochs": 1.0,
+  "num_generation_samples": 3,
+  "optimizer": "adamw_torch_fused",
+  "otel_metrics_host": "localhost",
+  "otel_metrics_port": 8000,
+  "output_dir": "/home/delphi/Athanor/lora-out-efficiency-001-structural",
+  "ple_cpu_offload": false,
+  "pretrain_multipack_attn": true,
+  "profiler_steps_start": 0,
+  "qgalore_cos_threshold": 0.4,
+  "qgalore_gamma_proj": 2,
+  "qgalore_proj_bits": 4,
+  "qgalore_proj_group_size": 256,
+  "qgalore_proj_quant": true,
+  "qgalore_proj_type": "std",
+  "qgalore_queue_size": 5,
+  "qgalore_rank": 256,
+  "qgalore_scale": 0.25,
+  "qgalore_update_proj_gap": 200,
+  "qlora_sharded_model_loading": false,
+  "quantize_moe_experts": false,
+  "ray_num_workers": 1,
+  "relora_prune_method": "magnitude",
+  "remove_unused_columns": false,
+  "resources_per_worker": {
+    "GPU": 1
+  },
+  "sample_packing_bin_size": 200,
+  "sample_packing_group_size": 100000,
+  "save_only_model": false,
+  "save_safetensors": true,
+  "save_steps": 24,
+  "seed": 42,
+  "sequence_len": 512,
+  "shuffle_before_merging_datasets": false,
+  "shuffle_merged_datasets": true,
+  "skip_prepare_dataset": false,
+  "streaming_multipack_buffer_size": 10000,
+  "strict": false,
+  "tensor_parallel_size": 1,
+  "tf32": true,
+  "tiled_mlp_use_original_mlp": true,
+  "tokenizer_config": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
+  "tokenizer_save_jinja_files": true,
+  "torch_dtype": "torch.bfloat16",
+  "train_on_inputs": false,
+  "trl": {
+    "async_prefetch": false,
+    "log_completions": false,
+    "mask_truncated_completions": false,
+    "ref_model_mixup_alpha": 0.9,
+    "ref_model_sync_steps": 64,
+    "replay_buffer_size": 0,
+    "replay_recompute_logps": true,
+    "reroll_max_groups": 1,
+    "reroll_start_fraction": 1.0,
+    "reward_num_workers": 1,
+    "scale_rewards": true,
+    "skip_zero_advantage_batches": true,
+    "sync_ref_model": false,
+    "use_data_producer": false,
+    "use_vllm": false,
+    "vllm_lora_sync": false,
+    "vllm_server_host": "0.0.0.0",
+    "vllm_server_port": 8000
+  },
+  "use_otel_metrics": false,
+  "use_ray": false,
+  "val_set_size": 0.0,
+  "vllm": {
+    "device": "auto",
+    "dtype": "auto",
+    "gpu_memory_utilization": 0.9,
+    "host": "0.0.0.0",
+    "port": 8000
+  },
+  "warmup_steps": 10,
+  "weight_decay": 0.0,
+  "world_size": 1
+}
+[2026-10-02 01:52:31,004] [WARNING] [axolotl.cli.checks] Error verifying HuggingFace token. Remember to log in using `hf auth login` and get your access token from https://huggingface.co/settings/tokens if you want to use gated models or datasets.
+[2026-10-02 01:52:32,652] [WARNING] [axolotl.loaders.tokenizer] Tokenizer does not have a pad_token, falling back to eos_token: <|eot_id|>
+[2026-10-02 01:52:32,664] [INFO] [axolotl.utils.data.shared] Unable to find prepared dataset in last_run_prepared/18a77a8818fb14223bd07543c92614a6
+[2026-10-02 01:52:32,664] [INFO] [axolotl.utils.data.sft] Loading raw datasets...
+[2026-10-02 01:52:32,664] [WARNING] [axolotl.utils.data.sft] Processing datasets during training can lead to VRAM instability. Please pre-process your dataset using `axolotl preprocess path/to/config.yml`.
+Generating train split: 0 examples [00:00, ? examples/s]Generating train split: 504 examples [00:00, 283444.52 examples/s]
+[2026-10-02 01:52:32,908] [INFO] [axolotl.utils.data.wrappers] Loading dataset: /home/delphi/Athanor/artifacts/efficiency/ATHANOR-STRUCTURAL-EFFICIENCY-001/structural_training_data_fixed.jsonl with base_type: completion and prompt_style: None
+Tokenizing Prompts (num_proc=20):   0%|          | 0/504 [00:00<?, ? examples/s]Tokenizing Prompts (num_proc=20):   5%|▌         | 26/504 [00:00<00:15, 31.54 examples/s]Tokenizing Prompts (num_proc=20):  10%|█         | 52/504 [00:00<00:07, 60.60 examples/s]Tokenizing Prompts (num_proc=20):  15%|█▌        | 78/504 [00:01<00:04, 86.28 examples/s]Tokenizing Prompts (num_proc=20):  21%|██        | 104/504 [00:01<00:03, 109.46 examples/s]Tokenizing Prompts (num_proc=20):  26%|██▌       | 129/504 [00:01<00:03, 123.37 examples/s]Tokenizing Prompts (num_proc=20):  31%|███       | 154/504 [00:01<00:03, 107.14 examples/s]Tokenizing Prompts (num_proc=20):  40%|████      | 204/504 [00:01<00:01, 152.71 examples/s]Tokenizing Prompts (num_proc=20):  45%|████▌     | 229/504 [00:02<00:01, 153.95 examples/s]Tokenizing Prompts (num_proc=20):  50%|█████     | 254/504 [00:02<00:01, 147.77 examples/s]Tokenizing Prompts (num_proc=20):  55%|█████▌    | 279/504 [00:02<00:01, 158.35 examples/s]Tokenizing Prompts (num_proc=20):  60%|██████    | 304/504 [00:02<00:01, 160.73 examples/s]Tokenizing Prompts (num_proc=20):  65%|██████▌   | 329/504 [00:02<00:01, 160.10 examples/s]Tokenizing Prompts (num_proc=20):  70%|███████   | 354/504 [00:02<00:00, 152.37 examples/s]Tokenizing Prompts (num_proc=20):  75%|███████▌  | 379/504 [00:02<00:00, 162.68 examples/s]Tokenizing Prompts (num_proc=20):  80%|████████  | 404/504 [00:03<00:00, 162.74 examples/s]Tokenizing Prompts (num_proc=20):  85%|████████▌ | 429/504 [00:03<00:00, 159.55 examples/s]Tokenizing Prompts (num_proc=20):  90%|█████████ | 454/504 [00:03<00:00, 156.48 examples/s]Tokenizing Prompts (num_proc=20):  95%|█████████▌| 479/504 [00:03<00:00, 165.86 examples/s]Tokenizing Prompts (num_proc=20): 100%|██████████| 504/504 [00:03<00:00, 170.40 examples/s]Tokenizing Prompts (num_proc=20): 100%|██████████| 504/504 [00:03<00:00, 127.77 examples/s]
+[2026-10-02 01:52:36,981] [INFO] [axolotl.utils.data.utils] min_input_len: 18
+[2026-10-02 01:52:36,981] [INFO] [axolotl.utils.data.utils] max_input_len: 57
+Dropping Invalid Sequences (<None or >512) (num_proc=20):   0%|          | 0/504 [00:00<?, ? examples/s]Dropping Invalid Sequences (<None or >512) (num_proc=20):   5%|▌         | 26/504 [00:00<00:04, 109.44 examples/s]Dropping Invalid Sequences (<None or >512) (num_proc=20): 100%|██████████| 504/504 [00:00<00:00, 1158.15 examples/s]
+Saving the dataset (0/1 shards):   0%|          | 0/504 [00:00<?, ? examples/s]Saving the dataset (0/1 shards): 100%|██████████| 504/504 [00:00<00:00, 1032.86 examples/s]Saving the dataset (1/1 shards): 100%|██████████| 504/504 [00:00<00:00, 1032.86 examples/s]Saving the dataset (1/1 shards): 100%|██████████| 504/504 [00:00<00:00, 910.48 examples/s] 
+[2026-10-02 01:52:38,007] [INFO] [axolotl.utils.data.sft] Maximum number of steps set at 48
+[2026-10-02 01:52:39,188] [WARNING] [axolotl.loaders.tokenizer] Tokenizer does not have a pad_token, falling back to eos_token: <|eot_id|>
+[2026-10-02 01:52:39,278] [INFO] [axolotl.monkeypatch.attention.fa2_hub_kernel] Pinned the flash-attn2 hub kernel to v2; v3's stable-ABI build fails the backward pass for GQA/MQA models.
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:   0%|          | 1/291 [00:08<40:42,  8.42s/it]Loading weights:   1%|          | 2/291 [00:17<41:43,  8.66s/it]Loading weights:   2%|▏         | 5/291 [00:18<12:44,  2.67s/it]Loading weights:   2%|▏         | 6/291 [00:19<10:34,  2.22s/it]Loading weights:   3%|▎         | 9/291 [00:19<05:16,  1.12s/it]Loading weights:   3%|▎         | 10/291 [00:19<04:26,  1.05it/s]Loading weights:   4%|▍         | 13/291 [00:20<03:00,  1.54it/s]Loading weights:   5%|▍         | 14/291 [00:21<03:10,  1.46it/s]Loading weights:   5%|▌         | 15/291 [00:22<03:12,  1.43it/s]Loading weights:   6%|▌         | 18/291 [00:22<01:55,  2.36it/s]Loading weights:   7%|▋         | 19/291 [00:22<01:44,  2.60it/s]Loading weights:   8%|▊         | 22/291 [00:23<01:36,  2.78it/s]Loading weights:   8%|▊         | 23/291 [00:24<01:54,  2.35it/s]Loading weights:   8%|▊         | 24/291 [00:25<02:18,  1.93it/s]Loading weights:  11%|█         | 31/291 [00:26<01:08,  3.80it/s]Loading weights:  11%|█         | 32/291 [00:26<01:22,  3.13it/s]Loading weights:  11%|█▏        | 33/291 [00:27<01:45,  2.45it/s]Loading weights:  12%|█▏        | 36/291 [00:28<01:12,  3.51it/s]Loading weights:  13%|█▎        | 37/291 [00:28<01:11,  3.56it/s]Loading weights:  14%|█▎        | 40/291 [00:29<01:07,  3.73it/s]Loading weights:  14%|█▍        | 41/291 [00:41<09:23,  2.25s/it]Loading weights:  29%|██▉       | 85/291 [00:42<00:45,  4.50it/s]Loading weights:  30%|██▉       | 87/291 [00:44<00:51,  3.94it/s]Loading weights:  32%|███▏      | 94/291 [00:45<00:45,  4.37it/s]Loading weights:  33%|███▎      | 96/291 [00:46<00:53,  3.63it/s]Loading weights:  34%|███▍      | 99/291 [00:47<00:48,  3.99it/s]Loading weights:  34%|███▍      | 100/291 [00:47<00:48,  3.97it/s]Loading weights:  35%|███▌      | 103/291 [00:48<00:48,  3.90it/s]Loading weights:  36%|███▌      | 104/291 [00:49<00:59,  3.15it/s]Loading weights:  36%|███▌      | 105/291 [00:49<01:07,  2.74it/s]Loading weights:  37%|███▋      | 108/291 [00:50<00:50,  3.64it/s]Loading weights:  37%|███▋      | 109/291 [00:50<00:48,  3.76it/s]Loading weights:  38%|███▊      | 112/291 [00:51<00:48,  3.72it/s]Loading weights:  39%|███▉      | 113/291 [00:52<01:03,  2.82it/s]Loading weights:  39%|███▉      | 114/291 [00:52<01:14,  2.39it/s]Loading weights:  40%|████      | 117/291 [00:55<01:48,  1.60it/s]Loading weights:  43%|████▎     | 126/291 [00:55<00:40,  4.12it/s]Loading weights:  44%|████▎     | 127/291 [00:55<00:39,  4.20it/s]Loading weights:  45%|████▍     | 130/291 [00:56<00:41,  3.86it/s]Loading weights:  45%|████▌     | 131/291 [00:57<00:50,  3.17it/s]Loading weights:  46%|████▌     | 134/291 [00:57<00:34,  4.53it/s]Loading weights:  47%|████▋     | 136/291 [00:58<00:36,  4.30it/s]Loading weights:  48%|████▊     | 139/291 [00:59<00:35,  4.22it/s]Loading weights:  48%|████▊     | 140/291 [01:28<10:53,  4.32s/it]Loading weights:  48%|████▊     | 141/291 [01:29<09:22,  3.75s/it]Loading weights:  85%|████████▍ | 247/291 [01:31<00:07,  6.07it/s]Loading weights:  86%|████████▌ | 249/291 [01:32<00:07,  5.81it/s]Loading weights:  88%|████████▊ | 256/291 [01:33<00:05,  5.95it/s]Loading weights:  89%|████████▊ | 258/291 [01:35<00:06,  5.05it/s]Loading weights:  90%|████████▉ | 261/291 [01:35<00:05,  5.29it/s]Loading weights:  90%|█████████ | 262/291 [01:35<00:05,  5.13it/s]Loading weights:  91%|█████████ | 265/291 [01:36<00:05,  4.96it/s]Loading weights:  91%|█████████▏| 266/291 [01:37<00:06,  4.02it/s]Loading weights:  92%|█████████▏| 267/291 [01:38<00:07,  3.27it/s]Loading weights:  93%|█████████▎| 270/291 [01:38<00:05,  3.98it/s]Loading weights:  93%|█████████▎| 271/291 [01:39<00:05,  3.95it/s]Loading weights:  94%|█████████▍| 274/291 [01:39<00:04,  3.69it/s]Loading weights:  95%|█████████▍| 275/291 [01:40<00:05,  2.82it/s]Loading weights:  95%|█████████▍| 276/291 [01:41<00:06,  2.27it/s]Loading weights:  96%|█████████▌| 279/291 [01:42<00:03,  3.31it/s]Loading weights:  96%|█████████▌| 280/291 [01:42<00:03,  3.35it/s]Loading weights:  97%|█████████▋| 283/291 [01:43<00:02,  3.31it/s]Loading weights:  98%|█████████▊| 284/291 [01:44<00:02,  2.50it/s]Loading weights:  98%|█████████▊| 285/291 [01:44<00:02,  2.07it/s]Loading weights:  99%|█████████▉| 288/291 [01:45<00:00,  3.18it/s]Loading weights:  99%|█████████▉| 289/291 [01:45<00:00,  3.29it/s]Loading weights: 100%|██████████| 291/291 [01:45<00:00,  2.75it/s]
+[2026-10-02 01:54:28,846] [INFO] [axolotl.train] Pre-saving tokenizer to /home/delphi/Athanor/lora-out-efficiency-001-structural...
+[2026-10-02 01:54:28,974] [INFO] [axolotl.train] Pre-saving model config to /home/delphi/Athanor/lora-out-efficiency-001-structural...
+[2026-10-02 01:54:28,979] [INFO] [axolotl.train] Starting trainer...
+[transformers] The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'pad_token_id': 128009}.
+  0%|          | 0/48 [00:00<?, ?it/s]  2%|▏         | 1/48 [00:08<06:28,  8.27s/it]                                              {'loss': '4.509', 'grad_norm': '1143', 'learning_rate': '0', 'ppl': '90.86', 'memory/max_active (GiB)': '67.66', 'memory/max_allocated (GiB)': '67.66', 'memory/device_reserved (GiB)': '67.96', 'tokens/trainable': 317, 'tokens/total': 512, 'epoch': '0.01587'}
+  2%|▏         | 1/48 [00:08<06:28,  8.27s/it]  4%|▍         | 2/48 [00:13<04:59,  6.52s/it]                                              {'loss': '4.979', 'grad_norm': '244.4', 'learning_rate': '2e-05', 'ppl': '145.3', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '47.61', 'tokens/trainable': 580, 'tokens/total': 1024, 'epoch': '0.03175'}
+  4%|▍         | 2/48 [00:14<04:59,  6.52s/it]  6%|▋         | 3/48 [00:18<04:29,  5.99s/it]                                              {'loss': '2.474', 'grad_norm': '41.99', 'learning_rate': '4e-05', 'ppl': '11.87', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '57.3', 'tokens/trainable': 887, 'tokens/total': 1536, 'epoch': '0.04762'}
+  6%|▋         | 3/48 [00:19<04:29,  5.99s/it]  8%|▊         | 4/48 [00:24<04:12,  5.74s/it]                                              {'loss': '1.988', 'grad_norm': '80.41', 'learning_rate': '6e-05', 'ppl': '7.297', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '53.73', 'tokens/trainable': 1175, 'tokens/total': 2048, 'epoch': '0.06349'}
+  8%|▊         | 4/48 [00:25<04:12,  5.74s/it] 10%|█         | 5/48 [00:29<04:00,  5.60s/it]                                              {'loss': '1.284', 'grad_norm': '27.73', 'learning_rate': '8e-05', 'ppl': '3.611', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '50.93', 'tokens/trainable': 1448, 'tokens/total': 2560, 'epoch': '0.07937'}
+ 10%|█         | 5/48 [00:30<04:00,  5.60s/it] 12%|█▎        | 6/48 [00:35<03:51,  5.52s/it]                                              {'loss': '1.409', 'grad_norm': '26.53', 'learning_rate': '0.0001', 'ppl': '4.09', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '51.07', 'tokens/trainable': 1722, 'tokens/total': 3072, 'epoch': '0.09524'}
+ 12%|█▎        | 6/48 [00:35<03:51,  5.52s/it] 15%|█▍        | 7/48 [00:40<03:44,  5.47s/it]                                              {'loss': '1.415', 'grad_norm': '46.24', 'learning_rate': '0.00012', 'ppl': '4.116', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '58.95', 'tokens/trainable': 2038, 'tokens/total': 3584, 'epoch': '0.1111'}
+ 15%|█▍        | 7/48 [00:41<03:44,  5.47s/it] 17%|█▋        | 8/48 [00:45<03:37,  5.44s/it]                                              {'loss': '1.17', 'grad_norm': '24.84', 'learning_rate': '0.00014', 'ppl': '3.222', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '58.27', 'tokens/trainable': 2351, 'tokens/total': 4096, 'epoch': '0.127'}
+ 17%|█▋        | 8/48 [00:46<03:37,  5.44s/it] 19%|█▉        | 9/48 [00:51<03:31,  5.42s/it]                                              {'loss': '1.187', 'grad_norm': '17.89', 'learning_rate': '0.00016', 'ppl': '3.277', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '50.85', 'tokens/trainable': 2624, 'tokens/total': 4608, 'epoch': '0.1429'}
+ 19%|█▉        | 9/48 [00:51<03:31,  5.42s/it] 21%|██        | 10/48 [00:56<03:25,  5.40s/it]                                               {'loss': '1.46', 'grad_norm': '26.21', 'learning_rate': '0.00018', 'ppl': '4.305', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '57.02', 'tokens/trainable': 2930, 'tokens/total': 5120, 'epoch': '0.1587'}
+ 21%|██        | 10/48 [00:57<03:25,  5.40s/it] 23%|██▎       | 11/48 [01:01<03:19,  5.39s/it]                                               {'loss': '1.4', 'grad_norm': '19.41', 'learning_rate': '0.0002', 'ppl': '4.056', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '58.11', 'tokens/trainable': 3242, 'tokens/total': 5632, 'epoch': '0.1746'}
+ 23%|██▎       | 11/48 [01:02<03:19,  5.39s/it] 25%|██▌       | 12/48 [01:07<03:13,  5.38s/it]                                               {'loss': '1.871', 'grad_norm': '24.67', 'learning_rate': '0.0001997', 'ppl': '6.493', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '46.45', 'tokens/trainable': 3491, 'tokens/total': 6144, 'epoch': '0.1905'}
+ 25%|██▌       | 12/48 [01:08<03:13,  5.38s/it] 27%|██▋       | 13/48 [01:12<03:08,  5.38s/it]                                               {'loss': '1.034', 'grad_norm': '12.93', 'learning_rate': '0.0001986', 'ppl': '2.812', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '51.06', 'tokens/trainable': 3765, 'tokens/total': 6656, 'epoch': '0.2063'}
+ 27%|██▋       | 13/48 [01:13<03:08,  5.38s/it] 29%|██▉       | 14/48 [01:17<03:02,  5.37s/it]                                               {'loss': '1.528', 'grad_norm': '20.48', 'learning_rate': '0.0001969', 'ppl': '4.61', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '54.6', 'tokens/trainable': 4058, 'tokens/total': 7168, 'epoch': '0.2222'}
+ 29%|██▉       | 14/48 [01:18<03:02,  5.37s/it] 31%|███▏      | 15/48 [01:23<02:57,  5.37s/it]                                               {'loss': '1.192', 'grad_norm': '37.67', 'learning_rate': '0.0001946', 'ppl': '3.293', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '56.37', 'tokens/trainable': 4361, 'tokens/total': 7680, 'epoch': '0.2381'}
+ 31%|███▏      | 15/48 [01:24<02:57,  5.37s/it] 33%|███▎      | 16/48 [01:28<02:51,  5.37s/it]                                               {'loss': '1.411', 'grad_norm': '20.12', 'learning_rate': '0.0001916', 'ppl': '4.101', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '49.54', 'tokens/trainable': 4627, 'tokens/total': 8192, 'epoch': '0.254'}
+ 33%|███▎      | 16/48 [01:29<02:51,  5.37s/it] 35%|███▌      | 17/48 [01:34<02:46,  5.37s/it]                                               {'loss': '1.023', 'grad_norm': '15.82', 'learning_rate': '0.0001879', 'ppl': '2.782', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '55.42', 'tokens/trainable': 4925, 'tokens/total': 8704, 'epoch': '0.2698'}
+ 35%|███▌      | 17/48 [01:34<02:46,  5.37s/it] 38%|███▊      | 18/48 [01:39<02:41,  5.37s/it]                                               {'loss': '1.505', 'grad_norm': '23.26', 'learning_rate': '0.0001837', 'ppl': '4.506', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '56.17', 'tokens/trainable': 5227, 'tokens/total': 9216, 'epoch': '0.2857'}
+ 38%|███▊      | 18/48 [01:40<02:41,  5.37s/it] 40%|███▉      | 19/48 [01:44<02:35,  5.38s/it]                                               {'loss': '1.037', 'grad_norm': '10.36', 'learning_rate': '0.0001789', 'ppl': '2.822', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '54.88', 'tokens/trainable': 5522, 'tokens/total': 9728, 'epoch': '0.3016'}
+ 40%|███▉      | 19/48 [01:45<02:35,  5.38s/it] 42%|████▏     | 20/48 [01:50<02:30,  5.38s/it]                                               {'loss': '0.8203', 'grad_norm': '7.348', 'learning_rate': '0.0001736', 'ppl': '2.271', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '47.99', 'tokens/trainable': 5780, 'tokens/total': 10240, 'epoch': '0.3175'}
+ 42%|████▏     | 20/48 [01:50<02:30,  5.38s/it] 44%|████▍     | 21/48 [01:55<02:25,  5.38s/it]                                               {'loss': '1.168', 'grad_norm': '11.25', 'learning_rate': '0.0001677', 'ppl': '3.215', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '48.54', 'tokens/trainable': 6041, 'tokens/total': 10752, 'epoch': '0.3333'}
+ 44%|████▍     | 21/48 [01:56<02:25,  5.38s/it] 46%|████▌     | 22/48 [02:00<02:19,  5.37s/it]                                               {'loss': '0.9175', 'grad_norm': '23.92', 'learning_rate': '0.0001614', 'ppl': '2.503', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '46.94', 'tokens/trainable': 6293, 'tokens/total': 11264, 'epoch': '0.3492'}
+ 46%|████▌     | 22/48 [02:01<02:19,  5.37s/it] 48%|████▊     | 23/48 [02:06<02:14,  5.38s/it]                                               {'loss': '1.307', 'grad_norm': '29.98', 'learning_rate': '0.0001547', 'ppl': '3.693', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '46.81', 'tokens/trainable': 6545, 'tokens/total': 11776, 'epoch': '0.3651'}
+ 48%|████▊     | 23/48 [02:07<02:14,  5.38s/it] 50%|█████     | 24/48 [02:11<02:08,  5.37s/it]                                               {'loss': '0.7572', 'grad_norm': '18.44', 'learning_rate': '0.0001476', 'ppl': '2.132', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '50.82', 'tokens/trainable': 6818, 'tokens/total': 12288, 'epoch': '0.381'}
+ 50%|█████     | 24/48 [02:12<02:08,  5.37s/it][2026-10-02 01:56:41,666] [INFO] [axolotl.core.trainers.base] Saving model checkpoint to /home/delphi/Athanor/lora-out-efficiency-001-structural/checkpoint-24
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [02:52<00:00, 172.84s/it]Writing model shards: 100%|██████████| 1/1 [02:52<00:00, 172.88s/it]
+ 52%|█████▏    | 25/48 [07:49<40:16, 105.09s/it]                                                {'loss': '0.5403', 'grad_norm': '9.191', 'learning_rate': '0.0001402', 'ppl': '1.717', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '0.92', 'tokens/trainable': 7130, 'tokens/total': 12800, 'epoch': '0.3968'}
+ 52%|█████▏    | 25/48 [07:50<40:16, 105.09s/it] 54%|█████▍    | 26/48 [07:54<27:33, 75.17s/it]                                                {'loss': '0.9984', 'grad_norm': '6.849', 'learning_rate': '0.0001325', 'ppl': '2.714', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '49.38', 'tokens/trainable': 7396, 'tokens/total': 13312, 'epoch': '0.4127'}
+ 54%|█████▍    | 26/48 [07:55<27:33, 75.17s/it] 56%|█████▋    | 27/48 [08:00<18:59, 54.24s/it]                                               {'loss': '0.6428', 'grad_norm': '7.435', 'learning_rate': '0.0001245', 'ppl': '1.902', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '50.23', 'tokens/trainable': 7668, 'tokens/total': 13824, 'epoch': '0.4286'}
+ 56%|█████▋    | 27/48 [08:00<18:59, 54.24s/it] 58%|█████▊    | 28/48 [08:05<13:11, 39.59s/it]                                               {'loss': '0.9055', 'grad_norm': '7.37', 'learning_rate': '0.0001165', 'ppl': '2.473', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '50', 'tokens/trainable': 7939, 'tokens/total': 14336, 'epoch': '0.4444'}
+ 58%|█████▊    | 28/48 [08:06<13:11, 39.59s/it] 60%|██████    | 29/48 [08:10<09:17, 29.33s/it]                                               {'loss': '0.4866', 'grad_norm': '11.54', 'learning_rate': '0.0001083', 'ppl': '1.627', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '47.1', 'tokens/trainable': 8193, 'tokens/total': 14848, 'epoch': '0.4603'}
+ 60%|██████    | 29/48 [08:11<09:17, 29.33s/it] 62%|██████▎   | 30/48 [08:16<06:38, 22.16s/it]                                               {'loss': '0.8352', 'grad_norm': '7.665', 'learning_rate': '0.0001', 'ppl': '2.305', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '52.68', 'tokens/trainable': 8478, 'tokens/total': 15360, 'epoch': '0.4762'}
+ 62%|██████▎   | 30/48 [08:17<06:38, 22.16s/it] 65%|██████▍   | 31/48 [08:21<04:51, 17.13s/it]                                               {'loss': '0.8523', 'grad_norm': '7.887', 'learning_rate': '9.174e-05', 'ppl': '2.345', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '50.75', 'tokens/trainable': 8752, 'tokens/total': 15872, 'epoch': '0.4921'}
+ 65%|██████▍   | 31/48 [08:22<04:51, 17.13s/it] 67%|██████▋   | 32/48 [08:27<03:37, 13.61s/it]                                               {'loss': '0.6076', 'grad_norm': '11.65', 'learning_rate': '8.354e-05', 'ppl': '1.836', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '49.54', 'tokens/trainable': 9019, 'tokens/total': 16384, 'epoch': '0.5079'}
+ 67%|██████▋   | 32/48 [08:27<03:37, 13.61s/it] 69%|██████▉   | 33/48 [08:32<02:47, 11.14s/it]                                               {'loss': '0.4384', 'grad_norm': '7.363', 'learning_rate': '7.545e-05', 'ppl': '1.55', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '57.08', 'tokens/trainable': 9327, 'tokens/total': 16896, 'epoch': '0.5238'}
+ 69%|██████▉   | 33/48 [08:33<02:47, 11.14s/it] 71%|███████   | 34/48 [08:37<02:11,  9.42s/it]                                               {'loss': '0.7094', 'grad_norm': '7.294', 'learning_rate': '6.753e-05', 'ppl': '2.033', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '57.31', 'tokens/trainable': 9636, 'tokens/total': 17408, 'epoch': '0.5397'}
+ 71%|███████   | 34/48 [08:38<02:11,  9.42s/it] 73%|███████▎  | 35/48 [08:43<01:46,  8.21s/it]                                               {'loss': '0.561', 'grad_norm': '5.285', 'learning_rate': '5.983e-05', 'ppl': '1.752', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '50.32', 'tokens/trainable': 9908, 'tokens/total': 17920, 'epoch': '0.5556'}
+ 73%|███████▎  | 35/48 [08:44<01:46,  8.21s/it] 75%|███████▌  | 36/48 [08:48<01:28,  7.37s/it]                                               {'loss': '0.3157', 'grad_norm': '2.751', 'learning_rate': '5.241e-05', 'ppl': '1.371', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '50.93', 'tokens/trainable': 10183, 'tokens/total': 18432, 'epoch': '0.5714'}
+ 75%|███████▌  | 36/48 [08:49<01:28,  7.37s/it] 77%|███████▋  | 37/48 [08:54<01:14,  6.78s/it]                                               {'loss': '0.4838', 'grad_norm': '4.491', 'learning_rate': '4.531e-05', 'ppl': '1.622', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '51.3', 'tokens/trainable': 10460, 'tokens/total': 18944, 'epoch': '0.5873'}
+ 77%|███████▋  | 37/48 [08:54<01:14,  6.78s/it] 79%|███████▉  | 38/48 [08:59<01:03,  6.37s/it]                                               {'loss': '0.28', 'grad_norm': '3.493', 'learning_rate': '3.858e-05', 'ppl': '1.323', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '56.13', 'tokens/trainable': 10764, 'tokens/total': 19456, 'epoch': '0.6032'}
+ 79%|███████▉  | 38/48 [09:00<01:03,  6.37s/it] 81%|████████▏ | 39/48 [09:04<00:54,  6.08s/it]                                               {'loss': '0.232', 'grad_norm': '3.148', 'learning_rate': '3.227e-05', 'ppl': '1.261', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '55.15', 'tokens/trainable': 11062, 'tokens/total': 19968, 'epoch': '0.619'}
+ 81%|████████▏ | 39/48 [09:05<00:54,  6.08s/it] 83%|████████▎ | 40/48 [09:10<00:47,  5.88s/it]                                               {'loss': '0.3373', 'grad_norm': '4.207', 'learning_rate': '2.643e-05', 'ppl': '1.401', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '48.29', 'tokens/trainable': 11323, 'tokens/total': 20480, 'epoch': '0.6349'}
+ 83%|████████▎ | 40/48 [09:11<00:47,  5.88s/it] 85%|████████▌ | 41/48 [09:15<00:40,  5.73s/it]                                               {'loss': '0.3394', 'grad_norm': '3.581', 'learning_rate': '2.109e-05', 'ppl': '1.404', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '53.69', 'tokens/trainable': 11613, 'tokens/total': 20992, 'epoch': '0.6508'}
+ 85%|████████▌ | 41/48 [09:16<00:40,  5.73s/it] 88%|████████▊ | 42/48 [09:21<00:33,  5.63s/it]                                               {'loss': '0.2765', 'grad_norm': '2.162', 'learning_rate': '1.628e-05', 'ppl': '1.319', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '54.79', 'tokens/trainable': 11909, 'tokens/total': 21504, 'epoch': '0.6667'}
+ 88%|████████▊ | 42/48 [09:22<00:33,  5.63s/it] 90%|████████▉ | 43/48 [09:26<00:27,  5.57s/it]                                               {'loss': '0.2888', 'grad_norm': '2.844', 'learning_rate': '1.205e-05', 'ppl': '1.335', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '53.99', 'tokens/trainable': 12201, 'tokens/total': 22016, 'epoch': '0.6825'}
+ 90%|████████▉ | 43/48 [09:27<00:27,  5.57s/it] 92%|█████████▏| 44/48 [09:32<00:22,  5.52s/it]                                               {'loss': '0.5015', 'grad_norm': '4.73', 'learning_rate': '8.423e-06', 'ppl': '1.651', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '53.71', 'tokens/trainable': 12491, 'tokens/total': 22528, 'epoch': '0.6984'}
+ 92%|█████████▏| 44/48 [09:32<00:22,  5.52s/it] 94%|█████████▍| 45/48 [09:37<00:16,  5.48s/it]                                               {'loss': '0.3598', 'grad_norm': '3.955', 'learning_rate': '5.418e-06', 'ppl': '1.433', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '43.64', 'tokens/trainable': 12727, 'tokens/total': 23040, 'epoch': '0.7143'}
+ 94%|█████████▍| 45/48 [09:38<00:16,  5.48s/it] 96%|█████████▌| 46/48 [09:42<00:10,  5.47s/it]                                               {'loss': '0.5502', 'grad_norm': '5.523', 'learning_rate': '3.06e-06', 'ppl': '1.734', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '54.22', 'tokens/trainable': 13021, 'tokens/total': 23552, 'epoch': '0.7302'}
+ 96%|█████████▌| 46/48 [09:43<00:10,  5.47s/it] 98%|█████████▊| 47/48 [09:48<00:05,  5.45s/it]                                               {'loss': '0.3876', 'grad_norm': '4.292', 'learning_rate': '1.364e-06', 'ppl': '1.473', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '50.36', 'tokens/trainable': 13293, 'tokens/total': 24064, 'epoch': '0.746'}
+ 98%|█████████▊| 47/48 [09:49<00:05,  5.45s/it]100%|██████████| 48/48 [09:53<00:00,  5.44s/it]                                               {'loss': '0.3201', 'grad_norm': '2.76', 'learning_rate': '3.416e-07', 'ppl': '1.377', 'memory/max_active (GiB)': '70.63', 'memory/max_allocated (GiB)': '70.63', 'memory/device_reserved (GiB)': '71.97', 'tokens/train_per_sec_per_gpu': '57.37', 'tokens/trainable': 13604, 'tokens/total': 24576, 'epoch': '0.7619'}
+100%|██████████| 48/48 [09:54<00:00,  5.44s/it][2026-10-02 02:04:23,637] [INFO] [axolotl.core.trainers.base] Saving model checkpoint to /home/delphi/Athanor/lora-out-efficiency-001-structural/checkpoint-48
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [02:50<00:00, 170.34s/it]Writing model shards: 100%|██████████| 1/1 [02:50<00:00, 170.34s/it]
+                                               {'train_runtime': '910.6', 'train_samples_per_second': '0.422', 'train_steps_per_second': '0.053', 'train_loss': '1.064', 'memory/max_active (GiB)': '50.75', 'memory/max_allocated (GiB)': '50.75', 'memory/device_reserved (GiB)': '71.97', 'epoch': '0.7619'}
+100%|██████████| 48/48 [15:10<00:00,  5.44s/it]100%|██████████| 48/48 [15:10<00:00, 18.97s/it]
+[2026-10-02 02:09:39,710] [INFO] [axolotl.train] Training completed! Saving trained model to /home/delphi/Athanor/lora-out-efficiency-001-structural.
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [02:51<00:00, 171.01s/it]Writing model shards: 100%|██████████| 1/1 [02:51<00:00, 171.02s/it]
+[2026-10-02 02:12:30,734] [INFO] [axolotl.train] Model successfully saved to /home/delphi/Athanor/lora-out-efficiency-001-structural

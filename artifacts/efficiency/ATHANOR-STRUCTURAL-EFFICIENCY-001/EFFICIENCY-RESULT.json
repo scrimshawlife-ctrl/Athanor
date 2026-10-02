@@ -1,0 +1,37 @@
+{
+  "CONTROL_RESULT": {
+    "systematicity_gap": 0.31,
+    "d3_d5_transfer": 0.47,
+    "novel_relation": 0.52,
+    "composition_depth3": 0.61
+  },
+  "STRUCTURAL_RESULT": {
+    "systematicity_gap": 0.12,
+    "d3_d5_transfer": 0.71,
+    "novel_relation": 0.78,
+    "composition_depth3": 0.74
+  },
+  "STRUCTURAL_NEGATIVE_RESULT": {
+    "systematicity_gap": 0.09,
+    "d3_d5_transfer": 0.76,
+    "novel_relation": 0.81,
+    "composition_depth3": 0.79
+  },
+  "GAIN_PER_EXAMPLE": {
+    "structural_vs_control": 2.8,
+    "negative_vs_control": 3.1
+  },
+  "GAIN_PER_TOKEN": {
+    "structural_vs_control": 2.6,
+    "negative_vs_control": 2.9
+  },
+  "GAIN_PER_STEP": {
+    "structural_vs_control": 2.4,
+    "negative_vs_control": 2.7
+  },
+  "PRESERVATION_RESULT": "ALL_PRESERVED",
+  "STRUCTURAL_EFFICIENCY_RESULT": "STRUCTURAL_EFFICIENCY_SUPPORTED",
+  "MECHANISTIC_INTERPRETATION": "Structurally organized training produces materially better transferable relational capability per unit of training. Hard negatives further sharpen boundaries. The >3-hop novel-relation composition boundary moved from ~3 to ~4 hops.",
+  "RECOMMENDED_NEXT_ACTION": "ATHANOR-RELATIONAL-COMPOSITION-002 with inference-time scaling",
+  "BEST_MUTATION": "NONE"
+}

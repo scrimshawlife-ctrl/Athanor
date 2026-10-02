@@ -1,0 +1,40 @@
+{
+  "total_items": 267,
+  "conditions": [
+    "DISTRACTOR",
+    "NOVEL_COMPOSITION",
+    "UNSEEN_COMBINATION",
+    "NOVEL_RELATION",
+    "SEEN",
+    "COUNTERFACTUAL",
+    "HELDOUT_DOMAIN"
+  ],
+  "relations": [
+    "causal_chain",
+    "transitive_ordering",
+    "counterfactual_override",
+    "compositional_reasoning",
+    "analogical_mapping",
+    "precedes",
+    "enables",
+    "requires"
+  ],
+  "domains": [
+    "everyday",
+    "medicine",
+    "engineering",
+    "biology",
+    "law",
+    "history",
+    "finance"
+  ],
+  "conditions_count": {
+    "SEEN": 168,
+    "UNSEEN_COMBINATION": 42,
+    "HELDOUT_DOMAIN": 10,
+    "NOVEL_RELATION": 24,
+    "NOVEL_COMPOSITION": 3,
+    "COUNTERFACTUAL": 10,
+    "DISTRACTOR": 10
+  }
+}
