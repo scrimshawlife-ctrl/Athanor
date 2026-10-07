@@ -1,18 +1,52 @@
 import json
-from pathlib import Path
-import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
-from peft import PeftModel
-import random
 import math
+import os
+import random
+import sys
+from pathlib import Path
 
 # Config
-BASE_MODEL = "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
-ADAPTER_PATH = "/home/delphi/Athanor/lora-out-transfer-001-t1/checkpoint-48"
-EVAL_FILE = "/home/delphi/Athanor/artifacts/composition/ATHANOR-RELATIONAL-COMPOSITION-002/composition_eval.jsonl"
-OUT_DIR = Path("/home/delphi/Athanor/artifacts/composition/ATHANOR-RELATIONAL-COMPOSITION-002")
+#
+# These paths were absolute to the machine the training ran on (`/home/delphi`, Linux). They are read from the
+# environment so the script can run wherever the artifacts actually are, and the defaults stay as they were so
+# nothing on that machine changes. What this fixes is the failure mode: pointed at a machine without those
+# artifacts, the script used to die somewhere inside `from_pretrained` with a confusing error. It now says
+# what is missing and why. No trained adapter exists in this repository -- `adapter_preflight` reports it
+# INVALID and `specs/003-qwen-adapter/model-lock.json` records `weight_downloaded: false`.
+BASE_MODEL = os.environ.get("ATHANOR_BASE_MODEL", "nvidia/Llama-3.1-Nemotron-Nano-8B-v1")
+ADAPTER_PATH = os.environ.get(
+    "ATHANOR_ADAPTER_PATH", "/home/delphi/Athanor/lora-out-transfer-001-t1/checkpoint-48"
+)
+EVAL_FILE = os.environ.get(
+    "ATHANOR_COMPOSITION_EVAL_FILE",
+    "/home/delphi/Athanor/artifacts/composition/ATHANOR-RELATIONAL-COMPOSITION-002/composition_eval.jsonl",
+)
+OUT_DIR = Path(
+    os.environ.get(
+        "ATHANOR_COMPOSITION_OUT_DIR",
+        "/home/delphi/Athanor/artifacts/composition/ATHANOR-RELATIONAL-COMPOSITION-002",
+    )
+)
 THRESHOLD_RELIABLE = 0.70
 THRESHOLD_CONFIDENCE = 0.80
+
+_missing = [p for p in (ADAPTER_PATH, EVAL_FILE) if not Path(p).exists()]
+if _missing:
+    sys.exit(
+        "Cannot run this evaluation: adapter and/or eval file not found.\n"
+        + "\n".join(f"  missing: {p}" for p in _missing)
+        + "\n\nThis script evaluated a trained LoRA adapter. No trained adapter artifacts are present (the\n"
+        "training ran on another host). Point ATHANOR_ADAPTER_PATH and ATHANOR_COMPOSITION_EVAL_FILE at the\n"
+        "real artifacts, or re-run training. For the runtime state of this machine, use:\n"
+        "  python -m athanor.adapter_preflight"
+    )
+
+# The model stack is imported only once the artifacts are known to exist, so the failure names the real
+# problem. Imported earlier, this file died on `ModuleNotFoundError: No module named 'torch'` and said nothing
+# about the adapter it could not find either.
+import torch
+from peft import PeftModel
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
 # Load model
 print("Loading model...")
