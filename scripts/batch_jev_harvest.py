@@ -206,7 +206,7 @@ def gen_pairs_for_family(family, atoms_path, pairs_path):
     for i, atom in enumerate(new_atoms):
         role = ROLES[i % len(ROLES)]
         pair = {
-            "pair_id": f"corr.{family}.{role}.{hashlib.sha256((family+"."+role+"."+atom.get("atom_id","")).encode()).hexdigest()[:6]}"." + role + "." + atom.get(\"atom_id\", \"\")).encode()).hexdigest()[:6]}".{role}.{atom.get("atom_id","")}'.encode()).hexdigest()[:6]}",
+            "pair_id": f"corr.{family}.{role}.{hashlib.sha256((family + '.' + role + '.' + atom.get('atom_id','')).encode()).hexdigest()[:6]}",
             "family_id": family,
             "role": role,
             "filler": " ".join(atom.get("text","").split()[:10]),
