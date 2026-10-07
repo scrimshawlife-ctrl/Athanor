@@ -204,3 +204,9 @@ Code: MIT. Corpus atoms carry their own licenses — see [`LICENSE_POLICY.md`](L
 This does not govern or activate.
 
 Provenance: Notion Sprint 001 Hub [not inspected; Athanor Hub inspected] + Loop 805 Slice N/A + Hash: fd84c7085579f3e7a560b38fc554a4f832fa9c10 (review base)
+
+## Project status
+
+- [ROADMAP.md](ROADMAP.md) — what is shipped, what is in progress, and what is deliberately not planned, each with its reason.
+- [KANBAN.md](KANBAN.md) — the board, with every blocker named and evidenced.
+- [CONTRIBUTING.md](CONTRIBUTING.md) — the working rules for this repository.
